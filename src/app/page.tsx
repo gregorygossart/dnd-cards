@@ -1,21 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardType, Deck } from '@/types/card';
+import { useState, useEffect } from 'react';
 import { CardRenderer } from '@/components/CardRenderer/CardRenderer';
-import { CardEditor, defaultCardValues } from '@/components/CardEditor/CardEditor';
+import { CardEditor } from '@/components/CardEditor/CardEditor';
 import { CardImporter } from '@/components/CardImporter/CardImporter';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useDeckStore } from '@/hooks/useDeckStore';
 
 
 export default function Home() {
-  const [deck, setDeck] = useState<Deck>({
-    id: crypto.randomUUID(),
-    name: 'My Deck',
-    cards: [defaultCardValues[CardType.Spell]],
-  });
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [editorVersion, setEditorVersion] = useState(0);
+  const { deck, currentCardIndex, updateCard } = useDeckStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -24,14 +18,6 @@ export default function Home() {
 
   const currentCard = deck.cards[currentCardIndex];
 
-  const updateCurrentCard = (updatedCard: Card) => {
-    setDeck((prevDeck) => ({
-      ...prevDeck,
-      cards: prevDeck.cards.map((card, index) =>
-        index === currentCardIndex ? updatedCard : card
-      ),
-    }));
-  };
 
   return (
     <div className="flex h-screen w-full bg-slate-950 text-slate-100 overflow-hidden font-sans">
@@ -95,16 +81,14 @@ export default function Home() {
           <div className="flex-1 overflow-y-auto">
             <TabsContent value="edit" className="h-full m-0 border-0">
               <CardEditor
-                key={editorVersion}
                 initialData={currentCard}
-                onChange={updateCurrentCard}
+                onChange={(card) => updateCard(currentCardIndex, card)}
               />
             </TabsContent>
             <TabsContent value="import" className="h-full m-0 p-4">
               <CardImporter
                 onImport={(data) => {
-                  updateCurrentCard(data);
-                  setEditorVersion(v => v + 1);
+                  updateCard(currentCardIndex, data);
                 }}
               />
               <div className="mt-8 p-4 bg-slate-950 rounded border border-slate-800 text-xs text-slate-500 font-mono overflow-auto max-h-60">

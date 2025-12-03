@@ -59,10 +59,15 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
         mode: 'onChange',
     });
 
-    const { register, watch, control } = form;
+    const { register, watch, control, reset } = form;
 
     // Use a ref to track if we've already notified the parent
     const isInitialMount = useRef(true);
+
+    // Reset form when initialData changes (e.g., when loading from localStorage)
+    useEffect(() => {
+        reset(initialData);
+    }, [initialData, reset]);
 
     // Subscribe to form changes
     useEffect(() => {
