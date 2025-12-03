@@ -1,11 +1,13 @@
 import React from 'react';
 import type { Card } from '@/types/card';
 import { cn } from '@/lib/utils';
+import { getCardSubtitle } from '@/lib/cardUtils';
 import { CardArtArea } from '@/components/CardRenderer/CardArtArea/CardArtArea';
 import { CardBanner } from '@/components/CardRenderer/CardBanner/CardBanner';
 import { CardHeader } from '@/components/CardRenderer/CardHeader/CardHeader';
 import { CardBody } from '@/components/CardRenderer/CardBody/CardBody';
 import { CardFooter } from '@/components/CardRenderer/CardFooter/CardFooter';
+import { SpellStats } from '@/components/CardRenderer/SpellStats/SpellStats';
 
 interface CardRendererProps {
     data: Card;
@@ -13,7 +15,7 @@ interface CardRendererProps {
 }
 
 export const CardRenderer: React.FC<CardRendererProps> = ({ data, className }) => {
-    const { title, type, blocks, visuals } = data;
+    const { title, blocks, visuals } = data;
 
     return (
         <div
@@ -35,11 +37,21 @@ export const CardRenderer: React.FC<CardRendererProps> = ({ data, className }) =
                 style={{ borderTop: `4px solid ${visuals.accentColor} ` }}
             >
                 <CardBanner
-                    subtitle={type}
+                    subtitle={getCardSubtitle(data)}
                     accentColor={visuals.accentColor}
                 />
 
                 <CardHeader title={title} />
+
+                {data.type === 'Spell' && data.castingTime && data.range && data.duration && data.components && (
+                    <SpellStats
+                        castingTime={data.castingTime}
+                        range={data.range}
+                        duration={data.duration}
+                        ritual={data.ritual}
+                        components={data.components}
+                    />
+                )}
 
                 <CardBody blocks={blocks} />
 

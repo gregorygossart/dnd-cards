@@ -1,19 +1,24 @@
 import React from 'react';
+import { useFormContext } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { EditorLabel } from '@/components/CardEditor/EditorLabel/EditorLabel';
+import type { Card } from '@/types/card';
 
 interface ImageInputProps {
-    value?: string;
-    onChange: (value: string | undefined) => void;
     label?: string;
 }
 
 export const ImageInput: React.FC<ImageInputProps> = ({
-    value,
-    onChange,
     label = 'Header Image'
 }) => {
+    const { watch, setValue } = useFormContext<Card>();
+    const value = watch('visuals.backgroundImage');
+
+    const onChange = (newValue: string | undefined) => {
+        setValue('visuals.backgroundImage', newValue);
+    };
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
@@ -27,8 +32,8 @@ export const ImageInput: React.FC<ImageInputProps> = ({
     };
 
     return (
-        <div className="space-y-2">
-            <Label htmlFor="backgroundImage" className="text-slate-300">{label}</Label>
+        <div>
+            <EditorLabel htmlFor="backgroundImage">{label}</EditorLabel>
             <div className="space-y-2">
                 <div className="flex gap-2">
                     <Input

@@ -3,23 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardType } from '@/types/card';
 import { CardRenderer } from '@/components/CardRenderer/CardRenderer';
-import { CardEditor } from '@/components/CardEditor/CardEditor';
+import { CardEditor, defaultCardValues } from '@/components/CardEditor/CardEditor';
 import { CardImporter } from '@/components/CardImporter/CardImporter';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-const INITIAL_CARD: Card = {
-  type: CardType.Item,
-  title: 'New Card',
-  blocks: [
-    { type: 'text', content: 'Card rules text goes here.' }
-  ],
-  visuals: {
-    accentColor: '#ffc814'
-  }
-};
 
 export default function Home() {
-  const [cardData, setCardData] = useState<Card>(INITIAL_CARD);
+  const [cardData, setCardData] = useState<Card>(defaultCardValues[CardType.Item]);
   const [editorVersion, setEditorVersion] = useState(0);
   const [mounted, setMounted] = useState(false);
 

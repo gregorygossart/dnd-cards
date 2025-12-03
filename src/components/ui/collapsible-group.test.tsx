@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { CollapsibleGroup } from './collapsible-group';
+import { CollapsibleGroup } from '@/components/ui/collapsible-group';
 
 describe('CollapsibleGroup', () => {
     it('renders with title and children', () => {

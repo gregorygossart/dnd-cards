@@ -1,31 +1,64 @@
 import React, { useEffect, useRef } from 'react';
-import { useForm, useFieldArray, Controller } from 'react-hook-form';
+import { useForm, useFieldArray, Controller, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Card } from '@/types/card';
-import { CardSchema } from '@/types/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { CardSchema, CastingTimeUnit, RangeType, RangeDistanceUnit, DurationType, CardType, CardBaseData } from '@/types/card';
+
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Card as UICard, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Trash2, Plus } from 'lucide-react';
-import { ImageInput } from './ImageInput/ImageInput';
-import { CardTypeSelector } from './CardTypeSelector/CardTypeSelector';
-import { Separator } from '@/components/ui/separator';
-import { assertUnreachable } from '@/lib/utils';
+import { GeneralCardInputs } from '@/components/CardEditor/GeneralCardInputs/GeneralCardInputs';
+import { CardTypeSelector } from '@/components/CardEditor/CardTypeSelector/CardTypeSelector';
+import { SpellComponentsInputs } from '@/components/CardEditor/SpellComponentsInputs/SpellComponentsInputs';
+import { SpellDurationInputs } from '@/components/CardEditor/SpellDurationInputs/SpellDurationInputs';
+import { SpellRangeInputs } from '@/components/CardEditor/SpellRangeInputs/SpellRangeInputs';
+import { CastingTimeInputs } from '@/components/CardEditor/CastingTimeInputs/CastingTimeInputs';
+import { SpellClassificationInputs } from '@/components/CardEditor/SpellClassificationInputs/SpellClassificationInputs';
+import { AccentColorInput } from '@/components/CardEditor/AccentColorInput/AccentColorInput';
+import { CollapsibleGroup } from '@/components/ui/collapsible-group';
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select"
-import { CollapsibleGroup } from '@/components/ui/collapsible-group';
+} from '@/components/ui/select';
 
 interface CardEditorProps {
     initialData: Card;
     onChange: (data: Card) => void;
 }
+
+const baseDefaultCardValues: CardBaseData = {
+    title: 'New Card',
+    blocks: [
+        { type: 'text', content: 'Card rules text goes here.' }],
+    visuals: {
+        accentColor: '#ffc814'
+    }
+}
+
+export const defaultCardValues: Record<CardType, Card> = {
+    [CardType.Item]: {
+        ...baseDefaultCardValues,
+        type: CardType.Item,
+    },
+    [CardType.Spell]: {
+        ...baseDefaultCardValues,
+        type: CardType.Spell,
+        castingTime: { amount: 1, unit: CastingTimeUnit.Action },
+        range: { type: RangeType.Ranged, distance: { amount: 60, unit: RangeDistanceUnit.Feet } },
+        duration: { type: DurationType.Instantaneous },
+        ritual: false,
+        components: { verbal: false, somatic: false, material: false },
+        school: undefined,
+        level: undefined,
+    },
+    [CardType.Ability]: {
+        ...baseDefaultCardValues,
+        type: CardType.Ability,
+    },
+};
 
 export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange }) => {
     const form = useForm<Card>({
@@ -34,7 +67,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
         mode: 'onChange',
     });
 
-    const { register, control, watch } = form;
+    const { control, register, watch } = form;
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'blocks',
@@ -57,102 +90,103 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
     }, [watch, onChange]);
 
     return (
-        <div className="w-full h-full overflow-y-auto p-4 space-y-6">
-            <div className="space-y-4">
+        <FormProvider {...form}>
+            <div className="w-full h-full overflow-y-auto p-4 space-y-6">
                 <CardTypeSelector
                     value={watch('type')}
-                    onChange={(value) => form.setValue('type', value)}
+                    onChange={(value) => {
+                        const defaults = defaultCardValues[value];
+                        form.reset(defaults);
+                    }}
                 />
 
-                <Separator className="my-6 bg-slate-700" />
+                <GeneralCardInputs />
 
-                <ImageInput
-                    value={watch('visuals.backgroundImage')}
-                    onChange={(value) => form.setValue('visuals.backgroundImage', value)}
-                />
+                {/* Spell-specific fields */}
+                {watch('type') === 'Spell' && (
+                    <CollapsibleGroup title="Spell Details" defaultOpen={true}>
+                        <div className="grid grid-cols-2 gap-4">
+                            <SpellClassificationInputs />
 
-                <div className="space-y-2">
-                    <Label htmlFor="title" className="text-slate-300">Title</Label>
-                    <Input id="title" {...register('title')} placeholder="Card Name" className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500" />
-                </div>
+                            {/* Casting Time */}
+                            <CastingTimeInputs />
 
-
-            </div>
-
-            <div className="space-y-3 pt-4 border-t border-slate-800">
-                <div className="flex justify-between items-center">
-                    <Label className="text-slate-300 font-semibold">Content Blocks</Label>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => append({ type: 'text', content: '' })}
-                        type="button"
-                        className="bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-slate-100 h-7 text-xs"
-                    >
-                        <Plus className="w-3 h-3 mr-1" /> Add Text
-                    </Button>
-                </div>
-
-                <div className="space-y-3">
-                    {fields.map((field, index) => (
-                        <div key={field.id} className="flex gap-2 items-start p-3 border border-slate-700 rounded-lg bg-slate-900/50 group">
-                            <div className="flex-1 space-y-2">
-                                <Controller
-                                    control={control}
-                                    name={`blocks.${index}.type`}
-                                    render={({ field }) => (
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            <SelectTrigger className="w-full border-slate-700 bg-slate-800 text-slate-300 text-xs mb-1 h-8">
-                                                <SelectValue placeholder="Select type" />
-                                            </SelectTrigger>
-                                            <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
-                                                <SelectItem value="text">Text Paragraph</SelectItem>
-                                                <SelectItem value="separator">Separator</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    )}
-                                />
-
-                                <Textarea
-                                    {...register(`blocks.${index}.content` as const)}
-                                    placeholder="Block content..."
-                                    rows={3}
-                                    className="bg-slate-800 border-slate-700 text-slate-100 text-sm min-h-[80px] placeholder:text-slate-600 focus-visible:ring-slate-500"
-                                />
+                            {/* Range */}
+                            <div className="col-span-2">
+                                <SpellRangeInputs />
                             </div>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => remove(index)}
-                                type="button"
-                                className="text-slate-500 hover:text-red-400 hover:bg-slate-800 h-6 w-6 -mt-1 -mr-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                            >
-                                <Trash2 className="w-3 h-3" />
-                            </Button>
-                        </div>
-                    ))}
-                </div>
-            </div>
 
-            <CollapsibleGroup title="Visual Style" defaultOpen={false}>
-                <div className="space-y-1">
-                    <Label htmlFor="accentColor" className="text-xs text-slate-400">Accent Color</Label>
-                    <div className="flex gap-2 items-center">
-                        <Input
-                            id="accentColor"
-                            type="color"
-                            value={watch('visuals.accentColor') ?? ''}
-                            onChange={(e) => form.setValue('visuals.accentColor', e.target.value)}
-                            className="w-8 p-0 border-0 rounded-full overflow-hidden cursor-pointer"
-                        />
-                        <Input
-                            {...register('visuals.accentColor')}
-                            placeholder="#000000"
-                            className="flex-1 bg-slate-800 border-slate-700 text-slate-100 text-xs"
-                        />
+                            {/* Duration */}
+                            <div className="col-span-2">
+                                <SpellDurationInputs />
+                            </div>
+
+                            {/* Components */}
+                            <div className="col-span-2">
+                                <SpellComponentsInputs />
+                            </div>
+                        </div>
+                    </CollapsibleGroup>
+                )}
+
+                <CollapsibleGroup title="Content Blocks" defaultOpen={true}>
+                    <div className="space-y-3">
+                        {fields.map((field, index) => (
+                            <div key={field.id} className="p-3 bg-slate-800 rounded-md space-y-2">
+                                <div className="flex items-center justify-between">
+                                    <Controller
+                                        control={control}
+                                        name={`blocks.${index}.type`}
+                                        render={({ field }) => (
+                                            <Select onValueChange={field.onChange} value={field.value}>
+                                                <SelectTrigger className="w-[140px] bg-slate-700 border-slate-600 text-slate-100">
+                                                    <SelectValue />
+                                                </SelectTrigger>
+                                                <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
+                                                    <SelectItem value="text">Text</SelectItem>
+                                                    <SelectItem value="separator">Separator</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        )}
+                                    />
+                                    <Button
+                                        type="button"
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => remove(index)}
+                                        className="text-red-400 hover:text-red-300 hover:bg-red-950"
+                                    >
+                                        <Trash2 className="h-4 w-4" />
+                                    </Button>
+                                </div>
+                                {watch(`blocks.${index}.type`) === 'text' && (
+                                    <Textarea
+                                        {...register(`blocks.${index}.content` as const)}
+                                        placeholder="Enter text content..."
+                                        className="bg-slate-700 border-slate-600 text-slate-100 placeholder:text-slate-500 min-h-[100px]"
+                                    />
+                                )}
+                            </div>
+                        ))}
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => append({ type: 'text', content: '' })}
+                            className="w-full border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
+                        >
+                            <Plus className="h-4 w-4 mr-2" />
+                            Add Block
+                        </Button>
                     </div>
-                </div>
-            </CollapsibleGroup>
-        </div>
+                </CollapsibleGroup>
+
+                <CollapsibleGroup title="Visual Style" defaultOpen={true}>
+                    <div className="space-y-4">
+                        <AccentColorInput />
+                    </div>
+                </CollapsibleGroup>
+            </div>
+        </FormProvider>
     );
 };
