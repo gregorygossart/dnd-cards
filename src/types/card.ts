@@ -1,15 +1,6 @@
 import { z } from 'zod';
 
-export const CardBlockSchema = z.discriminatedUnion('type', [
-    z.object({
-        type: z.literal('text'),
-        content: z.string(),
-    }),
-    z.object({
-        type: z.literal('separator'),
-        content: z.null().optional(),
-    }),
-]);
+
 
 export const CardVisualsSchema = z.object({
     accentColor: z.string(),
@@ -125,7 +116,7 @@ export const CardTypeSchema = z.enum(CardType);
 // Base schema shared by all card types
 const BaseCardSchema = z.object({
     title: z.string().min(1, "Title is required"),
-    blocks: z.array(CardBlockSchema),
+    description: z.string(),
     visuals: CardVisualsSchema,
 });
 
@@ -166,7 +157,7 @@ export const CardSchema = z.discriminatedUnion('type', [
     AbilityCardSchema,
 ]);
 
-export type CardBlock = z.infer<typeof CardBlockSchema>;
+
 export type CardVisuals = z.infer<typeof CardVisualsSchema>;
 export type CastingTime = z.infer<typeof CastingTimeSchema>;
 export type Range = z.infer<typeof RangeSchema>;

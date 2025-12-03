@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { useForm, useFieldArray, Controller, FormProvider } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Card } from '@/types/card';
 import { CardSchema, CastingTimeUnit, RangeType, RangeDistanceUnit, DurationType, CardType, CardBaseData } from '@/types/card';
 
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Trash2, Plus } from 'lucide-react';
 import { GeneralCardInputs } from '@/components/CardEditor/GeneralCardInputs/GeneralCardInputs';
 import { CardTypeSelector } from '@/components/CardEditor/CardTypeSelector/CardTypeSelector';
 import { SpellComponentsInputs } from '@/components/CardEditor/SpellComponentsInputs/SpellComponentsInputs';
@@ -16,13 +15,7 @@ import { CastingTimeInputs } from '@/components/CardEditor/CastingTimeInputs/Cas
 import { SpellClassificationInputs } from '@/components/CardEditor/SpellClassificationInputs/SpellClassificationInputs';
 import { AccentColorInput } from '@/components/CardEditor/AccentColorInput/AccentColorInput';
 import { CollapsibleGroup } from '@/components/ui/collapsible-group';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
+
 
 interface CardEditorProps {
     initialData: Card;
@@ -31,8 +24,7 @@ interface CardEditorProps {
 
 const baseDefaultCardValues: CardBaseData = {
     title: 'New Card',
-    blocks: [
-        { type: 'text', content: 'Card rules text goes here.' }],
+    description: 'Card rules text goes here.',
     visuals: {
         accentColor: '#ffc814'
     }
@@ -67,11 +59,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
         mode: 'onChange',
     });
 
-    const { control, register, watch } = form;
-    const { fields, append, remove } = useFieldArray({
-        control,
-        name: 'blocks',
-    });
+    const { register, watch } = form;
 
     // Use a ref to track if we've already notified the parent
     const isInitialMount = useRef(true);
@@ -129,55 +117,13 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
                     </CollapsibleGroup>
                 )}
 
-                <CollapsibleGroup title="Content Blocks" defaultOpen={true}>
+                <CollapsibleGroup title="Rules text" defaultOpen={true}>
                     <div className="space-y-3">
-                        {fields.map((field, index) => (
-                            <div key={field.id} className="p-3 bg-slate-800 rounded-md space-y-2">
-                                <div className="flex items-center justify-between">
-                                    <Controller
-                                        control={control}
-                                        name={`blocks.${index}.type`}
-                                        render={({ field }) => (
-                                            <Select onValueChange={field.onChange} value={field.value}>
-                                                <SelectTrigger className="w-[140px] bg-slate-700 border-slate-600 text-slate-100">
-                                                    <SelectValue />
-                                                </SelectTrigger>
-                                                <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
-                                                    <SelectItem value="text">Text</SelectItem>
-                                                    <SelectItem value="separator">Separator</SelectItem>
-                                                </SelectContent>
-                                            </Select>
-                                        )}
-                                    />
-                                    <Button
-                                        type="button"
-                                        variant="ghost"
-                                        size="sm"
-                                        onClick={() => remove(index)}
-                                        className="text-red-400 hover:text-red-300 hover:bg-red-950"
-                                    >
-                                        <Trash2 className="h-4 w-4" />
-                                    </Button>
-                                </div>
-                                {watch(`blocks.${index}.type`) === 'text' && (
-                                    <Textarea
-                                        {...register(`blocks.${index}.content` as const)}
-                                        placeholder="Enter text content..."
-                                        className="bg-slate-700 border-slate-600 text-slate-100 placeholder:text-slate-500 min-h-[100px]"
-                                    />
-                                )}
-                            </div>
-                        ))}
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() => append({ type: 'text', content: '' })}
-                            className="w-full border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
-                        >
-                            <Plus className="h-4 w-4 mr-2" />
-                            Add Block
-                        </Button>
+                        <Textarea
+                            {...register('description')}
+                            placeholder="Enter card rules..."
+                            className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 min-h-[200px] font-mono text-sm"
+                        />
                     </div>
                 </CollapsibleGroup>
 

@@ -15,7 +15,7 @@ interface CardRendererProps {
 }
 
 export const CardRenderer: React.FC<CardRendererProps> = ({ data, className }) => {
-    const { title, blocks, visuals } = data;
+    const { title, description, visuals } = data;
 
     return (
         <div
@@ -53,7 +53,7 @@ export const CardRenderer: React.FC<CardRendererProps> = ({ data, className }) =
                     />
                 )}
 
-                <CardBody blocks={blocks} />
+                <CardBody description={description} />
 
                 <CardFooter />
             </div>
