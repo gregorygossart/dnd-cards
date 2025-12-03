@@ -8,6 +8,7 @@ interface DeckStore {
     deck: Deck;
     currentCardIndex: number;
     updateCard: (index: number, card: Card) => void;
+    addCard: (type: CardType) => void;
     setCurrentCardIndex: (index: number) => void;
 }
 
@@ -81,10 +82,21 @@ export function useDeckStore(): DeckStore {
         }));
     };
 
+    const addCard = (type: CardType) => {
+        const newCard = defaultCardValues[type];
+        setDeck((prevDeck) => ({
+            ...prevDeck,
+            cards: [...prevDeck.cards, newCard],
+        }));
+        // Switch to the newly created card
+        setCurrentCardIndex(deck.cards.length);
+    };
+
     return {
         deck,
         currentCardIndex,
         updateCard,
+        addCard,
         setCurrentCardIndex,
     };
 }

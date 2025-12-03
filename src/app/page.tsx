@@ -5,11 +5,13 @@ import { CardRenderer } from '@/components/CardRenderer/CardRenderer';
 import { CardEditor } from '@/components/CardEditor/CardEditor';
 import { CardImporter } from '@/components/CardImporter/CardImporter';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
 import { useDeckStore } from '@/hooks/useDeckStore';
+import { CardType } from '@/types/card';
 
 
 export default function Home() {
-  const { deck, currentCardIndex, updateCard } = useDeckStore();
+  const { deck, currentCardIndex, updateCard, addCard } = useDeckStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -62,8 +64,22 @@ export default function Home() {
             style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
           </div>
 
-          <div className="relative z-10 shadow-2xl shadow-black/50">
-            <CardRenderer data={currentCard} />
+          {/* Card and Button */}
+          <div className="relative z-10 flex flex-col items-center gap-32">
+            <div className="shadow-2xl shadow-black/50">
+              <CardRenderer data={currentCard} />
+            </div>
+
+            {/* Add Card Button */}
+            <Button
+              onClick={() => addCard(CardType.Spell)}
+              className="bg-violet-600 hover:bg-violet-700 text-white font-medium shadow-lg"
+            >
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              Add Card
+            </Button>
           </div>
         </div>
       </main>
