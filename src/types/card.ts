@@ -169,3 +169,9 @@ export type SpellCard = z.infer<typeof SpellCardSchema>;
 export type AbilityCard = z.infer<typeof AbilityCardSchema>;
 
 export type Card = ItemCard | SpellCard | AbilityCard;
+
+export interface Deck {
+    id: string;
+    name: string;
+    cards: Card[];
+}

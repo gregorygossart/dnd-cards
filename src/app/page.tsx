@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card, CardType } from '@/types/card';
+import { Card, CardType, Deck } from '@/types/card';
 import { CardRenderer } from '@/components/CardRenderer/CardRenderer';
 import { CardEditor, defaultCardValues } from '@/components/CardEditor/CardEditor';
 import { CardImporter } from '@/components/CardImporter/CardImporter';
@@ -9,13 +9,29 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 
 export default function Home() {
-  const [cardData, setCardData] = useState<Card>(defaultCardValues[CardType.Spell]);
+  const [deck, setDeck] = useState<Deck>({
+    id: crypto.randomUUID(),
+    name: 'My Deck',
+    cards: [defaultCardValues[CardType.Spell]],
+  });
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [editorVersion, setEditorVersion] = useState(0);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const currentCard = deck.cards[currentCardIndex];
+
+  const updateCurrentCard = (updatedCard: Card) => {
+    setDeck((prevDeck) => ({
+      ...prevDeck,
+      cards: prevDeck.cards.map((card, index) =>
+        index === currentCardIndex ? updatedCard : card
+      ),
+    }));
+  };
 
   return (
     <div className="flex h-screen w-full bg-slate-950 text-slate-100 overflow-hidden font-sans">
@@ -45,7 +61,7 @@ export default function Home() {
         {/* Top Header */}
         <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center justify-between px-6">
           <div className="flex items-center gap-2">
-            <h1 className="font-semibold text-slate-200">{cardData.title || 'Untitled Card'}</h1>
+            <h1 className="font-semibold text-slate-200">{currentCard.title || 'Untitled Card'}</h1>
             <span className="text-xs text-slate-500 px-2 py-0.5 rounded bg-slate-800">Draft</span>
           </div>
           <div className="text-xs text-slate-500">
@@ -61,7 +77,7 @@ export default function Home() {
           </div>
 
           <div className="relative z-10 shadow-2xl shadow-black/50">
-            <CardRenderer data={cardData} />
+            <CardRenderer data={currentCard} />
           </div>
         </div>
       </main>
@@ -80,20 +96,20 @@ export default function Home() {
             <TabsContent value="edit" className="h-full m-0 border-0">
               <CardEditor
                 key={editorVersion}
-                initialData={cardData}
-                onChange={setCardData}
+                initialData={currentCard}
+                onChange={updateCurrentCard}
               />
             </TabsContent>
             <TabsContent value="import" className="h-full m-0 p-4">
               <CardImporter
                 onImport={(data) => {
-                  setCardData(data);
+                  updateCurrentCard(data);
                   setEditorVersion(v => v + 1);
                 }}
               />
               <div className="mt-8 p-4 bg-slate-950 rounded border border-slate-800 text-xs text-slate-500 font-mono overflow-auto max-h-60">
                 <div className="mb-2 font-bold text-slate-400">Current Data JSON:</div>
-                {JSON.stringify(cardData, null, 2)}
+                {JSON.stringify(currentCard, null, 2)}
               </div>
             </TabsContent>
           </div>
