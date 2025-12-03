@@ -117,7 +117,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
                     </CollapsibleGroup>
                 )}
 
-                <CollapsibleGroup title="Rules text" defaultOpen={true}>
+                <CollapsibleGroup title="Rules Text" defaultOpen={true}>
                     <div className="space-y-3">
                         <Controller
                             name="description"
