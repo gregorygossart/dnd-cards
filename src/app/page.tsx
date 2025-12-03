@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 
 export default function Home() {
-  const [cardData, setCardData] = useState<Card>(defaultCardValues[CardType.Item]);
+  const [cardData, setCardData] = useState<Card>(defaultCardValues[CardType.Spell]);
   const [editorVersion, setEditorVersion] = useState(0);
   const [mounted, setMounted] = useState(false);
 

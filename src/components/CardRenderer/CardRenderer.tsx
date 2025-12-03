@@ -53,7 +53,10 @@ export const CardRenderer: React.FC<CardRendererProps> = ({ data, className }) =
                     />
                 )}
 
-                <CardBody description={description} />
+                <CardBody
+                    description={description}
+                    accentColor={visuals.accentColor}
+                />
 
                 <CardFooter />
             </div>

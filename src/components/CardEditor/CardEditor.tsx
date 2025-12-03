@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+import { useForm, FormProvider, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Card } from '@/types/card';
 import { CardSchema, CastingTimeUnit, RangeType, RangeDistanceUnit, DurationType, CardType, CardBaseData } from '@/types/card';
 
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { RichTextEditor } from '@/components/RichTextEditor/RichTextEditor';
 import { GeneralCardInputs } from '@/components/CardEditor/GeneralCardInputs/GeneralCardInputs';
 import { CardTypeSelector } from '@/components/CardEditor/CardTypeSelector/CardTypeSelector';
 import { SpellComponentsInputs } from '@/components/CardEditor/SpellComponentsInputs/SpellComponentsInputs';
@@ -59,7 +59,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
         mode: 'onChange',
     });
 
-    const { register, watch } = form;
+    const { register, watch, control } = form;
 
     // Use a ref to track if we've already notified the parent
     const isInitialMount = useRef(true);
@@ -119,10 +119,17 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
 
                 <CollapsibleGroup title="Rules text" defaultOpen={true}>
                     <div className="space-y-3">
-                        <Textarea
-                            {...register('description')}
-                            placeholder="Enter card rules..."
-                            className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 min-h-[200px] font-mono text-sm"
+                        <Controller
+                            name="description"
+                            control={control}
+                            render={({ field }) => (
+                                <RichTextEditor
+                                    content={field.value || ''}
+                                    onChange={field.onChange}
+                                    placeholder="Enter card rules..."
+                                    className="min-h-[200px]"
+                                />
+                            )}
                         />
                     </div>
                 </CollapsibleGroup>

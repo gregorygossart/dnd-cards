@@ -1,5 +1,4 @@
 import React from 'react';
-import { Label } from '@/components/ui/label';
 import { CardType } from '@/types/card';
 
 import {
@@ -28,14 +27,14 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({ value, onCha
                 </div>
             </SelectTrigger>
             <SelectContent className="bg-slate-800 border-slate-700 text-slate-100 min-w-[200px]">
-                <SelectItem value={CardType.Item} className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider">
+                <SelectItem disabled value={CardType.Ability} className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider">
+                    Ability
+                </SelectItem>
+                <SelectItem disabled value={CardType.Item} className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider">
                     Item
                 </SelectItem>
                 <SelectItem value={CardType.Spell} className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider">
                     Spell
-                </SelectItem>
-                <SelectItem value={CardType.Ability} className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider">
-                    Ability
                 </SelectItem>
             </SelectContent>
         </Select>
