@@ -22,7 +22,7 @@ export const PRINT_CONFIG = {
     PAPER: {
         WIDTH_MM: 210, // A4
         HEIGHT_MM: 297,
-        MARGIN_MM: 10,
+        MARGIN_MM: 5,
     },
     CARD: {
         WIDTH_MM: CARD_WIDTH_MM,
