@@ -10,6 +10,8 @@ interface DeckStore {
     updateCard: (deckIndex: number, cardIndex: number, card: Card) => void;
     addCard: (deckId: string, type: CardType) => void;
     addDeck: (name: string) => void;
+    updateDeckName: (deckId: string, name: string) => void;
+    deleteDeck: (deckId: string) => void;
     setCurrentCard: (deckIndex: number, cardIndex: number) => void;
 }
 
@@ -84,6 +86,43 @@ export const useDeckStore = create<DeckStore>()(
                     currentDeckIndex: state.decks.length,
                     currentCardIndex: 0,
                 }));
+            },
+
+            updateDeckName: (deckId, name) => {
+                set((state) => ({
+                    decks: state.decks.map((deck) =>
+                        deck.id === deckId ? { ...deck, name } : deck
+                    ),
+                }));
+            },
+
+            deleteDeck: (deckId) => {
+                set((state) => {
+                    const newDecks = state.decks.filter((deck) => deck.id !== deckId);
+
+                    // If we deleted all decks, create a new default one
+                    if (newDecks.length === 0) {
+                        return {
+                            decks: getDefaultDecks(),
+                            currentDeckIndex: 0,
+                            currentCardIndex: 0,
+                        };
+                    }
+
+                    // If we deleted the current deck, switch to the first deck
+                    const deletedIndex = state.decks.findIndex((deck) => deck.id === deckId);
+                    const newCurrentIndex = deletedIndex === state.currentDeckIndex
+                        ? Math.min(state.currentDeckIndex, newDecks.length - 1)
+                        : state.currentDeckIndex > deletedIndex
+                            ? state.currentDeckIndex - 1
+                            : state.currentDeckIndex;
+
+                    return {
+                        decks: newDecks,
+                        currentDeckIndex: newCurrentIndex,
+                        currentCardIndex: 0,
+                    };
+                });
             },
 
             setCurrentCard: (deckIndex, cardIndex) => {

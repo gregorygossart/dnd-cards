@@ -1,8 +1,25 @@
 import React, { useState } from 'react';
 import { Deck } from '@/types/card';
 import { cn } from '@/lib/utils';
+import { useDeckStore } from '@/hooks/useDeckStore';
 import { AddCardButton } from './AddCardButton';
 import { AddDeckButton } from './AddDeckButton';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 interface DeckListProps {
     decks: Deck[];
@@ -17,10 +34,51 @@ export const DeckList: React.FC<DeckListProps> = ({
     currentCardIndex,
     onCardSelect,
 }) => {
+    const { updateDeckName, deleteDeck } = useDeckStore();
     const [expandedDeckIndex, setExpandedDeckIndex] = useState<number>(currentDeckIndex);
+    const [editingDeckId, setEditingDeckId] = useState<string | null>(null);
+    const [editingName, setEditingName] = useState('');
+    const [deckToDelete, setDeckToDelete] = useState<{ id: string; name: string } | null>(null);
+    const inputRef = React.useRef<HTMLInputElement>(null);
+
+    // Focus and select text when editing starts
+    React.useEffect(() => {
+        if (editingDeckId && inputRef.current) {
+            // Delay to ensure dropdown has closed and released focus
+            setTimeout(() => {
+                inputRef.current?.focus();
+                inputRef.current?.select();
+            }, 100);
+        }
+    }, [editingDeckId]);
 
     const toggleDeck = (deckIndex: number) => {
         setExpandedDeckIndex(expandedDeckIndex === deckIndex ? -1 : deckIndex);
+    };
+
+    const startEditing = (deck: Deck, e: React.MouseEvent) => {
+        e.stopPropagation();
+        setEditingDeckId(deck.id);
+        setEditingName(deck.name);
+    };
+
+    const handleRename = (deckId: string) => {
+        if (editingName.trim()) {
+            updateDeckName(deckId, editingName.trim());
+        }
+        setEditingDeckId(null);
+    };
+
+    const handleDelete = (deck: Deck, e: React.MouseEvent) => {
+        e.stopPropagation();
+        setDeckToDelete({ id: deck.id, name: deck.name });
+    };
+
+    const confirmDelete = () => {
+        if (deckToDelete) {
+            deleteDeck(deckToDelete.id);
+            setDeckToDelete(null);
+        }
     };
 
     return (
@@ -35,14 +93,19 @@ export const DeckList: React.FC<DeckListProps> = ({
                 {decks.map((deck, deckIndex) => {
                     const isExpanded = expandedDeckIndex === deckIndex;
                     const isCurrentDeck = deckIndex === currentDeckIndex;
+                    const isEditing = editingDeckId === deck.id;
 
                     return (
                         <div key={deck.id}>
                             {/* Deck Header */}
-                            <button
-                                onClick={() => toggleDeck(deckIndex)}
+                            <div
+                                onClick={() => {
+                                    if (!isEditing) {
+                                        toggleDeck(deckIndex);
+                                    }
+                                }}
                                 className={cn(
-                                    "w-full px-3 py-2 flex items-center justify-between rounded-lg transition-colors text-left group",
+                                    "w-full px-3 py-2 flex items-center justify-between rounded-lg transition-colors text-left group cursor-pointer",
                                     isCurrentDeck
                                         ? "bg-slate-800 text-slate-100"
                                         : "hover:bg-slate-800/50 text-slate-300"
@@ -59,9 +122,31 @@ export const DeckList: React.FC<DeckListProps> = ({
                                         </svg>
                                     </div>
 
-                                    <span className="font-medium truncate text-sm">
-                                        {deck.name}
-                                    </span>
+                                    {/* Deck Name */}
+                                    <div className="flex-1 min-w-0 pr-2">
+                                        {isEditing ? (
+                                            <input
+                                                ref={inputRef}
+                                                type="text"
+                                                value={editingName}
+                                                onChange={(e) => setEditingName(e.target.value)}
+                                                onBlur={() => handleRename(deck.id)}
+                                                onKeyDown={(e) => {
+                                                    if (e.key === 'Enter') {
+                                                        handleRename(deck.id);
+                                                    } else if (e.key === 'Escape') {
+                                                        setEditingDeckId(null);
+                                                    }
+                                                }}
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="w-full px-1 py-0 text-sm bg-input border border-input rounded text-foreground focus:outline-none focus:border-ring"
+                                            />
+                                        ) : (
+                                            <span className="font-medium truncate text-sm block">
+                                                {deck.name}
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="flex items-center gap-2 shrink-0">
@@ -70,25 +155,54 @@ export const DeckList: React.FC<DeckListProps> = ({
                                         {deck.cards.length}
                                     </span>
 
-                                    {/* Chevron */}
-                                    <svg
-                                        className={cn(
-                                            "w-4 h-4 text-slate-400 transition-transform",
-                                            isExpanded && "rotate-90"
-                                        )}
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M9 5l7 7-7 7"
-                                        />
-                                    </svg>
+                                    {/* Three-dot menu */}
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <button
+                                                onClick={(e) => e.stopPropagation()}
+                                                className="p-1 hover:bg-accent rounded transition-colors"
+                                            >
+                                                <svg className="w-4 h-4 text-muted-foreground" fill="currentColor" viewBox="0 0 16 16">
+                                                    <circle cx="8" cy="3" r="1.5" />
+                                                    <circle cx="8" cy="8" r="1.5" />
+                                                    <circle cx="8" cy="13" r="1.5" />
+                                                </svg>
+                                            </button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent
+                                            align="end"
+                                            onCloseAutoFocus={(e) => {
+                                                // Prevent dropdown from auto-focusing trigger when we're editing
+                                                if (editingDeckId === deck.id) {
+                                                    e.preventDefault();
+                                                }
+                                            }}
+                                        >
+                                            <DropdownMenuItem onClick={(e) => {
+                                                e.stopPropagation();
+                                                startEditing(deck, e as any);
+                                            }}>
+                                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                </svg>
+                                                Rename
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleDelete(deck, e as any);
+                                                }}
+                                                variant="destructive"
+                                            >
+                                                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                                Delete
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
                                 </div>
-                            </button>
+                            </div>
 
                             {/* Card List */}
                             {isExpanded && (
@@ -148,6 +262,24 @@ export const DeckList: React.FC<DeckListProps> = ({
                     );
                 })}
             </div>
+
+            {/* Delete Confirmation Dialog */}
+            <AlertDialog open={!!deckToDelete} onOpenChange={(open) => !open && setDeckToDelete(null)}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Delete Deck</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Are you sure you want to delete "{deckToDelete?.name}"? This will also delete all {decks.find(d => d.id === deckToDelete?.id)?.cards.length || 0} card(s) in this deck. This action cannot be undone.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmDelete} variant="destructive">
+                            Delete
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     );
 };
