@@ -1,15 +1,14 @@
-import { useState, useEffect } from 'react';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import { Deck, Card, CardType } from '@/types/card';
 import { defaultCardValues } from '@/components/CardEditor/CardEditor';
-
-const STORAGE_KEY = 'dnd-cards-decks';
 
 interface DeckStore {
     decks: Deck[];
     currentDeckIndex: number;
     currentCardIndex: number;
     updateCard: (deckIndex: number, cardIndex: number, card: Card) => void;
-    addCard: (type: CardType) => void;
+    addCard: (deckId: string, type: CardType) => void;
     setCurrentCard: (deckIndex: number, cardIndex: number) => void;
 }
 
@@ -23,118 +22,64 @@ function getDefaultDecks(): Deck[] {
     ];
 }
 
-interface StorageData {
-    decks: Deck[];
-    currentDeckIndex: number;
-    currentCardIndex: number;
-}
+export const useDeckStore = create<DeckStore>()(
+    persist(
+        (set) => ({
+            decks: getDefaultDecks(),
+            currentDeckIndex: 0,
+            currentCardIndex: 0,
 
-function loadFromStorage(): StorageData | null {
-    if (typeof window === 'undefined') return null;
+            updateCard: (deckIndex, cardIndex, updatedCard) => {
+                set((state) => ({
+                    decks: state.decks.map((deck, dIdx) =>
+                        dIdx === deckIndex
+                            ? {
+                                ...deck,
+                                cards: deck.cards.map((card, cIdx) =>
+                                    cIdx === cardIndex ? updatedCard : card
+                                ),
+                            }
+                            : deck
+                    ),
+                }));
+            },
 
-    try {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (!stored) return null;
+            addCard: (deckId, type) => {
+                const newCard = defaultCardValues[type];
 
-        const parsed = JSON.parse(stored);
+                set((state) => {
+                    let targetDeckIndex = -1;
+                    const newDecks = state.decks.map((deck, idx) => {
+                        if (deck.id === deckId) {
+                            targetDeckIndex = idx;
+                            return {
+                                ...deck,
+                                cards: [...deck.cards, newCard],
+                            };
+                        }
+                        return deck;
+                    });
 
-        // Handle legacy format (array of decks)
-        if (Array.isArray(parsed)) {
-            return {
-                decks: parsed as Deck[],
-                currentDeckIndex: 0,
-                currentCardIndex: 0
-            };
+                    const newCardIndex = targetDeckIndex !== -1
+                        ? state.decks[targetDeckIndex].cards.length
+                        : state.currentCardIndex;
+
+                    return {
+                        decks: newDecks,
+                        currentCardIndex: newCardIndex,
+                    };
+                });
+            },
+
+            setCurrentCard: (deckIndex, cardIndex) => {
+                set({
+                    currentDeckIndex: deckIndex,
+                    currentCardIndex: cardIndex,
+                });
+            },
+        }),
+        {
+            name: 'dnd-cards-decks',
         }
-
-        return parsed as StorageData;
-    } catch (error) {
-        console.error('Failed to load data from localStorage:', error);
-        return null;
-    }
-}
-
-function saveToStorage(data: StorageData): void {
-    if (typeof window === 'undefined') return;
-
-    try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    } catch (error) {
-        console.error('Failed to save data to localStorage:', error);
-    }
-}
-
-export function useDeckStore(): DeckStore {
-    // Always start with default decks (same on server and client)
-    const [decks, setDecks] = useState<Deck[]>(getDefaultDecks);
-    const [currentDeckIndex, setCurrentDeckIndex] = useState(0);
-    const [currentCardIndex, setCurrentCardIndex] = useState(0);
-    const [isHydrated, setIsHydrated] = useState(false);
-
-    // Load from localStorage after mount (client-only)
-    useEffect(() => {
-        const stored = loadFromStorage();
-        if (stored) {
-            setDecks(stored.decks);
-            setCurrentDeckIndex(stored.currentDeckIndex);
-            setCurrentCardIndex(stored.currentCardIndex);
-        }
-        setIsHydrated(true);
-    }, []);
-
-    // Save to localStorage whenever state changes (but only after hydration)
-    useEffect(() => {
-        if (isHydrated) {
-            saveToStorage({
-                decks,
-                currentDeckIndex,
-                currentCardIndex
-            });
-        }
-    }, [decks, currentDeckIndex, currentCardIndex, isHydrated]);
-
-    const updateCard = (deckIndex: number, cardIndex: number, updatedCard: Card) => {
-        setDecks((prevDecks) =>
-            prevDecks.map((deck, dIdx) =>
-                dIdx === deckIndex
-                    ? {
-                        ...deck,
-                        cards: deck.cards.map((card, cIdx) =>
-                            cIdx === cardIndex ? updatedCard : card
-                        ),
-                    }
-                    : deck
-            )
-        );
-    };
-
-    const addCard = (type: CardType) => {
-        const newCard = defaultCardValues[type];
-        setDecks((prevDecks) =>
-            prevDecks.map((deck, idx) =>
-                idx === currentDeckIndex
-                    ? {
-                        ...deck,
-                        cards: [...deck.cards, newCard],
-                    }
-                    : deck
-            )
-        );
-        // Switch to the newly created card
-        setCurrentCardIndex(decks[currentDeckIndex].cards.length);
-    };
-
-    const setCurrentCard = (deckIndex: number, cardIndex: number) => {
-        setCurrentDeckIndex(deckIndex);
-        setCurrentCardIndex(cardIndex);
-    };
-
-    return {
-        decks,
-        currentDeckIndex,
-        currentCardIndex,
-        updateCard,
-        addCard,
-        setCurrentCard,
-    };
-}
+    )
+);

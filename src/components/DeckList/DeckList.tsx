@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Deck } from '@/types/card';
 import { cn } from '@/lib/utils';
+import { AddCardButton } from './AddCardButton';
 
 interface DeckListProps {
     decks: Deck[];
@@ -135,6 +136,9 @@ export const DeckList: React.FC<DeckListProps> = ({
                                             </button>
                                         );
                                     })}
+
+                                    {/* Add Card Button */}
+                                    <AddCardButton deckId={deck.id} />
                                 </div>
                             )}
                         </div>

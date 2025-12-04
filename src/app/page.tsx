@@ -8,12 +8,11 @@ import { CardImporter } from '@/components/CardImporter/CardImporter';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { useDeckStore } from '@/hooks/useDeckStore';
-import { CardType } from '@/types/card';
 import { DeckList } from '@/components/DeckList/DeckList';
 
 
 export default function Home() {
-  const { decks, currentDeckIndex, currentCardIndex, updateCard, addCard, setCurrentCard } = useDeckStore();
+  const { decks, currentDeckIndex, currentCardIndex, updateCard, setCurrentCard } = useDeckStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -81,15 +80,7 @@ export default function Home() {
             </div>
 
             {/* Add Card Button */}
-            <Button
-              onClick={() => addCard(CardType.Spell)}
-              className="bg-violet-600 hover:bg-violet-700 text-white font-medium shadow-lg"
-            >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Add Card
-            </Button>
+            {/* Moved to Header */}
           </div>
         </div>
       </main>
