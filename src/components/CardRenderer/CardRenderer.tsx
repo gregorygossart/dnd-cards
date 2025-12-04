@@ -33,7 +33,7 @@ export const CardRenderer: React.FC<CardRendererProps> = ({ data, className }) =
 
             {/* Content Area */}
             <div
-                className="flex-1 flex flex-col relative bg-white"
+                className="flex-1 min-h-0 flex flex-col relative bg-white"
                 style={{ borderTop: `4px solid ${visuals.accentColor} ` }}
             >
                 <CardBanner
