@@ -2,25 +2,28 @@ import { useState, useEffect } from 'react';
 import { Deck, Card, CardType } from '@/types/card';
 import { defaultCardValues } from '@/components/CardEditor/CardEditor';
 
-const STORAGE_KEY = 'dnd-cards-deck';
+const STORAGE_KEY = 'dnd-cards-decks';
 
 interface DeckStore {
-    deck: Deck;
+    decks: Deck[];
+    currentDeckIndex: number;
     currentCardIndex: number;
-    updateCard: (index: number, card: Card) => void;
+    updateCard: (deckIndex: number, cardIndex: number, card: Card) => void;
     addCard: (type: CardType) => void;
-    setCurrentCardIndex: (index: number) => void;
+    setCurrentCard: (deckIndex: number, cardIndex: number) => void;
 }
 
-function getDefaultDeck(): Deck {
-    return {
-        id: crypto.randomUUID(),
-        name: 'My Deck',
-        cards: [defaultCardValues[CardType.Spell]],
-    };
+function getDefaultDecks(): Deck[] {
+    return [
+        {
+            id: crypto.randomUUID(),
+            name: 'My Deck',
+            cards: [defaultCardValues[CardType.Spell]],
+        }
+    ];
 }
 
-function loadDeckFromStorage(): Deck | null {
+function loadDecksFromStorage(): Deck[] | null {
     if (typeof window === 'undefined') return null;
 
     try {
@@ -29,74 +32,93 @@ function loadDeckFromStorage(): Deck | null {
 
         const parsed = JSON.parse(stored);
         // Basic validation
-        if (!parsed.id || !parsed.name || !Array.isArray(parsed.cards)) {
-            console.warn('Invalid deck data in localStorage, using default');
+        if (!Array.isArray(parsed)) {
+            console.warn('Invalid decks data in localStorage, using default');
             return null;
         }
 
-        return parsed as Deck;
+        return parsed as Deck[];
     } catch (error) {
-        console.error('Failed to load deck from localStorage:', error);
+        console.error('Failed to load decks from localStorage:', error);
         return null;
     }
 }
 
-function saveDeckToStorage(deck: Deck): void {
+function saveDecksToStorage(decks: Deck[]): void {
     if (typeof window === 'undefined') return;
 
     try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(deck));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
     } catch (error) {
-        console.error('Failed to save deck to localStorage:', error);
+        console.error('Failed to save decks to localStorage:', error);
     }
 }
 
 export function useDeckStore(): DeckStore {
-    // Always start with default deck (same on server and client)
-    const [deck, setDeck] = useState<Deck>(getDefaultDeck);
+    // Always start with default decks (same on server and client)
+    const [decks, setDecks] = useState<Deck[]>(getDefaultDecks);
+    const [currentDeckIndex, setCurrentDeckIndex] = useState(0);
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
     const [isHydrated, setIsHydrated] = useState(false);
 
     // Load from localStorage after mount (client-only)
     useEffect(() => {
-        const stored = loadDeckFromStorage();
-        if (stored) {
-            setDeck(stored);
+        const stored = loadDecksFromStorage();
+        if (stored && stored.length > 0) {
+            setDecks(stored);
         }
         setIsHydrated(true);
     }, []);
 
-    // Save to localStorage whenever deck changes (but only after hydration)
+    // Save to localStorage whenever decks change (but only after hydration)
     useEffect(() => {
         if (isHydrated) {
-            saveDeckToStorage(deck);
+            saveDecksToStorage(decks);
         }
-    }, [deck, isHydrated]);
+    }, [decks, isHydrated]);
 
-    const updateCard = (index: number, updatedCard: Card) => {
-        setDeck((prevDeck) => ({
-            ...prevDeck,
-            cards: prevDeck.cards.map((card, i) =>
-                i === index ? updatedCard : card
-            ),
-        }));
+    const updateCard = (deckIndex: number, cardIndex: number, updatedCard: Card) => {
+        setDecks((prevDecks) =>
+            prevDecks.map((deck, dIdx) =>
+                dIdx === deckIndex
+                    ? {
+                        ...deck,
+                        cards: deck.cards.map((card, cIdx) =>
+                            cIdx === cardIndex ? updatedCard : card
+                        ),
+                    }
+                    : deck
+            )
+        );
     };
 
     const addCard = (type: CardType) => {
         const newCard = defaultCardValues[type];
-        setDeck((prevDeck) => ({
-            ...prevDeck,
-            cards: [...prevDeck.cards, newCard],
-        }));
+        setDecks((prevDecks) =>
+            prevDecks.map((deck, idx) =>
+                idx === currentDeckIndex
+                    ? {
+                        ...deck,
+                        cards: [...deck.cards, newCard],
+                    }
+                    : deck
+            )
+        );
         // Switch to the newly created card
-        setCurrentCardIndex(deck.cards.length);
+        setCurrentCardIndex(decks[currentDeckIndex].cards.length);
+    };
+
+    const setCurrentCard = (deckIndex: number, cardIndex: number) => {
+        setCurrentDeckIndex(deckIndex);
+        setCurrentCardIndex(cardIndex);
     };
 
     return {
-        deck,
+        decks,
+        currentDeckIndex,
         currentCardIndex,
         updateCard,
         addCard,
-        setCurrentCardIndex,
+        setCurrentCard,
     };
 }

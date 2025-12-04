@@ -8,40 +8,40 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { useDeckStore } from '@/hooks/useDeckStore';
 import { CardType } from '@/types/card';
+import { DeckList } from '@/components/DeckList/DeckList';
 
 
 export default function Home() {
-  const { deck, currentCardIndex, updateCard, addCard } = useDeckStore();
+  const { decks, currentDeckIndex, currentCardIndex, updateCard, addCard, setCurrentCard } = useDeckStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const currentCard = deck.cards[currentCardIndex];
+  const currentDeck = decks[currentDeckIndex];
+  const currentCard = currentDeck?.cards[currentCardIndex];
 
+  // Safety check
+  if (!currentDeck || !currentCard) {
+    return <div className="flex h-screen w-full bg-slate-950 text-slate-100 items-center justify-center">
+      Loading...
+    </div>;
+  }
 
   return (
     <div className="flex h-screen w-full bg-slate-950 text-slate-100 overflow-hidden font-sans">
-      {/* Left Sidebar: Templates/Codex Placeholder */}
-      <aside className="w-64 border-r border-slate-800 bg-slate-900/50 flex flex-col">
-        <div className="h-14 border-b border-slate-800 flex items-center px-4">
+      {/* Left Sidebar: Deck List */}
+      <aside className="w-64 border-r border-slate-800 bg-slate-900 flex flex-col">
+        <div className="h-14 flex items-center px-4">
           <span className="font-bold text-lg tracking-tight text-amber-500">D&D Cards</span>
         </div>
-        <div className="flex-1 p-4 overflow-y-auto">
-          <div className="text-sm text-slate-500 uppercase tracking-wider font-semibold mb-4">Base Templates</div>
-          {/* Placeholder items */}
-          <div className="space-y-2 opacity-50">
-            {['Recovery', 'Bone-Touched', 'Cruel Precision', 'Breaking Blow'].map((item) => (
-              <div key={item} className="p-2 rounded hover:bg-slate-800 cursor-pointer text-sm text-slate-300">
-                {item}
-              </div>
-            ))}
-          </div>
-          <div className="mt-8 text-xs text-slate-600">
-            More content coming soon...
-          </div>
-        </div>
+        <DeckList
+          decks={decks}
+          currentDeckIndex={currentDeckIndex}
+          currentCardIndex={currentCardIndex}
+          onCardSelect={setCurrentCard}
+        />
       </aside>
 
       {/* Main Content Area: Canvas */}
@@ -98,13 +98,13 @@ export default function Home() {
             <TabsContent value="edit" className="h-full m-0 border-0">
               <CardEditor
                 initialData={currentCard}
-                onChange={(card) => updateCard(currentCardIndex, card)}
+                onChange={(card) => updateCard(currentDeckIndex, currentCardIndex, card)}
               />
             </TabsContent>
             <TabsContent value="import" className="h-full m-0 p-4">
               <CardImporter
                 onImport={(data) => {
-                  updateCard(currentCardIndex, data);
+                  updateCard(currentDeckIndex, currentCardIndex, data);
                 }}
               />
               <div className="mt-8 p-4 bg-slate-950 rounded border border-slate-800 text-xs text-slate-500 font-mono overflow-auto max-h-60">
