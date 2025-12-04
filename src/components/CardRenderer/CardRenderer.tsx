@@ -41,12 +41,9 @@ export const CardRenderer: React.FC<CardRendererProps> = ({ data, className, sca
             >
                 <div
                     className={cn(
-                        "relative rounded-[24px] overflow-hidden flex flex-col bg-white font-sans text-slate-900 h-full",
+                        "relative rounded-[24px] overflow-hidden flex flex-col bg-white font-sans text-slate-900 h-full border-[6px] border-[#F2E8D5]",
                         showShadow && "shadow-2xl"
                     )}
-                    style={{
-                        border: `2px solid ${visuals.accentColor} `,
-                    }}
                 >
                     <CardArtArea
                         backgroundImage={visuals.backgroundImage}
