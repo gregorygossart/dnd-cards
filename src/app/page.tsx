@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { CardRenderer } from '@/components/CardRenderer/CardRenderer';
 import { CardEditor } from '@/components/CardEditor/CardEditor';
 import { CardImporter } from '@/components/CardImporter/CardImporter';
@@ -47,7 +48,7 @@ export default function Home() {
       {/* Main Content Area: Canvas */}
       <main className="flex-1 flex flex-col relative min-w-0">
         {/* Top Header */}
-        <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center px-6">
+        <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center justify-between px-6">
           <div className="flex items-center gap-2 text-sm">
             <span className="text-slate-400">{currentDeck.name}</span>
             <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,6 +56,15 @@ export default function Home() {
             </svg>
             <h1 className="font-semibold text-slate-200">{currentCard.title || 'Untitled Card'}</h1>
           </div>
+
+          <Link href="/print">
+            <Button variant="ghost" size="sm" className="text-slate-400 hover:text-slate-100 hover:bg-slate-800">
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              Print Deck
+            </Button>
+          </Link>
         </header>
 
         {/* Canvas */}
@@ -67,7 +77,7 @@ export default function Home() {
           {/* Card and Button */}
           <div className="relative z-10 flex flex-col items-center gap-32">
             <div className="shadow-2xl shadow-black/50">
-              <CardRenderer data={currentCard} />
+              <CardRenderer data={currentCard} scale={1.5} />
             </div>
 
             {/* Add Card Button */}

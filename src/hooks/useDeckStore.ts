@@ -23,7 +23,13 @@ function getDefaultDecks(): Deck[] {
     ];
 }
 
-function loadDecksFromStorage(): Deck[] | null {
+interface StorageData {
+    decks: Deck[];
+    currentDeckIndex: number;
+    currentCardIndex: number;
+}
+
+function loadFromStorage(): StorageData | null {
     if (typeof window === 'undefined') return null;
 
     try {
@@ -31,26 +37,30 @@ function loadDecksFromStorage(): Deck[] | null {
         if (!stored) return null;
 
         const parsed = JSON.parse(stored);
-        // Basic validation
-        if (!Array.isArray(parsed)) {
-            console.warn('Invalid decks data in localStorage, using default');
-            return null;
+
+        // Handle legacy format (array of decks)
+        if (Array.isArray(parsed)) {
+            return {
+                decks: parsed as Deck[],
+                currentDeckIndex: 0,
+                currentCardIndex: 0
+            };
         }
 
-        return parsed as Deck[];
+        return parsed as StorageData;
     } catch (error) {
-        console.error('Failed to load decks from localStorage:', error);
+        console.error('Failed to load data from localStorage:', error);
         return null;
     }
 }
 
-function saveDecksToStorage(decks: Deck[]): void {
+function saveToStorage(data: StorageData): void {
     if (typeof window === 'undefined') return;
 
     try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch (error) {
-        console.error('Failed to save decks to localStorage:', error);
+        console.error('Failed to save data to localStorage:', error);
     }
 }
 
@@ -63,19 +73,25 @@ export function useDeckStore(): DeckStore {
 
     // Load from localStorage after mount (client-only)
     useEffect(() => {
-        const stored = loadDecksFromStorage();
-        if (stored && stored.length > 0) {
-            setDecks(stored);
+        const stored = loadFromStorage();
+        if (stored) {
+            setDecks(stored.decks);
+            setCurrentDeckIndex(stored.currentDeckIndex);
+            setCurrentCardIndex(stored.currentCardIndex);
         }
         setIsHydrated(true);
     }, []);
 
-    // Save to localStorage whenever decks change (but only after hydration)
+    // Save to localStorage whenever state changes (but only after hydration)
     useEffect(() => {
         if (isHydrated) {
-            saveDecksToStorage(decks);
+            saveToStorage({
+                decks,
+                currentDeckIndex,
+                currentCardIndex
+            });
         }
-    }, [decks, isHydrated]);
+    }, [decks, currentDeckIndex, currentCardIndex, isHydrated]);
 
     const updateCard = (deckIndex: number, cardIndex: number, updatedCard: Card) => {
         setDecks((prevDecks) =>
