@@ -17,7 +17,7 @@ function getDefaultDecks(): Deck[] {
     return [
         {
             id: crypto.randomUUID(),
-            name: 'My Deck',
+            name: 'New Deck',
             cards: [defaultCardValues[CardType.Spell]],
         }
     ];
