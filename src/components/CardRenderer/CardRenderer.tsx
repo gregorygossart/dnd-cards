@@ -2,6 +2,7 @@ import React from 'react';
 import type { Card } from '@/types/card';
 import { cn } from '@/lib/utils';
 import { getCardSubtitle } from '@/lib/cardUtils';
+import { CARD_WIDTH, CARD_HEIGHT } from '@/lib/cardConstants';
 import { CardArtArea } from '@/components/CardRenderer/CardArtArea/CardArtArea';
 import { CardBanner } from '@/components/CardRenderer/CardBanner/CardBanner';
 import { CardHeader } from '@/components/CardRenderer/CardHeader/CardHeader';
@@ -20,10 +21,12 @@ export const CardRenderer: React.FC<CardRendererProps> = ({ data, className }) =
     return (
         <div
             className={cn(
-                "relative w-[320px] h-[480px] rounded-[24px] overflow-hidden flex flex-col bg-white shadow-2xl font-sans text-slate-900",
+                "relative rounded-[24px] overflow-hidden flex flex-col bg-white shadow-2xl font-sans text-slate-900",
                 className
             )}
             style={{
+                width: `${CARD_WIDTH}px`,
+                height: `${CARD_HEIGHT}px`,
                 border: `2px solid ${visuals.accentColor} `,
             }}
         >
