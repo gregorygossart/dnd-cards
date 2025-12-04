@@ -47,13 +47,13 @@ export default function Home() {
       {/* Main Content Area: Canvas */}
       <main className="flex-1 flex flex-col relative min-w-0">
         {/* Top Header */}
-        <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center justify-between px-6">
-          <div className="flex items-center gap-2">
+        <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center px-6">
+          <div className="flex items-center gap-2 text-sm">
+            <span className="text-slate-400">{currentDeck.name}</span>
+            <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
             <h1 className="font-semibold text-slate-200">{currentCard.title || 'Untitled Card'}</h1>
-            <span className="text-xs text-slate-500 px-2 py-0.5 rounded bg-slate-800">Draft</span>
-          </div>
-          <div className="text-xs text-slate-500">
-            {mounted && `Last updated: ${new Date().toLocaleTimeString()}`}
           </div>
         </header>
 
