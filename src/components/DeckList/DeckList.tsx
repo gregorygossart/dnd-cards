@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Deck } from '@/types/card';
 import { cn } from '@/lib/utils';
 import { AddCardButton } from './AddCardButton';
+import { AddDeckButton } from './AddDeckButton';
 
 interface DeckListProps {
     decks: Deck[];
@@ -28,7 +29,9 @@ export const DeckList: React.FC<DeckListProps> = ({
                 My Decks
             </div>
 
-            <div className="space-y-1">
+            <AddDeckButton />
+
+            <div className="space-y-1 mt-3">
                 {decks.map((deck, deckIndex) => {
                     const isExpanded = expandedDeckIndex === deckIndex;
                     const isCurrentDeck = deckIndex === currentDeckIndex;

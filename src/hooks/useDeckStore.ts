@@ -9,6 +9,7 @@ interface DeckStore {
     currentCardIndex: number;
     updateCard: (deckIndex: number, cardIndex: number, card: Card) => void;
     addCard: (deckId: string, type: CardType) => void;
+    addDeck: (name: string) => void;
     setCurrentCard: (deckIndex: number, cardIndex: number) => void;
 }
 
@@ -69,6 +70,20 @@ export const useDeckStore = create<DeckStore>()(
                         currentCardIndex: newCardIndex,
                     };
                 });
+            },
+
+            addDeck: (name) => {
+                const newDeck: Deck = {
+                    id: crypto.randomUUID(),
+                    name,
+                    cards: [defaultCardValues[CardType.Spell]],
+                };
+
+                set((state) => ({
+                    decks: [...state.decks, newDeck],
+                    currentDeckIndex: state.decks.length,
+                    currentCardIndex: 0,
+                }));
             },
 
             setCurrentCard: (deckIndex, cardIndex) => {
