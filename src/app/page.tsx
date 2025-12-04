@@ -89,9 +89,19 @@ export default function Home() {
       <aside className="w-96 border-l border-slate-800 bg-slate-900 flex flex-col">
         <Tabs defaultValue="edit" className="flex-1 flex flex-col min-h-0">
           <div className="h-14 border-b border-slate-800 flex items-center px-4 shrink-0">
-            <TabsList className="grid w-full grid-cols-2 bg-slate-800 text-slate-400">
-              <TabsTrigger value="edit" className="data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100">Properties</TabsTrigger>
-              <TabsTrigger value="import" className="data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100">Import/Export</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-slate-800">
+              <TabsTrigger
+                value="edit"
+                className="text-slate-400 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100 hover:text-slate-200 transition-colors"
+              >
+                Properties
+              </TabsTrigger>
+              <TabsTrigger
+                value="import"
+                className="text-slate-400 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100 hover:text-slate-200 transition-colors"
+              >
+                Import/Export
+              </TabsTrigger>
             </TabsList>
           </div>
 

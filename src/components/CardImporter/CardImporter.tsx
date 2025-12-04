@@ -47,7 +47,7 @@ export const CardImporter: React.FC<CardImporterProps> = ({ onImport }) => {
                     <strong>Error:</strong> {error}
                 </div>
             )}
-            <Button onClick={handleImport} className="w-full bg-amber-600 hover:bg-amber-700 text-white">
+            <Button onClick={handleImport} className="w-full">
                 Import
             </Button>
         </div>
