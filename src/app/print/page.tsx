@@ -111,6 +111,7 @@ export default function PrintPage() {
                                     key={index}
                                     data={card}
                                     className="page-break-inside-avoid break-inside-avoid"
+                                    showShadow={false}
                                 />
                             ))}
                         </div>

@@ -17,9 +17,10 @@ interface CardRendererProps {
     data: Card;
     className?: string;
     scale?: number;
+    showShadow?: boolean;
 }
 
-export const CardRenderer: React.FC<CardRendererProps> = ({ data, className, scale = 1 }) => {
+export const CardRenderer: React.FC<CardRendererProps> = ({ data, className, scale = 1, showShadow = true }) => {
     const { title, description, visuals } = data;
 
     return (
@@ -39,7 +40,10 @@ export const CardRenderer: React.FC<CardRendererProps> = ({ data, className, sca
                 }}
             >
                 <div
-                    className="relative rounded-[24px] overflow-hidden flex flex-col bg-white shadow-2xl font-sans text-slate-900 h-full"
+                    className={cn(
+                        "relative rounded-[24px] overflow-hidden flex flex-col bg-white font-sans text-slate-900 h-full",
+                        showShadow && "shadow-2xl"
+                    )}
                     style={{
                         border: `2px solid ${visuals.accentColor} `,
                     }}
