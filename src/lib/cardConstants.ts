@@ -29,3 +29,10 @@ export const PRINT_CONFIG = {
         HEIGHT_MM: CARD_HEIGHT_MM,
     },
 } as const;
+
+export const CARD_BACK_PRESETS = [
+    { id: 'arcane-tome', name: 'Arcane Tome', src: '/card-backs/arcane-tome.png' },
+    { id: 'dragon-scales', name: 'Dragon Scales', src: '/card-backs/dragon-scales.png' },
+    { id: 'celestial-void', name: 'Celestial Void', src: '/card-backs/celestial-void.png' },
+    { id: 'shield-sword', name: 'Shield & Sword', src: '/card-backs/shield-sword.jpg' },
+] as const;

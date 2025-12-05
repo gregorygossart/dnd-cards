@@ -29,6 +29,7 @@ export const CardRenderer: React.FC<CardRendererProps> = ({
     side = CardSide.Front
 }) => {
     const { visuals } = data;
+    const hasCustomBack = side === CardSide.Back && !!visuals.backImage;
 
     return (
         <div
@@ -48,7 +49,7 @@ export const CardRenderer: React.FC<CardRendererProps> = ({
             >
                 <div
                     className={cn(
-                        "relative rounded-[24px] overflow-hidden flex flex-col bg-white font-sans text-slate-900 h-full border-[6px] border-[#E8D0A9]",
+                        "relative rounded-[24px] overflow-hidden flex flex-col bg-black font-sans text-slate-900 h-full",
                         showShadow && "shadow-2xl"
                     )}
                 >

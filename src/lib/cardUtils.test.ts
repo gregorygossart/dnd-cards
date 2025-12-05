@@ -30,9 +30,9 @@ describe('cardUtils', () => {
             const itemCard: ItemCard = {
                 type: CardType.Item,
                 title: 'Sword',
-                blocks: [],
-                visuals: {}
-            };
+
+                visuals: { accentColor: '#000000' }
+            } as unknown as ItemCard;
             expect(getCardSubtitle(itemCard)).toBe('Item');
         });
 
@@ -40,9 +40,9 @@ describe('cardUtils', () => {
             const spellCard: SpellCard = {
                 type: CardType.Spell,
                 title: 'Magic Missile',
-                blocks: [],
-                visuals: {}
-            };
+
+                visuals: { accentColor: '#000000' }
+            } as unknown as SpellCard;
             expect(getCardSubtitle(spellCard)).toBe('Spell');
         });
 
@@ -51,9 +51,9 @@ describe('cardUtils', () => {
                 type: CardType.Spell,
                 title: 'Fireball',
                 school: 'Evocation',
-                blocks: [],
-                visuals: {}
-            };
+
+                visuals: { accentColor: '#000000' }
+            } as unknown as SpellCard;
             expect(getCardSubtitle(spellCard)).toBe('Evocation');
         });
 
@@ -62,9 +62,9 @@ describe('cardUtils', () => {
                 type: CardType.Spell,
                 title: 'Magic Missile',
                 level: 1,
-                blocks: [],
-                visuals: {}
-            };
+
+                visuals: { accentColor: '#000000' }
+            } as unknown as SpellCard;
             expect(getCardSubtitle(spellCard)).toBe('Spell · 1st Level');
         });
 
@@ -74,9 +74,9 @@ describe('cardUtils', () => {
                 title: 'Fireball',
                 school: 'Evocation',
                 level: 3,
-                blocks: [],
-                visuals: {}
-            };
+
+                visuals: { accentColor: '#000000' }
+            } as unknown as SpellCard;
             expect(getCardSubtitle(spellCard)).toBe('Evocation · 3rd Level');
         });
 
@@ -86,9 +86,9 @@ describe('cardUtils', () => {
                 title: 'Light',
                 school: 'Evocation',
                 level: 0,
-                blocks: [],
-                visuals: {}
-            };
+
+                visuals: { accentColor: '#000000' }
+            } as unknown as SpellCard;
             expect(getCardSubtitle(spellCard)).toBe('Evocation · Cantrip');
         });
 
@@ -97,9 +97,9 @@ describe('cardUtils', () => {
                 type: CardType.Spell,
                 title: 'Light',
                 level: 0,
-                blocks: [],
-                visuals: {}
-            };
+
+                visuals: { accentColor: '#000000' }
+            } as unknown as SpellCard;
             expect(getCardSubtitle(spellCard)).toBe('Spell · Cantrip');
         });
     });

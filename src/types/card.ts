@@ -6,6 +6,7 @@ export const CardVisualsSchema = z.object({
     accentColor: z.string(),
     headerImage: z.string().optional(),
     backImage: z.string().optional(),
+    backTint: z.string().optional(),
 });
 
 // Casting time units
