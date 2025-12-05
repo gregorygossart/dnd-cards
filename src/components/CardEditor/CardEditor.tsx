@@ -84,7 +84,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
 
     return (
         <FormProvider {...form}>
-            <div className="w-full h-full overflow-y-auto p-4 space-y-6">
+            <div className="w-full h-full overflow-y-auto p-4 space-y-4">
                 <CardTypeSelector
                     value={watch('type')}
                     onChange={(value) => {
