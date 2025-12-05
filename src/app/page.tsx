@@ -12,7 +12,7 @@ import { ImportExportEditor } from '@/components/ImportExportEditor/ImportExport
 
 
 export default function Home() {
-  const { decks, currentDeckIndex, currentCardIndex, updateCard, setCurrentCard, duplicateCard } = useDeckStore();
+  const { decks, currentDeckIndex, currentCardIndex, updateCard, setCurrentCard } = useDeckStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <div className="flex h-screen w-full bg-slate-950 text-slate-100 overflow-hidden font-sans">
       {/* Left Sidebar: Deck List */}
-      <aside className="w-64 border-r border-slate-800 bg-slate-900 flex flex-col">
+      <aside className="w-80 border-r border-slate-800 bg-slate-900 flex flex-col">
         <div className="h-14 flex items-center px-4">
           <span className="font-bold text-lg tracking-tight text-amber-500">D&D Cards</span>
         </div>
@@ -54,39 +54,29 @@ export default function Home() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
             <h1 className="font-semibold text-slate-200 mr-2">{currentCard.title || 'Untitled Card'}</h1>
-
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              onClick={() => duplicateCard(currentDeckIndex, currentCardIndex)}
-              className="text-slate-400 hover:text-slate-100 hover:bg-slate-800 h-6 w-6"
-              title="Duplicate this card"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-              </svg>
-            </Button>
           </div>
 
-          <Link href="/print">
-            <Button variant="ghost" size="sm" className="text-slate-400 hover:text-slate-100 hover:bg-slate-800">
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-              </svg>
-              Print Deck
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link href="/print">
+              <Button variant="ghost" size="sm" className="text-slate-400 hover:text-slate-100 hover:bg-slate-800">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+                Print Deck
+              </Button>
+            </Link>
+          </div>
         </header>
 
         {/* Canvas */}
-        <div className="flex-1 bg-slate-950 relative overflow-hidden flex items-center justify-center p-8">
+        <div className="flex-1 bg-slate-950 relative overflow-hidden flex items-center justify-center">
           {/* Grid pattern background */}
           <div className="absolute inset-0 opacity-[0.25]"
             style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
           </div>
 
           {/* Card and Button */}
-          <div className="relative z-10 flex items-center gap-16 overflow-x-auto p-8 w-full justify-center">
+          <div className="relative z-10 flex items-center gap-8 overflow-x-auto p-8 w-full justify-center">
             {/* Front */}
             <div className="flex flex-col items-center gap-4">
               <span className="text-slate-500 text-sm font-medium uppercase tracking-wider">Front</span>

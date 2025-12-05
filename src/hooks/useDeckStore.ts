@@ -10,6 +10,7 @@ interface DeckStore {
     updateCard: (deckIndex: number, cardIndex: number, card: Card) => void;
     addCard: (deckId: string, type: CardType) => void;
     duplicateCard: (deckIndex: number, cardIndex: number) => void;
+    deleteCard: (deckIndex: number, cardIndex: number) => void;
     addDeck: (name: string) => void;
     updateDeckName: (deckId: string, name: string) => void;
     deleteDeck: (deckId: string) => void;
@@ -101,6 +102,43 @@ export const useDeckStore = create<DeckStore>()(
                     return {
                         decks: newDecks,
                         currentCardIndex: deck.cards.length, // Select the new card (last index)
+                    };
+                });
+            },
+
+            deleteCard: (deckIndex, cardIndex) => {
+                set((state) => {
+                    const deck = state.decks[deckIndex];
+                    if (!deck) return state;
+
+                    // Don't delete the last card in a deck
+                    if (deck.cards.length <= 1) return state;
+
+                    const newCards = deck.cards.filter((_, idx) => idx !== cardIndex);
+
+                    const newDecks = state.decks.map((d, idx) => {
+                        if (idx === deckIndex) {
+                            return {
+                                ...d,
+                                cards: newCards,
+                            };
+                        }
+                        return d;
+                    });
+
+                    // Adjust currentCardIndex if necessary
+                    let newCardIndex = state.currentCardIndex;
+                    if (cardIndex === state.currentCardIndex) {
+                        // If we deleted the current card, select the previous one (or 0)
+                        newCardIndex = Math.max(0, cardIndex - 1);
+                    } else if (cardIndex < state.currentCardIndex) {
+                        // If we deleted a card before the current one, shift index down
+                        newCardIndex = state.currentCardIndex - 1;
+                    }
+
+                    return {
+                        decks: newDecks,
+                        currentCardIndex: newCardIndex,
                     };
                 });
             },

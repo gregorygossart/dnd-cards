@@ -34,11 +34,12 @@ export const DeckList: React.FC<DeckListProps> = ({
     currentCardIndex,
     onCardSelect,
 }) => {
-    const { updateDeckName, deleteDeck } = useDeckStore();
+    const { updateDeckName, deleteDeck, duplicateCard, deleteCard } = useDeckStore();
     const [expandedDeckIndex, setExpandedDeckIndex] = useState<number>(currentDeckIndex);
     const [editingDeckId, setEditingDeckId] = useState<string | null>(null);
     const [editingName, setEditingName] = useState('');
     const [deckToDelete, setDeckToDelete] = useState<{ id: string; name: string } | null>(null);
+    const [cardToDelete, setCardToDelete] = useState<{ deckIndex: number; cardIndex: number; title: string } | null>(null);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     // Focus and select text when editing starts
@@ -78,6 +79,13 @@ export const DeckList: React.FC<DeckListProps> = ({
         if (deckToDelete) {
             deleteDeck(deckToDelete.id);
             setDeckToDelete(null);
+        }
+    };
+
+    const confirmCardDelete = () => {
+        if (cardToDelete) {
+            deleteCard(cardToDelete.deckIndex, cardToDelete.cardIndex);
+            setCardToDelete(null);
         }
     };
 
@@ -213,44 +221,88 @@ export const DeckList: React.FC<DeckListProps> = ({
                                             cardIndex === currentCardIndex;
 
                                         return (
-                                            <button
+                                            <div
                                                 key={cardIndex}
-                                                onClick={() => onCardSelect(deckIndex, cardIndex)}
                                                 className={cn(
-                                                    "w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group",
+                                                    "w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group relative",
                                                     isActive
                                                         ? "bg-violet-600/20 text-violet-300"
                                                         : "hover:bg-slate-800/50 text-slate-400"
                                                 )}
                                             >
-                                                {/* Card type icon */}
-                                                <div className={cn(
-                                                    "w-4 h-4 rounded shrink-0",
-                                                    isActive ? "bg-violet-600" : "bg-slate-700"
-                                                )}>
-                                                    <svg className="w-full h-full p-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm3 1h6v4H7V5zm6 6H7v2h6v-2z" clipRule="evenodd" />
-                                                    </svg>
-                                                </div>
-
-                                                <div className="flex-1 min-w-0">
-                                                    <div className="truncate">
-                                                        {card.title || 'Untitled Card'}
+                                                <button
+                                                    onClick={() => onCardSelect(deckIndex, cardIndex)}
+                                                    className="flex-1 flex items-center gap-2 min-w-0 text-left"
+                                                >
+                                                    {/* Card type icon */}
+                                                    <div className={cn(
+                                                        "w-4 h-4 rounded shrink-0",
+                                                        isActive ? "bg-violet-600" : "bg-slate-700"
+                                                    )}>
+                                                        <svg className="w-full h-full p-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm3 1h6v4H7V5zm6 6H7v2h6v-2z" clipRule="evenodd" />
+                                                        </svg>
                                                     </div>
-                                                </div>
 
-                                                {/* Level/Type badge */}
-                                                <span className={cn(
-                                                    "text-xs px-1.5 py-0.5 rounded shrink-0",
-                                                    isActive
-                                                        ? "bg-violet-600/30 text-violet-200"
-                                                        : "bg-slate-700 text-slate-400"
-                                                )}>
-                                                    {card.type === 'Spell' && card.level !== undefined
-                                                        ? `Lvl ${card.level}`
-                                                        : card.type}
-                                                </span>
-                                            </button>
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className="truncate">
+                                                            {card.title || 'Untitled Card'}
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Level/Type badge */}
+                                                    <span className={cn(
+                                                        "text-xs px-1.5 py-0.5 rounded shrink-0",
+                                                        isActive
+                                                            ? "bg-violet-600/30 text-violet-200"
+                                                            : "bg-slate-700 text-slate-400"
+                                                    )}>
+                                                        {card.type === 'Spell' && card.level !== undefined
+                                                            ? `Lvl ${card.level}`
+                                                            : card.type}
+                                                    </span>
+                                                </button>
+
+                                                {/* Three-dot menu */}
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger asChild>
+                                                        <button
+                                                            onClick={(e) => e.stopPropagation()}
+                                                            className="p-1 hover:bg-slate-700 rounded transition-colors text-slate-500 hover:text-slate-300"
+                                                        >
+                                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
+                                                                <circle cx="8" cy="3" r="1.5" />
+                                                                <circle cx="8" cy="8" r="1.5" />
+                                                                <circle cx="8" cy="13" r="1.5" />
+                                                            </svg>
+                                                        </button>
+                                                    </DropdownMenuTrigger>
+                                                    <DropdownMenuContent align="end">
+                                                        <DropdownMenuItem onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            duplicateCard(deckIndex, cardIndex);
+                                                        }}>
+                                                            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                                            </svg>
+                                                            Duplicate
+                                                        </DropdownMenuItem>
+                                                        <DropdownMenuItem
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                setCardToDelete({ deckIndex, cardIndex, title: card.title || 'Untitled Card' });
+                                                            }}
+                                                            disabled={deck.cards.length <= 1}
+                                                            variant="destructive"
+                                                        >
+                                                            <svg className="w-4 h-4 mr-2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                            </svg>
+                                                            Delete
+                                                        </DropdownMenuItem>
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
+                                            </div>
                                         );
                                     })}
 
@@ -263,7 +315,7 @@ export const DeckList: React.FC<DeckListProps> = ({
                 })}
             </div>
 
-            {/* Delete Confirmation Dialog */}
+            {/* Delete Deck Confirmation Dialog */}
             <AlertDialog open={!!deckToDelete} onOpenChange={(open) => !open && setDeckToDelete(null)}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
@@ -275,6 +327,24 @@ export const DeckList: React.FC<DeckListProps> = ({
                     <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
                         <AlertDialogAction onClick={confirmDelete} variant="destructive">
+                            Delete
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+
+            {/* Delete Card Confirmation Dialog */}
+            <AlertDialog open={!!cardToDelete} onOpenChange={(open) => !open && setCardToDelete(null)}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Delete Card</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Are you sure you want to delete "{cardToDelete?.title}"? This action cannot be undone.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={confirmCardDelete} variant="destructive">
                             Delete
                         </AlertDialogAction>
                     </AlertDialogFooter>
