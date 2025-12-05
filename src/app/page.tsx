@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { CardRenderer } from '@/components/CardRenderer/CardRenderer';
+import { CardRenderer, CardSide } from '@/components/CardRenderer/CardRenderer';
 import { CardEditor } from '@/components/CardEditor/CardEditor';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
@@ -12,7 +12,7 @@ import { ImportExportEditor } from '@/components/ImportExportEditor/ImportExport
 
 
 export default function Home() {
-  const { decks, currentDeckIndex, currentCardIndex, updateCard, setCurrentCard } = useDeckStore();
+  const { decks, currentDeckIndex, currentCardIndex, updateCard, setCurrentCard, duplicateCard } = useDeckStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -53,7 +53,19 @@ export default function Home() {
             <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-            <h1 className="font-semibold text-slate-200">{currentCard.title || 'Untitled Card'}</h1>
+            <h1 className="font-semibold text-slate-200 mr-2">{currentCard.title || 'Untitled Card'}</h1>
+
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => duplicateCard(currentDeckIndex, currentCardIndex)}
+              className="text-slate-400 hover:text-slate-100 hover:bg-slate-800 h-6 w-6"
+              title="Duplicate this card"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+              </svg>
+            </Button>
           </div>
 
           <Link href="/print">
@@ -74,13 +86,22 @@ export default function Home() {
           </div>
 
           {/* Card and Button */}
-          <div className="relative z-10 flex flex-col items-center gap-32">
-            <div className="shadow-2xl shadow-black/50">
-              <CardRenderer data={currentCard} scale={1.5} />
+          <div className="relative z-10 flex items-center gap-16 overflow-x-auto p-8 w-full justify-center">
+            {/* Front */}
+            <div className="flex flex-col items-center gap-4">
+              <span className="text-slate-500 text-sm font-medium uppercase tracking-wider">Front</span>
+              <div className="shadow-2xl shadow-black/50">
+                <CardRenderer data={currentCard} scale={1.2} side={CardSide.Front} />
+              </div>
             </div>
 
-            {/* Add Card Button */}
-            {/* Moved to Header */}
+            {/* Back */}
+            <div className="flex flex-col items-center gap-4">
+              <span className="text-slate-500 text-sm font-medium uppercase tracking-wider">Back</span>
+              <div className="shadow-2xl shadow-black/50">
+                <CardRenderer data={currentCard} scale={1.2} side={CardSide.Back} />
+              </div>
+            </div>
           </div>
         </div>
       </main>

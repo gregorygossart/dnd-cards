@@ -4,7 +4,8 @@ import { z } from 'zod';
 
 export const CardVisualsSchema = z.object({
     accentColor: z.string(),
-    backgroundImage: z.string().optional(),
+    headerImage: z.string().optional(),
+    backImage: z.string().optional(),
 });
 
 // Casting time units

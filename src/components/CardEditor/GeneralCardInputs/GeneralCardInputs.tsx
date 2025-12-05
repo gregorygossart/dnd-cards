@@ -8,7 +8,8 @@ export const GeneralCardInputs: React.FC = () => {
         <CollapsibleGroup title="General Information" defaultOpen={true}>
             <div className="space-y-4">
                 <TitleInput />
-                <ImageInput />
+                <ImageInput label="Header Image" fieldName="visuals.headerImage" />
+                <ImageInput label="Back Cover Image" fieldName="visuals.backImage" />
             </div>
         </CollapsibleGroup>
     );

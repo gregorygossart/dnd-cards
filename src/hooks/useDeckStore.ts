@@ -9,6 +9,7 @@ interface DeckStore {
     currentCardIndex: number;
     updateCard: (deckIndex: number, cardIndex: number, card: Card) => void;
     addCard: (deckId: string, type: CardType) => void;
+    duplicateCard: (deckIndex: number, cardIndex: number) => void;
     addDeck: (name: string) => void;
     updateDeckName: (deckId: string, name: string) => void;
     deleteDeck: (deckId: string) => void;
@@ -70,6 +71,36 @@ export const useDeckStore = create<DeckStore>()(
                     return {
                         decks: newDecks,
                         currentCardIndex: newCardIndex,
+                    };
+                });
+            },
+
+            duplicateCard: (deckIndex, cardIndex) => {
+                set((state) => {
+                    const deck = state.decks[deckIndex];
+                    if (!deck) return state;
+
+                    const cardToDuplicate = deck.cards[cardIndex];
+                    if (!cardToDuplicate) return state;
+
+                    const newCard = {
+                        ...JSON.parse(JSON.stringify(cardToDuplicate)),
+                        title: `${cardToDuplicate.title} (Copy)`,
+                    };
+
+                    const newDecks = state.decks.map((d, idx) => {
+                        if (idx === deckIndex) {
+                            return {
+                                ...d,
+                                cards: [...d.cards, newCard],
+                            };
+                        }
+                        return d;
+                    });
+
+                    return {
+                        decks: newDecks,
+                        currentCardIndex: deck.cards.length, // Select the new card (last index)
                     };
                 });
             },

@@ -1,21 +1,16 @@
 import React from 'react';
 
 interface CardArtAreaProps {
-    backgroundImage?: string;
-    children?: React.ReactNode;
+    image?: string;
 }
 
-export const CardArtArea: React.FC<CardArtAreaProps> = ({ backgroundImage, children }) => {
+export const CardArtArea: React.FC<CardArtAreaProps> = ({ image }) => {
     return (
         <div
-            className="relative w-full h-[180px] shrink-0 bg-gradient-to-b from-slate-200 to-slate-300 flex items-center justify-center overflow-hidden"
+            className="h-[200px] bg-slate-200 relative bg-cover bg-center"
             style={{
-                backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                backgroundImage: image ? `url(${image})` : undefined,
             }}
-        >
-            {children}
-        </div>
+        />
     );
 };

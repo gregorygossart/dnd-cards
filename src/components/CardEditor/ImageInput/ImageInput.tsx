@@ -6,17 +6,19 @@ import { EditorLabel } from '@/components/CardEditor/EditorLabel/EditorLabel';
 import type { Card } from '@/types/card';
 
 interface ImageInputProps {
+    fieldName: 'visuals.headerImage' | 'visuals.backImage';
     label?: string;
 }
 
 export const ImageInput: React.FC<ImageInputProps> = ({
+    fieldName,
     label = 'Header Image'
 }) => {
     const { watch, setValue } = useFormContext<Card>();
-    const value = watch('visuals.backgroundImage');
+    const value = watch(fieldName);
 
     const onChange = (newValue: string | undefined) => {
-        setValue('visuals.backgroundImage', newValue);
+        setValue(fieldName, newValue);
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,20 +33,22 @@ export const ImageInput: React.FC<ImageInputProps> = ({
         }
     };
 
+    const inputId = fieldName.replace('.', '-');
+
     return (
         <div>
-            <EditorLabel htmlFor="backgroundImage">{label}</EditorLabel>
+            <EditorLabel htmlFor={inputId}>{label}</EditorLabel>
             <div className="space-y-2">
                 <div className="flex gap-2">
                     <Input
-                        id="backgroundImageUrl"
+                        id={`${inputId}-url`}
                         value={value || ''}
                         onChange={(e) => onChange(e.target.value || undefined)}
                         placeholder="Enter image URL or upload file"
                         className="flex-1 bg-slate-800 border-slate-700 text-slate-100 text-xs placeholder:text-slate-500"
                     />
                     <input
-                        id="backgroundImageFile"
+                        id={`${inputId}-file`}
                         type="file"
                         accept="image/*"
                         onChange={handleFileChange}
@@ -53,7 +57,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
                     <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => document.getElementById('backgroundImageFile')?.click()}
+                        onClick={() => document.getElementById(`${inputId}-file`)?.click()}
                         type="button"
                         className="bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-slate-100 h-9 text-xs px-3"
                     >

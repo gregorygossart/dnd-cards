@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { CardRenderer } from '@/components/CardRenderer/CardRenderer';
+import { Fragment, useEffect, useState } from 'react';
+import { CardRenderer, CardSide } from '@/components/CardRenderer/CardRenderer';
 import { PRINT_CONFIG } from '@/lib/cardConstants';
 import { useDeckStore } from '@/hooks/useDeckStore';
 
@@ -88,34 +88,70 @@ export default function PrintPage() {
 
             <div className="flex flex-col gap-8 print:block print:gap-0">
                 {pages.map((pageCards, pageIndex) => (
-                    <div
-                        key={pageIndex}
-                        className="mx-auto bg-white shadow-xl print:shadow-none overflow-hidden relative print-page-break flex flex-col"
-                        style={{
-                            width: `${PRINT_CONFIG.PAPER.WIDTH_MM}mm`,
-                            height: `${PRINT_CONFIG.PAPER.HEIGHT_MM}mm`,
-                            padding: `${PRINT_CONFIG.PAPER.MARGIN_MM}mm`,
-                        }}
-                    >
+                    <Fragment key={pageIndex}>
+                        {/* Front Page */}
                         <div
-                            className="flex-1 grid"
+                            className="mx-auto bg-white shadow-xl print:shadow-none overflow-hidden relative print-page-break flex flex-col"
                             style={{
-                                gridTemplateColumns: `repeat(${cols}, ${PRINT_CONFIG.CARD.WIDTH_MM}mm)`,
-                                gridTemplateRows: `repeat(${rows}, ${PRINT_CONFIG.CARD.HEIGHT_MM}mm)`,
-                                justifyContent: 'space-between',
-                                alignContent: 'space-between',
+                                width: `${PRINT_CONFIG.PAPER.WIDTH_MM}mm`,
+                                height: `${PRINT_CONFIG.PAPER.HEIGHT_MM}mm`,
+                                padding: `${PRINT_CONFIG.PAPER.MARGIN_MM}mm`,
                             }}
                         >
-                            {pageCards.map((card, index) => (
-                                <CardRenderer
-                                    key={index}
-                                    data={card}
-                                    className="page-break-inside-avoid break-inside-avoid"
-                                    showShadow={false}
-                                />
-                            ))}
+                            <div
+                                className="flex-1 grid"
+                                style={{
+                                    gridTemplateColumns: `repeat(${cols}, ${PRINT_CONFIG.CARD.WIDTH_MM}mm)`,
+                                    gridTemplateRows: `repeat(${rows}, ${PRINT_CONFIG.CARD.HEIGHT_MM}mm)`,
+                                    justifyContent: 'space-between',
+                                    alignContent: 'space-between',
+                                }}
+                            >
+                                {pageCards.map((card, index) => (
+                                    <CardRenderer
+                                        key={`front-${index}`}
+                                        data={card}
+                                        className="page-break-inside-avoid break-inside-avoid"
+                                        showShadow={false}
+                                        side={CardSide.Front}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
+
+                        {/* Back Page */}
+                        <div
+                            className="mx-auto bg-white shadow-xl print:shadow-none overflow-hidden relative print-page-break flex flex-col"
+                            style={{
+                                width: `${PRINT_CONFIG.PAPER.WIDTH_MM}mm`,
+                                height: `${PRINT_CONFIG.PAPER.HEIGHT_MM}mm`,
+                                padding: `${PRINT_CONFIG.PAPER.MARGIN_MM}mm`,
+                            }}
+                        >
+                            <div
+                                className="flex-1 grid"
+                                style={{
+                                    gridTemplateColumns: `repeat(${cols}, ${PRINT_CONFIG.CARD.WIDTH_MM}mm)`,
+                                    gridTemplateRows: `repeat(${rows}, ${PRINT_CONFIG.CARD.HEIGHT_MM}mm)`,
+                                    justifyContent: 'space-between',
+                                    alignContent: 'space-between',
+                                    direction: 'rtl' // This mirrors the grid layout horizontally!
+                                }}
+                            >
+                                {pageCards.map((card, index) => (
+                                    <div key={`back-${index}`} style={{ direction: 'ltr' }}>
+                                        {/* Reset direction for content so text isn't backwards */}
+                                        <CardRenderer
+                                            data={card}
+                                            className="page-break-inside-avoid break-inside-avoid"
+                                            showShadow={false}
+                                            side={CardSide.Back}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </Fragment>
                 ))}
             </div>
         </div>

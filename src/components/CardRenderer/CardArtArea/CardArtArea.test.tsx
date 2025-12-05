@@ -8,8 +8,8 @@ describe('CardArtArea', () => {
         expect(screen.getByText('No Image')).toBeDefined();
     });
 
-    it('renders an image when backgroundImage is provided', () => {
-        render(<CardArtArea backgroundImage="https://example.com/image.jpg" />);
+    it('renders an image when image is provided', () => {
+        render(<CardArtArea image="https://example.com/image.jpg" />);
         expect(screen.queryByText('No Image')).toBeNull();
     });
 });
