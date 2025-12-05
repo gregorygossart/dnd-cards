@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { CardRenderer } from '@/components/CardRenderer/CardRenderer';
 import { CardEditor } from '@/components/CardEditor/CardEditor';
-import { CardImporter } from '@/components/CardImporter/CardImporter';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { useDeckStore } from '@/hooks/useDeckStore';
 import { DeckList } from '@/components/DeckList/DeckList';
+import { ImportExportEditor } from '@/components/ImportExportEditor/ImportExportEditor';
 
 
 export default function Home() {
@@ -100,7 +100,7 @@ export default function Home() {
                 value="import"
                 className="text-slate-400 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100 hover:text-slate-200 transition-colors"
               >
-                Import/Export
+                Import / Export
               </TabsTrigger>
             </TabsList>
           </div>
@@ -113,15 +113,10 @@ export default function Home() {
               />
             </TabsContent>
             <TabsContent value="import" className="h-full m-0 p-4">
-              <CardImporter
-                onImport={(data) => {
-                  updateCard(currentDeckIndex, currentCardIndex, data);
-                }}
+              <ImportExportEditor
+                data={currentCard}
+                onChange={(card) => updateCard(currentDeckIndex, currentCardIndex, card)}
               />
-              <div className="mt-8 p-4 bg-slate-950 rounded border border-slate-800 text-xs text-slate-500 font-mono overflow-auto max-h-60">
-                <div className="mb-2 font-bold text-slate-400">Current Data JSON:</div>
-                {JSON.stringify(currentCard, null, 2)}
-              </div>
             </TabsContent>
           </div>
         </Tabs>
