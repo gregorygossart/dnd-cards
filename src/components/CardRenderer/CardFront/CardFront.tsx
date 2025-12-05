@@ -2,7 +2,6 @@ import React from 'react';
 import { Card } from '@/types/card';
 import { CardHeader } from '../CardHeader/CardHeader';
 import { CardBody } from '../CardBody/CardBody';
-import { CardFooter } from '../CardFooter/CardFooter';
 import { SpellStats } from '../SpellStats/SpellStats';
 import { CardBanner } from '../CardBanner/CardBanner';
 import { CardArtArea } from '../CardArtArea/CardArtArea';
@@ -47,8 +46,6 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
                     description={description}
                     accentColor={visuals.accentColor}
                 />
-
-                <CardFooter />
             </div>
         </>
     );
