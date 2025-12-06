@@ -172,8 +172,15 @@ export type AbilityCard = z.infer<typeof AbilityCardSchema>;
 
 export type Card = ItemCard | SpellCard | AbilityCard;
 
+export interface DeckTypography {
+    titleFontSize: number; // Font size in pixels, default: 24
+    bodyFontSize: number; // Font size in pixels, default: 14
+    lineHeight: number; // Line height multiplier, default: 1.5
+}
+
 export interface Deck {
     id: string;
     name: string;
     cards: Card[];
+    typography?: DeckTypography; // Optional for backward compatibility
 }

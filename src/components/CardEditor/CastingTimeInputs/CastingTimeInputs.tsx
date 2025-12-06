@@ -19,7 +19,7 @@ export const CastingTimeInputs: React.FC = () => {
 
     return (
         <div className="col-span-2">
-            <div className="flex items-center justify-between">
+            <div className="flex items-start justify-between">
                 <EditorLabel>Casting Time</EditorLabel>
                 <div className="flex items-center gap-2">
                     <Controller

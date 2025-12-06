@@ -7,6 +7,7 @@ import { CardBanner } from '../CardBanner/CardBanner';
 import { CardArtArea } from '../CardArtArea/CardArtArea';
 import { getCardSubtitle } from '@/lib/cardUtils';
 import { getCardRadii } from '@/lib/cardConstants';
+import { useDeckStore } from '@/hooks/useDeckStore';
 
 interface CardFrontProps {
     data: Card;
@@ -15,6 +16,10 @@ interface CardFrontProps {
 export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
     const { title, description, visuals } = data;
     const { outerRadius, padding, innerRadius } = getCardRadii();
+
+    // Get title font size from current deck's typography settings
+    const { decks, currentDeckIndex } = useDeckStore();
+    const titleFontSize = decks[currentDeckIndex]?.typography?.titleFontSize ?? 24;
 
     return (
         <div
@@ -36,7 +41,7 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
                         accentColor={visuals.accentColor}
                     />
 
-                    <CardHeader title={title} />
+                    <CardHeader title={title} titleFontSize={titleFontSize} />
 
                     {data.type === 'Spell' && data.castingTime && data.range && data.duration && data.components && (
                         <SpellStats

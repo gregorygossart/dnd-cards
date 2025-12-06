@@ -28,7 +28,7 @@ export const CardBackSelector: React.FC = () => {
     };
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-6">
             <EditorLabel>Card Back Design</EditorLabel>
 
             <div className="grid grid-cols-4 gap-2">

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Deck, Card, CardType } from '@/types/card';
+import { Deck, Card, CardType, DeckTypography } from '@/types/card';
 import { defaultCardValues } from '@/components/CardEditor/CardEditor';
 
 interface DeckStore {
@@ -13,9 +13,16 @@ interface DeckStore {
     deleteCard: (deckIndex: number, cardIndex: number) => void;
     addDeck: (name: string) => void;
     updateDeckName: (deckId: string, name: string) => void;
+    updateDeckTypography: (deckId: string, typography: Partial<DeckTypography>) => void;
     deleteDeck: (deckId: string) => void;
     setCurrentCard: (deckIndex: number, cardIndex: number) => void;
 }
+
+const DEFAULT_TYPOGRAPHY: DeckTypography = {
+    titleFontSize: 24, // Default: 24px (equivalent to text-2xl)
+    bodyFontSize: 14, // Default: 14px (equivalent to text-sm)
+    lineHeight: 1.5, // Default: 1.5 (balanced readability)
+};
 
 function getDefaultDecks(): Deck[] {
     return [
@@ -23,6 +30,7 @@ function getDefaultDecks(): Deck[] {
             id: crypto.randomUUID(),
             name: 'New Deck',
             cards: [defaultCardValues[CardType.Spell]],
+            typography: DEFAULT_TYPOGRAPHY,
         }
     ];
 }
@@ -148,6 +156,7 @@ export const useDeckStore = create<DeckStore>()(
                     id: crypto.randomUUID(),
                     name,
                     cards: [defaultCardValues[CardType.Spell]],
+                    typography: DEFAULT_TYPOGRAPHY,
                 };
 
                 set((state) => ({
@@ -161,6 +170,16 @@ export const useDeckStore = create<DeckStore>()(
                 set((state) => ({
                     decks: state.decks.map((deck) =>
                         deck.id === deckId ? { ...deck, name } : deck
+                    ),
+                }));
+            },
+
+            updateDeckTypography: (deckId, typography) => {
+                set((state) => ({
+                    decks: state.decks.map((deck) =>
+                        deck.id === deckId
+                            ? { ...deck, typography: { ...DEFAULT_TYPOGRAPHY, ...deck.typography, ...typography } }
+                            : deck
                     ),
                 }));
             },

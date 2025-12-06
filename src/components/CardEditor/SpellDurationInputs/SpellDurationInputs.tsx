@@ -19,8 +19,9 @@ export const SpellDurationInputs: React.FC = () => {
 
     return (
         <div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-start justify-between">
                 <EditorLabel>Duration</EditorLabel>
+
                 <div className="flex items-center gap-2">
                     <Controller
                         control={control}
