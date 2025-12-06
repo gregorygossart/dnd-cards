@@ -49,7 +49,7 @@ export const CardRenderer: React.FC<CardRendererProps> = ({
             >
                 <div
                     className={cn(
-                        "relative rounded-3xl overflow-hidden flex flex-col font-sans text-slate-900 h-full",
+                        "relative overflow-hidden flex flex-col font-sans text-slate-900 h-full",
                         showShadow && "shadow-2xl"
                     )}
                 >
