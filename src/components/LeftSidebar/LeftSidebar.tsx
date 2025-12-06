@@ -8,7 +8,7 @@ const LeftSidebarContent: React.FC = () => {
     return (
         <div>
             <div className="h-14 flex items-center px-4">
-                <span className="font-bold text-lg tracking-tight text-amber-500">D&D Cards</span>
+                <span className="font-bold text-2xl tracking-tight font-serif text-white">Grimoire.</span>
             </div>
 
             <DeckList />
