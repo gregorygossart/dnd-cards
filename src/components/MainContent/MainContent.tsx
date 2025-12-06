@@ -21,7 +21,7 @@ export const MainContent: React.FC = () => {
             {/* Canvas */}
             <div className="flex-1 relative overflow-y-auto md:overflow-hidden flex flex-col items-center md:justify-center bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
                 {/* Grid pattern background */}
-                <div className="fixed inset-0 opacity-[0.25] pointer-events-none"
+                <div className="absolute inset-0 opacity-[0.25] pointer-events-none"
                     style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
                 </div>
 
