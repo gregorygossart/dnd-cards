@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import Link from 'next/link';
 import { CardRenderer, CardSide } from '@/components/CardRenderer/CardRenderer';
 import { CardEditor } from '@/components/CardEditor/CardEditor';
@@ -10,14 +10,28 @@ import { useDeckStore } from '@/hooks/useDeckStore';
 import { DeckList } from '@/components/DeckList/DeckList';
 import { ImportExportEditor } from '@/components/ImportExportEditor/ImportExportEditor';
 
+enum ActiveTab {
+  Edit = "Edit",
+  ImportExport = "ImportExport"
+}
 
 export default function Home() {
   const { decks, currentDeckIndex, currentCardIndex, updateCard, setCurrentCard } = useDeckStore();
   const [mounted, setMounted] = useState(false);
+  const [activeTab, setActiveTab] = useState<ActiveTab>(ActiveTab.Edit);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Reset tab to 'edit' when card changes (using useLayoutEffect for synchronous update)
+  useLayoutEffect(() => {
+    setActiveTab(ActiveTab.Edit);
+  }, [currentCardIndex]);
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value as ActiveTab);
+  };
 
   const currentDeck = decks[currentDeckIndex];
   const currentCard = currentDeck?.cards[currentCardIndex];
@@ -98,17 +112,17 @@ export default function Home() {
 
       {/* Right Sidebar: Editor */}
       <aside className="w-96 border-l border-slate-800 bg-slate-900 flex flex-col">
-        <Tabs defaultValue="edit" className="flex-1 flex flex-col min-h-0">
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="flex-1 flex flex-col min-h-0">
           <div className="h-14 border-b border-slate-800 flex items-center px-4 shrink-0">
             <TabsList className="grid w-full grid-cols-2 bg-slate-800">
               <TabsTrigger
-                value="edit"
+                value={ActiveTab.Edit}
                 className="text-slate-400 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100 hover:text-slate-200 transition-colors"
               >
                 Properties
               </TabsTrigger>
               <TabsTrigger
-                value="import"
+                value={ActiveTab.ImportExport}
                 className="text-slate-400 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100 hover:text-slate-200 transition-colors"
               >
                 Import / Export
@@ -117,14 +131,15 @@ export default function Home() {
           </div>
 
           <div className="flex-1 overflow-y-auto">
-            <TabsContent value="edit" className="h-full m-0 border-0">
+            <TabsContent value={ActiveTab.Edit} className="h-full m-0 border-0">
               <CardEditor
                 initialData={currentCard}
                 onChange={(card) => updateCard(currentDeckIndex, currentCardIndex, card)}
               />
             </TabsContent>
-            <TabsContent value="import" className="h-full m-0 p-4">
+            <TabsContent value={ActiveTab.ImportExport} className="h-full m-0 p-4">
               <ImportExportEditor
+                key={currentCardIndex}
                 data={currentCard}
                 onChange={(card) => updateCard(currentDeckIndex, currentCardIndex, card)}
               />
