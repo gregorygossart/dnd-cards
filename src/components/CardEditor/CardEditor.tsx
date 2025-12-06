@@ -6,7 +6,9 @@ import { CardSchema, CastingTimeUnit, RangeType, RangeDistanceUnit, DurationType
 
 import { Button } from '@/components/ui/button';
 import { RichTextEditor } from '@/components/RichTextEditor/RichTextEditor';
-import { GeneralCardInputs } from '@/components/CardEditor/GeneralCardInputs/GeneralCardInputs';
+import { TitleInput } from '@/components/CardEditor/TitleInput/TitleInput';
+import { ImageInput } from '@/components/CardEditor/ImageInput/ImageInput';
+import { CardBackSelector } from '@/components/CardEditor/CardBackSelector/CardBackSelector';
 import { CardTypeSelector } from '@/components/CardEditor/CardTypeSelector/CardTypeSelector';
 import { SpellComponentsInputs } from '@/components/CardEditor/SpellComponentsInputs/SpellComponentsInputs';
 import { SpellDurationInputs } from '@/components/CardEditor/SpellDurationInputs/SpellDurationInputs';
@@ -93,7 +95,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
                     }}
                 />
 
-                <GeneralCardInputs />
+                <TitleInput />
 
                 {/* Spell-specific fields */}
                 {watch('type') === 'Spell' && (
@@ -123,26 +125,29 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
                 )}
 
                 <CollapsibleGroup title="Rules Text" defaultOpen={true}>
-                    <div className="space-y-3">
-                        <Controller
-                            name="description"
-                            control={control}
-                            render={({ field }) => (
-                                <RichTextEditor
-                                    content={field.value || ''}
-                                    onChange={field.onChange}
-                                    placeholder="Enter card rules..."
-                                    className="min-h-[200px]"
-                                />
-                            )}
-                        />
-                    </div>
+                    <Controller
+                        name="description"
+                        control={control}
+                        render={({ field }) => (
+                            <RichTextEditor
+                                content={field.value || ''}
+                                onChange={field.onChange}
+                                placeholder="Enter card rules..."
+                                className="min-h-[200px]"
+                            />
+                        )}
+                    />
                 </CollapsibleGroup>
 
                 <CollapsibleGroup title="Visual Style" defaultOpen={true}>
                     <div className="space-y-4">
+                        <ImageInput label="Header Image" fieldName="visuals.headerImage" />
                         <AccentColorInput />
                     </div>
+                </CollapsibleGroup>
+
+                <CollapsibleGroup title="Card Back" defaultOpen={true}>
+                    <CardBackSelector />
                 </CollapsibleGroup>
             </div>
         </FormProvider>

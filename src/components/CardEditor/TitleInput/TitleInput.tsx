@@ -9,7 +9,7 @@ export const TitleInput: React.FC = () => {
 
     return (
         <div>
-            <EditorLabel htmlFor="title">Title</EditorLabel>
+            <EditorLabel htmlFor="title">Card Name</EditorLabel>
             <Input
                 id="title"
                 {...register('title')}

@@ -70,7 +70,7 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({ data, on
     }, [jsonText]);
 
     return (
-        <div className="h-full flex flex-col space-y-3">
+        <div className="h-full flex flex-col space-y-4">
             {/* Header */}
             <div className="flex items-center justify-between">
                 <h3 className="text-slate-300 font-semibold text-sm">Card Data</h3>

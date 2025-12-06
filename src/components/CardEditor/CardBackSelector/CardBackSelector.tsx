@@ -5,6 +5,7 @@ import { CARD_BACK_PRESETS } from '@/lib/cardConstants';
 import { ImageInput } from '@/components/CardEditor/ImageInput/ImageInput';
 import { EditorLabel } from '@/components/CardEditor/EditorLabel/EditorLabel';
 import type { Card } from '@/types/card';
+import { Separator } from '@/components/ui/separator';
 
 export const CardBackSelector: React.FC = () => {
     const { watch, setValue } = useFormContext<Card>();
@@ -27,7 +28,7 @@ export const CardBackSelector: React.FC = () => {
     };
 
     return (
-        <div className="space-y-3">
+        <div className="space-y-4">
             <EditorLabel>Card Back Design</EditorLabel>
 
             <div className="grid grid-cols-4 gap-2">
@@ -91,7 +92,7 @@ export const CardBackSelector: React.FC = () => {
             )}
 
             {/* Back Tint Picker */}
-            <div className="pt-2 border-t border-slate-700/50">
+            <div>
                 <EditorLabel htmlFor="backTint">Tint Color</EditorLabel>
                 <div className="flex items-center gap-2">
                     <div className="relative w-8 h-8 shrink-0">
