@@ -224,7 +224,7 @@ export const DeckList: React.FC<DeckListProps> = ({
                                             <div
                                                 key={cardIndex}
                                                 className={cn(
-                                                    "w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group relative",
+                                                    "relative w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group",
                                                     isActive
                                                         ? "bg-violet-600/20 text-violet-300"
                                                         : "hover:bg-slate-800/50 text-slate-400"
@@ -232,43 +232,44 @@ export const DeckList: React.FC<DeckListProps> = ({
                                             >
                                                 <button
                                                     onClick={() => onCardSelect(deckIndex, cardIndex)}
-                                                    className="flex-1 flex items-center gap-2 min-w-0 text-left"
-                                                >
-                                                    {/* Card type icon */}
-                                                    <div className={cn(
-                                                        "w-4 h-4 rounded shrink-0",
-                                                        isActive ? "bg-violet-600" : "bg-slate-700"
-                                                    )}>
-                                                        <svg className="w-full h-full p-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm3 1h6v4H7V5zm6 6H7v2h6v-2z" clipRule="evenodd" />
-                                                        </svg>
-                                                    </div>
+                                                    className="absolute inset-0 w-full h-full"
+                                                    aria-label={`Select ${card.title || 'Untitled Card'}`}
+                                                />
 
-                                                    <div className="flex-1 min-w-0">
-                                                        <div className="truncate">
-                                                            {card.title || 'Untitled Card'}
-                                                        </div>
-                                                    </div>
+                                                {/* Card type icon */}
+                                                <div className={cn(
+                                                    "w-4 h-4 rounded shrink-0 relative z-10 pointer-events-none",
+                                                    isActive ? "bg-violet-600" : "bg-slate-700"
+                                                )}>
+                                                    <svg className="w-full h-full p-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm3 1h6v4H7V5zm6 6H7v2h6v-2z" clipRule="evenodd" />
+                                                    </svg>
+                                                </div>
 
-                                                    {/* Level/Type badge */}
-                                                    <span className={cn(
-                                                        "text-xs px-1.5 py-0.5 rounded shrink-0",
-                                                        isActive
-                                                            ? "bg-violet-600/30 text-violet-200"
-                                                            : "bg-slate-700 text-slate-400"
-                                                    )}>
-                                                        {card.type === 'Spell' && card.level !== undefined
-                                                            ? `Lvl ${card.level}`
-                                                            : card.type}
-                                                    </span>
-                                                </button>
+                                                <div className="flex-1 min-w-0 relative z-10 pointer-events-none">
+                                                    <div className="truncate">
+                                                        {card.title || 'Untitled Card'}
+                                                    </div>
+                                                </div>
+
+                                                {/* Level/Type badge */}
+                                                <span className={cn(
+                                                    "text-xs px-1.5 py-0.5 rounded shrink-0 relative z-10 pointer-events-none",
+                                                    isActive
+                                                        ? "bg-violet-600/30 text-violet-200"
+                                                        : "bg-slate-700 text-slate-400"
+                                                )}>
+                                                    {card.type === 'Spell' && card.level !== undefined
+                                                        ? `Lvl ${card.level}`
+                                                        : card.type}
+                                                </span>
 
                                                 {/* Three-dot menu */}
                                                 <DropdownMenu>
                                                     <DropdownMenuTrigger asChild>
                                                         <button
                                                             onClick={(e) => e.stopPropagation()}
-                                                            className="p-1 hover:bg-slate-700 rounded transition-colors text-slate-500 hover:text-slate-300"
+                                                            className="relative z-10 p-1 hover:bg-slate-700 rounded transition-colors text-slate-500 hover:text-slate-300"
                                                         >
                                                             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
                                                                 <circle cx="8" cy="3" r="1.5" />
