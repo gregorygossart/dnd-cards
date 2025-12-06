@@ -22,6 +22,13 @@ const DEFAULT_TYPOGRAPHY: DeckTypography = {
     titleFontSize: 24, // Default: 24px (equivalent to text-2xl)
     bodyFontSize: 14, // Default: 14px (equivalent to text-sm)
     lineHeight: 1.5, // Default: 1.5 (balanced readability)
+    paddingMultiplier: 1.0, // Default: 1.0 (normal spacing)
+};
+
+// Base padding values (in pixels) that will be multiplied
+export const BASE_PADDING = {
+    horizontal: 20, // px-5
+    vertical: 6,    // py-1.5
 };
 
 function getDefaultDecks(): Deck[] {

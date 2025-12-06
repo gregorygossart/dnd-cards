@@ -176,6 +176,7 @@ export interface DeckTypography {
     titleFontSize: number; // Font size in pixels, default: 24
     bodyFontSize: number; // Font size in pixels, default: 14
     lineHeight: number; // Line height multiplier, default: 1.5
+    paddingMultiplier: number; // Padding multiplier, default: 1.0 (range: 0.5-1.5)
 }
 
 export interface Deck {

@@ -14,6 +14,7 @@ export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
     const titleFontSize = deck?.typography?.titleFontSize ?? 24;
     const bodyFontSize = deck?.typography?.bodyFontSize ?? 14;
     const lineHeight = deck?.typography?.lineHeight ?? 1.5;
+    const paddingMultiplier = deck?.typography?.paddingMultiplier ?? 1.0;
 
     const handleTitleSizeChange = (value: number[]) => {
         updateDeckTypography(deckId, { titleFontSize: value[0] });
@@ -25,6 +26,10 @@ export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
 
     const handleLineHeightChange = (value: number[]) => {
         updateDeckTypography(deckId, { lineHeight: value[0] });
+    };
+
+    const handlePaddingChange = (value: number[]) => {
+        updateDeckTypography(deckId, { paddingMultiplier: value[0] });
     };
 
     return (
@@ -84,6 +89,25 @@ export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
                             step={0.1}
                             value={[lineHeight]}
                             onValueChange={handleLineHeightChange}
+                            className="w-full"
+                        />
+                    </div>
+
+                    {/* Padding */}
+                    <div className="space-y-2">
+                        <EditorLabel htmlFor="padding" className="flex items-center justify-between">
+                            <span>Padding</span>
+                            <span className="font-mono normal-case font-normal text-muted-foreground">
+                                {(paddingMultiplier * 100).toFixed(0)}%
+                            </span>
+                        </EditorLabel>
+                        <Slider
+                            id="padding"
+                            min={0.5}
+                            max={1.5}
+                            step={0.1}
+                            value={[paddingMultiplier]}
+                            onValueChange={handlePaddingChange}
                             className="w-full"
                         />
                     </div>

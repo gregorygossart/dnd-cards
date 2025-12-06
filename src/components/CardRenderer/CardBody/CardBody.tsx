@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDeckStore } from '@/hooks/useDeckStore';
+import { useDeckStore, BASE_PADDING } from '@/hooks/useDeckStore';
 
 interface CardBodyProps {
     description: string;
@@ -7,15 +7,22 @@ interface CardBodyProps {
 }
 
 export const CardBody: React.FC<CardBodyProps> = ({ description, accentColor }) => {
-    // Get body font size from current deck's typography settings
+    // Get typography settings from current deck
     const { decks, currentDeckIndex } = useDeckStore();
     const bodyFontSize = decks[currentDeckIndex]?.typography?.bodyFontSize ?? 14;
     const lineHeight = decks[currentDeckIndex]?.typography?.lineHeight ?? 1.5;
+    const paddingMultiplier = decks[currentDeckIndex]?.typography?.paddingMultiplier ?? 1.0;
 
     return (
         <div
-            className="px-5 py-1.5 flex-1 min-h-0 flex flex-col gap-2 text-slate-700"
-            style={{ fontSize: `${bodyFontSize}px` }}
+            className="flex-1 min-h-0 flex flex-col gap-2 text-slate-700"
+            style={{
+                fontSize: `${bodyFontSize}px`,
+                paddingLeft: `${BASE_PADDING.horizontal * paddingMultiplier}px`,
+                paddingRight: `${BASE_PADDING.horizontal * paddingMultiplier}px`,
+                paddingTop: `${BASE_PADDING.vertical * paddingMultiplier}px`,
+                paddingBottom: `${BASE_PADDING.vertical * paddingMultiplier}px`,
+            }}
         >
             <style>{`
                 .card-body-content * {
