@@ -39,7 +39,7 @@ export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
     };
 
     return (
-        <div className="p-4">
+        <div className="">
             <CollapsibleGroup title="Deck Settings" defaultOpen={false}>
                 <div className="space-y-6">
                     {/* Density Presets */}
