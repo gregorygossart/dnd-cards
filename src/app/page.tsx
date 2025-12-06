@@ -27,7 +27,7 @@ export default function Home() {
   // Reset tab to 'edit' when card changes (using useLayoutEffect for synchronous update)
   useLayoutEffect(() => {
     setActiveTab(ActiveTab.Edit);
-  }, [currentCardIndex]);
+  }, [currentDeckIndex, currentCardIndex]);
 
   const handleTabChange = (value: string) => {
     setActiveTab(value as ActiveTab);
@@ -139,7 +139,7 @@ export default function Home() {
             </TabsContent>
             <TabsContent value={ActiveTab.ImportExport} className="h-full m-0 p-4">
               <ImportExportEditor
-                key={currentCardIndex}
+                key={`${currentDeckIndex}-${currentCardIndex}`}
                 data={currentCard}
                 onChange={(card) => updateCard(currentDeckIndex, currentCardIndex, card)}
               />
