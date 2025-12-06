@@ -3,10 +3,14 @@ import { CardRenderer, CardSide } from '@/components/CardRenderer/CardRenderer';
 import { AppHeader } from '@/components/AppHeader/AppHeader';
 import { useDeckStore } from '@/hooks/useDeckStore';
 
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+
 export const MainContent: React.FC = () => {
     const { decks, currentDeckIndex, currentCardIndex } = useDeckStore();
+    const isSmallScreen = useMediaQuery('(max-width: 768px)');
     const currentDeck = decks[currentDeckIndex];
     const currentCard = currentDeck?.cards[currentCardIndex];
+    const cardScale = isSmallScreen ? 0.85 : 1.2;
 
     if (!currentDeck || !currentCard) return null;
 
@@ -15,19 +19,19 @@ export const MainContent: React.FC = () => {
             <AppHeader />
 
             {/* Canvas */}
-            <div className="flex-1 relative overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
+            <div className="flex-1 relative overflow-y-auto md:overflow-hidden flex flex-col items-center md:justify-center bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
                 {/* Grid pattern background */}
-                <div className="absolute inset-0 opacity-[0.25]"
+                <div className="fixed inset-0 opacity-[0.25] pointer-events-none"
                     style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
                 </div>
 
                 {/* Card and Button */}
-                <div className="relative z-10 flex items-center gap-8 overflow-x-auto p-8 w-full justify-center">
+                <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 p-8 w-full justify-center min-h-min">
                     {/* Front */}
                     <div className="flex flex-col items-center gap-4">
                         <span className="text-slate-400 text-sm font-medium uppercase tracking-wider">Front</span>
                         <div className="shadow-2xl shadow-black/50">
-                            <CardRenderer data={currentCard} scale={1.2} side={CardSide.Front} />
+                            <CardRenderer data={currentCard} scale={cardScale} side={CardSide.Front} />
                         </div>
                     </div>
 
@@ -35,7 +39,7 @@ export const MainContent: React.FC = () => {
                     <div className="flex flex-col items-center gap-4">
                         <span className="text-slate-400 text-sm font-medium uppercase tracking-wider">Back</span>
                         <div className="shadow-2xl shadow-black/50">
-                            <CardRenderer data={currentCard} scale={1.2} side={CardSide.Back} />
+                            <CardRenderer data={currentCard} scale={cardScale} side={CardSide.Back} />
                         </div>
                     </div>
                 </div>
