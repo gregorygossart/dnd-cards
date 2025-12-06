@@ -8,7 +8,7 @@ interface CardHeaderProps {
 
 export const CardHeader: React.FC<CardHeaderProps> = ({ title, titleFontSize = 24 }) => {
     const { decks, currentDeckIndex } = useDeckStore();
-    const paddingMultiplier = decks[currentDeckIndex]?.typography?.paddingMultiplier ?? 1.0;
+    const paddingMultiplier = decks[currentDeckIndex]?.style?.paddingMultiplier ?? 1.0;
 
     return (
         <div

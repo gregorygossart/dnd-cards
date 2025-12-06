@@ -10,27 +10,32 @@ interface DeckSettingsProps {
 }
 
 export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
-    const { decks, updateDeckTypography } = useDeckStore();
+    const { decks, updateDeckStyle } = useDeckStore();
     const deck = decks.find(d => d.id === deckId);
-    const titleFontSize = deck?.typography?.titleFontSize ?? 24;
-    const bodyFontSize = deck?.typography?.bodyFontSize ?? 14;
-    const lineHeight = deck?.typography?.lineHeight ?? 1.5;
-    const paddingMultiplier = deck?.typography?.paddingMultiplier ?? 1.0;
+    const titleFontSize = deck?.style?.titleFontSize ?? 24;
+    const bodyFontSize = deck?.style?.bodyFontSize ?? 14;
+    const lineHeight = deck?.style?.lineHeight ?? 1.5;
+    const paddingMultiplier = deck?.style?.paddingMultiplier ?? 1.0;
+    const cornerRadius = deck?.style?.cornerRadius ?? 1.5;
 
     const handleTitleSizeChange = (value: number[]) => {
-        updateDeckTypography(deckId, { titleFontSize: value[0] });
+        updateDeckStyle(deckId, { titleFontSize: value[0] });
     };
 
     const handleBodySizeChange = (value: number[]) => {
-        updateDeckTypography(deckId, { bodyFontSize: value[0] });
+        updateDeckStyle(deckId, { bodyFontSize: value[0] });
     };
 
     const handleLineHeightChange = (value: number[]) => {
-        updateDeckTypography(deckId, { lineHeight: value[0] });
+        updateDeckStyle(deckId, { lineHeight: value[0] });
     };
 
     const handlePaddingChange = (value: number[]) => {
-        updateDeckTypography(deckId, { paddingMultiplier: value[0] });
+        updateDeckStyle(deckId, { paddingMultiplier: value[0] });
+    };
+
+    const handleCornerRadiusChange = (value: number[]) => {
+        updateDeckStyle(deckId, { cornerRadius: value[0] });
     };
 
     return (
@@ -112,6 +117,25 @@ export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
                             step={0.1}
                             value={[paddingMultiplier]}
                             onValueChange={handlePaddingChange}
+                            className="w-full"
+                        />
+                    </div>
+
+                    {/* Corner Radius */}
+                    <div className="space-y-2">
+                        <EditorLabel htmlFor="corner-radius" className="flex items-center justify-between">
+                            <span>Corner Radius</span>
+                            <span className="font-mono normal-case font-normal text-muted-foreground">
+                                {cornerRadius.toFixed(1)}rem
+                            </span>
+                        </EditorLabel>
+                        <Slider
+                            id="corner-radius"
+                            min={0.0}
+                            max={3.0}
+                            step={0.1}
+                            value={[cornerRadius]}
+                            onValueChange={handleCornerRadiusChange}
                             className="w-full"
                         />
                     </div>

@@ -9,11 +9,12 @@ interface DensityPresetsProps {
 }
 
 export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
-    const { updateDeckTypography } = useDeckStore();
+    const { updateDeckStyle } = useDeckStore();
 
     const applyPreset = (presetName: DensityPreset) => {
         const preset = DENSITY_PRESETS[presetName];
-        updateDeckTypography(deckId, preset);
+        // Preset only contains density settings, cornerRadius is preserved automatically
+        updateDeckStyle(deckId, preset);
     };
 
     return (

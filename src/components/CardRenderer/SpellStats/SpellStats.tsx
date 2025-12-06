@@ -18,8 +18,8 @@ export const SpellStats: React.FC<SpellStatsProps> = ({ castingTime, range, dura
 
     // Get body font size and calculate badge size (2px smaller to maintain hierarchy)
     const { decks, currentDeckIndex } = useDeckStore();
-    const bodyFontSize = decks[currentDeckIndex]?.typography?.bodyFontSize ?? 14;
-    const paddingMultiplier = decks[currentDeckIndex]?.typography?.paddingMultiplier ?? 1.0;
+    const bodyFontSize = decks[currentDeckIndex]?.style?.bodyFontSize ?? 14;
+    const paddingMultiplier = decks[currentDeckIndex]?.style?.paddingMultiplier ?? 1.0;
     const badgeFontSize = bodyFontSize - 2;
 
     return (

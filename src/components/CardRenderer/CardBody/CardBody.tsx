@@ -9,9 +9,9 @@ interface CardBodyProps {
 export const CardBody: React.FC<CardBodyProps> = ({ description, accentColor }) => {
     // Get typography settings from current deck
     const { decks, currentDeckIndex } = useDeckStore();
-    const bodyFontSize = decks[currentDeckIndex]?.typography?.bodyFontSize ?? 14;
-    const lineHeight = decks[currentDeckIndex]?.typography?.lineHeight ?? 1.5;
-    const paddingMultiplier = decks[currentDeckIndex]?.typography?.paddingMultiplier ?? 1.0;
+    const bodyFontSize = decks[currentDeckIndex]?.style?.bodyFontSize ?? 14;
+    const lineHeight = decks[currentDeckIndex]?.style?.lineHeight ?? 1.5;
+    const paddingMultiplier = decks[currentDeckIndex]?.style?.paddingMultiplier ?? 1.0;
 
     return (
         <div

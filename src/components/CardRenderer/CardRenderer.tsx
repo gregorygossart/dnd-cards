@@ -29,7 +29,6 @@ export const CardRenderer: React.FC<CardRendererProps> = ({
     side = CardSide.Front
 }) => {
     const { visuals } = data;
-    const hasCustomBack = side === CardSide.Back && !!visuals.backImage;
 
     return (
         <div

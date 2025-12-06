@@ -178,16 +178,17 @@ export enum DensityPreset {
     Spacious = 'Spacious',
 }
 
-export interface DeckTypography {
+export interface DeckStyle {
     titleFontSize: number; // Font size in pixels, default: 24
     bodyFontSize: number; // Font size in pixels, default: 14
     lineHeight: number; // Line height multiplier, default: 1.5
     paddingMultiplier: number; // Padding multiplier, default: 1.0 (range: 0.5-1.5)
+    cornerRadius: number; // Corner radius in rem, default: 1.5 (range: 0.0-3.0)
 }
 
 export interface Deck {
     id: string;
     name: string;
     cards: Card[];
-    typography?: DeckTypography; // Optional for backward compatibility
+    style: DeckStyle;
 }

@@ -15,11 +15,13 @@ interface CardFrontProps {
 
 export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
     const { title, description, visuals } = data;
-    const { outerRadius, padding, innerRadius } = getCardRadii();
 
-    // Get title font size from current deck's typography settings
+    // Get typography settings from current deck
     const { decks, currentDeckIndex } = useDeckStore();
-    const titleFontSize = decks[currentDeckIndex]?.typography?.titleFontSize ?? 24;
+    const titleFontSize = decks[currentDeckIndex]?.style?.titleFontSize ?? 24;
+    const cornerRadius = decks[currentDeckIndex]?.style?.cornerRadius ?? 1.5;
+
+    const { outerRadius, padding, innerRadius } = getCardRadii(cornerRadius);
 
     return (
         <div

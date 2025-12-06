@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Deck, Card, CardType, DeckTypography, DensityPreset } from '@/types/card';
+import { Deck, Card, CardType, DeckStyle, DensityPreset } from '@/types/card';
 import { defaultCardValues } from '@/components/CardEditor/CardEditor';
 
 interface DeckStore {
@@ -13,16 +13,17 @@ interface DeckStore {
     deleteCard: (deckIndex: number, cardIndex: number) => void;
     addDeck: (name: string) => void;
     updateDeckName: (deckId: string, name: string) => void;
-    updateDeckTypography: (deckId: string, typography: Partial<DeckTypography>) => void;
+    updateDeckStyle: (deckId: string, style: Partial<DeckStyle>) => void;
     deleteDeck: (deckId: string) => void;
     setCurrentCard: (deckIndex: number, cardIndex: number) => void;
 }
 
-const DEFAULT_TYPOGRAPHY: DeckTypography = {
+const DEFAULT_STYLE: DeckStyle = {
     titleFontSize: 24, // Default: 24px (equivalent to text-2xl)
     bodyFontSize: 14, // Default: 14px (equivalent to text-sm)
     lineHeight: 1.5, // Default: 1.5 (balanced readability)
     paddingMultiplier: 1.0, // Default: 1.0 (normal spacing)
+    cornerRadius: 1.5, // Default: 1.5rem (rounded-3xl)
 };
 
 // Base padding values (in pixels) that will be multiplied
@@ -31,15 +32,23 @@ export const BASE_PADDING = {
     vertical: 6,    // py-1.5
 };
 
-// Density presets - apply all typography settings at once
-export const DENSITY_PRESETS: Record<DensityPreset, DeckTypography> = {
+// Density-specific settings (excludes aesthetic choices like cornerRadius)
+type DensitySettings = Omit<DeckStyle, 'cornerRadius'>;
+
+// Density presets - apply only density-related settings
+export const DENSITY_PRESETS: Record<DensityPreset, DensitySettings> = {
     [DensityPreset.Compact]: {
         titleFontSize: 20,
         bodyFontSize: 12,
         lineHeight: 1.3,
         paddingMultiplier: 0.75,
     },
-    [DensityPreset.Normal]: DEFAULT_TYPOGRAPHY,
+    [DensityPreset.Normal]: {
+        titleFontSize: 24,
+        bodyFontSize: 14,
+        lineHeight: 1.5,
+        paddingMultiplier: 1.0,
+    },
     [DensityPreset.Spacious]: {
         titleFontSize: 28,
         bodyFontSize: 16,
@@ -54,7 +63,7 @@ function getDefaultDecks(): Deck[] {
             id: crypto.randomUUID(),
             name: 'New Deck',
             cards: [defaultCardValues[CardType.Spell]],
-            typography: DEFAULT_TYPOGRAPHY,
+            style: DEFAULT_STYLE,
         }
     ];
 }
@@ -180,7 +189,7 @@ export const useDeckStore = create<DeckStore>()(
                     id: crypto.randomUUID(),
                     name,
                     cards: [defaultCardValues[CardType.Spell]],
-                    typography: DEFAULT_TYPOGRAPHY,
+                    style: DEFAULT_STYLE,
                 };
 
                 set((state) => ({
@@ -198,11 +207,11 @@ export const useDeckStore = create<DeckStore>()(
                 }));
             },
 
-            updateDeckTypography: (deckId, typography) => {
+            updateDeckStyle: (deckId, style) => {
                 set((state) => ({
                     decks: state.decks.map((deck) =>
                         deck.id === deckId
-                            ? { ...deck, typography: { ...DEFAULT_TYPOGRAPHY, ...deck.typography, ...typography } }
+                            ? { ...deck, style: { ...DEFAULT_STYLE, ...deck.style, ...style } }
                             : deck
                     ),
                 }));
