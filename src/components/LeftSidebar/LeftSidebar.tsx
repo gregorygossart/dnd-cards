@@ -6,13 +6,13 @@ import { useIsMobile } from '@/hooks/useMediaQuery';
 
 const LeftSidebarContent: React.FC = () => {
     return (
-        <>
+        <div>
             <div className="h-14 flex items-center px-4">
                 <span className="font-bold text-lg tracking-tight text-amber-500">D&D Cards</span>
             </div>
 
             <DeckList />
-        </>
+        </div>
     );
 }
 
@@ -23,7 +23,7 @@ export const LeftSidebar: React.FC = () => {
     if (isMobile) {
         return (
             <Sheet open={leftDrawerOpen} onOpenChange={setLeftDrawerOpen}>
-                <SheetContent side="left" className="w-80 bg-slate-900 border-r border-slate-800 p-0 flex flex-col gap-0">
+                <SheetContent side="left" className="w-full max-w-80 bg-slate-900 border-r border-slate-800">
                     <SheetHeader className="sr-only">
                         <SheetTitle>Deck List</SheetTitle>
                     </SheetHeader>
@@ -34,7 +34,7 @@ export const LeftSidebar: React.FC = () => {
     }
 
     return (
-        <aside className="hidden lg:flex w-80 border-r border-slate-800 bg-slate-900 flex-col">
+        <aside className="w-80 border-r border-slate-800 bg-slate-900">
             <LeftSidebarContent />
         </aside>
     );

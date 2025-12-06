@@ -74,7 +74,7 @@ export const RightSidebar: React.FC = () => {
     if (isMobile) {
         return (
             <Sheet open={rightDrawerOpen} onOpenChange={setRightDrawerOpen}>
-                <SheetContent className="w-full sm:w-96 bg-slate-900 border-l border-slate-800 p-0 flex flex-col gap-0">
+                <SheetContent className="w-full max-w-96 bg-slate-900 border-l border-slate-800">
                     <SheetHeader className="sr-only">
                         <SheetTitle>Card Editor</SheetTitle>
                     </SheetHeader>
@@ -85,7 +85,7 @@ export const RightSidebar: React.FC = () => {
     }
 
     return (
-        <aside className="hidden lg:flex w-96 border-l border-slate-800 bg-slate-900 flex-col">
+        <aside className="w-96 border-l border-slate-800 bg-slate-900">
             <RightSidebarContent />
         </aside>
     );
