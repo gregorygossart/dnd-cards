@@ -85,7 +85,7 @@ export const RightSidebar: React.FC = () => {
     }
 
     return (
-        <aside className="w-96 border-l border-slate-800 bg-slate-900">
+        <aside className="w-96 border-l border-slate-800 bg-slate-900 flex flex-col">
             <RightSidebarContent />
         </aside>
     );
