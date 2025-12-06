@@ -83,17 +83,17 @@ export default function Home() {
         </header>
 
         {/* Canvas */}
-        <div className="flex-1 bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <div className="flex-1 relative overflow-hidden flex items-center justify-center bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
           {/* Grid pattern background */}
           <div className="absolute inset-0 opacity-[0.25]"
-            style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
+            style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '32px 32px' }}>
           </div>
 
           {/* Card and Button */}
           <div className="relative z-10 flex items-center gap-8 overflow-x-auto p-8 w-full justify-center">
             {/* Front */}
             <div className="flex flex-col items-center gap-4">
-              <span className="text-slate-500 text-sm font-medium uppercase tracking-wider">Front</span>
+              <span className="text-slate-400 text-sm font-medium uppercase tracking-wider">Front</span>
               <div className="shadow-2xl shadow-black/50">
                 <CardRenderer data={currentCard} scale={1.2} side={CardSide.Front} />
               </div>
@@ -101,7 +101,7 @@ export default function Home() {
 
             {/* Back */}
             <div className="flex flex-col items-center gap-4">
-              <span className="text-slate-500 text-sm font-medium uppercase tracking-wider">Back</span>
+              <span className="text-slate-400 text-sm font-medium uppercase tracking-wider">Back</span>
               <div className="shadow-2xl shadow-black/50">
                 <CardRenderer data={currentCard} scale={1.2} side={CardSide.Back} />
               </div>
