@@ -3,6 +3,7 @@ import { useDeckStore } from '@/hooks/useDeckStore';
 import { Slider } from '@/components/ui/slider';
 import { EditorLabel } from '@/components/CardEditor/EditorLabel/EditorLabel';
 import { CollapsibleGroup } from '@/components/ui/collapsible-group';
+import { DensityPresets } from './DensityPresets';
 
 interface DeckSettingsProps {
     deckId: string;
@@ -36,6 +37,9 @@ export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
         <div className="p-4">
             <CollapsibleGroup title="Deck Settings" defaultOpen={false}>
                 <div className="space-y-6">
+                    {/* Density Presets */}
+                    <DensityPresets deckId={deckId} />
+
                     {/* Title Font Size */}
                     <div className="space-y-2">
                         <EditorLabel htmlFor="title-size" className="flex items-center justify-between">

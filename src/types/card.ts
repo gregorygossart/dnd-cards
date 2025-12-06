@@ -172,6 +172,12 @@ export type AbilityCard = z.infer<typeof AbilityCardSchema>;
 
 export type Card = ItemCard | SpellCard | AbilityCard;
 
+export enum DensityPreset {
+    Compact = 'Compact',
+    Normal = 'Normal',
+    Spacious = 'Spacious',
+}
+
 export interface DeckTypography {
     titleFontSize: number; // Font size in pixels, default: 24
     bodyFontSize: number; // Font size in pixels, default: 14

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Deck, Card, CardType, DeckTypography } from '@/types/card';
+import { Deck, Card, CardType, DeckTypography, DensityPreset } from '@/types/card';
 import { defaultCardValues } from '@/components/CardEditor/CardEditor';
 
 interface DeckStore {
@@ -29,6 +29,23 @@ const DEFAULT_TYPOGRAPHY: DeckTypography = {
 export const BASE_PADDING = {
     horizontal: 20, // px-5
     vertical: 6,    // py-1.5
+};
+
+// Density presets - apply all typography settings at once
+export const DENSITY_PRESETS: Record<DensityPreset, DeckTypography> = {
+    [DensityPreset.Compact]: {
+        titleFontSize: 20,
+        bodyFontSize: 12,
+        lineHeight: 1.3,
+        paddingMultiplier: 0.75,
+    },
+    [DensityPreset.Normal]: DEFAULT_TYPOGRAPHY,
+    [DensityPreset.Spacious]: {
+        titleFontSize: 28,
+        bodyFontSize: 16,
+        lineHeight: 1.7,
+        paddingMultiplier: 1.25,
+    },
 };
 
 function getDefaultDecks(): Deck[] {
