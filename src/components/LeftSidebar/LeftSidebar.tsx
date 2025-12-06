@@ -1,0 +1,41 @@
+import React from 'react';
+import { useUIStore } from '@/hooks/useUIStore';
+import { DeckList } from '@/components/DeckList/DeckList';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { useIsMobile } from '@/hooks/useMediaQuery';
+
+const LeftSidebarContent: React.FC = () => {
+    return (
+        <>
+            <div className="h-14 flex items-center px-4">
+                <span className="font-bold text-lg tracking-tight text-amber-500">D&D Cards</span>
+            </div>
+
+            <DeckList />
+        </>
+    );
+}
+
+export const LeftSidebar: React.FC = () => {
+    const { leftDrawerOpen, setLeftDrawerOpen } = useUIStore();
+    const isMobile = useIsMobile();
+
+    if (isMobile) {
+        return (
+            <Sheet open={leftDrawerOpen} onOpenChange={setLeftDrawerOpen}>
+                <SheetContent side="left" className="w-80 bg-slate-900 border-r border-slate-800 p-0 flex flex-col gap-0">
+                    <SheetHeader className="sr-only">
+                        <SheetTitle>Deck List</SheetTitle>
+                    </SheetHeader>
+                    <LeftSidebarContent />
+                </SheetContent>
+            </Sheet>
+        );
+    }
+
+    return (
+        <aside className="hidden lg:flex w-80 border-r border-slate-800 bg-slate-900 flex-col">
+            <LeftSidebarContent />
+        </aside>
+    );
+};

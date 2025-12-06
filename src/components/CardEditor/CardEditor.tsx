@@ -3,8 +3,6 @@ import { useForm, FormProvider, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Card } from '@/types/card';
 import { CardSchema, CastingTimeUnit, RangeType, RangeDistanceUnit, DurationType, CardType, CardBaseData } from '@/types/card';
-
-import { Button } from '@/components/ui/button';
 import { RichTextEditor } from '@/components/RichTextEditor/RichTextEditor';
 import { TitleInput } from '@/components/CardEditor/TitleInput/TitleInput';
 import { ImageInput } from '@/components/CardEditor/ImageInput/ImageInput';
@@ -66,7 +64,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
         mode: 'onChange',
     });
 
-    const { register, watch, control, reset } = form;
+    const { watch, control, reset } = form;
 
     // Use a ref to track if we've already notified the parent
     const isInitialMount = useRef(true);

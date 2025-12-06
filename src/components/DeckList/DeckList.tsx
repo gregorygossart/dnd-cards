@@ -21,20 +21,10 @@ import {
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 
-interface DeckListProps {
-    decks: Deck[];
-    currentDeckIndex: number;
-    currentCardIndex: number;
-    onCardSelect: (deckIndex: number, cardIndex: number) => void;
-}
 
-export const DeckList: React.FC<DeckListProps> = ({
-    decks,
-    currentDeckIndex,
-    currentCardIndex,
-    onCardSelect,
-}) => {
-    const { updateDeckName, deleteDeck, duplicateCard, deleteCard } = useDeckStore();
+export const DeckList: React.FC = () => {
+    const { decks, currentDeckIndex, currentCardIndex, deleteDeck, duplicateCard, deleteCard, setCurrentCard, updateDeckName } = useDeckStore();
+
     const [expandedDeckIndex, setExpandedDeckIndex] = useState<number>(currentDeckIndex);
     const [editingDeckId, setEditingDeckId] = useState<string | null>(null);
     const [editingName, setEditingName] = useState('');
@@ -231,7 +221,7 @@ export const DeckList: React.FC<DeckListProps> = ({
                                                 )}
                                             >
                                                 <button
-                                                    onClick={() => onCardSelect(deckIndex, cardIndex)}
+                                                    onClick={() => setCurrentCard(deckIndex, cardIndex)}
                                                     className="absolute inset-0 w-full h-full"
                                                     aria-label={`Select ${card.title || 'Untitled Card'}`}
                                                 />
