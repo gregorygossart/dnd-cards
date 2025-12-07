@@ -3,9 +3,12 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 import importPlugin from "eslint-plugin-import";
 
+import pluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  pluginPrettierRecommended,
   {
     plugins: {
       import: importPlugin,
@@ -14,7 +17,7 @@ const eslintConfig = defineConfig([
       // Enforce inline type imports
       "@typescript-eslint/consistent-type-imports": [
         "error",
-        { prefer: "type-imports" }
+        { prefer: "type-imports" },
       ],
       // Enforce @/ path notation for local imports
       "import/no-relative-packages": "error",
@@ -24,12 +27,13 @@ const eslintConfig = defineConfig([
           patterns: [
             {
               group: ["./*", "../*"],
-              message: "Use @/ path notation instead of relative imports (e.g., @/components/...)"
-            }
-          ]
-        }
-      ]
-    }
+              message:
+                "Use @/ path notation instead of relative imports (e.g., @/components/...)",
+            },
+          ],
+        },
+      ],
+    },
   },
   // Override default ignores of eslint-config-next.
   globalIgnores([
@@ -42,4 +46,3 @@ const eslintConfig = defineConfig([
 ]);
 
 export default eslintConfig;
-

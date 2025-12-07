@@ -1,1 +1,1 @@
-export { SpellRangeInputs } from '@/components/CardEditor/SpellRangeInputs/SpellRangeInputs';
+export { SpellRangeInputs } from "@/components/CardEditor/SpellRangeInputs/SpellRangeInputs";

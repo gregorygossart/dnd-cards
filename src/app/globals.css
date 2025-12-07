@@ -196,18 +196,18 @@
   gap: 0.5rem;
 }
 
-.rich-text-content ul[data-type="taskList"] li>label {
+.rich-text-content ul[data-type="taskList"] li > label {
   flex-shrink: 0;
   margin-top: 0.1rem;
   user-select: none;
 }
 
-.rich-text-content ul[data-type="taskList"] li>div {
+.rich-text-content ul[data-type="taskList"] li > div {
   flex: 1;
   margin: 0;
 }
 
-.rich-text-content ul[data-type="taskList"] li>div>p {
+.rich-text-content ul[data-type="taskList"] li > div > p {
   margin: 0;
 }
 
@@ -223,7 +223,7 @@
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
-  font-family: 'Monaco', 'Courier New', monospace;
+  font-family: "Monaco", "Courier New", monospace;
 }
 
 .rich-text-content pre {
@@ -252,7 +252,6 @@
   border-top-style: solid;
   margin: 1rem 0;
 }
-
 
 /* Dark variant (for editor) - Colors only */
 .rich-text-content.dark h1,
@@ -293,11 +292,10 @@
 }
 
 .rich-text-content.dark p.is-empty::before {
-  color: #B5BAC1;
+  color: #b5bac1;
 }
 
 /* Light variant (for card) - Compact sizing + colors */
-
 
 .rich-text-content.light h1,
 .rich-text-content.light h2,
@@ -314,7 +312,11 @@
 
 .rich-text-content.light blockquote {
   color: var(--accent-color, #7c3aed);
-  background-color: color-mix(in srgb, var(--accent-color, #a78bfa), transparent 92%);
+  background-color: color-mix(
+    in srgb,
+    var(--accent-color, #a78bfa),
+    transparent 92%
+  );
   border-left: 3px solid var(--accent-color, #a78bfa);
 }
 
