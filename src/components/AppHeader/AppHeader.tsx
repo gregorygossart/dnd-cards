@@ -20,9 +20,9 @@ export const AppHeader: React.FC = () => {
   if (!currentDeck || !currentCard) return null;
 
   return (
-    <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center justify-between px-4 lg:px-6">
+    <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center justify-between px-4 lg:px-6 space-x-4">
       {/* Left: Mobile menu + Breadcrumb */}
-      <div className="flex items-center gap-3 min-w-0 flex-1">
+      <div className="flex items-center gap-4 min-w-0 flex-1">
         {/* Mobile: Deck List Toggle */}
         <Button
           variant="ghost"
@@ -56,7 +56,7 @@ export const AppHeader: React.FC = () => {
       </div>
 
       {/* Right: Actions */}
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-4 shrink-0">
         {/* Print Button */}
         <Link href="/print">
           <Button
@@ -83,12 +83,11 @@ export const AppHeader: React.FC = () => {
 
         {/* Mobile: Edit Toggle */}
         <Button
-          variant="ghost"
-          size="icon"
+          variant="default"
           onClick={() => setRightDrawerOpen(!rightDrawerOpen)}
           className="lg:hidden text-slate-300 hover:text-slate-100 hover:bg-slate-800"
         >
-          <Settings className="h-5 w-5" />
+          Edit Card
         </Button>
       </div>
     </header>
