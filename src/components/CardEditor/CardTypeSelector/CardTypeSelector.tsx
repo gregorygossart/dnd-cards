@@ -27,7 +27,7 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
           <span className="text-2xl font-black text-slate-600 uppercase tracking-tight">
             Crafting
           </span>
-          <span className="text-2xl font-black uppercase tracking-tight text-slate-200">
+          <span className="text-2xl font-black uppercase tracking-tight text-violet-500">
             {value}
           </span>
         </div>
