@@ -108,7 +108,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({ initialData, onChange })
                 {/* Spell-specific fields */}
                 {watch('type') === 'Spell' && (
                     <CollapsibleGroup title="Spell Details" defaultOpen={true}>
-                        <div className="grid grid-cols-2 space-y-6">
+                        <div className="space-y-6">
                             <SpellClassificationInputs />
 
                             {/* Casting Time */}

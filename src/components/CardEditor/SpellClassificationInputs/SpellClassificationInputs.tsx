@@ -14,9 +14,9 @@ export const SpellClassificationInputs: React.FC = () => {
     const { control } = useFormContext<Card>();
 
     return (
-        <>
+        <div className='flex gap-2'>
             {/* School */}
-            <div>
+            <div className='flex-1'>
                 <EditorLabel htmlFor="school">School</EditorLabel>
                 <Controller
                     control={control}
@@ -42,7 +42,7 @@ export const SpellClassificationInputs: React.FC = () => {
             </div>
 
             {/* Level */}
-            <div>
+            <div className='flex-1'>
                 <EditorLabel htmlFor="level">Level</EditorLabel>
                 <Controller
                     control={control}
@@ -71,6 +71,6 @@ export const SpellClassificationInputs: React.FC = () => {
                     )}
                 />
             </div>
-        </>
+        </div>
     );
 };
