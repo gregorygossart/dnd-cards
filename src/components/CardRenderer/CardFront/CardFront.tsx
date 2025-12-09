@@ -1,13 +1,12 @@
-import React from "react";
 import type { Card } from "@/types/card";
-import { CardHeader } from "../CardHeader/CardHeader";
-import { CardBody } from "../CardBody/CardBody";
-import { SpellStats } from "../SpellStats/SpellStats";
-import { CardArtArea } from "../CardArtArea/CardArtArea";
+import { CardArtArea } from "@/components/CardRenderer/CardFront/CardArtArea/CardArtArea";
+import { CardSeparator } from "@/components/CardRenderer/CardFront/CardSeparator/CardSeparator";
+import { CardSubheader } from "@/components/CardRenderer/CardFront/CardSubheader/CardSubheader";
+import { CardHeader } from "@/components/CardRenderer/CardFront/CardHeader/CardHeader";
+import { SpellStats } from "@/components/CardRenderer/CardFront/SpellStats/SpellStats";
+import { CardBody } from "@/components/CardRenderer/CardFront/CardBody/CardBody";
 import { getCardRadii } from "@/lib/cardConstants";
 import { useDeckStore } from "@/hooks/useDeckStore";
-import { CardSeparator } from "./CardSeparator/CardSeparator";
-import { CardSubheader } from "../CardSubheader/CardSubheader";
 
 interface CardFrontProps {
   data: Card;
