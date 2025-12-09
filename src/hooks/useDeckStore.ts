@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Deck, Card, DeckStyle } from "@/types/card";
-import { CardType, DensityPreset } from "@/types/card";
+import { CardType, DensityPreset, CardFormat } from "@/types/card";
 import { defaultCardValues } from "@/components/RightSidebar/CardEditor/CardEditor";
 
 interface DeckStore {
@@ -20,6 +20,7 @@ interface DeckStore {
 }
 
 const DEFAULT_STYLE: DeckStyle = {
+  cardFormat: CardFormat.Tarot, // Default: Tarot (70mm x 120mm)
   titleFontSize: 24, // Default: 24px (equivalent to text-2xl)
   bodyFontSize: 14, // Default: 14px (equivalent to text-sm)
   lineHeight: 1.5, // Default: 1.5 (balanced readability)
@@ -34,7 +35,7 @@ export const BASE_PADDING = {
 };
 
 // Density-specific settings (excludes aesthetic choices like cornerRadius)
-type DensitySettings = Omit<DeckStyle, "cornerRadius">;
+type DensitySettings = Omit<DeckStyle, "cardFormat" | "cornerRadius">;
 
 // Density presets - apply only density-related settings
 export const DENSITY_PRESETS: Record<DensityPreset, DensitySettings> = {

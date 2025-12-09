@@ -1,12 +1,28 @@
+import { CardFormat } from "@/types/card";
+
 /**
- * Card Dimensions Constants
+ * Card Dimensions by Format
  *
- * PHYSICAL DIMENSIONS (Print Output)
- * Standard TCG size: 2.5" x 3.5" (63.5mm x 88.9mm)
- * At 96 DPI (Web Standard), this converts to pixels.
+ * Poker: Poker card size 2.5" x 3.5" (63.5mm x 88.9mm)
+ * Tarot: Tarot card size 2.75" x 4.75" (70mm x 120mm)
  */
-export const CARD_WIDTH_MM = 63.5;
-export const CARD_HEIGHT_MM = 88.9;
+export const CARD_FORMATS = {
+  [CardFormat.Poker]: {
+    WIDTH_MM: 63.5,
+    HEIGHT_MM: 88.9,
+  },
+  [CardFormat.Tarot]: {
+    WIDTH_MM: 70.0,
+    HEIGHT_MM: 120.0,
+  },
+} as const;
+
+// Current card format - change this to switch between formats
+export const CURRENT_CARD_FORMAT = CardFormat.Tarot;
+
+// Active card dimensions based on current format
+export const CARD_WIDTH_MM = CARD_FORMATS[CURRENT_CARD_FORMAT].WIDTH_MM;
+export const CARD_HEIGHT_MM = CARD_FORMATS[CURRENT_CARD_FORMAT].HEIGHT_MM;
 
 export const PIXELS_PER_MM = 96 / 25.4; // ~3.7795
 
@@ -14,8 +30,23 @@ export const PIXELS_PER_MM = 96 / 25.4; // ~3.7795
 export const CARD_BORDER_MM = 3;
 
 // The actual display size of the card (Physical Size)
-export const CARD_WIDTH = CARD_WIDTH_MM * PIXELS_PER_MM; // ~240px
-export const CARD_HEIGHT = CARD_HEIGHT_MM * PIXELS_PER_MM; // ~336px
+export const CARD_WIDTH = CARD_WIDTH_MM * PIXELS_PER_MM; // Tarot: ~265px, TCG: ~240px
+export const CARD_HEIGHT = CARD_HEIGHT_MM * PIXELS_PER_MM; // Tarot: ~454px, TCG: ~336px
+
+/**
+ * Get card dimensions for a specific format
+ */
+export function getCardDimensions(format: CardFormat) {
+  const widthMm = CARD_FORMATS[format].WIDTH_MM;
+  const heightMm = CARD_FORMATS[format].HEIGHT_MM;
+
+  return {
+    width: widthMm * PIXELS_PER_MM,
+    height: heightMm * PIXELS_PER_MM,
+    widthMm,
+    heightMm,
+  };
+}
 
 /**
  * Calculate card border radii for perfect inner/outer radius

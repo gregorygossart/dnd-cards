@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+/**
+ * Card Format Types
+ */
+export enum CardFormat {
+  Poker = "Poker",
+  Tarot = "Tarot",
+}
+
 export const CardVisualsSchema = z.object({
   accentColor: z.string(),
   headerImage: z.string().optional(),
@@ -178,6 +186,7 @@ export enum DensityPreset {
 }
 
 export interface DeckStyle {
+  cardFormat: CardFormat; // Card format, default: CardFormat.Tarot
   titleFontSize: number; // Font size in pixels, default: 24
   bodyFontSize: number; // Font size in pixels, default: 14
   lineHeight: number; // Line height multiplier, default: 1.5
