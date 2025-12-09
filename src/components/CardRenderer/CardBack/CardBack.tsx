@@ -20,15 +20,20 @@ export const CardBack: React.FC<CardBackProps> = ({ visuals }) => {
       style={{ padding, borderRadius: outerRadius }}
     >
       <div
-        className="w-full h-full relative bg-cover bg-center overflow-hidden"
+        className="w-full h-full relative overflow-hidden"
         style={{
-          backgroundImage: visuals.backImage
-            ? `url(${visuals.backImage})`
-            : undefined,
-          backgroundColor: visuals.backImage ? undefined : "#E8D0A9",
+          backgroundColor: visuals.backImage ? undefined : "#000000",
           borderRadius: innerRadius,
         }}
       >
+        {visuals.backImage ? (
+          <img
+            src={visuals.backImage}
+            alt="Card back"
+            className="w-full h-full object-fill"
+            style={{ borderRadius: innerRadius }}
+          />
+        ) : null}
         {visuals.backTint && (
           <div
             className="absolute inset-0"
