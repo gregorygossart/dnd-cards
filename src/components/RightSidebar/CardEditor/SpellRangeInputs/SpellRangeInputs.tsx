@@ -1,6 +1,5 @@
-import React from "react";
 import { useFormContext } from "react-hook-form";
-import { EditorLabel } from "@/components/CardEditor/EditorLabel/EditorLabel";
+import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 import { Input } from "@/components/ui/input";
 import {
   Select,

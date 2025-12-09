@@ -1,8 +1,8 @@
 import React, { useLayoutEffect, useState } from "react";
 import { useUIStore } from "@/hooks/useUIStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CardEditor } from "@/components/CardEditor/CardEditor";
-import { ImportExportEditor } from "@/components/ImportExportEditor/ImportExportEditor";
+import { CardEditor } from "@/components/RightSidebar/CardEditor/CardEditor";
+import { ImportExportEditor } from "@/components/RightSidebar/ImportExportEditor/ImportExportEditor";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import {
   Sheet,

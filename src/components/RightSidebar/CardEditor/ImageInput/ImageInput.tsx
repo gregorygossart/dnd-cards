@@ -1,8 +1,7 @@
-import React from "react";
 import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { EditorLabel } from "@/components/CardEditor/EditorLabel/EditorLabel";
+import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 import type { Card } from "@/types/card";
 
 interface ImageInputProps {

@@ -1,8 +1,7 @@
-import React from "react";
 import { useDeckStore, DENSITY_PRESETS } from "@/hooks/useDeckStore";
 import { DensityPreset } from "@/types/card";
 import { Button } from "@/components/ui/button";
-import { EditorLabel } from "@/components/CardEditor/EditorLabel/EditorLabel";
+import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
 interface DensityPresetsProps {
   deckId: string;

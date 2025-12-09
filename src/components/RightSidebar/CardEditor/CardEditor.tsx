@@ -11,20 +11,20 @@ import {
   CardType,
 } from "@/types/card";
 import { RichTextEditor } from "@/components/RichTextEditor/RichTextEditor";
-import { TitleInput } from "@/components/CardEditor/TitleInput/TitleInput";
-import { ImageInput } from "@/components/CardEditor/ImageInput/ImageInput";
-import { CardBackSelector } from "@/components/CardEditor/CardBackSelector/CardBackSelector";
-import { CardTypeSelector } from "@/components/CardEditor/CardTypeSelector/CardTypeSelector";
-import { SpellComponentsInputs } from "@/components/CardEditor/SpellComponentsInputs/SpellComponentsInputs";
-import { SpellDurationInputs } from "@/components/CardEditor/SpellDurationInputs/SpellDurationInputs";
-import { SpellRangeInputs } from "@/components/CardEditor/SpellRangeInputs/SpellRangeInputs";
-import { CastingTimeInputs } from "@/components/CardEditor/CastingTimeInputs/CastingTimeInputs";
-import { SpellClassificationInputs } from "@/components/CardEditor/SpellClassificationInputs/SpellClassificationInputs";
-import { AccentColorInput } from "@/components/CardEditor/AccentColorInput/AccentColorInput";
+import { TitleInput } from "@/components/RightSidebar/CardEditor/TitleInput/TitleInput";
+import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/ImageInput";
+import { CardBackSelector } from "@/components/RightSidebar/CardEditor/CardBackSelector/CardBackSelector";
+import { CardTypeSelector } from "@/components/RightSidebar/CardEditor/CardTypeSelector/CardTypeSelector";
+import { SpellComponentsInputs } from "@/components/RightSidebar/CardEditor/SpellComponentsInputs/SpellComponentsInputs";
+import { SpellDurationInputs } from "@/components/RightSidebar/CardEditor/SpellDurationInputs/SpellDurationInputs";
+import { SpellRangeInputs } from "@/components/RightSidebar/CardEditor/SpellRangeInputs/SpellRangeInputs";
+import { CastingTimeInputs } from "@/components/RightSidebar/CardEditor/CastingTimeInputs/CastingTimeInputs";
+import { SpellClassificationInputs } from "@/components/RightSidebar/CardEditor/SpellClassificationInputs/SpellClassificationInputs";
+import { AccentColorInput } from "@/components/RightSidebar/CardEditor/AccentColorInput/AccentColorInput";
 import { CollapsibleGroup } from "@/components/ui/collapsible-group";
-import { DeckSettings } from "@/components/DeckSettings/DeckSettings";
+import { DeckSettings } from "@/components/RightSidebar/CardEditor/DeckSettings/DeckSettings";
 import { useDeckStore } from "@/hooks/useDeckStore";
-import { Separator } from "../ui/separator";
+import { Separator } from "@/components/ui/separator";
 
 interface CardEditorProps {
   initialData: Card;

@@ -2,10 +2,9 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { CARD_BACK_PRESETS } from "@/lib/cardConstants";
-import { ImageInput } from "@/components/CardEditor/ImageInput/ImageInput";
-import { EditorLabel } from "@/components/CardEditor/EditorLabel/EditorLabel";
+import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/ImageInput";
+import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 import type { Card } from "@/types/card";
-import { Separator } from "@/components/ui/separator";
 
 export const CardBackSelector: React.FC = () => {
   const { watch, setValue } = useFormContext<Card>();

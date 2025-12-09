@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useUIStore } from "@/hooks/useUIStore";
-import { DeckList } from "@/components/DeckList/DeckList";
+import { DeckList } from "@/components/LeftSidebar/DeckList/DeckList";
 import {
   Sheet,
   SheetContent,
