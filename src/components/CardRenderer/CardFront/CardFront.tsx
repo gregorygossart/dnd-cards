@@ -3,11 +3,11 @@ import type { Card } from "@/types/card";
 import { CardHeader } from "../CardHeader/CardHeader";
 import { CardBody } from "../CardBody/CardBody";
 import { SpellStats } from "../SpellStats/SpellStats";
-import { CardBanner } from "../CardBanner/CardBanner";
 import { CardArtArea } from "../CardArtArea/CardArtArea";
-import { getCardSubtitle } from "@/lib/cardUtils";
 import { getCardRadii } from "@/lib/cardConstants";
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { CardSeparator } from "./CardSeparator/CardSeparator";
+import { CardSubheader } from "../CardSubheader/CardSubheader";
 
 interface CardFrontProps {
   data: Card;
@@ -18,7 +18,6 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
 
   // Get typography settings from current deck
   const { decks, currentDeckIndex } = useDeckStore();
-  const titleFontSize = decks[currentDeckIndex]?.style?.titleFontSize ?? 24;
   const cornerRadius = decks[currentDeckIndex]?.style?.cornerRadius ?? 1.5;
 
   const { outerRadius, padding, innerRadius } = getCardRadii(cornerRadius);
@@ -32,19 +31,25 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
         className={`w-full h-full flex flex-col overflow-hidden`}
         style={{ borderRadius: innerRadius }}
       >
-        <CardArtArea image={visuals.headerImage} />
+        {/* 1. IMAGE AREA */}
+        <div className="relative">
+          <CardArtArea image={visuals.headerImage} />
+
+          {/* SEPARATOR - Centered vertically on the boundary line */}
+          <div
+            className="absolute bottom-0 left-0 right-0 translate-y-1/2 z-10"
+            style={{ marginLeft: `-${padding}`, marginRight: `-${padding}` }}
+          >
+            <CardSeparator card={data} />
+          </div>
+        </div>
 
         {/* Content Area */}
-        <div
-          className="flex-1 min-h-0 flex flex-col relative bg-white"
-          style={{ borderTop: `4px solid ${visuals.accentColor} ` }}
-        >
-          <CardBanner
-            subtitle={getCardSubtitle(data)}
-            accentColor={visuals.accentColor}
-          />
-
-          <CardHeader title={title} titleFontSize={titleFontSize} />
+        <div className="flex-1 min-h-0 flex flex-col relative bg-white pt-2">
+          <div className="mb-2">
+            <CardSubheader card={data} />
+            <CardHeader title={title} />
+          </div>
 
           {data.type === "Spell" &&
             data.castingTime &&

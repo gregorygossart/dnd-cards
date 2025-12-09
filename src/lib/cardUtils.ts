@@ -17,24 +17,10 @@ import type {
 
 export function getCardSubtitle(card: Card): string {
   if (card.type === CardType.Spell) {
-    return getSpellCardSubtitle(card);
+    return card.school ?? "Spell";
   }
 
-  // For non-spell cards, just return the type
   return card.type;
-}
-
-export function getSpellCardSubtitle(card: SpellCard): string {
-  // Case 1: Leveled Spell
-  if (card.level !== undefined) {
-    const levelText = formatSpellLevel(card.level);
-    return card.school
-      ? `${card.school} · ${levelText}`
-      : `Spell · ${levelText}`;
-  }
-
-  // Case 2: No Level (fallback)
-  return card.school ?? "Spell";
 }
 
 /**
