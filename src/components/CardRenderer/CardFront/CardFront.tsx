@@ -18,6 +18,8 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
   // Get typography settings from current deck
   const { decks, currentDeckIndex } = useDeckStore();
   const cornerRadius = decks[currentDeckIndex]?.style?.cornerRadius ?? 1.5;
+  const imageHeightPercent =
+    decks[currentDeckIndex]?.style?.imageHeightPercent ?? 40;
 
   const { outerRadius, padding, innerRadius } = getCardRadii(cornerRadius);
 
@@ -27,11 +29,14 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
       style={{ padding, borderRadius: outerRadius }}
     >
       <div
-        className={`w-full h-full flex flex-col overflow-hidden`}
+        className={`w-full h-full flex flex-col overflow-hidden relative`}
         style={{ borderRadius: innerRadius }}
       >
         {/* 1. IMAGE AREA */}
-        <div className="relative">
+        <div
+          className="absolute top-0 left-0 right-0"
+          style={{ height: `${imageHeightPercent}%` }}
+        >
           <CardArtArea image={visuals.headerImage} />
 
           {/* SEPARATOR - Centered vertically on the boundary line */}
@@ -44,7 +49,10 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
         </div>
 
         {/* Content Area */}
-        <div className="flex-1 min-h-0 flex flex-col relative bg-white pt-2">
+        <div
+          className="absolute left-0 right-0 bottom-0 flex flex-col bg-white pt-2"
+          style={{ top: `${imageHeightPercent}%` }}
+        >
           <div className="mb-2">
             <CardSubheader card={data} />
             <CardHeader title={title} />

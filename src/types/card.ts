@@ -187,6 +187,7 @@ export enum DensityPreset {
 
 export interface DeckStyle {
   cardFormat: CardFormat; // Card format, default: CardFormat.Tarot
+  imageHeightPercent: number; // Image height as percentage of card height, default: 40 (range: 0-100)
   titleFontSize: number; // Font size in pixels, default: 24
   bodyFontSize: number; // Font size in pixels, default: 14
   lineHeight: number; // Line height multiplier, default: 1.5

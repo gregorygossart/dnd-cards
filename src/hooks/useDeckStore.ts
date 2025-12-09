@@ -21,6 +21,7 @@ interface DeckStore {
 
 const DEFAULT_STYLE: DeckStyle = {
   cardFormat: CardFormat.Tarot, // Default: Tarot (70mm x 120mm)
+  imageHeightPercent: 40, // Default: 40% of card height
   titleFontSize: 24, // Default: 24px (equivalent to text-2xl)
   bodyFontSize: 14, // Default: 14px (equivalent to text-sm)
   lineHeight: 1.5, // Default: 1.5 (balanced readability)
@@ -34,8 +35,11 @@ export const BASE_PADDING = {
   vertical: 6, // py-1.5
 };
 
-// Density-specific settings (excludes aesthetic choices like cornerRadius)
-type DensitySettings = Omit<DeckStyle, "cardFormat" | "cornerRadius">;
+// Density-specific settings (excludes aesthetic choices like cornerRadius, cardFormat, and imageHeightPercent)
+type DensitySettings = Omit<
+  DeckStyle,
+  "cardFormat" | "imageHeightPercent" | "cornerRadius"
+>;
 
 // Density presets - apply only density-related settings
 export const DENSITY_PRESETS: Record<DensityPreset, DensitySettings> = {

@@ -1,6 +1,7 @@
 import { CollapsibleGroup } from "@/components/ui/collapsible-group";
 import { CardFormatSelector } from "./CardFormatSelector";
 import { CornerRadiusInput } from "./CornerRadiusInput";
+import { ImageHeightInput } from "./ImageHeightInput";
 import { DensityPresets } from "./DensityPresets";
 import { TitleSizeInput } from "./TitleSizeInput";
 import { BodySizeInput } from "./BodySizeInput";
@@ -20,6 +21,9 @@ export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
 
         {/* Corner Radius */}
         <CornerRadiusInput deckId={deckId} />
+
+        {/* Image Height */}
+        <ImageHeightInput deckId={deckId} />
 
         {/* Density Presets */}
         <DensityPresets deckId={deckId} />
