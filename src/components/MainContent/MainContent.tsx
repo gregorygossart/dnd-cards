@@ -19,7 +19,7 @@ export const MainContent: React.FC = () => {
       <AppHeader />
 
       {/* Canvas */}
-      <div className="flex-1 relative overflow-y-auto md:overflow-hidden flex flex-col items-center md:justify-center bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
+      <div className="flex-1 relative overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
         {/* Grid pattern background */}
         <div
           className="absolute inset-0 opacity-[0.25] pointer-events-none"
@@ -29,32 +29,35 @@ export const MainContent: React.FC = () => {
           }}
         ></div>
 
-        {/* Card and Button */}
-        <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 p-8 w-full justify-center min-h-min">
-          {/* Front */}
-          <div className="flex flex-col items-center gap-4">
-            <span className="text-slate-400 text-sm font-medium uppercase tracking-wider">
-              Front
-            </span>
-            <div className="shadow-2xl shadow-black/50">
-              <CardRenderer
-                data={currentCard}
-                scale={cardScale}
-                side={CardSide.Front}
-              />
-            </div>
-          </div>
-
-          {/* Back */}
-          <div className="flex flex-col items-center gap-4">
-            <span className="text-slate-400 text-sm font-medium uppercase tracking-wider">
-              Back
-            </span>
-            <div className="shadow-2xl shadow-black/50">
+        {/* Card Stack */}
+        <div className="relative z-10 flex items-center justify-center p-8 w-full">
+          <div
+            className="relative"
+            style={{
+              transform: `translate(-${100 * cardScale}px, -${20 * cardScale}px)`,
+            }}
+          >
+            {/* Back Card - positioned behind and offset */}
+            <div
+              className="absolute shadow-2xl shadow-black/50"
+              style={{
+                top: `${40 * cardScale}px`,
+                left: `${200 * cardScale}px`,
+              }}
+            >
               <CardRenderer
                 data={currentCard}
                 scale={cardScale}
                 side={CardSide.Back}
+              />
+            </div>
+
+            {/* Front Card - positioned in front */}
+            <div className="relative z-10 shadow-2xl shadow-black/50">
+              <CardRenderer
+                data={currentCard}
+                scale={cardScale}
+                side={CardSide.Front}
               />
             </div>
           </div>
