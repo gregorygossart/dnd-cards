@@ -1,16 +1,16 @@
+import { type Card } from "@/features/cards/types";
+import { CardType } from "@/features/cards/constants";
 import {
-  type Card,
   type CastingTime,
   type Range,
   type Duration,
   type Components,
-} from "@/features/cards/types";
+} from "@/features/spells/types";
 import {
-  CardType,
   RangeType,
   RangeDistanceUnit,
   DurationType,
-} from "@/features/cards/constants";
+} from "@/features/spells/constants";
 import { assertUnreachable } from "./utils";
 
 export function getCardSubtitle(card: Card): string {

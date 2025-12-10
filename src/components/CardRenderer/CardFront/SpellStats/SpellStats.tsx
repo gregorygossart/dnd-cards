@@ -10,7 +10,7 @@ import type {
   Range,
   Duration,
   Components,
-} from "@/features/cards/types";
+} from "@/features/spells/types";
 import { Badge } from "@/components/ui/badge";
 import { useDeckStore, BASE_PADDING } from "@/hooks/useDeckStore";
 

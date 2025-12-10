@@ -3,23 +3,15 @@ import { CardFormat } from "./constants";
 import {
   CardVisualsSchema,
   BaseCardSchema,
-  CastingTimeSchema,
-  RangeSchema,
-  DurationSchema,
-  ComponentsSchema,
-  SpellCardSchema,
   AbilityCardSchema,
 } from "./schemas";
 import { type ItemCard, ItemCardSchema } from "@/features/items/schemas";
+import { type SpellCard } from "@/features/spells/types";
+import { SpellCardSchema } from "@/features/spells/schemas";
 
 // Exported types
 export type CardBaseData = z.infer<typeof BaseCardSchema>;
 export type CardVisuals = z.infer<typeof CardVisualsSchema>;
-export type CastingTime = z.infer<typeof CastingTimeSchema>;
-export type Range = z.infer<typeof RangeSchema>;
-export type Duration = z.infer<typeof DurationSchema>;
-export type Components = z.infer<typeof ComponentsSchema>;
-export type SpellCard = z.infer<typeof SpellCardSchema>;
 export type AbilityCard = z.infer<typeof AbilityCardSchema>;
 export type Card = ItemCard | SpellCard | AbilityCard;
 

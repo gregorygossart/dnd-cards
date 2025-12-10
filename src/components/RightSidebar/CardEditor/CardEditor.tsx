@@ -2,13 +2,13 @@ import React, { useEffect, useRef } from "react";
 import { useForm, FormProvider, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type CardBaseData, type Card } from "@/features/cards/types";
+import { CardType } from "@/features/cards/constants";
 import {
-  CardType,
   CastingTimeUnit,
   RangeType,
   RangeDistanceUnit,
   DurationType,
-} from "@/features/cards/constants";
+} from "@/features/spells/constants";
 import { CardSchema } from "@/features/cards/types";
 import { ItemRarity, ItemSubtype } from "@/features/items/constants";
 import { WeaponType } from "@/features/items/weapons/constants";
@@ -105,7 +105,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
         isInitialMount.current = false;
         return;
       }
-      onChange(value as Card);
+      onChange(value as unknown as Card);
     });
     return () => subscription.unsubscribe();
   }, [watch, onChange]);

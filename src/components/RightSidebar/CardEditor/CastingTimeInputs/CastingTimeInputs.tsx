@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CastingTimeUnit } from "@/features/cards/constants";
+import { CastingTimeUnit } from "@/features/spells/constants";
 import type { Card } from "@/features/cards/types";
 
 export const CastingTimeInputs: React.FC = () => {
