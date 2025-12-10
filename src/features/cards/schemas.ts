@@ -8,11 +8,7 @@ export const CardVisualsSchema = z.object({
   backTint: z.string().optional(),
 });
 
-export const CardTypeSchema = z.enum([
-  CardType.Item,
-  CardType.Spell,
-  CardType.Ability,
-]);
+export const CardTypeSchema = z.enum(CardType);
 
 // Base schema shared by all card types
 export const BaseCardSchema = z.object({

@@ -12,13 +12,7 @@ import {
 // Simple casting time schema: amount + unit
 export const CastingTimeSchema = z.object({
   amount: z.number().min(1),
-  unit: z.enum([
-    CastingTimeUnit.Action,
-    CastingTimeUnit.BonusAction,
-    CastingTimeUnit.Reaction,
-    CastingTimeUnit.Minute,
-    CastingTimeUnit.Hour,
-  ]),
+  unit: z.enum(CastingTimeUnit),
 });
 
 export const DurationSchema = z.discriminatedUnion("type", [
@@ -65,7 +59,7 @@ export const RangeSchema = z.discriminatedUnion("type", [
     type: z.literal(RangeType.Ranged),
     distance: z.object({
       amount: z.number().min(1),
-      unit: z.enum([RangeDistanceUnit.Feet, RangeDistanceUnit.Miles]),
+      unit: z.enum(RangeDistanceUnit),
     }),
   }),
 ]);
