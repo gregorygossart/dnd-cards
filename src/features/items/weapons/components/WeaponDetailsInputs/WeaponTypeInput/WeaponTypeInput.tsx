@@ -6,9 +6,17 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectGroup,
+  SelectLabel,
 } from "@/components/ui/select";
 import { FormField, FormItem, FormControl } from "@/components/ui/form";
-import { WeaponType } from "@/features/items/weapons/constants";
+import {
+  SimpleMeleeWeaponType,
+  SimpleRangedWeaponType,
+  MartialMeleeWeaponType,
+  MartialRangedWeaponType,
+  OtherWeaponType,
+} from "@/features/items/weapons/constants";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
 export const WeaponTypeInput: React.FC = () => {
@@ -28,12 +36,61 @@ export const WeaponTypeInput: React.FC = () => {
                   <SelectValue placeholder="Select weapon type" />
                 </SelectTrigger>
               </FormControl>
-              <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
-                {Object.values(WeaponType).map((type) => (
-                  <SelectItem key={type} value={type}>
-                    {type}
-                  </SelectItem>
-                ))}
+              <SelectContent className="bg-slate-800 border-slate-700 text-slate-100 max-h-[300px]">
+                <SelectGroup>
+                  <SelectLabel className="text-slate-400 pl-2 text-xs uppercase font-bold tracking-wider">
+                    Simple Melee
+                  </SelectLabel>
+                  {Object.values(SimpleMeleeWeaponType).map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+
+                <SelectGroup>
+                  <SelectLabel className="text-slate-400 pl-2 text-xs uppercase font-bold tracking-wider mt-2">
+                    Simple Ranged
+                  </SelectLabel>
+                  {Object.values(SimpleRangedWeaponType).map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+
+                <SelectGroup>
+                  <SelectLabel className="text-slate-400 pl-2 text-xs uppercase font-bold tracking-wider mt-2">
+                    Martial Melee
+                  </SelectLabel>
+                  {Object.values(MartialMeleeWeaponType).map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+
+                <SelectGroup>
+                  <SelectLabel className="text-slate-400 pl-2 text-xs uppercase font-bold tracking-wider mt-2">
+                    Martial Ranged
+                  </SelectLabel>
+                  {Object.values(MartialRangedWeaponType).map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+
+                <SelectGroup>
+                  <SelectLabel className="text-slate-400 pl-2 text-xs uppercase font-bold tracking-wider mt-2">
+                    Other
+                  </SelectLabel>
+                  {Object.values(OtherWeaponType).map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
               </SelectContent>
             </Select>
           </FormItem>
