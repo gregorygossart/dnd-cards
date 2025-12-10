@@ -10,8 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CastingTimeUnit } from "@/types/card";
-import type { Card } from "@/types/card";
+import { CastingTimeUnit } from "@/features/cards/constants";
+import type { Card } from "@/features/cards/types";
 
 export const CastingTimeInputs: React.FC = () => {
   const { control } = useFormContext<Card>();

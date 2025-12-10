@@ -1,6 +1,6 @@
 import React from "react";
 import { useDeckStore } from "@/hooks/useDeckStore";
-import { CardType } from "@/types/card";
+import { CardType } from "@/features/cards/constants";
 
 interface AddCardButtonProps {
   deckId: string;

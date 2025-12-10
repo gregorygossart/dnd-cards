@@ -5,7 +5,12 @@ import {
   formatDuration,
   formatComponents,
 } from "@/lib/cardUtils";
-import type { CastingTime, Range, Duration, Components } from "@/types/card";
+import type {
+  CastingTime,
+  Range,
+  Duration,
+  Components,
+} from "@/features/cards/types";
 import { Badge } from "@/components/ui/badge";
 import { useDeckStore, BASE_PADDING } from "@/hooks/useDeckStore";
 

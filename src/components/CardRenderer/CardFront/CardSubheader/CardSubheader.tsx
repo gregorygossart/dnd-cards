@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "@/types/card";
+import { Card } from "@/features/cards/types";
 import { getCardSubtitle } from "@/lib/cardUtils";
 import { useDeckStore } from "@/hooks/useDeckStore";
 

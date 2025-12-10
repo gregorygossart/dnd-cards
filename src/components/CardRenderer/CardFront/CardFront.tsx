@@ -1,4 +1,4 @@
-import type { Card } from "@/types/card";
+import type { Card } from "@/features/cards/types";
 import { CardArtArea } from "@/components/CardRenderer/CardFront/CardArtArea/CardArtArea";
 import { CardSeparator } from "@/components/CardRenderer/CardFront/CardSeparator/CardSeparator";
 import { CardSubheader } from "@/components/CardRenderer/CardFront/CardSubheader/CardSubheader";

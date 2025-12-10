@@ -1,4 +1,4 @@
-import { CardFormat } from "@/types/card";
+import { CardFormat } from "@/features/cards/constants";
 
 /**
  * Card Dimensions by Format

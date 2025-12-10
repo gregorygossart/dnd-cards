@@ -1,7 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Deck, Card, DeckStyle } from "@/types/card";
-import { CardType, DensityPreset, CardFormat } from "@/types/card";
+import type { Deck, Card, DeckStyle } from "@/features/cards/types";
+import {
+  CardFormat,
+  CardType,
+  DensityPreset,
+} from "@/features/cards/constants";
 import { defaultCardValues } from "@/components/RightSidebar/CardEditor/CardEditor";
 
 interface DeckStore {

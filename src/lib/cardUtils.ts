@@ -1,26 +1,30 @@
 import {
+  type Card,
+  type CastingTime,
+  type Range,
+  type Duration,
+  type Components,
+} from "@/features/cards/types";
+import {
   CardType,
-  CastingTimeUnit,
   RangeType,
   RangeDistanceUnit,
   DurationType,
-  TimeDurationUnit,
-} from "@/types/card";
-import type {
-  Card,
-  SpellCard,
-  CastingTime,
-  Range,
-  Duration,
-  Components,
-} from "@/types/card";
+} from "@/features/cards/constants";
+import { assertUnreachable } from "./utils";
 
 export function getCardSubtitle(card: Card): string {
-  if (card.type === CardType.Spell) {
-    return card.school ?? "Spell";
+  const type = card.type;
+  switch (type) {
+    case CardType.Spell:
+      return card.school ?? "Spell";
+    case CardType.Item:
+      return `${card.rarity ?? ""} ${card.subtype ?? "Item"}`;
+    case CardType.Ability:
+      throw new Error("Unavailable");
+    default:
+      return assertUnreachable(type);
   }
-
-  return card.type;
 }
 
 /**

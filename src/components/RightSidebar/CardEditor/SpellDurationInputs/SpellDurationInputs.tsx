@@ -10,8 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DurationType, TimeDurationUnit } from "@/types/card";
-import type { Card } from "@/types/card";
+import { DurationType, TimeDurationUnit } from "@/features/cards/constants";
+import type { Card } from "@/features/cards/types";
 
 export const SpellDurationInputs: React.FC = () => {
   const { control, watch, setValue, getValues, register } =

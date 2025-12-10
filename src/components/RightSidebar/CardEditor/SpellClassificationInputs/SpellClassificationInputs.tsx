@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { Card } from "@/types/card";
+import type { Card } from "@/features/cards/types";
 
 export const SpellClassificationInputs: React.FC = () => {
   const { control } = useFormContext<Card>();
