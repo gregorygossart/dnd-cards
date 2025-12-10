@@ -4,7 +4,7 @@ import { ItemSubtype } from "@/features/items/constants";
 import { ItemSubtypeSelect } from "./ItemSubtypeSelect";
 import { RaritySelect } from "./RaritySelect";
 import { AttunementSwitch } from "./AttunementSwitch";
-import { WeaponStatsInputs } from "../weapons/components/WeaponStatsInputs";
+import { WeaponStatsInputs } from "../weapons/components/WeaponStatsInputs/WeaponStatsInputs";
 
 export const ItemDetailsInputs: React.FC = () => {
   const { watch } = useFormContext();
