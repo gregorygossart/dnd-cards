@@ -27,7 +27,7 @@ import { CollapsibleGroup } from "@/components/ui/collapsible-group";
 import { DeckSettings } from "@/components/RightSidebar/CardEditor/DeckSettings/DeckSettings";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { Separator } from "@/components/ui/separator";
-import { ItemDetailsInputs } from "@/features/items/components/ItemDetailsInputs";
+import { ItemDetailsInputs } from "@/features/items/components/ItemDetailsInputs/ItemDetailsInputs";
 
 interface CardEditorProps {
   initialData: Card;

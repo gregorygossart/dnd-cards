@@ -28,14 +28,11 @@ export const ItemSubtypeSelect: React.FC = () => {
                 </SelectTrigger>
               </FormControl>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
-                <SelectItem value={ItemSubtype.Weapon}>
-                  {ItemSubtype.Weapon}
-                </SelectItem>
-                {/* {Object.values(ItemSubtype).map((subtype) => (
-                                    <SelectItem key={subtype} value={subtype}>
-                                        {subtype}
-                                    </SelectItem>
-                                ))} */}
+                {Object.values(ItemSubtype).map((subtype) => (
+                  <SelectItem key={subtype} value={subtype}>
+                    {subtype}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </FormItem>
