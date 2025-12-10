@@ -1,5 +1,5 @@
 import { useDeckStore, DENSITY_PRESETS } from "@/hooks/useDeckStore";
-import { DensityPreset } from "@/features/cards/constants";
+import { DensityPreset } from "@/features/decks/constants";
 import { Button } from "@/components/ui/button";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
