@@ -2,7 +2,7 @@
 
 import { Fragment, useEffect, useState } from "react";
 import { CardRenderer, CardSide } from "@/components/CardRenderer/CardRenderer";
-import { PRINT_CONFIG } from "@/lib/cardConstants";
+import { PRINT_CONFIG, getCardDimensions } from "@/lib/cardConstants";
 import { useDeckStore } from "@/hooks/useDeckStore";
 
 export default function PrintPage() {
@@ -31,6 +31,12 @@ export default function PrintPage() {
     );
   }
 
+  // Get card dimensions
+  const cardFormat = currentDeck.style.cardFormat;
+  const cardDims = getCardDimensions(cardFormat);
+  const cardWidthMm = cardDims.widthMm;
+  const cardHeightMm = cardDims.heightMm;
+
   // Calculate available space
   const contentWidth =
     PRINT_CONFIG.PAPER.WIDTH_MM - 2 * PRINT_CONFIG.PAPER.MARGIN_MM;
@@ -38,8 +44,8 @@ export default function PrintPage() {
     PRINT_CONFIG.PAPER.HEIGHT_MM - 2 * PRINT_CONFIG.PAPER.MARGIN_MM;
 
   // Calculate grid dimensions
-  const cols = Math.floor(contentWidth / PRINT_CONFIG.CARD.WIDTH_MM);
-  const rows = Math.floor(contentHeight / PRINT_CONFIG.CARD.HEIGHT_MM);
+  const cols = cardWidthMm > 0 ? Math.floor(contentWidth / cardWidthMm) : 0;
+  const rows = cardHeightMm > 0 ? Math.floor(contentHeight / cardHeightMm) : 0;
   const cardsPerPage = cols * rows;
 
   // Chunk cards into pages
@@ -123,15 +129,15 @@ export default function PrintPage() {
               <div
                 className="flex-1 grid"
                 style={{
-                  gridTemplateColumns: `repeat(${cols}, ${PRINT_CONFIG.CARD.WIDTH_MM}mm)`,
-                  gridTemplateRows: `repeat(${rows}, ${PRINT_CONFIG.CARD.HEIGHT_MM}mm)`,
+                  gridTemplateColumns: `repeat(${cols}, ${cardWidthMm}mm)`,
+                  gridTemplateRows: `repeat(${rows}, ${cardHeightMm}mm)`,
                   justifyContent: "space-between",
                   alignContent: "space-between",
                 }}
               >
                 {pageCards.map((card, index) => (
                   <CardRenderer
-                    key={`front-${index}`}
+                    key={`front - ${index} `}
                     data={card}
                     className="page-break-inside-avoid break-inside-avoid"
                     showShadow={false}
@@ -153,15 +159,15 @@ export default function PrintPage() {
               <div
                 className="flex-1 grid"
                 style={{
-                  gridTemplateColumns: `repeat(${cols}, ${PRINT_CONFIG.CARD.WIDTH_MM}mm)`,
-                  gridTemplateRows: `repeat(${rows}, ${PRINT_CONFIG.CARD.HEIGHT_MM}mm)`,
+                  gridTemplateColumns: `repeat(${cols}, ${cardWidthMm}mm)`,
+                  gridTemplateRows: `repeat(${rows}, ${cardHeightMm}mm)`,
                   justifyContent: "space-between",
                   alignContent: "space-between",
                   direction: "rtl", // This mirrors the grid layout horizontally
                 }}
               >
                 {pageCards.map((card, index) => (
-                  <div key={`back-${index}`} style={{ direction: "ltr" }}>
+                  <div key={`back - ${index} `} style={{ direction: "ltr" }}>
                     {/* Reset direction for content so text isn't backwards */}
                     <CardRenderer
                       data={card}
