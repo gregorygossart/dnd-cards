@@ -7,7 +7,6 @@ import {
   SpellCardSchema,
 } from "./schemas";
 
-// Exported types
 export type CastingTime = z.infer<typeof CastingTimeSchema>;
 export type Range = z.infer<typeof RangeSchema>;
 export type Duration = z.infer<typeof DurationSchema>;

@@ -10,7 +10,6 @@ import {
   SpellSchool,
 } from "./constants";
 
-// Simple casting time schema: amount + unit
 export const CastingTimeSchema = z.object({
   amount: z.number().min(1),
   unit: z.enum(CastingTimeUnit),
@@ -37,14 +36,12 @@ export const DurationSchema = z.discriminatedUnion("type", [
   }),
 ]);
 
-// Components
 export const ComponentsSchema = z.object({
   verbal: z.boolean(),
   somatic: z.boolean(),
   material: z.boolean(),
 });
 
-// Range schema: Discriminated union
 export const RangeSchema = z.discriminatedUnion("type", [
   // Simple ranges (no distance)
   z.object({

@@ -12,7 +12,6 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
 
   const applyPreset = (presetName: DensityPreset) => {
     const preset = DENSITY_PRESETS[presetName];
-    // Preset only contains density settings, cornerRadius is preserved automatically
     updateDeckStyle(deckId, preset);
   };
 

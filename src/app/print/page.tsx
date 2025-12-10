@@ -157,7 +157,7 @@ export default function PrintPage() {
                   gridTemplateRows: `repeat(${rows}, ${PRINT_CONFIG.CARD.HEIGHT_MM}mm)`,
                   justifyContent: "space-between",
                   alignContent: "space-between",
-                  direction: "rtl", // This mirrors the grid layout horizontally!
+                  direction: "rtl", // This mirrors the grid layout horizontally
                 }}
               >
                 {pageCards.map((card, index) => (

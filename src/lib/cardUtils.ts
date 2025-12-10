@@ -52,7 +52,6 @@ export function formatSpellLevel(level: number): string {
 export function formatCastingTime(castingTime: CastingTime): string {
   const { amount, unit } = castingTime;
 
-  // For time-based units, pluralize if needed
   const plural = amount > 1 ? "s" : "";
   return `${amount} ${unit}${plural}`;
 }

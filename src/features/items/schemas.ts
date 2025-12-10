@@ -4,14 +4,12 @@ import { CardType } from "@/features/cards/constants";
 import { ItemRarity, ItemSubtype } from "./constants";
 import { WeaponType } from "./weapons/constants";
 
-// Base Item Fields
 export const BaseItemFields = BaseCardSchema.extend({
   type: z.literal(CardType.Item),
   rarity: z.enum(ItemRarity),
   attunement: z.boolean(),
 });
 
-// Weapon Schema
 export const WeaponItemSchema = BaseItemFields.extend({
   subtype: z.literal(ItemSubtype.Weapon),
   weaponType: z.enum(WeaponType),

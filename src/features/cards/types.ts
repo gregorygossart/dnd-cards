@@ -9,7 +9,6 @@ import { type ItemCard, ItemCardSchema } from "@/features/items/schemas";
 import { type SpellCard } from "@/features/spells/types";
 import { SpellCardSchema } from "@/features/spells/schemas";
 
-// Exported types
 export type CardBaseData = z.infer<typeof BaseCardSchema>;
 export type CardVisuals = z.infer<typeof CardVisualsSchema>;
 export type AbilityCard = z.infer<typeof AbilityCardSchema>;

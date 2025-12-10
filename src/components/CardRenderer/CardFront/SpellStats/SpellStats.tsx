@@ -29,7 +29,6 @@ export const SpellStats: React.FC<SpellStatsProps> = ({
   ritual,
   components,
 }) => {
-  // Check if concentration is present and true
   const hasConcentration =
     "concentration" in duration && duration.concentration;
 

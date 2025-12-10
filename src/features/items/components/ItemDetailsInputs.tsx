@@ -5,7 +5,6 @@ import { ItemSubtypeSelect } from "./ItemSubtypeSelect";
 import { RaritySelect } from "./RaritySelect";
 import { AttunementSwitch } from "./AttunementSwitch";
 import { WeaponStatsInputs } from "../weapons/components/WeaponStatsInputs";
-// import { ArmorStatsInputs } from "../armors/components/ArmorStatsInputs";
 
 export const ItemDetailsInputs: React.FC = () => {
   const { watch } = useFormContext();
@@ -20,7 +19,6 @@ export const ItemDetailsInputs: React.FC = () => {
         </div>
 
         {subtype === ItemSubtype.Weapon && <WeaponStatsInputs />}
-        {/* {subtype === ItemSubtype.Armor && <ArmorStatsInputs />} */}
 
         <AttunementSwitch />
       </div>

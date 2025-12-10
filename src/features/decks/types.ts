@@ -1,7 +1,6 @@
 import { CardFormat } from "@/features/cards/constants";
 import { type Card } from "@/features/cards/types";
 
-// Deck-related interfaces
 export interface DeckStyle {
   cardFormat: CardFormat;
   imageHeightPercent: number; // Image height as percentage of card height, default: 40 (range: 0-100)

@@ -1,4 +1,3 @@
-// Casting time units
 export enum CastingTimeUnit {
   Action = "Action",
   BonusAction = "Bonus Action",
@@ -20,7 +19,6 @@ export enum TimeDurationUnit {
   Day = "Day",
 }
 
-// Range types
 export enum RangeType {
   Self = "Self",
   Touch = "Touch",
@@ -29,12 +27,11 @@ export enum RangeType {
   Unlimited = "Unlimited",
 }
 
-// Range distance units
 export enum RangeDistanceUnit {
   Feet = "Feet",
   Miles = "Miles",
 }
-// Spell schools
+
 export enum SpellSchool {
   Abjuration = "Abjuration",
   Conjuration = "Conjuration",
