@@ -34,3 +34,14 @@ export enum RangeDistanceUnit {
   Feet = "Feet",
   Miles = "Miles",
 }
+// Spell schools
+export enum SpellSchool {
+  Abjuration = "Abjuration",
+  Conjuration = "Conjuration",
+  Divination = "Divination",
+  Enchantment = "Enchantment",
+  Evocation = "Evocation",
+  Illusion = "Illusion",
+  Necromancy = "Necromancy",
+  Transmutation = "Transmutation",
+}

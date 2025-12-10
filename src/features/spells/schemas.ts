@@ -7,6 +7,7 @@ import {
   TimeDurationUnit,
   RangeType,
   RangeDistanceUnit,
+  SpellSchool,
 } from "./constants";
 
 // Simple casting time schema: amount + unit
@@ -66,18 +67,7 @@ export const RangeSchema = z.discriminatedUnion("type", [
 
 export const SpellCardSchema = BaseCardSchema.extend({
   type: z.literal(CardType.Spell),
-  school: z
-    .enum([
-      "Abjuration",
-      "Conjuration",
-      "Divination",
-      "Enchantment",
-      "Evocation",
-      "Illusion",
-      "Necromancy",
-      "Transmutation",
-    ])
-    .optional(),
+  school: z.enum(SpellSchool).optional(),
   level: z.number().min(0).max(9).optional(),
   castingTime: CastingTimeSchema,
   range: RangeSchema,
