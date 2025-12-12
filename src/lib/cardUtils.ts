@@ -8,6 +8,7 @@ import {
 } from "@/features/spells/types";
 import { RangeType, DurationType } from "@/features/spells/constants";
 import { RangeDistanceUnit } from "@/features/constants";
+import { ItemSubtype } from "@/features/items/constants";
 import { assertUnreachable } from "./utils";
 
 export function getCardSubtitle(card: Card): string {
@@ -15,10 +16,22 @@ export function getCardSubtitle(card: Card): string {
   switch (type) {
     case CardType.Spell:
       return card.school ?? "Spell";
-    case CardType.Item:
-      return `${card.rarity ?? ""} ${card.subtype ?? "Item"}`;
+
+    case CardType.Item: {
+      const itemSubtype = card.subtype;
+
+      switch (itemSubtype) {
+        case ItemSubtype.Weapon:
+          return `${card.rarity} • ${card.weaponType}`;
+
+        default:
+          return assertUnreachable(itemSubtype);
+      }
+    }
+
     case CardType.Ability:
       throw new Error("Unavailable");
+
     default:
       return assertUnreachable(type);
   }
