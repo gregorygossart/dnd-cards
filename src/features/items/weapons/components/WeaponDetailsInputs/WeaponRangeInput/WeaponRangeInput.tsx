@@ -17,6 +17,7 @@ export const WeaponRangeInput: React.FC = () => {
   return (
     <div className="space-y-1">
       <EditorLabel>Range (Feet)</EditorLabel>
+
       <div className="flex gap-2">
         <div className="flex-1">
           <Controller
@@ -29,7 +30,10 @@ export const WeaponRangeInput: React.FC = () => {
                 className="bg-slate-800 border-slate-700 text-slate-100 h-9 placeholder:text-slate-500"
                 {...field}
                 value={field.value ?? ""}
-                onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                onChange={(e) => {
+                  const val = e.target.valueAsNumber;
+                  field.onChange(Number.isNaN(val) ? undefined : val);
+                }}
               />
             )}
           />
@@ -45,7 +49,10 @@ export const WeaponRangeInput: React.FC = () => {
                 className="bg-slate-800 border-slate-700 text-slate-100 h-9 placeholder:text-slate-500"
                 {...field}
                 value={field.value ?? ""}
-                onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                onChange={(e) => {
+                  const val = e.target.valueAsNumber;
+                  field.onChange(Number.isNaN(val) ? undefined : val);
+                }}
               />
             )}
           />

@@ -64,7 +64,7 @@ export const ItemStats: React.FC<ItemStatsProps> = ({
   };
 
   const renderRangedDistance = () => {
-    if (!range) return null;
+    if (!range?.normal || !range?.long) return null;
 
     const isThrown = properties?.includes(WeaponProperty.Thrown);
     const isAmmunition = properties?.includes(WeaponProperty.Ammunition);
