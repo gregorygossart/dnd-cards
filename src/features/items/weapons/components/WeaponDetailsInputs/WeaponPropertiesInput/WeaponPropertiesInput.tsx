@@ -9,7 +9,7 @@ import { WeaponProperty } from "@/features/items/weapons/constants";
 import type { WeaponItem } from "@/features/items/weapons/schemas";
 
 export const WeaponPropertiesInput: React.FC = () => {
-  const { control } = useFormContext<WeaponItem>();
+  const { control, setValue } = useFormContext<WeaponItem>();
 
   // Sort properties alphabetically and map to MultiSelectOption
   const options: MultiSelectOption[] = Object.values(WeaponProperty)
@@ -29,7 +29,19 @@ export const WeaponPropertiesInput: React.FC = () => {
           <MultiSelect
             options={options}
             value={field.value || []}
-            onValueChange={field.onChange}
+            onValueChange={(newValues) => {
+              field.onChange(newValues);
+
+              // If Versatile was removed, clear the versatile damage
+              const wasVersatile = field.value?.includes(
+                WeaponProperty.Versatile,
+              );
+              const isVersatile = newValues.includes(WeaponProperty.Versatile);
+
+              if (wasVersatile && !isVersatile) {
+                setValue("damage.versatile", undefined);
+              }
+            }}
             placeholder="Select properties"
             className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 hover:bg-slate-800"
             popoverClassName="bg-slate-800 border-slate-700"
