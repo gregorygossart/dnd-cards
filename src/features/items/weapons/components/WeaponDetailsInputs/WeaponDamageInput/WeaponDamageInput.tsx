@@ -30,7 +30,7 @@ export const WeaponDamageInput = () => {
             render={({ field }) => (
               <Input
                 placeholder="e.g. 1d8"
-                className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500"
+                className="w-full bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500"
                 {...field}
               />
             )}
@@ -44,7 +44,7 @@ export const WeaponDamageInput = () => {
             name="damage.type"
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100">
+                <SelectTrigger className="w-full bg-slate-800 border-slate-700 text-slate-100">
                   <SelectValue placeholder="Type" />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
@@ -80,7 +80,7 @@ export const WeaponDamageInput = () => {
             render={({ field }) => (
               <Input
                 placeholder="e.g. 1d10"
-                className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500"
+                className="w-full bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500"
                 {...field}
                 value={field.value || ""}
               />
