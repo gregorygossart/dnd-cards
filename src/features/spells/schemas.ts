@@ -6,9 +6,9 @@ import {
   DurationType,
   TimeDurationUnit,
   RangeType,
-  RangeDistanceUnit,
   SpellSchool,
 } from "./constants";
+import { RangeDistanceUnit } from "@/features/constants";
 
 export const CastingTimeSchema = z.object({
   amount: z.number().min(1),

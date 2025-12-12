@@ -27,11 +27,6 @@ export enum RangeType {
   Unlimited = "Unlimited",
 }
 
-export enum RangeDistanceUnit {
-  Feet = "Feet",
-  Miles = "Miles",
-}
-
 export enum SpellSchool {
   Abjuration = "Abjuration",
   Conjuration = "Conjuration",

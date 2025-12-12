@@ -6,11 +6,8 @@ import {
   type Duration,
   type Components,
 } from "@/features/spells/types";
-import {
-  RangeType,
-  RangeDistanceUnit,
-  DurationType,
-} from "@/features/spells/constants";
+import { RangeType, DurationType } from "@/features/spells/constants";
+import { RangeDistanceUnit } from "@/features/constants";
 import { assertUnreachable } from "./utils";
 
 export function getCardSubtitle(card: Card): string {

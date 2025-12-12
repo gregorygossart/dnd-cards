@@ -8,7 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { RangeType, RangeDistanceUnit } from "@/features/spells/constants";
+import { RangeType } from "@/features/spells/constants";
+import { RangeDistanceUnit } from "@/features/constants";
 import type { Card } from "@/features/cards/types";
 
 export const SpellRangeInputs: React.FC = () => {

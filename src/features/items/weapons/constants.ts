@@ -65,3 +65,43 @@ export type WeaponType =
   | MartialMeleeWeaponType
   | MartialRangedWeaponType
   | OtherWeaponType;
+
+export enum PhysicalDamageType {
+  Bludgeoning = "Bludgeoning",
+  Piercing = "Piercing",
+  Slashing = "Slashing",
+}
+
+export enum ElementalDamageType {
+  Acid = "Acid",
+  Cold = "Cold",
+  Fire = "Fire",
+  Force = "Force",
+  Lightning = "Lightning",
+  Necrotic = "Necrotic",
+  Poison = "Poison",
+  Psychic = "Psychic",
+  Radiant = "Radiant",
+  Thunder = "Thunder",
+}
+
+export const DamageType = {
+  ...PhysicalDamageType,
+  ...ElementalDamageType,
+} as const;
+
+export type DamageType = PhysicalDamageType | ElementalDamageType;
+
+export enum WeaponProperty {
+  Ammunition = "Ammunition",
+  Finesse = "Finesse",
+  Heavy = "Heavy",
+  Light = "Light",
+  Loading = "Loading",
+  Range = "Range",
+  Reach = "Reach",
+  Special = "Special",
+  Thrown = "Thrown",
+  TwoHanded = "Two-Handed",
+  Versatile = "Versatile",
+}
