@@ -21,7 +21,7 @@ export const AttunementSwitch: React.FC = () => {
               <Switch
                 checked={field.value}
                 onCheckedChange={field.onChange}
-                className="scale-75 data-[state=checked]:bg-primary"
+                className="scale-75"
               />
             </FormControl>
           </div>
