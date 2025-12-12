@@ -5,7 +5,14 @@ import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/Ed
 import type { WeaponItem } from "@/features/items/weapons/schemas";
 
 export const WeaponRangeInput: React.FC = () => {
-  const { control } = useFormContext<WeaponItem>();
+  const { control, watch } = useFormContext<WeaponItem>();
+  const properties = watch("properties") || [];
+
+  const showRange = properties.some((p) =>
+    ["Thrown", "Ammunition"].includes(p),
+  );
+
+  if (!showRange) return null;
 
   return (
     <div className="space-y-1">
