@@ -16,11 +16,13 @@ import {
   MartialMeleeWeaponType,
   MartialRangedWeaponType,
   OtherWeaponType,
+  WeaponType,
 } from "@/features/items/weapons/constants";
+import { WEAPON_DEFINITIONS } from "@/features/items/weapons/data";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
 export const WeaponTypeInput: React.FC = () => {
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
 
   return (
     <div className="space-y-1">
@@ -30,7 +32,20 @@ export const WeaponTypeInput: React.FC = () => {
         name="weaponType"
         render={({ field }) => (
           <FormItem>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <Select
+              onValueChange={(val) => {
+                field.onChange(val);
+                const def = WEAPON_DEFINITIONS[val as WeaponType];
+                if (def) {
+                  setValue("category", def.category);
+                  setValue("attackType", def.attackType);
+                  setValue("damage", def.damage);
+                  setValue("range", def.range);
+                  setValue("properties", def.properties);
+                }
+              }}
+              defaultValue={field.value}
+            >
               <FormControl>
                 <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 w-full h-9">
                   <SelectValue placeholder="Select weapon type" />

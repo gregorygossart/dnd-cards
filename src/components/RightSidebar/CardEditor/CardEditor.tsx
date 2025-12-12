@@ -6,12 +6,17 @@ import { CardType } from "@/features/cards/constants";
 import {
   CastingTimeUnit,
   RangeType,
-  RangeDistanceUnit,
   DurationType,
 } from "@/features/spells/constants";
+import { RangeDistanceUnit } from "@/features/constants";
 import { CardSchema } from "@/features/cards/types";
 import { ItemRarity, ItemSubtype } from "@/features/items/constants";
-import { WeaponType } from "@/features/items/weapons/constants";
+import {
+  WeaponType,
+  PhysicalDamageType,
+  WeaponAttackType,
+  WeaponCategory,
+} from "@/features/items/weapons/constants";
 import { RichTextEditor } from "@/components/RichTextEditor/RichTextEditor";
 import { TitleInput } from "@/components/RightSidebar/CardEditor/TitleInput/TitleInput";
 import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/ImageInput";
@@ -50,9 +55,11 @@ export const defaultCardValues: Record<CardType, Card> = {
     rarity: ItemRarity.Common,
     attunement: false,
     weaponType: WeaponType.Dagger,
-    damage: "1d4 bludgeoning",
-    range: "5 ft.",
-    properties: "",
+    category: WeaponCategory.Simple,
+    attackType: WeaponAttackType.Melee,
+    damage: { amount: "1d4", type: PhysicalDamageType.Piercing },
+    range: undefined,
+    properties: [],
   },
   [CardType.Spell]: {
     ...baseDefaultCardValues,

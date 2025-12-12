@@ -9,12 +9,8 @@ export const WeaponDetailsInputs: React.FC = () => {
     <CollapsibleGroup title="Weapon Details" defaultOpen={true}>
       <div className="space-y-4">
         <WeaponTypeInput />
-
-        <div className="grid grid-cols-2 gap-4">
-          <WeaponDamageInput />
-          <WeaponRangeInput />
-        </div>
-
+        <WeaponDamageInput />
+        <WeaponRangeInput />
         <WeaponPropertiesInput />
       </div>
     </CollapsibleGroup>

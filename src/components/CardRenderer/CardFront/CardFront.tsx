@@ -1,4 +1,6 @@
 import type { Card } from "@/features/cards/types";
+import { ItemStats } from "@/components/CardRenderer/CardFront/ItemStats/ItemStats";
+import { ItemSubtype } from "@/features/items/constants";
 import { CardArtArea } from "@/components/CardRenderer/CardFront/CardArtArea/CardArtArea";
 import { CardSeparator } from "@/components/CardRenderer/CardFront/CardSeparator/CardSeparator";
 import { CardSubheader } from "@/components/CardRenderer/CardFront/CardSubheader/CardSubheader";
@@ -71,6 +73,16 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
                 components={data.components}
               />
             )}
+
+          {data.type === "Item" && data.subtype === ItemSubtype.Weapon && (
+            <ItemStats
+              attunement={data.attunement}
+              damage={data.damage}
+              range={data.range}
+              properties={data.properties}
+              attackType={data.attackType}
+            />
+          )}
 
           <CardBody
             description={description}
