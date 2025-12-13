@@ -10,6 +10,7 @@ interface DeckStore {
   decks: Deck[];
   currentDeckIndex: number;
   currentCardIndex: number;
+  isHydrated: boolean;
   updateCard: (deckIndex: number, cardIndex: number, card: Card) => void;
   addCard: (deckId: string, type: CardType) => void;
   duplicateCard: (deckIndex: number, cardIndex: number) => void;
@@ -80,6 +81,7 @@ export const useDeckStore = create<DeckStore>()(
       decks: getDefaultDecks(),
       currentDeckIndex: 0,
       currentCardIndex: 0,
+      isHydrated: false,
 
       updateCard: (deckIndex, cardIndex, updatedCard) => {
         set((state) => ({
@@ -271,6 +273,11 @@ export const useDeckStore = create<DeckStore>()(
     }),
     {
       name: "dnd-cards-decks",
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          state.isHydrated = true;
+        }
+      },
     },
   ),
 );

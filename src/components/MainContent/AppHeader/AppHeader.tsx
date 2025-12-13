@@ -4,8 +4,13 @@ import { Menu, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUIStore } from "@/hooks/useUIStore";
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export const AppHeader: React.FC = () => {
+interface AppHeaderProps {
+  isLoading?: boolean;
+}
+
+export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
   const {
     leftDrawerOpen,
     setLeftDrawerOpen,
@@ -16,6 +21,31 @@ export const AppHeader: React.FC = () => {
 
   const currentDeck = decks[currentDeckIndex];
   const currentCard = currentDeck?.cards[currentCardIndex];
+
+  if (isLoading) {
+    return (
+      <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center justify-between px-4 lg:px-6 space-x-4">
+        {/* Left: Mobile menu + Breadcrumb */}
+        <div className="flex items-center gap-4 min-w-0 flex-1">
+          {/* Mobile: Deck List Toggle */}
+          <Skeleton className="h-8 w-8 rounded lg:hidden shrink-0" />
+
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 min-w-0">
+            <Skeleton className="h-5 w-24" />
+            <Skeleton className="h-4 w-4 shrink-0" />
+            <Skeleton className="h-5 w-32" />
+          </div>
+        </div>
+
+        {/* Right: Actions */}
+        <div className="flex items-center gap-4 shrink-0">
+          <Skeleton className="h-8 w-24 rounded hidden lg:block" />
+          <Skeleton className="h-9 w-20 rounded lg:hidden" />
+        </div>
+      </header>
+    );
+  }
 
   if (!currentDeck || !currentCard) return null;
 

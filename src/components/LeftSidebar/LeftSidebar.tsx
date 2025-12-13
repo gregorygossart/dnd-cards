@@ -9,8 +9,33 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/useMediaQuery";
+import { Skeleton } from "@/components/ui/skeleton";
 
-const LeftSidebarContent: React.FC = () => {
+interface LeftSidebarProps {
+  isLoading?: boolean;
+}
+
+const LeftSidebarContent: React.FC<{ isLoading?: boolean }> = ({
+  isLoading = false,
+}) => {
+  if (isLoading) {
+    return (
+      <div className="flex flex-col h-full">
+        {/* Header */}
+        <div className="h-14 flex items-center px-4 shrink-0 bg-slate-900 border-b border-slate-800">
+          <Skeleton className="h-8 w-32" />
+        </div>
+
+        {/* Deck List */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col h-full">
       <div className="h-14 flex items-center px-4 shrink-0 bg-slate-900 border-b border-slate-800">
@@ -26,7 +51,9 @@ const LeftSidebarContent: React.FC = () => {
   );
 };
 
-export const LeftSidebar: React.FC = () => {
+export const LeftSidebar: React.FC<LeftSidebarProps> = ({
+  isLoading = false,
+}) => {
   const { leftDrawerOpen, setLeftDrawerOpen } = useUIStore();
   const isMobile = useIsMobile();
 
@@ -40,7 +67,7 @@ export const LeftSidebar: React.FC = () => {
           <SheetHeader className="sr-only">
             <SheetTitle>Deck List</SheetTitle>
           </SheetHeader>
-          <LeftSidebarContent />
+          <LeftSidebarContent isLoading={isLoading} />
         </SheetContent>
       </Sheet>
     );
@@ -48,7 +75,7 @@ export const LeftSidebar: React.FC = () => {
 
   return (
     <aside className="w-80 border-r border-slate-800 bg-slate-900 flex flex-col overflow-hidden">
-      <LeftSidebarContent />
+      <LeftSidebarContent isLoading={isLoading} />
     </aside>
   );
 };

@@ -11,13 +11,20 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/useMediaQuery";
+import { Skeleton } from "@/components/ui/skeleton";
 
 enum ActiveTab {
   Edit = "Edit",
   ImportExport = "ImportExport",
 }
 
-const RightSidebarContent = () => {
+interface RightSidebarProps {
+  isLoading?: boolean;
+}
+
+const RightSidebarContent: React.FC<{ isLoading?: boolean }> = ({
+  isLoading = false,
+}) => {
   const { decks, currentDeckIndex, currentCardIndex, updateCard } =
     useDeckStore();
 
@@ -34,6 +41,44 @@ const RightSidebarContent = () => {
   const onTabChange = (value: string) => {
     setActiveTab(value as ActiveTab);
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex-1 flex flex-col min-h-0">
+        {/* Tabs Header */}
+        <div className="h-14 border-b border-slate-800 flex items-center px-4 shrink-0">
+          <div className="grid w-full grid-cols-2 gap-2">
+            <Skeleton className="h-9 w-full" />
+            <Skeleton className="h-9 w-full" />
+          </div>
+        </div>
+
+        {/* Editor Content */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-28" />
+            <Skeleton className="h-32 w-full" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <Tabs
@@ -81,7 +126,9 @@ const RightSidebarContent = () => {
   );
 };
 
-export const RightSidebar: React.FC = () => {
+export const RightSidebar: React.FC<RightSidebarProps> = ({
+  isLoading = false,
+}) => {
   const { rightDrawerOpen, setRightDrawerOpen } = useUIStore();
   const isMobile = useIsMobile();
 
@@ -92,7 +139,7 @@ export const RightSidebar: React.FC = () => {
           <SheetHeader className="sr-only">
             <SheetTitle>Card Editor</SheetTitle>
           </SheetHeader>
-          <RightSidebarContent />
+          <RightSidebarContent isLoading={isLoading} />
         </SheetContent>
       </Sheet>
     );
@@ -100,7 +147,7 @@ export const RightSidebar: React.FC = () => {
 
   return (
     <aside className="w-96 border-l border-slate-800 bg-slate-900 flex flex-col">
-      <RightSidebarContent />
+      <RightSidebarContent isLoading={isLoading} />
     </aside>
   );
 };
