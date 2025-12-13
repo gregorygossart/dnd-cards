@@ -31,26 +31,17 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen w-full bg-slate-950 text-slate-100 overflow-hidden font-sans">
-        {/* Left Sidebar - Hidden on mobile */}
-        <aside className="hidden lg:flex w-80 border-r border-slate-800 bg-slate-900 flex-col overflow-hidden">
-          <LeftSidebar isLoading />
-        </aside>
-
-        {/* Main Content */}
+      <div className="w-full h-full flex bg-slate-950 text-slate-100 overflow-hidden font-sans">
+        <LeftSidebar isLoading />
         <MainContent isLoading />
-
-        {/* Right Sidebar - Hidden on mobile */}
-        <aside className="hidden lg:flex w-96 border-l border-slate-800 bg-slate-900 flex-col">
-          <RightSidebar isLoading />
-        </aside>
+        <RightSidebar isLoading />
       </div>
     );
   }
 
   if (hasError) {
     return (
-      <div className="flex h-screen w-full bg-slate-950 text-slate-100 items-center justify-center">
+      <div className="w-full h-full flex bg-slate-950 text-slate-100 items-center justify-center">
         <div className="text-center space-y-4 max-w-md px-4">
           <div className="space-y-2">
             <h1 className="text-2xl font-bold text-slate-100">No Deck Found</h1>
@@ -71,19 +62,10 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-screen w-full bg-slate-950 text-slate-100 overflow-hidden font-sans">
-      {/* Left Sidebar - Hidden on mobile */}
-      <aside className="hidden lg:flex w-80 border-r border-slate-800 bg-slate-900 flex-col overflow-hidden">
-        <LeftSidebar />
-      </aside>
-
-      {/* Main Content */}
+    <div className="w-full h-full flex bg-slate-950 text-slate-100 overflow-hidden">
+      <LeftSidebar />
       <MainContent />
-
-      {/* Right Sidebar - Hidden on mobile */}
-      <aside className="hidden lg:flex w-96 border-l border-slate-800 bg-slate-900 flex-col">
-        <RightSidebar />
-      </aside>
+      <RightSidebar />
     </div>
   );
 }

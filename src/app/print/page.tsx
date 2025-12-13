@@ -55,7 +55,7 @@ export default function PrintPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 p-8 print:p-0 print:bg-white font-sans">
+    <div className="h-screen overflow-y-auto bg-slate-100 p-8 print:h-auto print:overflow-visible print:p-0 print:bg-white font-sans">
       <style jsx global>{`
         @media print {
           @page {

@@ -24,7 +24,7 @@ export const MainContent: React.FC<MainContentProps> = ({
         <AppHeader isLoading />
 
         {/* Canvas */}
-        <div className="flex-1 relative overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
+        <div className="flex-1 relative bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
           {/* Grid pattern background */}
           <div
             className="absolute inset-0 opacity-[0.25] pointer-events-none"
@@ -34,9 +34,41 @@ export const MainContent: React.FC<MainContentProps> = ({
             }}
           ></div>
 
-          {/* Card Skeleton - responsive sizing */}
-          <div className="relative z-10 p-4">
-            <Skeleton className="h-[500px] w-[340px] md:h-[600px] md:w-[400px] rounded-2xl" />
+          {/* Card Skeleton - matches the main card stack layout */}
+          <div className="absolute inset-0 flex items-center justify-center p-8 w-full pointer-events-none">
+            <div className="relative">
+              {/* Back Card Skeleton */}
+              <div
+                className="absolute"
+                style={{
+                  transform: `translate(calc(-50% + ${100 * cardScale}px), calc(-50% + ${20 * cardScale}px))`,
+                }}
+              >
+                <Skeleton
+                  className="rounded-[30px]"
+                  style={{
+                    width: `${264 * cardScale}px`,
+                    height: `${453 * cardScale}px`,
+                  }}
+                />
+              </div>
+
+              {/* Front Card Skeleton */}
+              <div
+                className="absolute"
+                style={{
+                  transform: `translate(calc(-50% - ${100 * cardScale}px), calc(-50% - ${20 * cardScale}px))`,
+                }}
+              >
+                <Skeleton
+                  className="rounded-[30px]"
+                  style={{
+                    width: `${264 * cardScale}px`,
+                    height: `${453 * cardScale}px`,
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -50,7 +82,7 @@ export const MainContent: React.FC<MainContentProps> = ({
       <AppHeader />
 
       {/* Canvas */}
-      <div className="flex-1 relative overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
+      <div className="flex-1 relative bg-gradient-to-br from-slate-900 via-violet-500/40 to-slate-900">
         {/* Grid pattern background */}
         <div
           className="absolute inset-0 opacity-[0.25] pointer-events-none"
@@ -61,19 +93,16 @@ export const MainContent: React.FC<MainContentProps> = ({
         ></div>
 
         {/* Card Stack */}
-        <div className="relative z-10 flex items-center justify-center p-8 w-full">
-          <div
-            className="relative"
-            style={{
-              transform: `translate(-${100 * cardScale}px, -${20 * cardScale}px)`,
-            }}
-          >
+        {/* Card Stack */}
+        <div className="absolute inset-0 flex items-center justify-center p-8 w-full pointer-events-none">
+          {/* Relative anchor at center of screen */}
+          <div className="relative">
             {/* Back Card - positioned behind and offset */}
+            {/* Translate moves it from center anchor. Also translate -50% -50% to center the card itself on that point */}
             <div
-              className="absolute shadow-2xl shadow-black/50"
+              className="absolute pointer-events-auto"
               style={{
-                top: `${40 * cardScale}px`,
-                left: `${200 * cardScale}px`,
+                transform: `translate(calc(-50% + ${100 * cardScale}px), calc(-50% + ${20 * cardScale}px))`,
               }}
             >
               <CardRenderer
@@ -84,7 +113,12 @@ export const MainContent: React.FC<MainContentProps> = ({
             </div>
 
             {/* Front Card - positioned in front */}
-            <div className="relative z-10 shadow-2xl shadow-black/50">
+            <div
+              className="absolute pointer-events-auto"
+              style={{
+                transform: `translate(calc(-50% - ${100 * cardScale}px), calc(-50% - ${20 * cardScale}px))`,
+              }}
+            >
               <CardRenderer
                 data={currentCard}
                 scale={cardScale}

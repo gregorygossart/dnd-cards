@@ -120,9 +120,19 @@
   html,
   body {
     height: 100%;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
     overscroll-behavior: none;
     @apply bg-background text-foreground;
+  }
+
+  @media print {
+    html,
+    body {
+      height: auto;
+      overflow: visible !important;
+    }
   }
 }
 

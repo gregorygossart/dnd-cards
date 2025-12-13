@@ -74,7 +74,7 @@ export const LeftSidebar: React.FC<LeftSidebarProps> = ({
   }
 
   return (
-    <aside className="w-80 border-r border-slate-800 bg-slate-900 flex flex-col overflow-hidden">
+    <aside className="z-30 w-80 border-r border-slate-800 bg-slate-900 flex flex-col overflow-scroll">
       <LeftSidebarContent isLoading={isLoading} />
     </aside>
   );

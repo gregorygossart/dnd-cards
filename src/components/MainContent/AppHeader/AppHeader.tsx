@@ -24,7 +24,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
 
   if (isLoading) {
     return (
-      <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center justify-between px-4 lg:px-6 space-x-4">
+      <header className="z-20 h-14 shrink-0 border-b border-slate-800 bg-slate-900 flex items-center justify-between px-4 lg:px-6 space-x-4">
         {/* Left: Mobile menu + Breadcrumb */}
         <div className="flex items-center gap-4 min-w-0 flex-1">
           {/* Mobile: Deck List Toggle */}
@@ -50,7 +50,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
   if (!currentDeck || !currentCard) return null;
 
   return (
-    <header className="h-14 border-b border-slate-800 bg-slate-900/50 flex items-center justify-between px-4 lg:px-6 space-x-4">
+    <header className="z-20 h-14 shrink-0 border-b border-slate-800 bg-slate-900 flex items-center justify-between px-4 lg:px-6 space-x-4">
       {/* Left: Mobile menu + Breadcrumb */}
       <div className="flex items-center gap-4 min-w-0 flex-1">
         {/* Mobile: Deck List Toggle */}

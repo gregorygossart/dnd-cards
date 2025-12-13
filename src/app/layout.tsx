@@ -3,6 +3,7 @@ import { Geist_Mono, Barlow } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import "@/app/globals.css";
+import { cn } from "@/lib/utils";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -27,7 +28,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${barlow.variable} ${geistMono.variable}  antialiased`}>
+      <body
+        className={cn(
+          barlow.variable,
+          geistMono.variable,
+          "antialiased",
+          "bg-background text-foreground font-sans",
+        )}
+      >
         {children}
         <SpeedInsights />
         <Analytics />
