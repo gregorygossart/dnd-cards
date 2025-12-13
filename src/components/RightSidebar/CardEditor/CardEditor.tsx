@@ -1,15 +1,22 @@
 import React, { useEffect, useRef } from "react";
 import { useForm, FormProvider, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { Card, CardBaseData } from "@/types/card";
+import { type CardBaseData, type Card } from "@/features/cards/types";
+import { CardType } from "@/features/cards/constants";
 import {
-  CardSchema,
   CastingTimeUnit,
   RangeType,
-  RangeDistanceUnit,
   DurationType,
-  CardType,
-} from "@/types/card";
+} from "@/features/spells/constants";
+import { RangeDistanceUnit } from "@/features/constants";
+import { CardSchema } from "@/features/cards/types";
+import { ItemRarity, ItemSubtype } from "@/features/items/constants";
+import {
+  WeaponType,
+  PhysicalDamageType,
+  WeaponAttackType,
+  WeaponCategory,
+} from "@/features/items/weapons/constants";
 import { RichTextEditor } from "@/components/RichTextEditor/RichTextEditor";
 import { TitleInput } from "@/components/RightSidebar/CardEditor/TitleInput/TitleInput";
 import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/ImageInput";
@@ -25,6 +32,7 @@ import { CollapsibleGroup } from "@/components/ui/collapsible-group";
 import { DeckSettings } from "@/components/RightSidebar/CardEditor/DeckSettings/DeckSettings";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { Separator } from "@/components/ui/separator";
+import { ItemDetailsInputs } from "@/features/items/components/ItemDetailsInputs/ItemDetailsInputs";
 
 interface CardEditorProps {
   initialData: Card;
@@ -43,6 +51,15 @@ export const defaultCardValues: Record<CardType, Card> = {
   [CardType.Item]: {
     ...baseDefaultCardValues,
     type: CardType.Item,
+    subtype: ItemSubtype.Weapon,
+    rarity: ItemRarity.Common,
+    attunement: false,
+    weaponType: WeaponType.Dagger,
+    category: WeaponCategory.Simple,
+    attackType: WeaponAttackType.Melee,
+    damage: { amount: "1d4", type: PhysicalDamageType.Piercing },
+    range: undefined,
+    properties: [],
   },
   [CardType.Spell]: {
     ...baseDefaultCardValues,
@@ -95,7 +112,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
         isInitialMount.current = false;
         return;
       }
-      onChange(value as Card);
+      onChange(value as unknown as Card);
     });
     return () => subscription.unsubscribe();
   }, [watch, onChange]);
@@ -117,8 +134,11 @@ export const CardEditor: React.FC<CardEditorProps> = ({
 
         <TitleInput />
 
+        {/* Item-specific fields */}
+        {watch("type") === CardType.Item && <ItemDetailsInputs />}
+
         {/* Spell-specific fields */}
-        {watch("type") === "Spell" && (
+        {watch("type") === CardType.Spell && (
           <CollapsibleGroup title="Spell Details" defaultOpen={true}>
             <div className="space-y-6">
               <SpellClassificationInputs />

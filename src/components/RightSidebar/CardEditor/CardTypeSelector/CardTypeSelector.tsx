@@ -1,6 +1,4 @@
-import React from "react";
-import { CardType } from "@/types/card";
-
+import { CardType } from "@/features/cards/constants";
 import {
   Select,
   SelectContent,
@@ -41,7 +39,6 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
           Ability
         </SelectItem>
         <SelectItem
-          disabled
           value={CardType.Item}
           className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
         >

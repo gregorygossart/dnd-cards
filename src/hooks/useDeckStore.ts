@@ -1,7 +1,9 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Deck, Card, DeckStyle } from "@/types/card";
-import { CardType, DensityPreset, CardFormat } from "@/types/card";
+import type { Card } from "@/features/cards/types";
+import type { Deck, DeckStyle } from "@/features/decks/types";
+import { CardFormat, CardType } from "@/features/cards/constants";
+import { DensityPreset } from "@/features/decks/constants";
 import { defaultCardValues } from "@/components/RightSidebar/CardEditor/CardEditor";
 
 interface DeckStore {
@@ -20,28 +22,26 @@ interface DeckStore {
 }
 
 const DEFAULT_STYLE: DeckStyle = {
-  cardFormat: CardFormat.Tarot, // Default: Tarot (70mm x 120mm)
-  imageHeightPercent: 40, // Default: 40% of card height
-  titleFontSize: 24, // Default: 24px (equivalent to text-2xl)
-  bodyFontSize: 14, // Default: 14px (equivalent to text-sm)
-  lineHeight: 1.5, // Default: 1.5 (balanced readability)
-  paddingMultiplier: 1.0, // Default: 1.0 (normal spacing)
-  cornerRadius: 1.5, // Default: 1.5rem (rounded-3xl)
+  cardFormat: CardFormat.Tarot,
+  imageHeightPercent: 40,
+  titleFontSize: 24,
+  bodyFontSize: 14,
+  lineHeight: 1.5,
+  paddingMultiplier: 1.0,
+  cornerRadius: 1.5,
 };
 
 // Base padding values (in pixels) that will be multiplied
 export const BASE_PADDING = {
-  horizontal: 20, // px-5
-  vertical: 6, // py-1.5
+  horizontal: 20,
+  vertical: 6,
 };
 
-// Density-specific settings (excludes aesthetic choices like cornerRadius, cardFormat, and imageHeightPercent)
 type DensitySettings = Omit<
   DeckStyle,
   "cardFormat" | "imageHeightPercent" | "cornerRadius"
 >;
 
-// Density presets - apply only density-related settings
 export const DENSITY_PRESETS: Record<DensityPreset, DensitySettings> = {
   [DensityPreset.Compact]: {
     titleFontSize: 20,

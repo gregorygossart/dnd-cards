@@ -2,7 +2,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
-import type { Card } from "@/types/card";
+import type { Card } from "@/features/cards/types";
 
 export const AccentColorInput: React.FC = () => {
   const { watch, setValue } = useFormContext<Card>();

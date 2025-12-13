@@ -1,5 +1,5 @@
 import { CardMainBadgeSvg } from "@/components/svg/CardMainBadgeSvg";
-import { Card } from "@/types/card";
+import { Card } from "@/features/cards/types";
 
 interface CardMainBadgeProps {
   card: Card;

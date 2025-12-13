@@ -18,7 +18,6 @@ export default function Home() {
   const currentDeck = decks[currentDeckIndex];
   const currentCard = currentDeck?.cards[currentCardIndex];
 
-  // Safety check
   if (!currentDeck || !currentCard) {
     return (
       <div className="flex h-screen w-full bg-slate-950 text-slate-100 items-center justify-center">

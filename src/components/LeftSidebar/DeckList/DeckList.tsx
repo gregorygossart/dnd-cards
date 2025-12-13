@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { Deck } from "@/types/card";
+import type { Deck } from "@/features/decks/types";
 import { cn } from "@/lib/utils";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { AddCardButton } from "./AddCardButton";

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Card } from "@/types/card";
+import { Card } from "@/features/cards/types";
 import { CardMainBadge } from "./CardMainBadge/CardMainBadge";
 import { CardSeparatorSvg } from "@/components/svg/CardSeparatorSvg";
 

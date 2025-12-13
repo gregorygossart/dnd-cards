@@ -2,7 +2,7 @@ import { useFormContext, Controller } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 import { Checkbox } from "@/components/ui/checkbox";
-import type { Card } from "@/types/card";
+import type { Card } from "@/features/cards/types";
 
 export const SpellComponentsInputs: React.FC = () => {
   const { control } = useFormContext<Card>();

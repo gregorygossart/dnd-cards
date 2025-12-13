@@ -2,7 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
-import type { Card } from "@/types/card";
+import type { Card } from "@/features/cards/types";
 
 interface ImageInputProps {
   fieldName: "visuals.headerImage" | "visuals.backImage";

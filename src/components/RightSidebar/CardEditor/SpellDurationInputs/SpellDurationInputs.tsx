@@ -10,8 +10,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DurationType, TimeDurationUnit } from "@/types/card";
-import type { Card } from "@/types/card";
+import { DurationType, TimeDurationUnit } from "@/features/spells/constants";
+import type { Card } from "@/features/cards/types";
+import { assertUnreachable } from "@/lib/utils";
 
 export const SpellDurationInputs: React.FC = () => {
   const { control, watch, setValue, getValues, register } =
@@ -53,23 +54,27 @@ export const SpellDurationInputs: React.FC = () => {
           value={watch("duration.type")}
           onValueChange={(value) => {
             const type = value as DurationType;
-            if (type === DurationType.Time) {
-              setValue("duration", {
-                type,
-                duration: { amount: 1, unit: TimeDurationUnit.Minute },
-                concentration: getValues("duration.concentration") ?? false,
-              });
-            } else if (type === DurationType.Instantaneous) {
-              // Instantaneous can't have concentration
-              setValue("duration", { type });
-              // Explicitly uncheck the concentration checkbox
-              setValue("duration.concentration", false);
-            } else {
-              // UntilDispelled
-              setValue("duration", {
-                type,
-                concentration: getValues("duration.concentration") ?? false,
-              });
+            switch (type) {
+              case DurationType.Time:
+                setValue("duration", {
+                  type,
+                  duration: { amount: 1, unit: TimeDurationUnit.Minute },
+                  concentration: getValues("duration.concentration") ?? false,
+                });
+                break;
+              case DurationType.Instantaneous:
+                setValue("duration", { type });
+                // Instantaneous can't have concentration. Explicitly uncheck the concentration checkbox
+                setValue("duration.concentration", false);
+                break;
+              case DurationType.UntilDispelled:
+                setValue("duration", {
+                  type,
+                  concentration: getValues("duration.concentration") ?? false,
+                });
+                break;
+              default:
+                assertUnreachable(type);
             }
           }}
         >

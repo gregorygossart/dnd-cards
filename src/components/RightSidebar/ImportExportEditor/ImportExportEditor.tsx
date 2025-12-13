@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import type { Card } from "@/types/card";
-import { CardSchema } from "@/types/card";
+import type { Card } from "@/features/cards/types";
+import { CardSchema } from "@/features/cards/types";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Copy, Check, AlertCircle } from "lucide-react";

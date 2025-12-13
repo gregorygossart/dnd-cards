@@ -5,7 +5,12 @@ import {
   formatDuration,
   formatComponents,
 } from "@/lib/cardUtils";
-import type { CastingTime, Range, Duration, Components } from "@/types/card";
+import type {
+  CastingTime,
+  Range,
+  Duration,
+  Components,
+} from "@/features/spells/types";
 import { Badge } from "@/components/ui/badge";
 import { useDeckStore, BASE_PADDING } from "@/hooks/useDeckStore";
 
@@ -24,7 +29,6 @@ export const SpellStats: React.FC<SpellStatsProps> = ({
   ritual,
   components,
 }) => {
-  // Check if concentration is present and true
   const hasConcentration =
     "concentration" in duration && duration.concentration;
 

@@ -1,5 +1,5 @@
 import { useDeckStore, DENSITY_PRESETS } from "@/hooks/useDeckStore";
-import { DensityPreset } from "@/types/card";
+import { DensityPreset } from "@/features/decks/constants";
 import { Button } from "@/components/ui/button";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
@@ -12,7 +12,6 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
 
   const applyPreset = (presetName: DensityPreset) => {
     const preset = DENSITY_PRESETS[presetName];
-    // Preset only contains density settings, cornerRadius is preserved automatically
     updateDeckStyle(deckId, preset);
   };
 

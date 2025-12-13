@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
-import type { Card } from "@/types/card";
+import type { Card } from "@/features/cards/types";
+import { CardFormat } from "@/features/cards/constants";
 import { CardFront } from "./CardFront/CardFront";
 import { CardBack } from "./CardBack/CardBack";
 import { cn } from "@/lib/utils";
 import { getCardDimensions } from "@/lib/cardConstants";
-import { CardFormat } from "@/types/card";
 import { useDeckStore } from "@/hooks/useDeckStore";
 
 export enum CardSide {

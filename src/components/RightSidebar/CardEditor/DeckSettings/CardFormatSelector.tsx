@@ -1,7 +1,7 @@
+import { CardFormat } from "@/features/cards/constants";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { Button } from "@/components/ui/button";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
-import { CardFormat } from "@/types/card";
 
 interface CardFormatSelectorProps {
   deckId: string;

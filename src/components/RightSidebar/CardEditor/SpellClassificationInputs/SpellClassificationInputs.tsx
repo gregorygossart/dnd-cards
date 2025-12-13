@@ -7,7 +7,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { Card } from "@/types/card";
+import type { Card } from "@/features/cards/types";
+import { SpellSchool } from "@/features/spells/constants";
 
 export const SpellClassificationInputs: React.FC = () => {
   const { control } = useFormContext<Card>();
@@ -29,14 +30,11 @@ export const SpellClassificationInputs: React.FC = () => {
                 <SelectValue placeholder="Select school" />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
-                <SelectItem value="Abjuration">Abjuration</SelectItem>
-                <SelectItem value="Conjuration">Conjuration</SelectItem>
-                <SelectItem value="Divination">Divination</SelectItem>
-                <SelectItem value="Enchantment">Enchantment</SelectItem>
-                <SelectItem value="Evocation">Evocation</SelectItem>
-                <SelectItem value="Illusion">Illusion</SelectItem>
-                <SelectItem value="Necromancy">Necromancy</SelectItem>
-                <SelectItem value="Transmutation">Transmutation</SelectItem>
+                {Object.values(SpellSchool).map((school) => (
+                  <SelectItem key={school} value={school}>
+                    {school}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           )}
