@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import type { Deck } from "@/features/decks/types";
-import { cn } from "@/lib/utils";
+import { type Card } from "@/features/cards/types";
+import { CardType } from "@/features/cards/constants";
+import { assertUnreachable, cn } from "@/lib/utils";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { AddCardButton } from "./AddCardButton";
 import { AddDeckButton } from "./AddDeckButton";
@@ -20,6 +22,26 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+
+const getCardSubtitle = (card: Card) => {
+  const cardType = card.type;
+  switch (cardType) {
+    case CardType.Spell:
+      if (card.level !== undefined) {
+        return `Lvl ${card.level}`;
+      }
+      return card.type;
+
+    case CardType.Item:
+      return card.subtype;
+
+    case CardType.Ability:
+      throw new Error("Not implemented");
+
+    default:
+      return assertUnreachable(cardType);
+  }
+};
 
 export const DeckList: React.FC = () => {
   const {
@@ -309,9 +331,7 @@ export const DeckList: React.FC = () => {
                               : "bg-slate-700 text-slate-400",
                           )}
                         >
-                          {card.type === "Spell" && card.level !== undefined
-                            ? `Lvl ${card.level}`
-                            : card.type}
+                          {getCardSubtitle(card)}
                         </span>
 
                         {/* Three-dot menu */}
