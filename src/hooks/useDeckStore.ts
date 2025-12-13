@@ -119,6 +119,8 @@ export const useDeckStore = create<DeckStore>()(
 
           return {
             decks: newDecks,
+            currentDeckIndex:
+              targetDeckIndex !== -1 ? targetDeckIndex : state.currentDeckIndex,
             currentCardIndex: newCardIndex,
           };
         });
@@ -149,6 +151,7 @@ export const useDeckStore = create<DeckStore>()(
 
           return {
             decks: newDecks,
+            currentDeckIndex: deckIndex,
             currentCardIndex: deck.cards.length, // Select the new card (last index)
           };
         });
