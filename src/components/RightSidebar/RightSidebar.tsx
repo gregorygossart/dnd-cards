@@ -146,7 +146,7 @@ export const RightSidebar: React.FC<RightSidebarProps> = ({
   }
 
   return (
-    <aside className="z-30 w-96 border-l border-slate-800 bg-slate-900 flex flex-col overflow-scroll">
+    <aside className="z-30 w-96 border-l border-slate-800 bg-slate-900 flex flex-col overflow-y-auto">
       <RightSidebarContent isLoading={isLoading} />
     </aside>
   );
