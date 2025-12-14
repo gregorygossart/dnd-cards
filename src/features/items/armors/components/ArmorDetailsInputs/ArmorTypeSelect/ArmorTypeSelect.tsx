@@ -49,7 +49,7 @@ export const ArmorTypeSelect: React.FC = () => {
                   );
                 }
               }}
-              defaultValue={field.value}
+              value={field.value}
             >
               <FormControl>
                 <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 w-full h-9">
