@@ -7,7 +7,7 @@ import {
 } from "@/features/items/weapons/constants";
 import { useDeckStore, BASE_PADDING } from "@/hooks/useDeckStore";
 
-interface ItemStatsProps {
+interface WeaponStatsProps {
   attunement?: boolean;
   damage?: WeaponDamage;
   range?: WeaponRange;
@@ -15,7 +15,7 @@ interface ItemStatsProps {
   attackType?: WeaponAttackType;
 }
 
-export const ItemStats: React.FC<ItemStatsProps> = ({
+export const WeaponStats: React.FC<WeaponStatsProps> = ({
   attunement,
   damage,
   range,

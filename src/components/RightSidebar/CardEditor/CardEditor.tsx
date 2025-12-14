@@ -10,13 +10,13 @@ import {
 } from "@/features/spells/constants";
 import { RangeDistanceUnit } from "@/features/constants";
 import { CardSchema } from "@/features/cards/types";
-import { ItemRarity, ItemSubtype } from "@/features/items/constants";
+import { ItemRarity } from "@/features/items/constants";
 import {
   WeaponType,
   PhysicalDamageType,
   WeaponAttackType,
-  WeaponCategory,
 } from "@/features/items/weapons/constants";
+import { LightArmorType } from "@/features/items/armors/constants";
 import { RichTextEditor } from "@/components/RichTextEditor/RichTextEditor";
 import { TitleInput } from "@/components/RightSidebar/CardEditor/TitleInput/TitleInput";
 import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/ImageInput";
@@ -32,7 +32,8 @@ import { CollapsibleGroup } from "@/components/ui/collapsible-group";
 import { DeckSettings } from "@/components/RightSidebar/CardEditor/DeckSettings/DeckSettings";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { Separator } from "@/components/ui/separator";
-import { ItemDetailsInputs } from "@/features/items/components/ItemDetailsInputs/ItemDetailsInputs";
+import { WeaponDetailsInputs } from "@/features/items/weapons/components/WeaponDetailsInputs/WeaponDetailsInputs";
+import { ArmorDetailsInputs } from "@/features/items/armors/components/ArmorDetailsInputs/ArmorDetailsInputs";
 
 interface CardEditorProps {
   initialData: Card;
@@ -48,18 +49,9 @@ const baseDefaultCardValues: CardBaseData = {
 };
 
 export const defaultCardValues: Record<CardType, Card> = {
-  [CardType.Item]: {
+  [CardType.Ability]: {
     ...baseDefaultCardValues,
-    type: CardType.Item,
-    subtype: ItemSubtype.Weapon,
-    rarity: ItemRarity.Common,
-    attunement: false,
-    weaponType: WeaponType.Dagger,
-    category: WeaponCategory.Simple,
-    attackType: WeaponAttackType.Melee,
-    damage: { amount: "1d4", type: PhysicalDamageType.Piercing },
-    range: undefined,
-    properties: [],
+    type: CardType.Ability,
   },
   [CardType.Spell]: {
     ...baseDefaultCardValues,
@@ -75,9 +67,26 @@ export const defaultCardValues: Record<CardType, Card> = {
     school: undefined,
     level: undefined,
   },
-  [CardType.Ability]: {
+  [CardType.Armor]: {
     ...baseDefaultCardValues,
-    type: CardType.Ability,
+    type: CardType.Armor,
+    rarity: ItemRarity.Common,
+    attunement: false,
+    armorType: LightArmorType.Padded,
+    ac: "11 + Dex",
+    stealthDisadvantage: true,
+    strengthRequirement: undefined,
+  },
+  [CardType.Weapon]: {
+    ...baseDefaultCardValues,
+    type: CardType.Weapon,
+    rarity: ItemRarity.Common,
+    attunement: false,
+    weaponType: WeaponType.Dagger,
+    attackType: WeaponAttackType.Melee,
+    damage: { amount: "1d4", type: PhysicalDamageType.Piercing },
+    range: undefined,
+    properties: [],
   },
 };
 
@@ -134,8 +143,11 @@ export const CardEditor: React.FC<CardEditorProps> = ({
 
         <TitleInput />
 
-        {/* Item-specific fields */}
-        {watch("type") === CardType.Item && <ItemDetailsInputs />}
+        {/* Weapon-specific fields */}
+        {watch("type") === CardType.Weapon && <WeaponDetailsInputs />}
+
+        {/* Armor-specific fields */}
+        {watch("type") === CardType.Armor && <ArmorDetailsInputs />}
 
         {/* Spell-specific fields */}
         {watch("type") === CardType.Spell && (

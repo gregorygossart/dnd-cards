@@ -71,11 +71,6 @@ export enum WeaponAttackType {
   Ranged = "Ranged",
 }
 
-export enum WeaponCategory {
-  Simple = "Simple",
-  Martial = "Martial",
-}
-
 export enum PhysicalDamageType {
   Bludgeoning = "Bludgeoning",
   Piercing = "Piercing",

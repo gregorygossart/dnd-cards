@@ -23,20 +23,21 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-const getCardSubtitle = (card: Card) => {
+const getCardLabel = (card: Card) => {
   const cardType = card.type;
   switch (cardType) {
+    case CardType.Ability:
+      throw new Error("Not implemented");
+
     case CardType.Spell:
       if (card.level !== undefined) {
         return `Lvl ${card.level}`;
       }
       return card.type;
 
-    case CardType.Item:
-      return card.subtype;
-
-    case CardType.Ability:
-      throw new Error("Not implemented");
+    case CardType.Armor:
+    case CardType.Weapon:
+      return card.type;
 
     default:
       return assertUnreachable(cardType);
@@ -331,7 +332,7 @@ export const DeckList: React.FC = () => {
                               : "bg-slate-700 text-slate-400",
                           )}
                         >
-                          {getCardSubtitle(card)}
+                          {getCardLabel(card)}
                         </span>
 
                         {/* Three-dot menu */}

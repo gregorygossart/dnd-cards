@@ -4,7 +4,8 @@ export enum CardFormat {
 }
 
 export enum CardType {
-  Item = "Item",
-  Spell = "Spell",
   Ability = "Ability",
+  Spell = "Spell",
+  Armor = "Armor",
+  Weapon = "Weapon",
 }

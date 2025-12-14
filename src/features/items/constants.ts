@@ -6,7 +6,3 @@ export enum ItemRarity {
   Legendary = "Legendary",
   Artifact = "Artifact",
 }
-
-export enum ItemSubtype {
-  Weapon = "Weapon",
-}

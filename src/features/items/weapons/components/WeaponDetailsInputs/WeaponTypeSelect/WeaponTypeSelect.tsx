@@ -21,7 +21,7 @@ import {
 import { WEAPON_DEFINITIONS } from "@/features/items/weapons/data";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
-export const WeaponTypeInput: React.FC = () => {
+export const WeaponTypeSelect: React.FC = () => {
   const { control, setValue } = useFormContext();
 
   return (
@@ -37,7 +37,6 @@ export const WeaponTypeInput: React.FC = () => {
                 field.onChange(val);
                 const def = WEAPON_DEFINITIONS[val as WeaponType];
                 if (def) {
-                  setValue("category", def.category);
                   setValue("attackType", def.attackType);
                   setValue("damage", def.damage);
                   setValue("range", def.range);

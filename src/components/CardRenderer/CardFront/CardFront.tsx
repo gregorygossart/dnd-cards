@@ -1,6 +1,7 @@
+import { CardType } from "@/features/cards/constants";
 import type { Card } from "@/features/cards/types";
-import { ItemStats } from "@/components/CardRenderer/CardFront/ItemStats/ItemStats";
-import { ItemSubtype } from "@/features/items/constants";
+import { WeaponStats } from "@/components/CardRenderer/CardFront/WeaponStats/WeaponStats";
+import { ArmorStats } from "@/components/CardRenderer/CardFront/ArmorStats/ArmorStats";
 import { CardArtArea } from "@/components/CardRenderer/CardFront/CardArtArea/CardArtArea";
 import { CardSeparator } from "@/components/CardRenderer/CardFront/CardSeparator/CardSeparator";
 import { CardSubheader } from "@/components/CardRenderer/CardFront/CardSubheader/CardSubheader";
@@ -60,7 +61,7 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
             <CardHeader title={title} />
           </div>
 
-          {data.type === "Spell" &&
+          {data.type === CardType.Spell &&
             data.castingTime &&
             data.range &&
             data.duration &&
@@ -74,13 +75,22 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
               />
             )}
 
-          {data.type === "Item" && data.subtype === ItemSubtype.Weapon && (
-            <ItemStats
+          {data.type === CardType.Weapon && (
+            <WeaponStats
               attunement={data.attunement}
               damage={data.damage}
               range={data.range}
               properties={data.properties}
               attackType={data.attackType}
+            />
+          )}
+
+          {data.type === CardType.Armor && (
+            <ArmorStats
+              ac={data.ac}
+              strengthRequirement={data.strengthRequirement}
+              stealthDisadvantage={data.stealthDisadvantage}
+              attunement={data.attunement}
             />
           )}
 

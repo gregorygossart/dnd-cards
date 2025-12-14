@@ -2,7 +2,9 @@ import { CardType } from "@/features/cards/constants";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
 } from "@/components/ui/select";
 
@@ -31,25 +33,40 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
         </div>
       </SelectTrigger>
       <SelectContent className="bg-slate-800 border-slate-700 text-slate-100 min-w-[200px]">
-        <SelectItem
-          disabled
-          value={CardType.Ability}
-          className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
-        >
-          Ability
-        </SelectItem>
-        <SelectItem
-          value={CardType.Item}
-          className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
-        >
-          Item
-        </SelectItem>
-        <SelectItem
-          value={CardType.Spell}
-          className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
-        >
-          Spell
-        </SelectItem>
+        <SelectGroup>
+          <SelectLabel>Abilities & Spells</SelectLabel>
+
+          <SelectItem
+            disabled
+            value={CardType.Ability}
+            className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
+          >
+            Ability
+          </SelectItem>
+          <SelectItem
+            value={CardType.Spell}
+            className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
+          >
+            Spell
+          </SelectItem>
+        </SelectGroup>
+
+        <SelectGroup>
+          <SelectLabel>Items</SelectLabel>
+
+          <SelectItem
+            value={CardType.Armor}
+            className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
+          >
+            Armor
+          </SelectItem>
+          <SelectItem
+            value={CardType.Weapon}
+            className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
+          >
+            Weapon
+          </SelectItem>
+        </SelectGroup>
       </SelectContent>
     </Select>
   );

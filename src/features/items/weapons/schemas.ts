@@ -1,14 +1,13 @@
 import { z } from "zod";
-import { BaseCardSchema } from "@/features/cards/schemas";
-import { ItemRarity, ItemSubtype } from "@/features/items/constants";
-import { CardType } from "@/features/cards/constants";
 import {
   DamageType,
   WeaponProperty,
   WeaponType,
   WeaponAttackType,
-  WeaponCategory,
 } from "./constants";
+import { BaseCardSchema } from "@/features/cards/schemas";
+import { CardType } from "@/features/cards/constants";
+import { ItemRarity } from "../constants";
 
 export const WeaponDamageSchema = z.object({
   amount: z.string(), // e.g. "1d8"
@@ -23,18 +22,13 @@ export const WeaponRangeSchema = z.object({
 
 export type WeaponDamage = z.infer<typeof WeaponDamageSchema>;
 export type WeaponRange = z.infer<typeof WeaponRangeSchema>;
-export const WeaponTypeSchema = z.enum(
-  Object.values(WeaponType) as [string, ...string[]],
-);
 export const WeaponPropertySchema = z.enum(WeaponProperty);
 
 const BaseWeaponFields = BaseCardSchema.extend({
-  type: z.literal(CardType.Item),
+  type: z.literal(CardType.Weapon),
+  weaponType: z.enum(WeaponType),
   rarity: z.enum(ItemRarity),
   attunement: z.boolean(),
-  subtype: z.literal(ItemSubtype.Weapon),
-  weaponType: WeaponTypeSchema,
-  category: z.enum(WeaponCategory),
   damage: WeaponDamageSchema,
   properties: z.array(WeaponPropertySchema),
 });
@@ -52,48 +46,66 @@ export const WeaponItemSchema = z
       range: WeaponRangeSchema,
     }),
   ])
-  .superRefine((data, ctx) => {
-    const props = data.properties || [];
+  .refine(
+    (data) => {
+      // Logic for versatile property checking
+      const isVersatile = data.properties.includes(WeaponProperty.Versatile);
+      if (isVersatile && !data.damage.versatile) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Versatile weapons must have a versatile damage value",
+      path: ["damage", "versatile"],
+    },
+  )
+  .refine(
+    ({ attackType, properties }) => {
+      // Logic for ranged property checking
+      const isRanged = attackType === WeaponAttackType.Ranged;
+      const isThrown = properties.includes(WeaponProperty.Thrown);
+      const isAmmunition = properties.includes(WeaponProperty.Ammunition);
 
-    // Versatile Check
-    if (props.includes(WeaponProperty.Versatile) && !data.damage.versatile) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Versatile damage is required for Versatile weapons",
-        path: ["damage", "versatile"],
-      });
-    }
+      if (isRanged && !isThrown && !isAmmunition) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Ranged weapon requires either Thrown or Ammunition property",
+      path: ["properties"],
+    },
+  )
+  .refine(
+    ({ properties, range }) => {
+      // Logic for thrown property checking
+      const isThrown = properties.includes(WeaponProperty.Thrown);
 
-    // Ranged weapon requires either Thrown or Ammunition property
-    if (
-      data.attackType === WeaponAttackType.Ranged &&
-      !props.includes(WeaponProperty.Thrown) &&
-      !props.includes(WeaponProperty.Ammunition)
-    ) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Ranged weapon requires either Thrown or Ammunition property",
-        path: ["properties"],
-      });
-    }
+      if (isThrown && !range) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Thrown weapon requires Range (Normal/Long)",
+      path: ["range"],
+    },
+  )
+  .refine(
+    ({ properties, range }) => {
+      // Logic for ammunition property checking
+      const isAmmunition = properties.includes(WeaponProperty.Ammunition);
 
-    // Thrown Check
-    if (props.includes(WeaponProperty.Thrown) && !data.range) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Range (Normal/Long) is required for Thrown weapons",
-        path: ["range"],
-      });
-    }
-
-    // Ammunition Check
-    if (props.includes(WeaponProperty.Ammunition) && !data.range) {
-      ctx.addIssue({
-        code: "custom",
-        message: "Range (Normal/Long) is required for Ammunition weapons",
-        path: ["range"],
-      });
-    }
-  });
+      if (isAmmunition && !range) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "Ammunition weapon requires Range (Normal/Long)",
+      path: ["range"],
+    },
+  );
 
 export type WeaponItem = z.infer<typeof WeaponItemSchema>;
