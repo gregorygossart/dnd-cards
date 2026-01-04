@@ -73,4 +73,9 @@ export const CARD_BACK_PRESETS = [
     name: "Shield & Sword",
     src: "/card-backs/shield-sword.png",
   },
+  {
+    id: "magic-eye",
+    name: "Magic Eye",
+    src: "/card-backs/magic-eye.png",
+  },
 ] as const;
