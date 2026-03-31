@@ -19,7 +19,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
     setRightDrawerOpen,
   } = useUIStore();
   const { decks, currentDeckIndex, currentCardIndex } = useDeckStore();
-  const { t } = useT();
+  const { t, i18n } = useT();
 
   const currentDeck = decks[currentDeckIndex];
   const currentCard = currentDeck?.cards[currentCardIndex];
@@ -90,7 +90,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
       {/* Right: Actions */}
       <div className="flex items-center gap-4 shrink-0">
         {/* Print Button */}
-        <Link href="/print">
+        <Link href={`/${i18n.language}/print`}>
           <Button
             variant="ghost"
             size="sm"

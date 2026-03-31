@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useEffect, useState } from "react";
+import Link from "next/link";
 import { CardRenderer, CardSide } from "@/components/CardRenderer/CardRenderer";
 import { PRINT_CONFIG, getCardDimensions } from "@/lib/cardConstants";
 import { useT } from "next-i18next/client";
@@ -8,7 +9,7 @@ import { useDeckStore } from "@/hooks/useDeckStore";
 
 export default function PrintPage() {
   const { decks, currentDeckIndex } = useDeckStore();
-  const { t } = useT();
+  const { t, i18n } = useT();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -104,12 +105,12 @@ export default function PrintPage() {
             </svg>
             {t("printPage.print")}
           </button>
-          <button
-            onClick={() => window.history.back()}
+          <Link
+            href={`/${i18n.language}`}
             className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded font-medium transition-colors"
           >
             {t("common.back")}
-          </button>
+          </Link>
         </div>
       </div>
 
