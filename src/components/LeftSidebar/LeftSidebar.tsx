@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/useMediaQuery";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { LanguageSwitcher, LanguageSwitcherSkeleton } from "@/components/LanguageSwitcher";
 
 interface LeftSidebarProps {
   isLoading?: boolean;
@@ -32,6 +32,11 @@ const LeftSidebarContent: React.FC<{ isLoading?: boolean }> = ({
           <Skeleton className="h-10 w-full" />
           <Skeleton className="h-10 w-full" />
           <Skeleton className="h-10 w-full" />
+        </div>
+
+        {/* Settings Footer Skeleton */}
+        <div className="p-4 border-t border-slate-800 shrink-0 bg-slate-900/50">
+          <LanguageSwitcherSkeleton />
         </div>
       </div>
     );

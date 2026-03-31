@@ -10,6 +10,11 @@ import {
 } from "@/components/ui/select";
 import { LANGUAGES } from "@/app/i18n/constants";
 import { Globe } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+
+export const LanguageSwitcherSkeleton: React.FC = () => {
+    return <Skeleton className="w-full h-9 bg-slate-800 border border-slate-700/50" />;
+};
 
 export const LanguageSwitcher: React.FC = () => {
     const { i18n } = useT();
