@@ -41,5 +41,21 @@
   "printPage": {
     "printPreview": "Aperçu de l'impression",
     "print": "Imprimer"
+  },
+  "editor": {
+    "title": "Éditeur de carte",
+    "tabs": {
+      "properties": "Propriétés",
+      "importExport": "Import / Export"
+    },
+    "importExport": {
+      "title": "Données de la carte",
+      "copyTitle": "Copier le JSON",
+      "placeholder": "Coller le JSON ici...",
+      "status": {
+        "saved": "Enregistré",
+        "unknownError": "Erreur inconnue"
+      }
+    }
   }
 }

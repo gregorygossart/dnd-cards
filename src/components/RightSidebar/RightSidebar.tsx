@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
+import { useT } from "next-i18next/client";
 import { useUIStore } from "@/hooks/useUIStore";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CardEditor } from "@/components/RightSidebar/CardEditor/CardEditor";
@@ -27,6 +28,7 @@ const RightSidebarContent: React.FC<{ isLoading?: boolean }> = ({
 }) => {
   const { decks, currentDeckIndex, currentCardIndex, updateCard } =
     useDeckStore();
+  const { t } = useT();
 
   const currentDeck = decks[currentDeckIndex];
   const currentCard = currentDeck?.cards[currentCardIndex];
@@ -92,13 +94,13 @@ const RightSidebarContent: React.FC<{ isLoading?: boolean }> = ({
             value={ActiveTab.Edit}
             className="text-slate-400 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100 hover:text-slate-200 transition-colors"
           >
-            Properties
+            {t("editor.tabs.properties")}
           </TabsTrigger>
           <TabsTrigger
             value={ActiveTab.ImportExport}
             className="text-slate-400 data-[state=active]:bg-slate-700 data-[state=active]:text-slate-100 hover:text-slate-200 transition-colors"
           >
-            Import / Export
+            {t("editor.tabs.importExport")}
           </TabsTrigger>
         </TabsList>
       </div>
@@ -131,13 +133,14 @@ export const RightSidebar: React.FC<RightSidebarProps> = ({
 }) => {
   const { rightDrawerOpen, setRightDrawerOpen } = useUIStore();
   const isMobile = useIsMobile();
+  const { t } = useT();
 
   if (isMobile) {
     return (
       <Sheet open={rightDrawerOpen} onOpenChange={setRightDrawerOpen}>
         <SheetContent className="w-full max-w-96 bg-slate-900 border-l border-slate-800">
           <SheetHeader className="sr-only">
-            <SheetTitle>Card Editor</SheetTitle>
+            <SheetTitle>{t("editor.title")}</SheetTitle>
           </SheetHeader>
           <RightSidebarContent isLoading={isLoading} />
         </SheetContent>

@@ -1,45 +1,61 @@
 {
-    "common": {
-        "loading": "Loading...",
-        "cancel": "Cancel",
-        "back": "Back"
+  "common": {
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "back": "Back"
+  },
+  "navigation": {
+    "myDecks": "My decks"
+  },
+  "deck": {
+    "printDeck": "Print deck",
+    "noDeckFound": "No deck found.",
+    "add": {
+      "buttonLabel": "Add deck",
+      "placeholder": "Deck name..."
     },
-    "navigation": {
-        "myDecks": "My decks"
+    "actions": {
+      "rename": "Rename",
+      "delete": "Delete"
     },
-    "deck": {
-        "printDeck": "Print deck",
-        "noDeckFound": "No deck found.",
-        "add": {
-            "buttonLabel": "Add deck",
-            "placeholder": "Deck name..."
-        },
-        "actions": {
-            "rename": "Rename",
-            "delete": "Delete"
-        },
-        "deletePopup": {
-            "title": "Delete deck",
-            "description": "Are you sure you want to delete \"{{deckName}}\"? This will also delete all {{cardCount}} card(s) in this deck. This action cannot be undone."
-        }
-    },
-    "card": {
-        "editCard": "Edit card",
-        "untitledCard": "Untitled card",
-        "add": {
-            "buttonLabel": "Add card"
-        },
-        "actions": {
-            "duplicate": "Duplicate",
-            "delete": "Delete"
-        },
-        "deletePopup": {
-            "title": "Delete card",
-            "description": "Are you sure you want to delete \"{{cardName}}\"? This action cannot be undone."
-        }
-    },
-    "printPage": {
-        "printPreview": "Print preview",
-        "print": "Print"
+    "deletePopup": {
+      "title": "Delete deck",
+      "description": "Are you sure you want to delete \"{{deckName}}\"? This will also delete all {{cardCount}} card(s) in this deck. This action cannot be undone."
     }
+  },
+  "card": {
+    "editCard": "Edit card",
+    "untitledCard": "Untitled card",
+    "add": {
+      "buttonLabel": "Add card"
+    },
+    "actions": {
+      "duplicate": "Duplicate",
+      "delete": "Delete"
+    },
+    "deletePopup": {
+      "title": "Delete card",
+      "description": "Are you sure you want to delete \"{{cardName}}\"? This action cannot be undone."
+    }
+  },
+  "printPage": {
+    "printPreview": "Print preview",
+    "print": "Print"
+  },
+  "editor": {
+    "title": "Card editor",
+    "tabs": {
+      "properties": "Properties",
+      "importExport": "Import / Export"
+    },
+    "importExport": {
+      "title": "Card data",
+      "copyTitle": "Copy JSON",
+      "placeholder": "Paste JSON here...",
+      "status": {
+        "saved": "Saved",
+        "unknownError": "Unknown error"
+      }
+    }
+  }
 }

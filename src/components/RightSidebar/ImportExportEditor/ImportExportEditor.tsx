@@ -4,6 +4,7 @@ import { CardSchema } from "@/features/cards/types";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Copy, Check, AlertCircle } from "lucide-react";
+import { useT } from "next-i18next/client";
 import { useDebounce } from "@/hooks/useDebounce";
 
 interface ImportExportEditorProps {
@@ -19,6 +20,7 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
+  const { t } = useT();
 
   // Debounce the JSON text input
   const debouncedJsonText = useDebounce(jsonText, 500);
@@ -63,7 +65,7 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({
         console.log(e);
         setError(e.message);
       } else {
-        setError("Unknown error");
+        setError(t("editor.importExport.status.unknownError"));
       }
       setSaved(false);
     }
@@ -79,13 +81,13 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({
     <div className="h-full flex flex-col space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-slate-300 font-semibold text-sm">Card Data</h3>
+        <h3 className="text-slate-300 font-semibold text-sm">{t("editor.importExport.title")}</h3>
         <Button
           size="icon-sm"
           variant="outline"
           onClick={handleCopy}
           className="h-7 w-7"
-          title="Copy JSON"
+          title={t("editor.importExport.copyTitle")}
         >
           {copied ? (
             <Check className="h-3.5 w-3.5 text-green-400" />
@@ -105,7 +107,7 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({
           if (saved) setSaved(false);
         }}
         className="flex-1 font-mono text-xs bg-slate-950 border-slate-800 text-slate-300 placeholder:text-slate-600 focus-visible:ring-slate-500 resize-none"
-        placeholder="Paste JSON here..."
+        placeholder={t("editor.importExport.placeholder")}
       />
 
       {/* Status */}
@@ -113,7 +115,7 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({
         {saved && (
           <div className="flex items-center gap-1.5 text-xs text-green-400">
             <Check className="h-3.5 w-3.5" />
-            <span>Saved</span>
+            <span>{t("editor.importExport.status.saved")}</span>
           </div>
         )}
         {error && (
