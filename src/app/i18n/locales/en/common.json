@@ -1,5 +1,29 @@
 {
     "ui": {
-        "myDecks": "My Decks"
+        "myDecks": "My decks",
+        "addDeck": {
+            "buttonLabel": "Add deck",
+            "placeholder": "Deck name..."
+        },
+        "addCard": {
+            "buttonLabel": "Add card"
+        },
+        "deck": {
+            "rename": "Rename",
+            "delete": "Delete",
+            "deleteDeckPopup": {
+                "title": "Delete deck",
+                "description": "Are you sure you want to delete \"{{deckName}}\"? This will also delete all {{cardCount}} card(s) in this deck. This action cannot be undone."
+            }
+        },
+        "card": {
+            "duplicate": "Duplicate",
+            "delete": "Delete",
+            "deleteCardPopup": {
+                "title": "Delete card",
+                "description": "Are you sure you want to delete \"{{cardName}}\"? This action cannot be undone."
+            }
+        },
+        "cancel": "Cancel"
     }
 }

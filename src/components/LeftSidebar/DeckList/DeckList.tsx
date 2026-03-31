@@ -246,7 +246,7 @@ export const DeckList: React.FC = () => {
                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
                           />
                         </svg>
-                        Rename
+                        {t("ui.deck.rename")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={(e) => {
@@ -268,7 +268,7 @@ export const DeckList: React.FC = () => {
                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                           />
                         </svg>
-                        Delete
+                        {t("ui.deck.delete")}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -375,7 +375,7 @@ export const DeckList: React.FC = () => {
                                   d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
                                 />
                               </svg>
-                              Duplicate
+                              {t("ui.card.duplicate")}
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={(e) => {
@@ -402,7 +402,7 @@ export const DeckList: React.FC = () => {
                                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                                 />
                               </svg>
-                              Delete
+                              {t("ui.card.delete")}
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -426,18 +426,18 @@ export const DeckList: React.FC = () => {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Deck</AlertDialogTitle>
+            <AlertDialogTitle>{t("ui.deck.deletePopup.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{deckToDelete?.name}"? This will
-              also delete all{" "}
-              {decks.find((d) => d.id === deckToDelete?.id)?.cards.length || 0}{" "}
-              card(s) in this deck. This action cannot be undone.
+              {t("ui.deck.deletePopup.description", {
+                deckName: deckToDelete?.name,
+                cardCount: decks.find((d) => d.id === deckToDelete?.id)?.cards.length || 0,
+              })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("ui.cancel")}</AlertDialogCancel>
             <AlertDialogAction onClick={confirmDelete} variant="destructive">
-              Delete
+              {t("ui.deck.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -450,19 +450,20 @@ export const DeckList: React.FC = () => {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Card</AlertDialogTitle>
+            <AlertDialogTitle>{t("ui.card.deletePopup.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{cardToDelete?.title}"? This
-              action cannot be undone.
+              {t("ui.card.deletePopup.description", {
+                cardName: cardToDelete?.title,
+              })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("ui.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={confirmCardDelete}
               variant="destructive"
             >
-              Delete
+              {t("ui.card.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
