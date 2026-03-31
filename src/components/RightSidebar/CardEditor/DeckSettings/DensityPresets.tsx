@@ -1,4 +1,5 @@
 import { useDeckStore, DENSITY_PRESETS } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 import { DensityPreset } from "@/features/decks/constants";
 import { Button } from "@/components/ui/button";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
@@ -9,6 +10,7 @@ interface DensityPresetsProps {
 
 export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
   const { updateDeckStyle } = useDeckStore();
+  const { t } = useT();
 
   const applyPreset = (presetName: DensityPreset) => {
     const preset = DENSITY_PRESETS[presetName];
@@ -17,7 +19,7 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
 
   return (
     <div className="space-y-2">
-      <EditorLabel>Density Presets</EditorLabel>
+      <EditorLabel>{t("deck.settings.density")}</EditorLabel>
       <div className="grid grid-cols-3 gap-2">
         <Button
           variant="outline"
@@ -25,7 +27,7 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
           onClick={() => applyPreset(DensityPreset.Compact)}
           className="text-xs"
         >
-          {DensityPreset.Compact}
+          {t("deck.settings.densityLevels.compact")}
         </Button>
         <Button
           variant="outline"
@@ -33,7 +35,7 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
           onClick={() => applyPreset(DensityPreset.Normal)}
           className="text-xs"
         >
-          {DensityPreset.Normal}
+          {t("deck.settings.densityLevels.normal")}
         </Button>
         <Button
           variant="outline"
@@ -41,7 +43,7 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
           onClick={() => applyPreset(DensityPreset.Spacious)}
           className="text-xs"
         >
-          {DensityPreset.Spacious}
+          {t("deck.settings.densityLevels.spacious")}
         </Button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { CardFormat } from "@/features/cards/constants";
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 import { Button } from "@/components/ui/button";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
@@ -11,6 +12,7 @@ export const CardFormatSelector: React.FC<CardFormatSelectorProps> = ({
   deckId,
 }) => {
   const { decks, updateDeckStyle } = useDeckStore();
+  const { t } = useT();
   const deck = decks.find((d) => d.id === deckId);
   const cardFormat = deck?.style?.cardFormat ?? CardFormat.Tarot;
 
@@ -20,7 +22,7 @@ export const CardFormatSelector: React.FC<CardFormatSelectorProps> = ({
 
   return (
     <div className="space-y-2">
-      <EditorLabel>Card Format</EditorLabel>
+      <EditorLabel>{t("deck.settings.format")}</EditorLabel>
       <div className="grid grid-cols-2 gap-2">
         <Button
           variant={cardFormat === CardFormat.Tarot ? "default" : "outline"}
@@ -28,7 +30,7 @@ export const CardFormatSelector: React.FC<CardFormatSelectorProps> = ({
           onClick={() => handleCardFormatChange(CardFormat.Tarot)}
           className="text-xs"
         >
-          Tarot
+          {t("deck.settings.formats.tarot")}
         </Button>
         <Button
           variant={cardFormat === CardFormat.Poker ? "default" : "outline"}
@@ -36,7 +38,7 @@ export const CardFormatSelector: React.FC<CardFormatSelectorProps> = ({
           onClick={() => handleCardFormatChange(CardFormat.Poker)}
           className="text-xs"
         >
-          Poker
+          {t("deck.settings.formats.poker")}
         </Button>
       </div>
     </div>

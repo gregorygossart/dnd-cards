@@ -1,61 +1,81 @@
 {
-  "common": {
-    "loading": "Chargement...",
-    "cancel": "Annuler",
-    "back": "Retour"
-  },
-  "navigation": {
-    "myDecks": "Mes decks"
-  },
-  "deck": {
-    "printDeck": "Imprimer le deck",
-    "noDeckFound": "Aucun deck trouvé.",
-    "add": {
-       "buttonLabel": "Ajouter un deck",
-       "placeholder": "Nom du deck..."
+    "common": {
+        "loading": "Chargement...",
+        "cancel": "Annuler",
+        "back": "Retour"
     },
-    "actions": {
-      "rename": "Renommer",
-      "delete": "Supprimer"
+    "navigation": {
+        "myDecks": "Mes decks"
     },
-    "deletePopup": {
-      "title": "Supprimer le deck",
-      "description": "Êtes-vous sûr de vouloir supprimer \"{{deckName}}\"? Cela supprimera également les {{cardCount}} carte(s) de ce deck. Cette action ne peut pas être annulée."
+    "deck": {
+        "printDeck": "Imprimer le deck",
+        "noDeckFound": "Aucun deck trouvé.",
+        "add": {
+            "buttonLabel": "Ajouter un deck",
+            "placeholder": "Nom du deck..."
+        },
+        "actions": {
+            "rename": "Renommer",
+            "delete": "Supprimer"
+        },
+        "deletePopup": {
+            "title": "Supprimer le deck",
+            "description": "Êtes-vous sûr de vouloir supprimer \"{{deckName}}\"? Cela supprimera également les {{cardCount}} carte(s) de ce deck. Cette action est irréversible."
+        },
+        "settings": {
+            "title": "Paramètres du deck",
+            "format": "Format de la carte",
+            "formats": {
+                "tarot": "Tarot",
+                "poker": "Poker"
+            },
+            "borderRadius": "Arrondi des bords",
+            "imageHeight": "Taille de l'image",
+            "density": "Préréglages de densité",
+            "densityLevels": {
+                "compact": "Compact",
+                "normal": "Normal",
+                "spacious": "Espacé"
+            },
+            "titleSize": "Taille de police du titre",
+            "bodySize": "Taille de police du texte",
+            "lineHeight": "Hauteur de ligne",
+            "padding": "Espacement intérieur"
+        }
+    },
+    "card": {
+        "editCard": "Modifier la carte",
+        "untitledCard": "Carte sans titre",
+        "add": {
+            "buttonLabel": "Ajouter une carte"
+        },
+        "actions": {
+            "duplicate": "Dupliquer",
+            "delete": "Supprimer"
+        },
+        "deletePopup": {
+            "title": "Supprimer la carte",
+            "description": "Êtes-vous sûr de vouloir supprimer \"{{cardName}}\"? Cette action est irréversible."
+        }
+    },
+    "printPage": {
+        "printPreview": "Aperçu avant impression",
+        "print": "Imprimer"
+    },
+    "editor": {
+        "title": "Éditeur de carte",
+        "tabs": {
+            "properties": "Propriétés",
+            "importExport": "Import / Export"
+        },
+        "importExport": {
+            "title": "Données sources",
+            "copyTitle": "Copier le JSON",
+            "placeholder": "Coller le JSON ici...",
+            "status": {
+                "saved": "Enregistré",
+                "unknownError": "Erreur inconnue"
+            }
+        }
     }
-  },
-  "card": {
-    "editCard": "Modifier la carte",
-    "untitledCard": "Carte sans titre",
-    "add": {
-      "buttonLabel": "Ajouter une carte"
-    },
-    "actions": {
-      "duplicate": "Dupliquer",
-      "delete": "Supprimer"
-    },
-    "deletePopup": {
-      "title": "Supprimer la carte",
-      "description": "Êtes-vous sûr de vouloir supprimer \"{{cardName}}\"? Cette action ne peut pas être annulée."
-    }
-  },
-  "printPage": {
-    "printPreview": "Aperçu de l'impression",
-    "print": "Imprimer"
-  },
-  "editor": {
-    "title": "Éditeur de carte",
-    "tabs": {
-      "properties": "Propriétés",
-      "importExport": "Import / Export"
-    },
-    "importExport": {
-      "title": "Données de la carte",
-      "copyTitle": "Copier le JSON",
-      "placeholder": "Coller le JSON ici...",
-      "status": {
-        "saved": "Enregistré",
-        "unknownError": "Erreur inconnue"
-      }
-    }
-  }
 }

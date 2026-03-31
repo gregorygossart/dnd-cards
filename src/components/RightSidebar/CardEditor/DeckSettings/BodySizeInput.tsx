@@ -1,4 +1,5 @@
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 import { Slider } from "@/components/ui/slider";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
@@ -8,6 +9,7 @@ interface BodySizeInputProps {
 
 export const BodySizeInput: React.FC<BodySizeInputProps> = ({ deckId }) => {
   const { decks, updateDeckStyle } = useDeckStore();
+  const { t } = useT();
   const deck = decks.find((d) => d.id === deckId);
   const bodyFontSize = deck?.style?.bodyFontSize ?? 14;
 
@@ -21,7 +23,7 @@ export const BodySizeInput: React.FC<BodySizeInputProps> = ({ deckId }) => {
         htmlFor="body-size"
         className="flex items-center justify-between"
       >
-        <span>Body Size</span>
+        <span>{t("deck.settings.bodySize")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {bodyFontSize}px
         </span>
