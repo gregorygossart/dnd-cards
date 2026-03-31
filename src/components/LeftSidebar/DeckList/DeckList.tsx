@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useT } from "next-i18next/client";
 import type { Deck } from "@/features/decks/types";
 import { type Card } from "@/features/cards/types";
 import { CardType } from "@/features/cards/constants";
@@ -55,6 +56,7 @@ export const DeckList: React.FC = () => {
     setCurrentCard,
     updateDeckName,
   } = useDeckStore();
+  const { t } = useT();
 
   const [expandedDeckIndex, setExpandedDeckIndex] =
     useState<number>(currentDeckIndex);
@@ -121,7 +123,7 @@ export const DeckList: React.FC = () => {
   return (
     <div className="flex-1 overflow-y-auto p-4">
       <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-3">
-        My Decks
+        {t("ui.myDecks")}
       </div>
 
       <AddDeckButton />
