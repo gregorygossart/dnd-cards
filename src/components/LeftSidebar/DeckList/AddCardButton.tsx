@@ -32,7 +32,7 @@ export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId }) => {
         </svg>
       </div>
       <div className="flex-1 min-w-0">
-        <div className="truncate font-medium">{t("ui.addCard.buttonLabel")}</div>
+        <div className="truncate font-medium">{t("card.add.buttonLabel")}</div>
       </div>
     </button>
   );

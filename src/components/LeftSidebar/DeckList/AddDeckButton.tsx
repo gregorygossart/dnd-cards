@@ -24,7 +24,7 @@ export const AddDeckButton: React.FC = () => {
           type="text"
           value={deckName}
           onChange={(e) => setDeckName(e.target.value)}
-          placeholder={t("ui.addDeck.placeholder")}
+          placeholder={t("deck.add.placeholder")}
           autoFocus
           className="w-full px-2 py-1 text-sm bg-slate-800 border border-slate-700 rounded text-slate-100 placeholder-slate-500 focus:outline-none focus:border-violet-500"
           onBlur={() => {
@@ -57,7 +57,7 @@ export const AddDeckButton: React.FC = () => {
           />
         </svg>
       </div>
-      <span className="font-medium">{t("ui.addDeck.buttonLabel")}</span>
+      <span className="font-medium">{t("deck.add.buttonLabel")}</span>
     </button>
   );
 };

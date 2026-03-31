@@ -1,29 +1,45 @@
 {
-    "ui": {
-        "myDecks": "My decks",
-        "addDeck": {
+    "common": {
+        "loading": "Loading...",
+        "cancel": "Cancel",
+        "back": "Back"
+    },
+    "navigation": {
+        "myDecks": "My decks"
+    },
+    "deck": {
+        "printDeck": "Print deck",
+        "noDeckFound": "No deck found.",
+        "add": {
             "buttonLabel": "Add deck",
             "placeholder": "Deck name..."
         },
-        "addCard": {
+        "actions": {
+            "rename": "Rename",
+            "delete": "Delete"
+        },
+        "deletePopup": {
+            "title": "Delete deck",
+            "description": "Are you sure you want to delete \"{{deckName}}\"? This will also delete all {{cardCount}} card(s) in this deck. This action cannot be undone."
+        }
+    },
+    "card": {
+        "editCard": "Edit card",
+        "untitledCard": "Untitled card",
+        "add": {
             "buttonLabel": "Add card"
         },
-        "deck": {
-            "rename": "Rename",
-            "delete": "Delete",
-            "deleteDeckPopup": {
-                "title": "Delete deck",
-                "description": "Are you sure you want to delete \"{{deckName}}\"? This will also delete all {{cardCount}} card(s) in this deck. This action cannot be undone."
-            }
-        },
-        "card": {
+        "actions": {
             "duplicate": "Duplicate",
-            "delete": "Delete",
-            "deleteCardPopup": {
-                "title": "Delete card",
-                "description": "Are you sure you want to delete \"{{cardName}}\"? This action cannot be undone."
-            }
+            "delete": "Delete"
         },
-        "cancel": "Cancel"
+        "deletePopup": {
+            "title": "Delete card",
+            "description": "Are you sure you want to delete \"{{cardName}}\"? This action cannot be undone."
+        }
+    },
+    "printPage": {
+        "printPreview": "Print preview",
+        "print": "Print"
     }
 }

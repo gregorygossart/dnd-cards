@@ -3,10 +3,12 @@
 import { Fragment, useEffect, useState } from "react";
 import { CardRenderer, CardSide } from "@/components/CardRenderer/CardRenderer";
 import { PRINT_CONFIG, getCardDimensions } from "@/lib/cardConstants";
+import { useT } from "next-i18next/client";
 import { useDeckStore } from "@/hooks/useDeckStore";
 
 export default function PrintPage() {
   const { decks, currentDeckIndex } = useDeckStore();
+  const { t } = useT();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -16,7 +18,7 @@ export default function PrintPage() {
   if (!mounted) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        Loading...
+        {t("common.loading")}
       </div>
     );
   }
@@ -26,7 +28,7 @@ export default function PrintPage() {
   if (!currentDeck) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        No deck found.
+        {t("deck.noDeckFound")}
       </div>
     );
   }
@@ -76,7 +78,7 @@ export default function PrintPage() {
       {/* Toolbar (hidden on print) */}
       <div className="fixed top-0 left-0 right-0 h-16 bg-slate-900 text-white flex items-center justify-between px-8 shadow-lg print:hidden z-50">
         <div className="flex items-center gap-4">
-          <h1 className="font-bold text-lg">Print Preview</h1>
+          <h1 className="font-bold text-lg">{t("printPage.printPreview")}</h1>
           <span className="text-slate-400">|</span>
           <span className="text-slate-300">
             {currentDeck.name} ({currentDeck.cards.length} cards)
@@ -100,13 +102,13 @@ export default function PrintPage() {
                 d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
               />
             </svg>
-            Print
+            {t("printPage.print")}
           </button>
           <button
             onClick={() => window.history.back()}
             className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded font-medium transition-colors"
           >
-            Back
+            {t("common.back")}
           </button>
         </div>
       </div>
