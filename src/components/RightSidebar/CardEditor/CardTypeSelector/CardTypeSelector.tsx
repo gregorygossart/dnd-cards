@@ -30,7 +30,7 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
             {t("editor.propertiesTab.cardType.crafting")}
           </span>
           <span className="text-2xl font-black uppercase tracking-tight text-violet-500">
-            {t(`editor.propertiesTab.cardType.types.${value.toLowerCase()}`)}
+            {t(`card.types.${value.toLowerCase()}`)}
           </span>
         </div>
       </SelectTrigger>
@@ -43,13 +43,13 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
             value={CardType.Ability}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            {t("editor.propertiesTab.cardType.types.ability")}
+            {t("card.types.ability")}
           </SelectItem>
           <SelectItem
             value={CardType.Spell}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            {t("editor.propertiesTab.cardType.types.spell")}
+            {t("card.types.spell")}
           </SelectItem>
         </SelectGroup>
 
@@ -61,14 +61,14 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
             value={CardType.Armor}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            {t("editor.propertiesTab.cardType.types.armor")}
+            {t("card.types.armor")}
           </SelectItem>
           <SelectItem
             disabled
             value={CardType.Weapon}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            {t("editor.propertiesTab.cardType.types.weapon")}
+            {t("card.types.weapon")}
           </SelectItem>
         </SelectGroup>
       </SelectContent>

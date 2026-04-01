@@ -26,6 +26,12 @@
         }
     },
     "card": {
+        "types": {
+            "ability": "Ability",
+            "spell": "Spell",
+            "armor": "Armor",
+            "weapon": "Weapon"
+        },
         "editCard": "Edit card",
         "untitledCard": "Untitled card",
         "add": {
@@ -88,12 +94,6 @@
                 "groups": {
                     "abilitiesAndSpells": "Abilities & Spells",
                     "items": "Items"
-                },
-                "types": {
-                    "ability": "Ability",
-                    "spell": "Spell",
-                    "armor": "Armor",
-                    "weapon": "Weapon"
                 }
             },
             "cardName": "Card name",

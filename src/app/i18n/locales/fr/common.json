@@ -26,6 +26,12 @@
         }
     },
     "card": {
+        "types": {
+            "ability": "Capacité",
+            "spell": "Sort",
+            "armor": "Armure",
+            "weapon": "Arme"
+        },
         "editCard": "Modifier la carte",
         "untitledCard": "Carte sans titre",
         "add": {
@@ -89,12 +95,6 @@
                 "groups": {
                     "abilitiesAndSpells": "Capacités & Sorts",
                     "items": "Objets"
-                },
-                "types": {
-                    "ability": "Capacité",
-                    "spell": "Sort",
-                    "armor": "Armure",
-                    "weapon": "Arme"
                 }
             },
             "spellDetails": {
