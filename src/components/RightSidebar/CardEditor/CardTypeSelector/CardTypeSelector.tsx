@@ -55,12 +55,14 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
           <SelectLabel>Items</SelectLabel>
 
           <SelectItem
+            disabled
             value={CardType.Armor}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
             Armor
           </SelectItem>
           <SelectItem
+            disabled
             value={CardType.Weapon}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
