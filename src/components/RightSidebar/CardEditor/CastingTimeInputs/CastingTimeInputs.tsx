@@ -39,7 +39,7 @@ export const CastingTimeInputs: React.FC = () => {
             htmlFor="ritual"
             className="text-xs font-normal text-slate-400 cursor-pointer"
           >
-            {t("editor.propertiesTab.spellDetails.castingTime.ritual")}
+            {t("card.spell.ritual")}
           </Label>
         </div>
       </div>
@@ -71,19 +71,19 @@ export const CastingTimeInputs: React.FC = () => {
                 </SelectTrigger>
                 <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                   <SelectItem value={CastingTimeUnit.Action}>
-                    {t("editor.propertiesTab.spellDetails.castingTime.units.action")}
+                    {t("card.spell.castingTimeUnits.action")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.BonusAction}>
-                    {t("editor.propertiesTab.spellDetails.castingTime.units.bonusAction")}
+                    {t("card.spell.castingTimeUnits.bonusAction")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.Reaction}>
-                    {t("editor.propertiesTab.spellDetails.castingTime.units.reaction")}
+                    {t("card.spell.castingTimeUnits.reaction")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.Minute}>
-                    {t("editor.propertiesTab.spellDetails.castingTime.units.minute")}
+                    {t("card.spell.castingTimeUnits.minute")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.Hour}>
-                    {t("editor.propertiesTab.spellDetails.castingTime.units.hour")}
+                    {t("card.spell.castingTimeUnits.hour")}
                   </SelectItem>
                 </SelectContent>
               </Select>

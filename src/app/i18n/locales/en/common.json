@@ -4,7 +4,22 @@
         "cancel": "Cancel",
         "back": "Back",
         "clear": "Clear",
-        "browse": "Browse"
+        "browse": "Browse",
+        "upTo": "Up to",
+        "units": {
+            "distance": {
+                "foot": "Foot",
+                "feet": "Feet",
+                "mile": "Mile",
+                "miles": "Miles"
+            },
+            "time": {
+                "round": "Round(s)",
+                "minute": "Minute(s)",
+                "hour": "Hour(s)",
+                "day": "Day(s)"
+            }
+        }
     },
     "navigation": {
         "myDecks": "My decks"
@@ -44,6 +59,71 @@
         "deletePopup": {
             "title": "Delete card",
             "description": "Are you sure you want to delete \"{{cardName}}\"? This action cannot be undone."
+        },
+        "spell": {
+            "ritual": "Ritual",
+            "concentration": "Concentration",
+            "schools": {
+                "abjuration": "Abjuration",
+                "conjuration": "Conjuration",
+                "divination": "Divination",
+                "enchantment": "Enchantment",
+                "evocation": "Evocation",
+                "illusion": "Illusion",
+                "necromancy": "Necromancy",
+                "transmutation": "Transmutation"
+            },
+            "levels": {
+                "cantrip": "Cantrip",
+                "level1": "1st Level",
+                "level2": "2nd Level",
+                "level3": "3rd Level",
+                "level4": "4th Level",
+                "level5": "5th Level",
+                "level6": "6th Level",
+                "level7": "7th Level",
+                "level8": "8th Level",
+                "level9": "9th Level"
+            },
+            "castingTimeUnits": {
+                "action": "Action",
+                "bonusAction": "Bonus Action",
+                "reaction": "Reaction",
+                "minute": "Minute(s)",
+                "hour": "Hour(s)"
+            },
+            "rangeTypes": {
+                "self": "Self",
+                "touch": "Touch",
+                "ranged": "Ranged",
+                "sight": "Sight",
+                "unlimited": "Unlimited"
+            },
+            "durationTypes": {
+                "instantaneous": "Instantaneous",
+                "time": "Time",
+                "untilDispelled": "Until dispelled"
+            },
+            "components": {
+                "verbal": "Verbal",
+                "somatic": "Somatic",
+                "material": "Material"
+            }
+        },
+        "item": {
+            "attunement": "Attunement"
+        },
+        "armor": {
+            "ac": "AC",
+            "strengthRequired": "Requires {{value}} Str",
+            "stealthDisadvantage": "Stealth (Disadv)"
+        },
+        "weapon": {
+            "melee": "Melee (5ft)",
+            "reach": "Reach (10ft)",
+            "thrown": "Thrown ({{normal}}/{{long}}ft)",
+            "ammunition": "Ammunition ({{normal}}/{{long}}ft)",
+            "versatile": "Versatile ({{damage}})"
         }
     },
     "printPage": {
@@ -101,82 +181,28 @@
                 "title": "Spell details",
                 "school": {
                     "label": "School",
-                    "placeholder": "No school",
-                    "schools": {
-                        "abjuration": "Abjuration",
-                        "conjuration": "Conjuration",
-                        "divination": "Divination",
-                        "enchantment": "Enchantment",
-                        "evocation": "Evocation",
-                        "illusion": "Illusion",
-                        "necromancy": "Necromancy",
-                        "transmutation": "Transmutation"
-                    }
+                    "placeholder": "No school"
                 },
                 "level": {
                     "label": "Level",
-                    "placeholder": "No level",
-                    "cantrip": "Cantrip",
-                    "level1": "1st Level",
-                    "level2": "2nd Level",
-                    "level3": "3rd Level",
-                    "level4": "4th Level",
-                    "level5": "5th Level",
-                    "level6": "6th Level",
-                    "level7": "7th Level",
-                    "level8": "8th Level",
-                    "level9": "9th Level"
+                    "placeholder": "No level"
                 },
                 "castingTime": {
                     "label": "Casting Time",
-                    "ritual": "Ritual",
-                    "unitPlaceholder": "Unit",
-                    "units": {
-                        "action": "Action",
-                        "bonusAction": "Bonus Action",
-                        "reaction": "Reaction",
-                        "minute": "Minute(s)",
-                        "hour": "Hour(s)"
-                    }
+                    "unitPlaceholder": "Unit"
                 },
                 "range": {
                     "label": "Range",
                     "typePlaceholder": "Range type",
-                    "unitPlaceholder": "Unit",
-                    "types": {
-                        "self": "Self",
-                        "touch": "Touch",
-                        "ranged": "Ranged",
-                        "sight": "Sight",
-                        "unlimited": "Unlimited"
-                    },
-                    "units": {
-                        "feet": "Feet",
-                        "miles": "Miles"
-                    }
+                    "unitPlaceholder": "Unit"
                 },
                 "duration": {
                     "label": "Duration",
-                    "concentration": "Concentration",
                     "typePlaceholder": "Duration type",
-                    "unitPlaceholder": "Unit",
-                    "types": {
-                        "instantaneous": "Instantaneous",
-                        "time": "Time",
-                        "untilDispelled": "Until dispelled"
-                    },
-                    "units": {
-                        "round": "Round(s)",
-                        "minute": "Minute(s)",
-                        "hour": "Hour(s)",
-                        "day": "Day(s)"
-                    }
+                    "unitPlaceholder": "Unit"
                 },
                 "components": {
-                    "label": "Components",
-                    "verbal": "Verbal",
-                    "somatic": "Somatic",
-                    "material": "Material"
+                    "label": "Components"
                 }
             },
             "rulesText": "Rules text",

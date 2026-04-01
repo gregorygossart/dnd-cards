@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { useDeckStore, BASE_PADDING } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 
 interface ArmorStatsProps {
   ac: string;
@@ -15,6 +16,7 @@ export const ArmorStats: React.FC<ArmorStatsProps> = ({
   stealthDisadvantage,
   attunement,
 }) => {
+  const { t } = useT();
   const { decks, currentDeckIndex } = useDeckStore();
   const bodyFontSize = decks[currentDeckIndex]?.style?.bodyFontSize ?? 14;
   const paddingMultiplier =
@@ -33,26 +35,26 @@ export const ArmorStats: React.FC<ArmorStatsProps> = ({
     >
       {attunement && (
         <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-          Attunement
+          {t("card.item.attunement")}
         </Badge>
       )}
 
       {/* AC Badge */}
       <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-        {ac} AC
+        {ac} {t("card.armor.ac")}
       </Badge>
 
       {/* Strength Req Badge */}
       {strengthRequirement && (
         <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-          Requires {strengthRequirement} Str
+          {t("card.armor.strengthRequired", { value: strengthRequirement })}
         </Badge>
       )}
 
       {/* Stealth Disadvantage Badge */}
       {stealthDisadvantage && (
         <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-          Stealth (Disadv)
+          {t("card.armor.stealthDisadvantage")}
         </Badge>
       )}
     </div>

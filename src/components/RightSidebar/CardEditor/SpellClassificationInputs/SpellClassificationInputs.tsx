@@ -34,7 +34,7 @@ export const SpellClassificationInputs: React.FC = () => {
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(SpellSchool).map((school) => (
                   <SelectItem key={school} value={school}>
-                    {t(`editor.propertiesTab.spellDetails.school.schools.${school.toLowerCase()}`)}
+                    {t(`card.spell.schools.${school.toLowerCase()}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -63,16 +63,16 @@ export const SpellClassificationInputs: React.FC = () => {
                 <SelectValue placeholder={t("editor.propertiesTab.spellDetails.level.placeholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
-                <SelectItem value="0">{t("editor.propertiesTab.spellDetails.level.cantrip")}</SelectItem>
-                <SelectItem value="1">{t("editor.propertiesTab.spellDetails.level.level1")}</SelectItem>
-                <SelectItem value="2">{t("editor.propertiesTab.spellDetails.level.level2")}</SelectItem>
-                <SelectItem value="3">{t("editor.propertiesTab.spellDetails.level.level3")}</SelectItem>
-                <SelectItem value="4">{t("editor.propertiesTab.spellDetails.level.level4")}</SelectItem>
-                <SelectItem value="5">{t("editor.propertiesTab.spellDetails.level.level5")}</SelectItem>
-                <SelectItem value="6">{t("editor.propertiesTab.spellDetails.level.level6")}</SelectItem>
-                <SelectItem value="7">{t("editor.propertiesTab.spellDetails.level.level7")}</SelectItem>
-                <SelectItem value="8">{t("editor.propertiesTab.spellDetails.level.level8")}</SelectItem>
-                <SelectItem value="9">{t("editor.propertiesTab.spellDetails.level.level9")}</SelectItem>
+                <SelectItem value="0">{t("card.spell.levels.cantrip")}</SelectItem>
+                <SelectItem value="1">{t("card.spell.levels.level1")}</SelectItem>
+                <SelectItem value="2">{t("card.spell.levels.level2")}</SelectItem>
+                <SelectItem value="3">{t("card.spell.levels.level3")}</SelectItem>
+                <SelectItem value="4">{t("card.spell.levels.level4")}</SelectItem>
+                <SelectItem value="5">{t("card.spell.levels.level5")}</SelectItem>
+                <SelectItem value="6">{t("card.spell.levels.level6")}</SelectItem>
+                <SelectItem value="7">{t("card.spell.levels.level7")}</SelectItem>
+                <SelectItem value="8">{t("card.spell.levels.level8")}</SelectItem>
+                <SelectItem value="9">{t("card.spell.levels.level9")}</SelectItem>
               </SelectContent>
             </Select>
           )}

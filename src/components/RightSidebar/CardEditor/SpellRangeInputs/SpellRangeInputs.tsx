@@ -41,7 +41,7 @@ export const SpellRangeInputs: React.FC = () => {
           <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
             {Object.values(RangeType).map((type) => (
               <SelectItem key={type} value={type}>
-                {t(`editor.propertiesTab.spellDetails.range.types.${type.toLowerCase()}`)}
+                {t(`card.spell.rangeTypes.${type.toLowerCase()}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -69,7 +69,7 @@ export const SpellRangeInputs: React.FC = () => {
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(RangeDistanceUnit).map((unit) => (
                   <SelectItem key={unit} value={unit}>
-                    {t(`editor.propertiesTab.spellDetails.range.units.${unit.toLowerCase()}`)}
+                    {t(`common.units.distance.${unit.toLowerCase()}`)}
                   </SelectItem>
                 ))}
               </SelectContent>

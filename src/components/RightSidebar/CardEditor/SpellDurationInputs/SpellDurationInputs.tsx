@@ -52,13 +52,12 @@ export const SpellDurationInputs: React.FC = () => {
           />
           <Label
             htmlFor="concentration"
-            className={`text-xs font-normal cursor-pointer ${
-              watch("duration.type") === DurationType.Instantaneous
-                ? "text-slate-600"
-                : "text-slate-400"
-            }`}
+            className={`text-xs font-normal cursor-pointer ${watch("duration.type") === DurationType.Instantaneous
+              ? "text-slate-600"
+              : "text-slate-400"
+              }`}
           >
-            {t("editor.propertiesTab.spellDetails.duration.concentration")}
+            {t("card.spell.concentration")}
           </Label>
         </div>
       </div>
@@ -97,7 +96,7 @@ export const SpellDurationInputs: React.FC = () => {
           <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
             {Object.values(DurationType).map((type) => (
               <SelectItem key={type} value={type}>
-                {t(`editor.propertiesTab.spellDetails.duration.types.${getDurationTypeKey(type)}`)}
+                {t(`card.spell.durationTypes.${getDurationTypeKey(type)}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -125,7 +124,7 @@ export const SpellDurationInputs: React.FC = () => {
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(TimeDurationUnit).map((unit) => (
                   <SelectItem key={unit} value={unit}>
-                    {t(`editor.propertiesTab.spellDetails.duration.units.${unit.toLowerCase()}`)}
+                    {t(`common.units.time.${unit.toLowerCase()}`)}
                   </SelectItem>
                 ))}
               </SelectContent>

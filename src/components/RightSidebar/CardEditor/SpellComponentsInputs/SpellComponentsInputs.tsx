@@ -31,7 +31,7 @@ export const SpellComponentsInputs: React.FC = () => {
             htmlFor="verbal"
             className="text-slate-300 font-normal cursor-pointer"
           >
-            {t("editor.propertiesTab.spellDetails.components.verbal")}
+            {t("card.spell.components.verbal")}
           </Label>
         </div>
 
@@ -52,7 +52,7 @@ export const SpellComponentsInputs: React.FC = () => {
             htmlFor="somatic"
             className="text-slate-300 font-normal cursor-pointer"
           >
-            {t("editor.propertiesTab.spellDetails.components.somatic")}
+            {t("card.spell.components.somatic")}
           </Label>
         </div>
 
@@ -73,7 +73,7 @@ export const SpellComponentsInputs: React.FC = () => {
             htmlFor="material"
             className="text-slate-300 font-normal cursor-pointer"
           >
-            {t("editor.propertiesTab.spellDetails.components.material")}
+            {t("card.spell.components.material")}
           </Label>
         </div>
       </div>

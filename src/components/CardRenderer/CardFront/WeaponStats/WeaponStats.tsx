@@ -6,6 +6,7 @@ import {
   WeaponAttackType,
 } from "@/features/items/weapons/constants";
 import { useDeckStore, BASE_PADDING } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 
 interface WeaponStatsProps {
   attunement?: boolean;
@@ -22,6 +23,7 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
   properties,
   attackType,
 }) => {
+  const { t } = useT();
   const { decks, currentDeckIndex } = useDeckStore();
   const bodyFontSize = decks[currentDeckIndex]?.style?.bodyFontSize ?? 14;
   const paddingMultiplier =
@@ -46,7 +48,7 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
 
     return (
       <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-        Versatile ({damage?.versatile})
+        {t("card.weapon.versatile", { damage: damage?.versatile })}
       </Badge>
     );
   };
@@ -57,8 +59,8 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
     return (
       <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
         {properties?.includes(WeaponProperty.Reach)
-          ? "Reach (10ft)"
-          : "Melee (5ft)"}
+          ? t("card.weapon.reach")
+          : t("card.weapon.melee")}
       </Badge>
     );
   };
@@ -74,9 +76,9 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
     let label = "";
 
     if (isThrown) {
-      label = `Thrown (${range.normal}/${range.long}ft)`;
+      label = t("card.weapon.thrown", { normal: range.normal, long: range.long });
     } else if (isAmmunition) {
-      label = `Ammunition (${range.normal}/${range.long}ft)`;
+      label = t("card.weapon.ammunition", { normal: range.normal, long: range.long });
     }
 
     return (
@@ -121,7 +123,7 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
     >
       {attunement && (
         <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-          Attunement
+          {t("card.item.attunement")}
         </Badge>
       )}
 
