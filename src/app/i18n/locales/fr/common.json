@@ -104,7 +104,22 @@
         },
         "richText": {
             "slashPrompt": "Tapez '/' pour les raccourcis",
-            "filterPlaceholder": "Rechercher..."
+            "filterPlaceholder": "Rechercher...",
+            "sections": {
+                "text": "Texte",
+                "lists": "Listes",
+                "formatting": "Mise en forme"
+            },
+            "commands": {
+                "text": "Texte",
+                "section": "Titre",
+                "subsection": "Sous-titre",
+                "bulletList": "Liste à puces",
+                "numberedList": "Liste numérotée",
+                "flavorText": "Texte d'ambiance",
+                "divider": "Séparateur",
+                "fallback": "Tapez \"/{{search}}\" sur la page"
+            }
         }
     },
     "spell": {

@@ -104,7 +104,22 @@
         },
         "richText": {
             "slashPrompt": "Type '/' for commands",
-            "filterPlaceholder": "Filter..."
+            "filterPlaceholder": "Filter...",
+            "sections": {
+                "text": "Text",
+                "lists": "Lists",
+                "formatting": "Formatting"
+            },
+            "commands": {
+                "text": "Text",
+                "section": "Title",
+                "subsection": "Subtitle",
+                "bulletList": "Bullet List",
+                "numberedList": "Numbered List",
+                "flavorText": "Flavor Text",
+                "divider": "Divider",
+                "fallback": "Type \"/{{search}}\" on the page"
+            }
         }
     },
     "spell": {
