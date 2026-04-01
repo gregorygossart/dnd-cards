@@ -7,6 +7,7 @@ import {
   SelectLabel,
   SelectTrigger,
 } from "@/components/ui/select";
+import { useT } from "next-i18next/client";
 
 interface CardTypeSelectorProps {
   value: CardType;
@@ -17,6 +18,7 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
   value,
   onChange,
 }) => {
+  const { t } = useT();
   return (
     <Select value={value} onValueChange={(val) => onChange(val as CardType)}>
       <SelectTrigger
@@ -25,48 +27,48 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
       >
         <div className="flex items-baseline gap-2">
           <span className="text-2xl font-black text-slate-600 uppercase tracking-tight">
-            Crafting
+            {t("editor.cardType.crafting")}
           </span>
           <span className="text-2xl font-black uppercase tracking-tight text-violet-500">
-            {value}
+            {t(`editor.cardType.types.${value}`)}
           </span>
         </div>
       </SelectTrigger>
       <SelectContent className="bg-slate-800 border-slate-700 text-slate-100 min-w-[200px]">
         <SelectGroup>
-          <SelectLabel>Abilities & Spells</SelectLabel>
+          <SelectLabel>{t("editor.cardType.groups.abilitiesAndSpells")}</SelectLabel>
 
           <SelectItem
             disabled
             value={CardType.Ability}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            Ability
+            {t("editor.cardType.types.Ability")}
           </SelectItem>
           <SelectItem
             value={CardType.Spell}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            Spell
+            {t("editor.cardType.types.Spell")}
           </SelectItem>
         </SelectGroup>
 
         <SelectGroup>
-          <SelectLabel>Items</SelectLabel>
+          <SelectLabel>{t("editor.cardType.groups.items")}</SelectLabel>
 
           <SelectItem
             disabled
             value={CardType.Armor}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            Armor
+            {t("editor.cardType.types.Armor")}
           </SelectItem>
           <SelectItem
             disabled
             value={CardType.Weapon}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            Weapon
+            {t("editor.cardType.types.Weapon")}
           </SelectItem>
         </SelectGroup>
       </SelectContent>

@@ -68,6 +68,19 @@
         "title": "Card editor",
         "spellDetails": "Spell details",
         "rulesText": "Rules text",
+        "cardType": {
+            "crafting": "Crafting",
+            "groups": {
+                "abilitiesAndSpells": "Abilities & Spells",
+                "items": "Items"
+            },
+            "types": {
+                "Ability": "Ability",
+                "Spell": "Spell",
+                "Armor": "Armor",
+                "Weapon": "Weapon"
+            }
+        },
         "visualStyle": {
             "title": "Visual style",
             "headerImage": "Header image",

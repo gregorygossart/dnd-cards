@@ -68,6 +68,19 @@
         "title": "Éditeur de carte",
         "spellDetails": "Détails du sort",
         "rulesText": "Contenu de la carte",
+        "cardType": {
+            "crafting": "Création de",
+            "groups": {
+                "abilitiesAndSpells": "Capacités & Sorts",
+                "items": "Objets"
+            },
+            "types": {
+                "Ability": "Capacité",
+                "Spell": "Sort",
+                "Armor": "Armure",
+                "Weapon": "Arme"
+            }
+        },
         "visualStyle": {
             "title": "Style visuel",
             "headerImage": "Image d'en-tête",
