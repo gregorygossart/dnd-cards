@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useT } from "next-i18next/client";
 import type { Deck } from "@/features/decks/types";
 import { type Card } from "@/features/cards/types";
 import { CardType } from "@/features/cards/constants";
@@ -23,21 +24,19 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-const getCardLabel = (card: Card) => {
+const getCardLabel = (card: Card, t: any) => {
   const cardType = card.type;
   switch (cardType) {
     case CardType.Ability:
-      throw new Error("Not implemented");
+    case CardType.Armor:
+    case CardType.Weapon:
+      return t(`card.types.${cardType.toLowerCase()}`);
 
     case CardType.Spell:
       if (card.level !== undefined) {
         return `Lvl ${card.level}`;
       }
-      return card.type;
-
-    case CardType.Armor:
-    case CardType.Weapon:
-      return card.type;
+      return t(`card.types.${cardType.toLowerCase()}`);
 
     default:
       return assertUnreachable(cardType);
@@ -55,6 +54,7 @@ export const DeckList: React.FC = () => {
     setCurrentCard,
     updateDeckName,
   } = useDeckStore();
+  const { t } = useT();
 
   const [expandedDeckIndex, setExpandedDeckIndex] =
     useState<number>(currentDeckIndex);
@@ -121,7 +121,7 @@ export const DeckList: React.FC = () => {
   return (
     <div className="flex-1 overflow-y-auto p-4">
       <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-3">
-        My Decks
+        {t("navigation.myDecks")}
       </div>
 
       <AddDeckButton />
@@ -244,7 +244,7 @@ export const DeckList: React.FC = () => {
                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
                           />
                         </svg>
-                        Rename
+                        {t("deck.actions.rename")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={(e) => {
@@ -266,7 +266,7 @@ export const DeckList: React.FC = () => {
                             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                           />
                         </svg>
-                        Delete
+                        {t("deck.actions.delete")}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -332,7 +332,7 @@ export const DeckList: React.FC = () => {
                               : "bg-slate-700 text-slate-400",
                           )}
                         >
-                          {getCardLabel(card)}
+                          {getCardLabel(card, t)}
                         </span>
 
                         {/* Three-dot menu */}
@@ -373,7 +373,7 @@ export const DeckList: React.FC = () => {
                                   d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"
                                 />
                               </svg>
-                              Duplicate
+                              {t("card.actions.duplicate")}
                             </DropdownMenuItem>
                             <DropdownMenuItem
                               onClick={(e) => {
@@ -400,7 +400,7 @@ export const DeckList: React.FC = () => {
                                   d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                                 />
                               </svg>
-                              Delete
+                              {t("card.actions.delete")}
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -424,18 +424,18 @@ export const DeckList: React.FC = () => {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Deck</AlertDialogTitle>
+            <AlertDialogTitle>{t("deck.deletePopup.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{deckToDelete?.name}"? This will
-              also delete all{" "}
-              {decks.find((d) => d.id === deckToDelete?.id)?.cards.length || 0}{" "}
-              card(s) in this deck. This action cannot be undone.
+              {t("deck.deletePopup.description", {
+                deckName: deckToDelete?.name,
+                cardCount: decks.find((d) => d.id === deckToDelete?.id)?.cards.length || 0,
+              })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
             <AlertDialogAction onClick={confirmDelete} variant="destructive">
-              Delete
+              {t("deck.actions.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -448,19 +448,20 @@ export const DeckList: React.FC = () => {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Card</AlertDialogTitle>
+            <AlertDialogTitle>{t("card.deletePopup.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{cardToDelete?.title}"? This
-              action cannot be undone.
+              {t("card.deletePopup.description", {
+                cardName: cardToDelete?.title,
+              })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={confirmCardDelete}
               variant="destructive"
             >
-              Delete
+              {t("card.actions.delete")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

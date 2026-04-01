@@ -1,0 +1,261 @@
+{
+    "common": {
+        "loading": "Chargement...",
+        "cancel": "Annuler",
+        "back": "Retour",
+        "clear": "Effacer",
+        "browse": "Parcourir",
+        "upTo": "Jusqu'à",
+        "units": {
+            "distance": {
+                "foot": "Pied",
+                "feet": "Pieds",
+                "mile": "Mile",
+                "miles": "Miles",
+                "meter": "Mètre",
+                "meters": "Mètres",
+                "kilometer": "Kilomètre",
+                "kilometers": "Kilomètres"
+            },
+            "time": {
+                "round": "Tour(s)",
+                "minute": "Minute(s)",
+                "hour": "Heure(s)",
+                "day": "Jour(s)"
+            }
+        }
+    },
+    "navigation": {
+        "myDecks": "Mes decks"
+    },
+    "deck": {
+        "printDeck": "Imprimer le deck",
+        "noDeckFound": "Aucun deck trouvé.",
+        "add": {
+            "buttonLabel": "Ajouter un deck",
+            "placeholder": "Nom du deck..."
+        },
+        "actions": {
+            "rename": "Renommer",
+            "delete": "Supprimer"
+        },
+        "deletePopup": {
+            "title": "Supprimer le deck",
+            "description": "Êtes-vous sûr de vouloir supprimer \"{{deckName}}\"? Cela supprimera également les {{cardCount}} carte(s) de ce deck. Cette action est irréversible."
+        }
+    },
+    "card": {
+        "types": {
+            "ability": "Capacité",
+            "spell": "Sort",
+            "armor": "Armure",
+            "weapon": "Arme"
+        },
+        "editCard": "Modifier la carte",
+        "untitledCard": "Carte sans titre",
+        "add": {
+            "buttonLabel": "Ajouter une carte"
+        },
+        "actions": {
+            "duplicate": "Dupliquer",
+            "delete": "Supprimer"
+        },
+        "deletePopup": {
+            "title": "Supprimer la carte",
+            "description": "Êtes-vous sûr de vouloir supprimer \"{{cardName}}\"? Cette action est irréversible."
+        },
+        "spell": {
+            "ritual": "Rituel",
+            "concentration": "Concentration",
+            "schools": {
+                "abjuration": "Abjuration",
+                "conjuration": "Invocation",
+                "divination": "Divination",
+                "enchantment": "Enchantement",
+                "evocation": "Évocation",
+                "illusion": "Illusion",
+                "necromancy": "Nécromancie",
+                "transmutation": "Transmutation"
+            },
+            "levels": {
+                "cantrip": "Sort mineur",
+                "level1": "Niveau 1",
+                "level2": "Niveau 2",
+                "level3": "Niveau 3",
+                "level4": "Niveau 4",
+                "level5": "Niveau 5",
+                "level6": "Niveau 6",
+                "level7": "Niveau 7",
+                "level8": "Niveau 8",
+                "level9": "Niveau 9"
+            },
+            "castingTimeUnits": {
+                "action": "Action",
+                "bonusAction": "Action bonus",
+                "reaction": "Réaction",
+                "minute": "Minute(s)",
+                "hour": "Heure(s)"
+            },
+            "rangeTypes": {
+                "self": "Soi-même",
+                "touch": "Contact",
+                "ranged": "À distance",
+                "sight": "Champ de vision",
+                "unlimited": "Illimitée"
+            },
+            "durationTypes": {
+                "instantaneous": "Instantanée",
+                "time": "Temps",
+                "untilDispelled": "Jusqu'à dissipation"
+            },
+            "components": {
+                "verbal": "Verbale",
+                "somatic": "Somatique",
+                "material": "Matérielle"
+            }
+        },
+        "item": {
+            "attunement": "Harmonisation"
+        },
+        "armor": {
+            "ac": "CA",
+            "strengthRequired": "Requiert {{value}} For",
+            "stealthDisadvantage": "Discrétion (Désav.)"
+        },
+        "weapon": {
+            "melee": "Corps-à-corps (1,5m)",
+            "reach": "Allonge (3m)",
+            "thrown": "Lancer ({{normal}}/{{long}}m)",
+            "ammunition": "Munition ({{normal}}/{{long}}m)",
+            "versatile": "Polyvalente ({{damage}})"
+        }
+    },
+    "printPage": {
+        "printPreview": "Aperçu avant impression",
+        "print": "Imprimer"
+    },
+    "editor": {
+        "title": "Éditeur de carte",
+        "tabs": {
+            "properties": "Propriétés",
+            "importExport": "Import / Export"
+        },
+        "propertiesTab": {
+            "deckSettings": {
+                "title": "Paramètres du deck",
+                "format": {
+                    "title": "Format de la carte",
+                    "tarot": "Tarot",
+                    "poker": "Poker"
+                },
+                "borderRadius": {
+                    "title": "Arrondi des bords"
+                },
+                "imageHeight": {
+                    "title": "Taille de l'image"
+                },
+                "density": {
+                    "title": "Préréglages de densité",
+                    "compact": "Compact",
+                    "normal": "Normal",
+                    "spacious": "Espacé"
+                },
+                "titleSize": {
+                    "title": "Taille de police du titre"
+                },
+                "bodySize": {
+                    "title": "Taille de police du texte"
+                },
+                "lineHeight": {
+                    "title": "Hauteur de ligne"
+                },
+                "padding": {
+                    "title": "Espacement intérieur"
+                }
+            },
+            "cardName": "Nom de la carte",
+            "cardType": {
+                "crafting": "Création de",
+                "groups": {
+                    "abilitiesAndSpells": "Capacités & Sorts",
+                    "items": "Objets"
+                }
+            },
+            "spellDetails": {
+                "title": "Détails du sort",
+                "school": {
+                    "label": "École",
+                    "placeholder": "Aucune école"
+                },
+                "level": {
+                    "label": "Niveau",
+                    "placeholder": "Aucun niveau"
+                },
+                "castingTime": {
+                    "label": "Temps d'incantation",
+                    "unitPlaceholder": "Unité"
+                },
+                "range": {
+                    "label": "Portée",
+                    "typePlaceholder": "Type de portée",
+                    "unitPlaceholder": "Unité"
+                },
+                "duration": {
+                    "label": "Durée",
+                    "typePlaceholder": "Type de durée",
+                    "unitPlaceholder": "Unité"
+                },
+                "components": {
+                    "label": "Composantes"
+                }
+            },
+            "rulesText": "Contenu de la carte",
+            "visualStyle": {
+                "title": "Style visuel",
+                "headerImage": "Image d'en-tête",
+                "accentColor": "Couleur d'accentuation"
+            },
+            "cardBack": {
+                "title": "Dos de la carte",
+                "design": "Modèle de dos de carte",
+                "custom": "Personnalisé",
+                "customImage": "Image personnalisée (URL)",
+                "tintColor": "Couleur de teinte",
+                "noTint": "Aucune teinte",
+                "tintDescription": "Applique une teinte de couleur pour modifier l'apparence de la texture."
+            },
+            "image": {
+                "placeholder": "Lien de l'image ou fichier",
+                "clear": "Effacer l'image"
+            }
+        },
+        "importExportTab": {
+            "title": "Données sources",
+            "copyTitle": "Copier le JSON",
+            "placeholder": "Coller le JSON ici...",
+            "status": {
+                "saved": "Enregistré",
+                "unknownError": "Erreur inconnue"
+            }
+        }
+    },
+    "richText": {
+        "slashPrompt": "Tapez '/' pour les raccourcis",
+        "filterPlaceholder": "Rechercher...",
+        "sections": {
+            "text": "Texte",
+            "lists": "Listes",
+            "formatting": "Mise en forme"
+        },
+        "commands": {
+            "text": "Texte",
+            "section": "Titre",
+            "subsection": "Sous-titre",
+            "bulletList": "Liste à puces",
+            "numberedList": "Liste numérotée",
+            "flavorText": "Texte d'ambiance",
+            "divider": "Séparateur",
+            "fallback": "Tapez \"/{{search}}\" sur la page"
+        }
+    }
+}

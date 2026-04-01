@@ -2,6 +2,7 @@ import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
+import { useT } from "next-i18next/client";
 import type { Card } from "@/features/cards/types";
 
 interface ImageInputProps {
@@ -11,9 +12,10 @@ interface ImageInputProps {
 
 export const ImageInput: React.FC<ImageInputProps> = ({
   fieldName,
-  label = "Header Image",
+  label,
 }) => {
   const { watch, setValue } = useFormContext<Card>();
+  const { t } = useT();
   const value = watch(fieldName);
 
   const onChange = (newValue: string | undefined) => {
@@ -36,14 +38,16 @@ export const ImageInput: React.FC<ImageInputProps> = ({
 
   return (
     <div>
-      <EditorLabel htmlFor={inputId}>{label}</EditorLabel>
+      <EditorLabel htmlFor={inputId}>
+        {label || t("editor.propertiesTab.visualStyle.headerImage")}
+      </EditorLabel>
       <div className="space-y-2">
         <div className="flex gap-2">
           <Input
             id={`${inputId}-url`}
             value={value || ""}
             onChange={(e) => onChange(e.target.value || undefined)}
-            placeholder="Enter image URL or upload file"
+            placeholder={t("editor.propertiesTab.image.placeholder")}
             className="flex-1 bg-slate-800 border-slate-700 text-slate-100 text-xs placeholder:text-slate-500"
           />
           <input
@@ -60,7 +64,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
             type="button"
             className="bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-slate-100 h-9 text-xs px-3"
           >
-            Upload
+            {t("common.browse")}
           </Button>
         </div>
         {value && (
@@ -71,7 +75,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
             type="button"
             className="bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-slate-100 h-7 text-xs w-full"
           >
-            Clear Image
+            {t("editor.propertiesTab.image.clear")}
           </Button>
         )}
       </div>

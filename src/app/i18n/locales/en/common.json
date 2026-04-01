@@ -1,0 +1,261 @@
+{
+    "common": {
+        "loading": "Loading...",
+        "cancel": "Cancel",
+        "back": "Back",
+        "clear": "Clear",
+        "browse": "Browse",
+        "upTo": "Up to",
+        "units": {
+            "distance": {
+                "foot": "Foot",
+                "feet": "Feet",
+                "mile": "Mile",
+                "miles": "Miles",
+                "meter": "Meter",
+                "meters": "Meters",
+                "kilometer": "Kilometer",
+                "kilometers": "Kilometers"
+            },
+            "time": {
+                "round": "Round(s)",
+                "minute": "Minute(s)",
+                "hour": "Hour(s)",
+                "day": "Day(s)"
+            }
+        }
+    },
+    "navigation": {
+        "myDecks": "My decks"
+    },
+    "deck": {
+        "printDeck": "Print deck",
+        "noDeckFound": "No deck found.",
+        "add": {
+            "buttonLabel": "Add deck",
+            "placeholder": "Deck name..."
+        },
+        "actions": {
+            "rename": "Rename",
+            "delete": "Delete"
+        },
+        "deletePopup": {
+            "title": "Delete deck",
+            "description": "Are you sure you want to delete \"{{deckName}}\"? This will also delete all {{cardCount}} card(s) in this deck. This action cannot be undone."
+        }
+    },
+    "card": {
+        "types": {
+            "ability": "Ability",
+            "spell": "Spell",
+            "armor": "Armor",
+            "weapon": "Weapon"
+        },
+        "editCard": "Edit card",
+        "untitledCard": "Untitled card",
+        "add": {
+            "buttonLabel": "Add card"
+        },
+        "actions": {
+            "duplicate": "Duplicate",
+            "delete": "Delete"
+        },
+        "deletePopup": {
+            "title": "Delete card",
+            "description": "Are you sure you want to delete \"{{cardName}}\"? This action cannot be undone."
+        },
+        "spell": {
+            "ritual": "Ritual",
+            "concentration": "Concentration",
+            "schools": {
+                "abjuration": "Abjuration",
+                "conjuration": "Conjuration",
+                "divination": "Divination",
+                "enchantment": "Enchantment",
+                "evocation": "Evocation",
+                "illusion": "Illusion",
+                "necromancy": "Necromancy",
+                "transmutation": "Transmutation"
+            },
+            "levels": {
+                "cantrip": "Cantrip",
+                "level1": "1st Level",
+                "level2": "2nd Level",
+                "level3": "3rd Level",
+                "level4": "4th Level",
+                "level5": "5th Level",
+                "level6": "6th Level",
+                "level7": "7th Level",
+                "level8": "8th Level",
+                "level9": "9th Level"
+            },
+            "castingTimeUnits": {
+                "action": "Action",
+                "bonusAction": "Bonus Action",
+                "reaction": "Reaction",
+                "minute": "Minute(s)",
+                "hour": "Hour(s)"
+            },
+            "rangeTypes": {
+                "self": "Self",
+                "touch": "Touch",
+                "ranged": "Ranged",
+                "sight": "Sight",
+                "unlimited": "Unlimited"
+            },
+            "durationTypes": {
+                "instantaneous": "Instantaneous",
+                "time": "Time",
+                "untilDispelled": "Until dispelled"
+            },
+            "components": {
+                "verbal": "Verbal",
+                "somatic": "Somatic",
+                "material": "Material"
+            }
+        },
+        "item": {
+            "attunement": "Attunement"
+        },
+        "armor": {
+            "ac": "AC",
+            "strengthRequired": "Requires {{value}} Str",
+            "stealthDisadvantage": "Stealth (Disadv)"
+        },
+        "weapon": {
+            "melee": "Melee (5ft)",
+            "reach": "Reach (10ft)",
+            "thrown": "Thrown ({{normal}}/{{long}}ft)",
+            "ammunition": "Ammunition ({{normal}}/{{long}}ft)",
+            "versatile": "Versatile ({{damage}})"
+        }
+    },
+    "printPage": {
+        "printPreview": "Print preview",
+        "print": "Print"
+    },
+    "editor": {
+        "title": "Card editor",
+        "tabs": {
+            "properties": "Properties",
+            "importExport": "Import / Export"
+        },
+        "propertiesTab": {
+            "deckSettings": {
+                "title": "Deck settings",
+                "format": {
+                    "title": "Card format",
+                    "tarot": "Tarot",
+                    "poker": "Poker"
+                },
+                "borderRadius": {
+                    "title": "Border radius"
+                },
+                "imageHeight": {
+                    "title": "Image height"
+                },
+                "density": {
+                    "title": "Density presets",
+                    "compact": "Compact",
+                    "normal": "Normal",
+                    "spacious": "Spacious"
+                },
+                "titleSize": {
+                    "title": "Title font size"
+                },
+                "bodySize": {
+                    "title": "Body font size"
+                },
+                "lineHeight": {
+                    "title": "Line height"
+                },
+                "padding": {
+                    "title": "Padding"
+                }
+            },
+            "cardType": {
+                "crafting": "Crafting",
+                "groups": {
+                    "abilitiesAndSpells": "Abilities & Spells",
+                    "items": "Items"
+                }
+            },
+            "cardName": "Card name",
+            "spellDetails": {
+                "title": "Spell details",
+                "school": {
+                    "label": "School",
+                    "placeholder": "No school"
+                },
+                "level": {
+                    "label": "Level",
+                    "placeholder": "No level"
+                },
+                "castingTime": {
+                    "label": "Casting Time",
+                    "unitPlaceholder": "Unit"
+                },
+                "range": {
+                    "label": "Range",
+                    "typePlaceholder": "Range type",
+                    "unitPlaceholder": "Unit"
+                },
+                "duration": {
+                    "label": "Duration",
+                    "typePlaceholder": "Duration type",
+                    "unitPlaceholder": "Unit"
+                },
+                "components": {
+                    "label": "Components"
+                }
+            },
+            "rulesText": "Rules text",
+            "visualStyle": {
+                "title": "Visual style",
+                "headerImage": "Header image",
+                "accentColor": "Accent color"
+            },
+            "cardBack": {
+                "title": "Card back",
+                "design": "Card back design",
+                "custom": "Custom",
+                "customImage": "Custom back image URL",
+                "tintColor": "Tint color",
+                "noTint": "No tint",
+                "tintDescription": "Apply a color tint to modify the texture appearance."
+            },
+            "image": {
+                "placeholder": "Enter image URL or upload file",
+                "clear": "Clear image"
+            }
+        },
+        "importExportTab": {
+            "title": "Card data",
+            "copyTitle": "Copy JSON",
+            "placeholder": "Paste JSON here...",
+            "status": {
+                "saved": "Saved",
+                "unknownError": "Unknown error"
+            }
+        }
+    },
+    "richText": {
+        "slashPrompt": "Type '/' for commands",
+        "filterPlaceholder": "Filter...",
+        "sections": {
+            "text": "Text",
+            "lists": "Lists",
+            "formatting": "Formatting"
+        },
+        "commands": {
+            "text": "Text",
+            "section": "Title",
+            "subsection": "Subtitle",
+            "bulletList": "Bullet List",
+            "numberedList": "Numbered List",
+            "flavorText": "Flavor Text",
+            "divider": "Divider",
+            "fallback": "Type \"/{{search}}\" on the page"
+        }
+    }
+}

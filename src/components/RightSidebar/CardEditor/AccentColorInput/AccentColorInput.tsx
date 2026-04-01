@@ -2,15 +2,19 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
+import { useT } from "next-i18next/client";
 import type { Card } from "@/features/cards/types";
 
 export const AccentColorInput: React.FC = () => {
   const { watch, setValue } = useFormContext<Card>();
+  const { t } = useT();
   const value = watch("visuals.accentColor");
 
   return (
     <div>
-      <EditorLabel htmlFor="accentColor">Accent Color</EditorLabel>
+      <EditorLabel htmlFor="accentColor">
+        {t("editor.propertiesTab.visualStyle.accentColor")}
+      </EditorLabel>
       <div className="flex items-center gap-2">
         <div className="relative w-8 h-8 shrink-0">
           <Input

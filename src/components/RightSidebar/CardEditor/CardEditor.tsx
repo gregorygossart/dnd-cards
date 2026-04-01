@@ -18,6 +18,7 @@ import {
 } from "@/features/items/weapons/constants";
 import { LightArmorType } from "@/features/items/armors/constants";
 import { RichTextEditor } from "@/components/RichTextEditor/RichTextEditor";
+import { useT } from "next-i18next/client";
 import { TitleInput } from "@/components/RightSidebar/CardEditor/TitleInput/TitleInput";
 import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/ImageInput";
 import { CardBackSelector } from "@/components/RightSidebar/CardEditor/CardBackSelector/CardBackSelector";
@@ -96,6 +97,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
 }) => {
   const { decks, currentDeckIndex } = useDeckStore();
   const currentDeck = decks[currentDeckIndex];
+  const { t } = useT();
 
   const form = useForm<Card>({
     resolver: zodResolver(CardSchema),
@@ -151,7 +153,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
 
         {/* Spell-specific fields */}
         {watch("type") === CardType.Spell && (
-          <CollapsibleGroup title="Spell Details" defaultOpen={true}>
+          <CollapsibleGroup title={t("editor.propertiesTab.spellDetails.title")} defaultOpen={true}>
             <div className="space-y-6">
               <SpellClassificationInputs />
 
@@ -176,7 +178,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
           </CollapsibleGroup>
         )}
 
-        <CollapsibleGroup title="Rules Text" defaultOpen={true}>
+        <CollapsibleGroup title={t("editor.propertiesTab.rulesText")} defaultOpen={true}>
           <Controller
             name="description"
             control={control}
@@ -184,21 +186,23 @@ export const CardEditor: React.FC<CardEditorProps> = ({
               <RichTextEditor
                 content={field.value || ""}
                 onChange={field.onChange}
-                placeholder="Enter card rules..."
                 className="min-h-[200px]"
               />
             )}
           />
         </CollapsibleGroup>
 
-        <CollapsibleGroup title="Visual Style" defaultOpen={true}>
+        <CollapsibleGroup title={t("editor.propertiesTab.visualStyle.title")} defaultOpen={true}>
           <div className="space-y-6">
-            <ImageInput label="Header Image" fieldName="visuals.headerImage" />
+            <ImageInput
+              label={t("editor.propertiesTab.visualStyle.headerImage")}
+              fieldName="visuals.headerImage"
+            />
             <AccentColorInput />
           </div>
         </CollapsibleGroup>
 
-        <CollapsibleGroup title="Card Back" defaultOpen={true}>
+        <CollapsibleGroup title={t("editor.propertiesTab.cardBack.title")} defaultOpen={true}>
           <CardBackSelector />
         </CollapsibleGroup>
       </div>

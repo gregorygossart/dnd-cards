@@ -13,6 +13,7 @@ import type {
 } from "@/features/spells/types";
 import { Badge } from "@/components/ui/badge";
 import { useDeckStore, BASE_PADDING } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 
 interface SpellStatsProps {
   castingTime: CastingTime;
@@ -29,6 +30,7 @@ export const SpellStats: React.FC<SpellStatsProps> = ({
   ritual,
   components,
 }) => {
+  const { t } = useT();
   const hasConcentration =
     "concentration" in duration && duration.concentration;
 
@@ -50,23 +52,23 @@ export const SpellStats: React.FC<SpellStatsProps> = ({
       }}
     >
       <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-        {formatCastingTime(castingTime)}
+        {formatCastingTime(castingTime, t)}
       </Badge>
       {ritual && (
         <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-          Ritual
+          {t("card.spell.ritual")}
         </Badge>
       )}
       <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-        {formatRange(range)}
+        {formatRange(range, t)}
       </Badge>
       {hasConcentration && (
         <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-          Concentration
+          {t("card.spell.concentration")}
         </Badge>
       )}
       <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
-        {formatDuration(duration)}
+        {formatDuration(duration, t)}
       </Badge>
       {(components.material || components.somatic || components.verbal) && (
         <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>

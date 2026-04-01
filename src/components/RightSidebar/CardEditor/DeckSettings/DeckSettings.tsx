@@ -1,3 +1,5 @@
+import React from "react";
+import { useT } from "next-i18next/client";
 import { CollapsibleGroup } from "@/components/ui/collapsible-group";
 import { CardFormatSelector } from "./CardFormatSelector";
 import { CornerRadiusInput } from "./CornerRadiusInput";
@@ -13,8 +15,9 @@ interface DeckSettingsProps {
 }
 
 export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
+  const { t } = useT();
   return (
-    <CollapsibleGroup title="Deck Settings" defaultOpen={false}>
+    <CollapsibleGroup title={t("editor.propertiesTab.deckSettings.title")} defaultOpen={false}>
       <div className="space-y-6">
         {/* Card Format */}
         <CardFormatSelector deckId={deckId} />

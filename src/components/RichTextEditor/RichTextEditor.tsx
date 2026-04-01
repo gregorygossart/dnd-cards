@@ -10,6 +10,7 @@ import TaskItem from "@tiptap/extension-task-item";
 import Highlight from "@tiptap/extension-highlight";
 import Underline from "@tiptap/extension-underline";
 import { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import { useT } from "next-i18next/client";
 import { cn } from "@/lib/utils";
 import {
   Heading2,
@@ -24,7 +25,6 @@ import {
 interface RichTextEditorProps {
   content: string;
   onChange: (content: string) => void;
-  placeholder?: string;
   className?: string;
   readOnly?: boolean;
   minHeight?: string;
@@ -45,75 +45,77 @@ interface SectionHeader {
 
 type MenuItem = CommandItem | SectionHeader;
 
-const COMMANDS: MenuItem[] = [
-  { type: "section", title: "Text" },
-  {
-    type: "command",
-    title: "Text",
-    icon: Type,
-    command: (editor) => editor.chain().focus().setParagraph().run(),
-  },
-  {
-    type: "command",
-    title: "Section",
-    icon: Heading2,
-    shortcut: "##",
-    command: (editor) =>
-      editor.chain().focus().toggleHeading({ level: 2 }).run(),
-  },
-  {
-    type: "command",
-    title: "Subsection",
-    icon: Heading3,
-    shortcut: "###",
-    command: (editor) =>
-      editor.chain().focus().toggleHeading({ level: 3 }).run(),
-  },
 
-  { type: "section", title: "Lists" },
-  {
-    type: "command",
-    title: "Bullet List",
-    icon: List,
-    shortcut: "-",
-    command: (editor) => editor.chain().focus().toggleBulletList().run(),
-  },
-  {
-    type: "command",
-    title: "Numbered List",
-    icon: ListOrdered,
-    shortcut: "1.",
-    command: (editor) => editor.chain().focus().toggleOrderedList().run(),
-  },
-
-  { type: "section", title: "Formatting" },
-  {
-    type: "command",
-    title: "Flavor Text",
-    icon: Quote,
-    shortcut: ">",
-    command: (editor) => editor.chain().focus().toggleBlockquote().run(),
-  },
-
-  {
-    type: "command",
-    title: "Divider",
-    icon: Minus,
-    shortcut: "---",
-    command: (editor) => editor.chain().focus().setHorizontalRule().run(),
-  },
-];
 
 export function RichTextEditor({
   content,
   onChange,
-  placeholder,
   className,
   readOnly = false,
 }: RichTextEditorProps) {
   const [showCommands, setShowCommands] = useState(false);
   const [commandSearch, setCommandSearch] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const { t } = useT();
+
+  const allCommands: MenuItem[] = useMemo(() => [
+    { type: "section", title: t("richText.sections.text") },
+    {
+      type: "command",
+      title: t("richText.commands.text"),
+      icon: Type,
+      command: (editor) => editor.chain().focus().setParagraph().run(),
+    },
+    {
+      type: "command",
+      title: t("richText.commands.section"),
+      icon: Heading2,
+      shortcut: "##",
+      command: (editor) =>
+        editor.chain().focus().toggleHeading({ level: 2 }).run(),
+    },
+    {
+      type: "command",
+      title: t("richText.commands.subsection"),
+      icon: Heading3,
+      shortcut: "###",
+      command: (editor) =>
+        editor.chain().focus().toggleHeading({ level: 3 }).run(),
+    },
+
+    { type: "section", title: t("richText.sections.lists") },
+    {
+      type: "command",
+      title: t("richText.commands.bulletList"),
+      icon: List,
+      shortcut: "-",
+      command: (editor) => editor.chain().focus().toggleBulletList().run(),
+    },
+    {
+      type: "command",
+      title: t("richText.commands.numberedList"),
+      icon: ListOrdered,
+      shortcut: "1.",
+      command: (editor) => editor.chain().focus().toggleOrderedList().run(),
+    },
+
+    { type: "section", title: t("richText.sections.formatting") },
+    {
+      type: "command",
+      title: t("richText.commands.flavorText"),
+      icon: Quote,
+      shortcut: ">",
+      command: (editor) => editor.chain().focus().toggleBlockquote().run(),
+    },
+
+    {
+      type: "command",
+      title: t("richText.commands.divider"),
+      icon: Minus,
+      shortcut: "---",
+      command: (editor) => editor.chain().focus().setHorizontalRule().run(),
+    },
+  ], [t]);
 
   // Refs for event handlers to avoid stale closures
   const showCommandsRef = useRef(showCommands);
@@ -129,7 +131,7 @@ export function RichTextEditor({
   const filteredCommands = useMemo(() => {
     if (commandSearch) {
       // When searching, only show matching commands (no section headers)
-      const filtered = COMMANDS.filter(
+      const filtered = allCommands.filter(
         (item): item is CommandItem =>
           item.type === "command" &&
           item.title.toLowerCase().includes(commandSearch.toLowerCase()),
@@ -140,7 +142,7 @@ export function RichTextEditor({
         return [
           {
             type: "command" as const,
-            title: `Type "/${commandSearch}" on the page`,
+            title: t("richText.commands.fallback", { search: commandSearch }),
             icon: Type,
             shortcut: undefined,
             command: () => {
@@ -156,8 +158,8 @@ export function RichTextEditor({
     }
 
     // When not searching, show all items including section headers
-    return COMMANDS;
-  }, [commandSearch]);
+    return allCommands;
+  }, [commandSearch, allCommands, t]);
 
   // Sync refs
   useEffect(() => {
@@ -179,7 +181,7 @@ export function RichTextEditor({
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === "paragraph") {
-            return "Type '/' for commands";
+            return t("richText.slashPrompt");
           }
           return "";
         },
@@ -314,7 +316,9 @@ export function RichTextEditor({
       if (editor) {
         // If it's the fallback command (no matches), just execute it (which closes menu)
         // We identify it by checking if it's not in the original commands list
-        const isFallback = !COMMANDS.find((c) => c.title === command.title);
+        const isFallback = !allCommands.find(
+          (c) => c.type === "command" && c.title === command.title,
+        );
 
         if (isFallback) {
           command.command(editor);
@@ -349,7 +353,7 @@ export function RichTextEditor({
         setSelectedIndex(0);
       }
     },
-    [editor],
+    [editor, allCommands],
   );
 
   // Update ref for handleKeyDown
@@ -442,7 +446,7 @@ export function RichTextEditor({
               left: placeholderPos.left,
             }}
           >
-            Filter...
+            {t("richText.filterPlaceholder")}
           </div>
         )}
       </div>

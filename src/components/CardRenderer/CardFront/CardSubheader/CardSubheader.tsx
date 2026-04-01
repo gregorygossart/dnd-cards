@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "@/features/cards/types";
 import { getCardSubtitle } from "@/lib/cardUtils";
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 
 interface CardSubheaderProps {
   card: Card;
@@ -9,6 +10,7 @@ interface CardSubheaderProps {
 
 export const CardSubheader: React.FC<CardSubheaderProps> = ({ card }) => {
   const { decks, currentDeckIndex } = useDeckStore();
+  const { t } = useT();
 
   const bodyFontSize = decks[currentDeckIndex]?.style?.bodyFontSize ?? 14;
 
@@ -18,7 +20,7 @@ export const CardSubheader: React.FC<CardSubheaderProps> = ({ card }) => {
         className="font-bold uppercase opacity-40"
         style={{ fontSize: `${bodyFontSize}px` }}
       >
-        {getCardSubtitle(card)}
+        {getCardSubtitle(card, t)}
       </span>
     </div>
   );

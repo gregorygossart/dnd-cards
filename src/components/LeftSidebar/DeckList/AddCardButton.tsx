@@ -1,4 +1,5 @@
 import React from "react";
+import { useT } from "next-i18next/client";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { CardType } from "@/features/cards/constants";
 
@@ -8,6 +9,7 @@ interface AddCardButtonProps {
 
 export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId }) => {
   const { addCard } = useDeckStore();
+  const { t } = useT();
 
   return (
     <button
@@ -30,7 +32,7 @@ export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId }) => {
         </svg>
       </div>
       <div className="flex-1 min-w-0">
-        <div className="truncate font-medium">Add Card</div>
+        <div className="truncate font-medium">{t("card.add.buttonLabel")}</div>
       </div>
     </button>
   );

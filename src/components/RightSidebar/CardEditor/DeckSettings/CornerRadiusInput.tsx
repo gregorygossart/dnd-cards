@@ -1,4 +1,5 @@
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 import { Slider } from "@/components/ui/slider";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
@@ -10,6 +11,7 @@ export const CornerRadiusInput: React.FC<CornerRadiusInputProps> = ({
   deckId,
 }) => {
   const { decks, updateDeckStyle } = useDeckStore();
+  const { t } = useT();
   const deck = decks.find((d) => d.id === deckId);
   const cornerRadius = deck?.style?.cornerRadius ?? 1.5;
 
@@ -23,7 +25,7 @@ export const CornerRadiusInput: React.FC<CornerRadiusInputProps> = ({
         htmlFor="corner-radius"
         className="flex items-center justify-between"
       >
-        <span>Corner Radius</span>
+        <span>{t("editor.propertiesTab.deckSettings.borderRadius.title")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {cornerRadius.toFixed(1)}rem
         </span>

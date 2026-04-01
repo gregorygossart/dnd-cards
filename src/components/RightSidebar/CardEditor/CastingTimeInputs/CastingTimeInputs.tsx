@@ -10,16 +10,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useT } from "next-i18next/client";
 import { CastingTimeUnit } from "@/features/spells/constants";
 import type { Card } from "@/features/cards/types";
 
 export const CastingTimeInputs: React.FC = () => {
   const { control } = useFormContext<Card>();
+  const { t } = useT();
 
   return (
     <div className="col-span-2">
       <div className="flex items-start justify-between">
-        <EditorLabel>Casting Time</EditorLabel>
+        <EditorLabel>{t("editor.propertiesTab.spellDetails.castingTime.label")}</EditorLabel>
         <div className="flex items-center gap-2">
           <Controller
             control={control}
@@ -37,7 +39,7 @@ export const CastingTimeInputs: React.FC = () => {
             htmlFor="ritual"
             className="text-xs font-normal text-slate-400 cursor-pointer"
           >
-            Ritual
+            {t("card.spell.ritual")}
           </Label>
         </div>
       </div>
@@ -65,20 +67,24 @@ export const CastingTimeInputs: React.FC = () => {
             render={({ field }) => (
               <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 w-full h-9">
-                  <SelectValue placeholder="Unit" />
+                  <SelectValue placeholder={t("editor.propertiesTab.spellDetails.castingTime.unitPlaceholder")} />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
-                  <SelectItem value={CastingTimeUnit.Action}>Action</SelectItem>
+                  <SelectItem value={CastingTimeUnit.Action}>
+                    {t("card.spell.castingTimeUnits.action")}
+                  </SelectItem>
                   <SelectItem value={CastingTimeUnit.BonusAction}>
-                    Bonus Action
+                    {t("card.spell.castingTimeUnits.bonusAction")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.Reaction}>
-                    Reaction
+                    {t("card.spell.castingTimeUnits.reaction")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.Minute}>
-                    Minute(s)
+                    {t("card.spell.castingTimeUnits.minute")}
                   </SelectItem>
-                  <SelectItem value={CastingTimeUnit.Hour}>Hour(s)</SelectItem>
+                  <SelectItem value={CastingTimeUnit.Hour}>
+                    {t("card.spell.castingTimeUnits.hour")}
+                  </SelectItem>
                 </SelectContent>
               </Select>
             )}
@@ -88,3 +94,4 @@ export const CastingTimeInputs: React.FC = () => {
     </div>
   );
 };
+

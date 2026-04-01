@@ -1,4 +1,5 @@
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 import { Slider } from "@/components/ui/slider";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
@@ -8,6 +9,7 @@ interface TitleSizeInputProps {
 
 export const TitleSizeInput: React.FC<TitleSizeInputProps> = ({ deckId }) => {
   const { decks, updateDeckStyle } = useDeckStore();
+  const { t } = useT();
   const deck = decks.find((d) => d.id === deckId);
   const titleFontSize = deck?.style?.titleFontSize ?? 24;
 
@@ -21,7 +23,7 @@ export const TitleSizeInput: React.FC<TitleSizeInputProps> = ({ deckId }) => {
         htmlFor="title-size"
         className="flex items-center justify-between"
       >
-        <span>Title Size</span>
+        <span>{t("editor.propertiesTab.deckSettings.titleSize.title")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {titleFontSize}px
         </span>

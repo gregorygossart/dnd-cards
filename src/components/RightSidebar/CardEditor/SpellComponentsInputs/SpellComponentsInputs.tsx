@@ -2,14 +2,16 @@ import { useFormContext, Controller } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useT } from "next-i18next/client";
 import type { Card } from "@/features/cards/types";
 
 export const SpellComponentsInputs: React.FC = () => {
   const { control } = useFormContext<Card>();
+  const { t } = useT();
 
   return (
     <div>
-      <EditorLabel>Components</EditorLabel>
+      <EditorLabel>{t("editor.propertiesTab.spellDetails.components.label")}</EditorLabel>
 
       <div className="flex gap-4">
         <div className="flex-1 flex items-center gap-2">
@@ -29,7 +31,7 @@ export const SpellComponentsInputs: React.FC = () => {
             htmlFor="verbal"
             className="text-slate-300 font-normal cursor-pointer"
           >
-            Verbal
+            {t("card.spell.components.verbal")}
           </Label>
         </div>
 
@@ -50,7 +52,7 @@ export const SpellComponentsInputs: React.FC = () => {
             htmlFor="somatic"
             className="text-slate-300 font-normal cursor-pointer"
           >
-            Somatic
+            {t("card.spell.components.somatic")}
           </Label>
         </div>
 
@@ -71,10 +73,11 @@ export const SpellComponentsInputs: React.FC = () => {
             htmlFor="material"
             className="text-slate-300 font-normal cursor-pointer"
           >
-            Material
+            {t("card.spell.components.material")}
           </Label>
         </div>
       </div>
     </div>
   );
 };
+

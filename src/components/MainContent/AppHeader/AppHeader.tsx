@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Menu, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useT } from "next-i18next/client";
 import { useUIStore } from "@/hooks/useUIStore";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,6 +19,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
     setRightDrawerOpen,
   } = useUIStore();
   const { decks, currentDeckIndex, currentCardIndex } = useDeckStore();
+  const { t, i18n } = useT();
 
   const currentDeck = decks[currentDeckIndex];
   const currentCard = currentDeck?.cards[currentCardIndex];
@@ -80,7 +82,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
             />
           </svg>
           <h1 className="font-semibold text-slate-200 truncate">
-            {currentCard.title || "Untitled Card"}
+            {currentCard.title || t("card.untitledCard")}
           </h1>
         </div>
       </div>
@@ -88,7 +90,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
       {/* Right: Actions */}
       <div className="flex items-center gap-4 shrink-0">
         {/* Print Button */}
-        <Link href="/print">
+        <Link href={`/${i18n.language}/print`}>
           <Button
             variant="ghost"
             size="sm"
@@ -107,7 +109,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
                 d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
               />
             </svg>
-            <span className="hidden lg:inline">Print Deck</span>
+            <span className="hidden lg:inline">{t("deck.printDeck")}</span>
           </Button>
         </Link>
 
@@ -117,7 +119,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({ isLoading = false }) => {
           onClick={() => setRightDrawerOpen(!rightDrawerOpen)}
           className="lg:hidden text-slate-300 hover:text-slate-100 hover:bg-slate-800"
         >
-          Edit Card
+          {t("card.editCard")}
         </Button>
       </div>
     </header>

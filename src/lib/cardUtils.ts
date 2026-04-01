@@ -7,17 +7,22 @@ import {
   type Components,
 } from "@/features/spells/types";
 import { RangeType, DurationType } from "@/features/spells/constants";
-import { RangeDistanceUnit } from "@/features/constants";
+
 import { assertUnreachable } from "./utils";
 
-export function getCardSubtitle(card: Card): string {
+type TFunction = (key: string, options?: Record<string, unknown>) => string;
+
+export function getCardSubtitle(card: Card, t: TFunction): string {
   const type = card.type;
   switch (type) {
     case CardType.Ability:
       throw new Error("Not implemented");
 
     case CardType.Spell:
-      return card.school ?? "Spell";
+      if (card.school) {
+        return t(`card.spell.schools.${card.school.toLowerCase()}`);
+      }
+      return t("card.types.spell");
 
     case CardType.Armor:
       return `${card.rarity} • ${card.armorType}`;
@@ -31,80 +36,66 @@ export function getCardSubtitle(card: Card): string {
 }
 
 /**
- * Formats a spell level number into display text.
- * 0 -> "Cantrip"
- * 1-9 -> "1st", "2nd", "3rd", "4th", etc.
- */
-export function formatSpellLevel(level: number): string {
-  if (level === 0) return "Cantrip";
-
-  const suffixes = ["th", "st", "nd", "rd"];
-  const suffix =
-    level >= 11 && level <= 13 ? "th" : suffixes[level % 10] || "th";
-
-  return `${level}${suffix} Level`;
-}
-
-/**
  * Formats casting time for display.
  * Examples:
  * - { amount: 1, unit: 'Action' } -> "1 Action"
  * - { amount: 1, unit: 'Minute' } -> "1 Minute"
  * - { amount: 10, unit: 'Minute' } -> "10 Minutes"
  */
-export function formatCastingTime(castingTime: CastingTime): string {
+export function formatCastingTime(castingTime: CastingTime, t: TFunction): string {
   const { amount, unit } = castingTime;
-
+  const unitKey = unit.charAt(0).toLowerCase() + unit.slice(1).replace(/\s+/g, "");
+  const unitLabel = t(`card.spell.castingTimeUnits.${unitKey}`);
   const plural = amount > 1 ? "s" : "";
-  return `${amount} ${unit}${plural}`;
+  return `${amount} ${unitLabel}${plural}`;
 }
 
 /**
  * Formats range for display.
  * Examples:
- * - { type: 'Self' } → "Self"
- * - { type: 'Ranged', distance: { amount: 60, unit: 'Feet' } } → "60 Feet"
- * - { type: 'Ranged', distance: { amount: 1, unit: 'Miles' } } → "1 Mile"
+ * - { type: 'Self' } -> "Self"
+ * - { type: 'Ranged', distance: { amount: 60, unit: 'Feet' } } -> "60 Feet"
+ * - { type: 'Ranged', distance: { amount: 1, unit: 'Miles' } } -> "1 Mile"
  */
-export function formatRange(range: Range): string {
+export function formatRange(range: Range, t: TFunction): string {
   const { type } = range;
 
   if (type === RangeType.Ranged && "distance" in range) {
     const { amount, unit } = range.distance;
-
-    let unitLabel: string = unit;
-    if (amount === 1) {
-      if (unit === RangeDistanceUnit.Miles) unitLabel = "Mile";
-      if (unit === RangeDistanceUnit.Feet) unitLabel = "Foot";
-    }
-
+    const pluralKey = unit.toLowerCase(); // "feet" | "miles" | "meters" | "kilometers"
+    const singularMap: Record<string, string> = { feet: "foot", miles: "mile", meters: "meter", kilometers: "kilometer" };
+    const unitKey = amount === 1 ? (singularMap[pluralKey] ?? pluralKey) : pluralKey;
+    const unitLabel = t(`common.units.distance.${unitKey}`);
     return `${amount} ${unitLabel}`;
   }
 
-  return type;
+  const typeKey = type.charAt(0).toLowerCase() + type.slice(1);
+  return t(`card.spell.rangeTypes.${typeKey}`);
 }
 
 /**
  * Formats duration for display (without concentration - that's a separate badge).
  * Examples:
- * - { type: 'Instantaneous' } → "Instantaneous"
- * - { type: 'Time', duration: { amount: 1, unit: 'Minute' }, concentration: true } → "up to 1 Minute"
- * - { type: 'Time', duration: { amount: 10, unit: 'Minute' }, concentration: false } → "10 Minutes"
- * - { type: 'Until Dispelled' } → "Until Dispelled"
+ * - { type: 'Instantaneous' } -> "Instantaneous"
+ * - { type: 'Time', duration: { amount: 1, unit: 'Minute' }, concentration: true } -> "up to 1 Minute"
+ * - { type: 'Time', duration: { amount: 10, unit: 'Minute' }, concentration: false } -> "10 Minutes"
+ * - { type: 'Until Dispelled' } -> "Until Dispelled"
  */
-export function formatDuration(duration: Duration): string {
+export function formatDuration(duration: Duration, t: TFunction): string {
   const { type } = duration;
 
   if (type === DurationType.Instantaneous) {
-    return "Instantaneous";
+    return t("card.spell.durationTypes.instantaneous");
   } else if (type === DurationType.UntilDispelled) {
-    return "Until Dispelled";
+    return t("card.spell.durationTypes.untilDispelled");
   } else if (type === DurationType.Time) {
     const { amount, unit } = duration.duration;
-    const unitLabel = amount === 1 ? unit : `${unit}s`;
+    const unitKey = unit.toLowerCase();
+    const unitLabel = t(`common.units.time.${unitKey}`);
     const hasConcentration =
       "concentration" in duration && duration.concentration;
-    return `${hasConcentration ? "Up to " : ""} ${amount} ${unitLabel}`;
+    const upTo = hasConcentration ? `${t("common.upTo")} ` : "";
+    return `${upTo}${amount} ${unitLabel}${amount > 1 ? "s" : ""}`;
   }
 
   return "";
@@ -113,9 +104,9 @@ export function formatDuration(duration: Duration): string {
 /**
  * Formats components for display.
  * Examples:
- * - { verbal: true, somatic: true, material: true } → "V, S, M"
- * - { verbal: true, somatic: false, material: false } → "V"
- * - { verbal: false, somatic: true, material: true } → "S, M"
+ * - { verbal: true, somatic: true, material: true } -> "V, S, M"
+ * - { verbal: true, somatic: false, material: false } -> "V"
+ * - { verbal: false, somatic: true, material: true } -> "S, M"
  */
 export function formatComponents(components: Components): string {
   const parts = [];

@@ -1,4 +1,5 @@
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { useT } from "next-i18next/client";
 import { Slider } from "@/components/ui/slider";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 
@@ -8,6 +9,7 @@ interface PaddingInputProps {
 
 export const PaddingInput: React.FC<PaddingInputProps> = ({ deckId }) => {
   const { decks, updateDeckStyle } = useDeckStore();
+  const { t } = useT();
   const deck = decks.find((d) => d.id === deckId);
   const paddingMultiplier = deck?.style?.paddingMultiplier ?? 1.0;
 
@@ -21,7 +23,7 @@ export const PaddingInput: React.FC<PaddingInputProps> = ({ deckId }) => {
         htmlFor="padding"
         className="flex items-center justify-between"
       >
-        <span>Padding</span>
+        <span>{t("editor.propertiesTab.deckSettings.padding.title")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {(paddingMultiplier * 100).toFixed(0)}%
         </span>
