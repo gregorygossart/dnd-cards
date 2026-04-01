@@ -192,14 +192,17 @@ export const CardEditor: React.FC<CardEditorProps> = ({
           />
         </CollapsibleGroup>
 
-        <CollapsibleGroup title="Visual Style" defaultOpen={true}>
+        <CollapsibleGroup title={t("editor.visualStyle.title")} defaultOpen={true}>
           <div className="space-y-6">
-            <ImageInput label="Header Image" fieldName="visuals.headerImage" />
+            <ImageInput
+              label={t("editor.visualStyle.headerImage")}
+              fieldName="visuals.headerImage"
+            />
             <AccentColorInput />
           </div>
         </CollapsibleGroup>
 
-        <CollapsibleGroup title="Card Back" defaultOpen={true}>
+        <CollapsibleGroup title={t("editor.cardBack.title")} defaultOpen={true}>
           <CardBackSelector />
         </CollapsibleGroup>
       </div>

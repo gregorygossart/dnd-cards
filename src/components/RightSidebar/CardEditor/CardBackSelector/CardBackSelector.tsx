@@ -4,10 +4,12 @@ import { cn } from "@/lib/utils";
 import { CARD_BACK_PRESETS } from "@/lib/cardConstants";
 import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/ImageInput";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
+import { useT } from "next-i18next/client";
 import type { Card } from "@/features/cards/types";
 
 export const CardBackSelector: React.FC = () => {
   const { watch, setValue } = useFormContext<Card>();
+  const { t } = useT();
   const currentBackImage = watch("visuals.backImage");
 
   // Check if the current image matches one of the presets
@@ -30,7 +32,7 @@ export const CardBackSelector: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <EditorLabel>Card Back Design</EditorLabel>
+      <EditorLabel>{t("editor.cardBack.design")}</EditorLabel>
 
       <div className="grid grid-cols-4 gap-2">
         {CARD_BACK_PRESETS.map((preset) => (
@@ -83,7 +85,7 @@ export const CardBackSelector: React.FC = () => {
               ? "border-violet-500 ring-2 ring-violet-500/20"
               : "border-slate-700 hover:border-slate-500",
           )}
-          title="Custom Image"
+          title={t("editor.cardBack.custom")}
         >
           <svg
             className="w-6 h-6 text-slate-400"
@@ -98,7 +100,9 @@ export const CardBackSelector: React.FC = () => {
               d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
             />
           </svg>
-          <span className="text-[10px] font-medium text-slate-400">Custom</span>
+          <span className="text-[10px] font-medium text-slate-400">
+            {t("editor.cardBack.custom")}
+          </span>
         </button>
       </div>
 
@@ -107,14 +111,14 @@ export const CardBackSelector: React.FC = () => {
         <div className="pt-2 animate-in fade-in slide-in-from-top-2 duration-200">
           <ImageInput
             fieldName="visuals.backImage"
-            label="Custom Back Image URL"
+            label={t("editor.cardBack.customImage")}
           />
         </div>
       )}
 
       {/* Back Tint Picker */}
       <div>
-        <EditorLabel htmlFor="backTint">Tint Color</EditorLabel>
+        <EditorLabel htmlFor="backTint">{t("editor.cardBack.tintColor")}</EditorLabel>
         <div className="flex items-center gap-2">
           <div className="relative w-8 h-8 shrink-0">
             <input
@@ -130,29 +134,30 @@ export const CardBackSelector: React.FC = () => {
               }}
             />
           </div>
-          <div className="flex-1 flex gap-2">
+          <div className="flex-1 flex gap-2 min-w-0">
             <input
               id="backTint"
               value={watch("visuals.backTint") || ""}
               onChange={(e) => setValue("visuals.backTint", e.target.value)}
-              placeholder="No Tint"
-              className="flex-1 bg-slate-800 border border-slate-700 rounded-md text-slate-100 placeholder:text-slate-500 px-3 h-9 font-mono text-sm"
+              placeholder={t("editor.cardBack.noTint")}
+              className="flex-1 bg-slate-800 border border-slate-700 rounded-md text-slate-100 placeholder:text-slate-500 px-3 h-9 font-mono text-sm min-w-0"
             />
             {watch("visuals.backTint") && (
               <button
                 type="button"
                 onClick={() => setValue("visuals.backTint", undefined)}
-                className="px-3 py-1 text-xs text-slate-400 hover:text-white hover:bg-slate-700 rounded-md transition-colors"
+                className="px-3 py-1 text-xs text-slate-400 hover:text-white hover:bg-slate-700 rounded-md transition-colors whitespace-nowrap"
               >
-                Clear
+                {t("common.clear")}
               </button>
             )}
           </div>
         </div>
         <p className="text-[10px] text-slate-500 mt-1 pl-1">
-          Apply a color tint to modify the texture appearance.
+          {t("editor.cardBack.tintDescription")}
         </p>
       </div>
     </div>
   );
 };
+
