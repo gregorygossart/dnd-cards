@@ -178,7 +178,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
           </CollapsibleGroup>
         )}
 
-        <CollapsibleGroup title="Rules Text" defaultOpen={true}>
+        <CollapsibleGroup title={t("editor.rulesText")} defaultOpen={true}>
           <Controller
             name="description"
             control={control}
@@ -186,7 +186,6 @@ export const CardEditor: React.FC<CardEditorProps> = ({
               <RichTextEditor
                 content={field.value || ""}
                 onChange={field.onChange}
-                placeholder="Enter card rules..."
                 className="min-h-[200px]"
               />
             )}

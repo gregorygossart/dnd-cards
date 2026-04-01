@@ -65,6 +65,7 @@
     "editor": {
         "title": "Card editor",
         "spellDetails": "Spell details",
+        "rulesText": "Rules text",
         "fields": {
             "cardName": "Card name"
         },
@@ -80,6 +81,10 @@
                 "saved": "Saved",
                 "unknownError": "Unknown error"
             }
+        },
+        "richText": {
+            "slashPrompt": "Type '/' for commands",
+            "filterPlaceholder": "Filter..."
         }
     },
     "spell": {

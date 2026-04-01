@@ -10,6 +10,7 @@ import TaskItem from "@tiptap/extension-task-item";
 import Highlight from "@tiptap/extension-highlight";
 import Underline from "@tiptap/extension-underline";
 import { useEffect, useState, useCallback, useRef, useMemo } from "react";
+import { useT } from "next-i18next/client";
 import { cn } from "@/lib/utils";
 import {
   Heading2,
@@ -24,7 +25,6 @@ import {
 interface RichTextEditorProps {
   content: string;
   onChange: (content: string) => void;
-  placeholder?: string;
   className?: string;
   readOnly?: boolean;
   minHeight?: string;
@@ -107,13 +107,13 @@ const COMMANDS: MenuItem[] = [
 export function RichTextEditor({
   content,
   onChange,
-  placeholder,
   className,
   readOnly = false,
 }: RichTextEditorProps) {
   const [showCommands, setShowCommands] = useState(false);
   const [commandSearch, setCommandSearch] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const { t } = useT();
 
   // Refs for event handlers to avoid stale closures
   const showCommandsRef = useRef(showCommands);
@@ -179,7 +179,7 @@ export function RichTextEditor({
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === "paragraph") {
-            return "Type '/' for commands";
+            return t("editor.richText.slashPrompt");
           }
           return "";
         },
@@ -442,7 +442,7 @@ export function RichTextEditor({
               left: placeholderPos.left,
             }}
           >
-            Filter...
+            {t("editor.richText.filterPlaceholder")}
           </div>
         )}
       </div>

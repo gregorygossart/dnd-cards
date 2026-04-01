@@ -65,6 +65,7 @@
     "editor": {
         "title": "Éditeur de carte",
         "spellDetails": "Détails du sort",
+        "rulesText": "Contenu de la carte",
         "fields": {
             "cardName": "Nom de la carte"
         },
@@ -80,6 +81,10 @@
                 "saved": "Enregistré",
                 "unknownError": "Erreur inconnue"
             }
+        },
+        "richText": {
+            "slashPrompt": "Tapez '/' pour les raccourcis",
+            "filterPlaceholder": "Rechercher..."
         }
     },
     "spell": {

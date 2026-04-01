@@ -128,6 +128,7 @@
   }
 
   @media print {
+
     html,
     body {
       height: auto;
@@ -172,7 +173,7 @@
 }
 
 .rich-text-content p.is-empty::before {
-  content: "Type '/' for commands";
+  content: attr(data-placeholder);
   opacity: 0.5;
   float: left;
   pointer-events: none;
@@ -210,18 +211,18 @@
   gap: 0.5rem;
 }
 
-.rich-text-content ul[data-type="taskList"] li > label {
+.rich-text-content ul[data-type="taskList"] li>label {
   flex-shrink: 0;
   margin-top: 0.1rem;
   user-select: none;
 }
 
-.rich-text-content ul[data-type="taskList"] li > div {
+.rich-text-content ul[data-type="taskList"] li>div {
   flex: 1;
   margin: 0;
 }
 
-.rich-text-content ul[data-type="taskList"] li > div > p {
+.rich-text-content ul[data-type="taskList"] li>div>p {
   margin: 0;
 }
 
@@ -326,11 +327,9 @@
 
 .rich-text-content.light blockquote {
   color: var(--accent-color, #7c3aed);
-  background-color: color-mix(
-    in srgb,
-    var(--accent-color, #a78bfa),
-    transparent 92%
-  );
+  background-color: color-mix(in srgb,
+      var(--accent-color, #a78bfa),
+      transparent 92%);
   border-left: 3px solid var(--accent-color, #a78bfa);
 }
 
