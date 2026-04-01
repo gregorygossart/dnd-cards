@@ -64,6 +64,9 @@
     },
     "editor": {
         "title": "Card editor",
+        "fields": {
+            "cardName": "Card name"
+        },
         "tabs": {
             "properties": "Properties",
             "importExport": "Import / Export"

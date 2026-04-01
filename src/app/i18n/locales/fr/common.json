@@ -64,6 +64,9 @@
     },
     "editor": {
         "title": "Éditeur de carte",
+        "fields": {
+            "cardName": "Nom de la carte"
+        },
         "tabs": {
             "properties": "Propriétés",
             "importExport": "Import / Export"
