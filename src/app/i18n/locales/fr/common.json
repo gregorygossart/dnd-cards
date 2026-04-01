@@ -11,7 +11,11 @@
                 "foot": "Pied",
                 "feet": "Pieds",
                 "mile": "Mile",
-                "miles": "Miles"
+                "miles": "Miles",
+                "meter": "Mètre",
+                "meters": "Mètres",
+                "kilometer": "Kilomètre",
+                "kilometers": "Kilomètres"
             },
             "time": {
                 "round": "Tour(s)",

@@ -62,8 +62,8 @@ export function formatRange(range: Range, t: TFunction): string {
 
   if (type === RangeType.Ranged && "distance" in range) {
     const { amount, unit } = range.distance;
-    const pluralKey = unit.toLowerCase(); // "feet" | "miles"
-    const singularMap: Record<string, string> = { feet: "foot", miles: "mile" };
+    const pluralKey = unit.toLowerCase(); // "feet" | "miles" | "meters" | "kilometers"
+    const singularMap: Record<string, string> = { feet: "foot", miles: "mile", meters: "meter", kilometers: "kilometer" };
     const unitKey = amount === 1 ? (singularMap[pluralKey] ?? pluralKey) : pluralKey;
     const unitLabel = t(`common.units.distance.${unitKey}`);
     return `${amount} ${unitLabel}`;
