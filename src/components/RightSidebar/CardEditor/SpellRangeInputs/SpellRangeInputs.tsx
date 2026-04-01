@@ -19,7 +19,7 @@ export const SpellRangeInputs: React.FC = () => {
 
   return (
     <div>
-      <EditorLabel>{t("spell.range.label")}</EditorLabel>
+      <EditorLabel>{t("editor.propertiesTab.spellDetails.range.label")}</EditorLabel>
       <div className="flex gap-2">
         <Select
           value={watch("range.type")}
@@ -36,12 +36,12 @@ export const SpellRangeInputs: React.FC = () => {
           }}
         >
           <SelectTrigger className="flex-1 bg-slate-800 border-slate-700 text-slate-100 h-9">
-            <SelectValue placeholder={t("spell.range.typePlaceholder")} />
+            <SelectValue placeholder={t("editor.propertiesTab.spellDetails.range.typePlaceholder")} />
           </SelectTrigger>
           <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
             {Object.values(RangeType).map((type) => (
               <SelectItem key={type} value={type}>
-                {t(`spell.range.types.${type.toLowerCase()}`)}
+                {t(`editor.propertiesTab.spellDetails.range.types.${type.toLowerCase()}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -64,12 +64,12 @@ export const SpellRangeInputs: React.FC = () => {
               }
             >
               <SelectTrigger className="w-[100px] bg-slate-800 border-slate-700 text-slate-100 h-9">
-                <SelectValue placeholder={t("spell.range.unitPlaceholder")} />
+                <SelectValue placeholder={t("editor.propertiesTab.spellDetails.range.unitPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(RangeDistanceUnit).map((unit) => (
                   <SelectItem key={unit} value={unit}>
-                    {t(`spell.range.units.${unit.toLowerCase()}`)}
+                    {t(`editor.propertiesTab.spellDetails.range.units.${unit.toLowerCase()}`)}
                   </SelectItem>
                 ))}
               </SelectContent>

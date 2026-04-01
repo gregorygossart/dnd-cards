@@ -23,7 +23,7 @@ export const LineHeightInput: React.FC<LineHeightInputProps> = ({ deckId }) => {
         htmlFor="line-height"
         className="flex items-center justify-between"
       >
-        <span>{t("deck.settings.lineHeight")}</span>
+        <span>{t("editor.propertiesTab.deckSettings.lineHeight.title")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {lineHeight.toFixed(1)}
         </span>

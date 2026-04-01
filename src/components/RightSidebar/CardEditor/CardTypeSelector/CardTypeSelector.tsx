@@ -27,48 +27,48 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
       >
         <div className="flex items-baseline gap-2">
           <span className="text-2xl font-black text-slate-600 uppercase tracking-tight">
-            {t("editor.cardType.crafting")}
+            {t("editor.propertiesTab.cardType.crafting")}
           </span>
           <span className="text-2xl font-black uppercase tracking-tight text-violet-500">
-            {t(`editor.cardType.types.${value}`)}
+            {t(`editor.propertiesTab.cardType.types.${value.toLowerCase()}`)}
           </span>
         </div>
       </SelectTrigger>
       <SelectContent className="bg-slate-800 border-slate-700 text-slate-100 min-w-[200px]">
         <SelectGroup>
-          <SelectLabel>{t("editor.cardType.groups.abilitiesAndSpells")}</SelectLabel>
+          <SelectLabel>{t("editor.propertiesTab.cardType.groups.abilitiesAndSpells")}</SelectLabel>
 
           <SelectItem
             disabled
             value={CardType.Ability}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            {t("editor.cardType.types.Ability")}
+            {t("editor.propertiesTab.cardType.types.ability")}
           </SelectItem>
           <SelectItem
             value={CardType.Spell}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            {t("editor.cardType.types.Spell")}
+            {t("editor.propertiesTab.cardType.types.spell")}
           </SelectItem>
         </SelectGroup>
 
         <SelectGroup>
-          <SelectLabel>{t("editor.cardType.groups.items")}</SelectLabel>
+          <SelectLabel>{t("editor.propertiesTab.cardType.groups.items")}</SelectLabel>
 
           <SelectItem
             disabled
             value={CardType.Armor}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            {t("editor.cardType.types.Armor")}
+            {t("editor.propertiesTab.cardType.types.armor")}
           </SelectItem>
           <SelectItem
             disabled
             value={CardType.Weapon}
             className="focus:bg-slate-700 focus:text-slate-100 cursor-pointer font-semibold uppercase tracking-wider"
           >
-            {t("editor.cardType.types.Weapon")}
+            {t("editor.propertiesTab.cardType.types.weapon")}
           </SelectItem>
         </SelectGroup>
       </SelectContent>

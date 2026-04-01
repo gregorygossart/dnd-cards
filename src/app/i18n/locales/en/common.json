@@ -23,26 +23,6 @@
         "deletePopup": {
             "title": "Delete deck",
             "description": "Are you sure you want to delete \"{{deckName}}\"? This will also delete all {{cardCount}} card(s) in this deck. This action cannot be undone."
-        },
-        "settings": {
-            "title": "Deck settings",
-            "format": "Card format",
-            "formats": {
-                "tarot": "Tarot",
-                "poker": "Poker"
-            },
-            "borderRadius": "Border radius",
-            "imageHeight": "Image height",
-            "density": "Density presets",
-            "densityLevels": {
-                "compact": "Compact",
-                "normal": "Normal",
-                "spacious": "Spacious"
-            },
-            "titleSize": "Title font size",
-            "bodySize": "Body font size",
-            "lineHeight": "Line height",
-            "padding": "Padding"
         }
     },
     "card": {
@@ -66,47 +46,160 @@
     },
     "editor": {
         "title": "Card editor",
-        "spellDetails": "Spell details",
-        "rulesText": "Rules text",
-        "cardType": {
-            "crafting": "Crafting",
-            "groups": {
-                "abilitiesAndSpells": "Abilities & Spells",
-                "items": "Items"
-            },
-            "types": {
-                "Ability": "Ability",
-                "Spell": "Spell",
-                "Armor": "Armor",
-                "Weapon": "Weapon"
-            }
-        },
-        "visualStyle": {
-            "title": "Visual style",
-            "headerImage": "Header image",
-            "accentColor": "Accent color"
-        },
-        "cardBack": {
-            "title": "Card back",
-            "design": "Card back design",
-            "custom": "Custom",
-            "customImage": "Custom back image URL",
-            "tintColor": "Tint color",
-            "noTint": "No tint",
-            "tintDescription": "Apply a color tint to modify the texture appearance."
-        },
-        "image": {
-            "placeholder": "Enter image URL or upload file",
-            "clear": "Clear image"
-        },
-        "fields": {
-            "cardName": "Card name"
-        },
         "tabs": {
             "properties": "Properties",
             "importExport": "Import / Export"
         },
-        "importExport": {
+        "propertiesTab": {
+            "deckSettings": {
+                "title": "Deck settings",
+                "format": {
+                    "title": "Card format",
+                    "tarot": "Tarot",
+                    "poker": "Poker"
+                },
+                "borderRadius": {
+                    "title": "Border radius"
+                },
+                "imageHeight": {
+                    "title": "Image height"
+                },
+                "density": {
+                    "title": "Density presets",
+                    "compact": "Compact",
+                    "normal": "Normal",
+                    "spacious": "Spacious"
+                },
+                "titleSize": {
+                    "title": "Title font size"
+                },
+                "bodySize": {
+                    "title": "Body font size"
+                },
+                "lineHeight": {
+                    "title": "Line height"
+                },
+                "padding": {
+                    "title": "Padding"
+                }
+            },
+            "cardType": {
+                "crafting": "Crafting",
+                "groups": {
+                    "abilitiesAndSpells": "Abilities & Spells",
+                    "items": "Items"
+                },
+                "types": {
+                    "ability": "Ability",
+                    "spell": "Spell",
+                    "armor": "Armor",
+                    "weapon": "Weapon"
+                }
+            },
+            "cardName": "Card name",
+            "spellDetails": {
+                "title": "Spell details",
+                "school": {
+                    "label": "School",
+                    "placeholder": "No school",
+                    "schools": {
+                        "abjuration": "Abjuration",
+                        "conjuration": "Conjuration",
+                        "divination": "Divination",
+                        "enchantment": "Enchantment",
+                        "evocation": "Evocation",
+                        "illusion": "Illusion",
+                        "necromancy": "Necromancy",
+                        "transmutation": "Transmutation"
+                    }
+                },
+                "level": {
+                    "label": "Level",
+                    "placeholder": "No level",
+                    "cantrip": "Cantrip",
+                    "level1": "1st Level",
+                    "level2": "2nd Level",
+                    "level3": "3rd Level",
+                    "level4": "4th Level",
+                    "level5": "5th Level",
+                    "level6": "6th Level",
+                    "level7": "7th Level",
+                    "level8": "8th Level",
+                    "level9": "9th Level"
+                },
+                "castingTime": {
+                    "label": "Casting Time",
+                    "ritual": "Ritual",
+                    "unitPlaceholder": "Unit",
+                    "units": {
+                        "action": "Action",
+                        "bonusAction": "Bonus Action",
+                        "reaction": "Reaction",
+                        "minute": "Minute(s)",
+                        "hour": "Hour(s)"
+                    }
+                },
+                "range": {
+                    "label": "Range",
+                    "typePlaceholder": "Range type",
+                    "unitPlaceholder": "Unit",
+                    "types": {
+                        "self": "Self",
+                        "touch": "Touch",
+                        "ranged": "Ranged",
+                        "sight": "Sight",
+                        "unlimited": "Unlimited"
+                    },
+                    "units": {
+                        "feet": "Feet",
+                        "miles": "Miles"
+                    }
+                },
+                "duration": {
+                    "label": "Duration",
+                    "concentration": "Concentration",
+                    "typePlaceholder": "Duration type",
+                    "unitPlaceholder": "Unit",
+                    "types": {
+                        "instantaneous": "Instantaneous",
+                        "time": "Time",
+                        "untilDispelled": "Until dispelled"
+                    },
+                    "units": {
+                        "round": "Round(s)",
+                        "minute": "Minute(s)",
+                        "hour": "Hour(s)",
+                        "day": "Day(s)"
+                    }
+                },
+                "components": {
+                    "label": "Components",
+                    "verbal": "Verbal",
+                    "somatic": "Somatic",
+                    "material": "Material"
+                }
+            },
+            "rulesText": "Rules text",
+            "visualStyle": {
+                "title": "Visual style",
+                "headerImage": "Header image",
+                "accentColor": "Accent color"
+            },
+            "cardBack": {
+                "title": "Card back",
+                "design": "Card back design",
+                "custom": "Custom",
+                "customImage": "Custom back image URL",
+                "tintColor": "Tint color",
+                "noTint": "No tint",
+                "tintDescription": "Apply a color tint to modify the texture appearance."
+            },
+            "image": {
+                "placeholder": "Enter image URL or upload file",
+                "clear": "Clear image"
+            }
+        },
+        "importExportTab": {
             "title": "Card data",
             "copyTitle": "Copy JSON",
             "placeholder": "Paste JSON here...",
@@ -114,106 +207,25 @@
                 "saved": "Saved",
                 "unknownError": "Unknown error"
             }
-        },
-        "richText": {
-            "slashPrompt": "Type '/' for commands",
-            "filterPlaceholder": "Filter...",
-            "sections": {
-                "text": "Text",
-                "lists": "Lists",
-                "formatting": "Formatting"
-            },
-            "commands": {
-                "text": "Text",
-                "section": "Title",
-                "subsection": "Subtitle",
-                "bulletList": "Bullet List",
-                "numberedList": "Numbered List",
-                "flavorText": "Flavor Text",
-                "divider": "Divider",
-                "fallback": "Type \"/{{search}}\" on the page"
-            }
         }
     },
-    "spell": {
-        "school": {
-            "label": "School",
-            "placeholder": "Select school",
-            "schools": {
-                "abjuration": "Abjuration",
-                "conjuration": "Conjuration",
-                "divination": "Divination",
-                "enchantment": "Enchantment",
-                "evocation": "Evocation",
-                "illusion": "Illusion",
-                "necromancy": "Necromancy",
-                "transmutation": "Transmutation"
-            }
+    "richText": {
+        "slashPrompt": "Type '/' for commands",
+        "filterPlaceholder": "Filter...",
+        "sections": {
+            "text": "Text",
+            "lists": "Lists",
+            "formatting": "Formatting"
         },
-        "level": {
-            "label": "Level",
-            "placeholder": "Select level",
-            "cantrip": "Cantrip",
-            "level1": "1st Level",
-            "level2": "2nd Level",
-            "level3": "3rd Level",
-            "level4": "4th Level",
-            "level5": "5th Level",
-            "level6": "6th Level",
-            "level7": "7th Level",
-            "level8": "8th Level",
-            "level9": "9th Level"
-        },
-        "castingTime": {
-            "label": "Casting Time",
-            "ritual": "Ritual",
-            "unitPlaceholder": "Unit",
-            "units": {
-                "action": "Action",
-                "bonusAction": "Bonus Action",
-                "reaction": "Reaction",
-                "minute": "Minute(s)",
-                "hour": "Hour(s)"
-            }
-        },
-        "range": {
-            "label": "Range",
-            "typePlaceholder": "Range type",
-            "unitPlaceholder": "Unit",
-            "types": {
-                "self": "Self",
-                "touch": "Touch",
-                "ranged": "Ranged",
-                "sight": "Sight",
-                "unlimited": "Unlimited"
-            },
-            "units": {
-                "feet": "Feet",
-                "miles": "Miles"
-            }
-        },
-        "duration": {
-            "label": "Duration",
-            "concentration": "Concentration",
-            "typePlaceholder": "Duration type",
-            "unitPlaceholder": "Unit",
-            "types": {
-                "instantaneous": "Instantaneous",
-                "time": "Time",
-                "untilDispelled": "Until dispelled"
-            },
-            "units": {
-                "round": "Round(s)",
-                "minute": "Minute(s)",
-                "hour": "Hour(s)",
-                "day": "Day(s)"
-            }
-        },
-        "components": {
-            "label": "Components",
-            "verbal": "Verbal",
-            "somatic": "Somatic",
-            "material": "Material"
+        "commands": {
+            "text": "Text",
+            "section": "Title",
+            "subsection": "Subtitle",
+            "bulletList": "Bullet List",
+            "numberedList": "Numbered List",
+            "flavorText": "Flavor Text",
+            "divider": "Divider",
+            "fallback": "Type \"/{{search}}\" on the page"
         }
     }
 }

@@ -23,7 +23,7 @@ export const BodySizeInput: React.FC<BodySizeInputProps> = ({ deckId }) => {
         htmlFor="body-size"
         className="flex items-center justify-between"
       >
-        <span>{t("deck.settings.bodySize")}</span>
+        <span>{t("editor.propertiesTab.deckSettings.bodySize.title")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {bodyFontSize}px
         </span>

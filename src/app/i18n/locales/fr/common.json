@@ -23,26 +23,6 @@
         "deletePopup": {
             "title": "Supprimer le deck",
             "description": "Êtes-vous sûr de vouloir supprimer \"{{deckName}}\"? Cela supprimera également les {{cardCount}} carte(s) de ce deck. Cette action est irréversible."
-        },
-        "settings": {
-            "title": "Paramètres du deck",
-            "format": "Format de la carte",
-            "formats": {
-                "tarot": "Tarot",
-                "poker": "Poker"
-            },
-            "borderRadius": "Arrondi des bords",
-            "imageHeight": "Taille de l'image",
-            "density": "Préréglages de densité",
-            "densityLevels": {
-                "compact": "Compact",
-                "normal": "Normal",
-                "spacious": "Espacé"
-            },
-            "titleSize": "Taille de police du titre",
-            "bodySize": "Taille de police du texte",
-            "lineHeight": "Hauteur de ligne",
-            "padding": "Espacement intérieur"
         }
     },
     "card": {
@@ -66,47 +46,160 @@
     },
     "editor": {
         "title": "Éditeur de carte",
-        "spellDetails": "Détails du sort",
-        "rulesText": "Contenu de la carte",
-        "cardType": {
-            "crafting": "Création de",
-            "groups": {
-                "abilitiesAndSpells": "Capacités & Sorts",
-                "items": "Objets"
-            },
-            "types": {
-                "Ability": "Capacité",
-                "Spell": "Sort",
-                "Armor": "Armure",
-                "Weapon": "Arme"
-            }
-        },
-        "visualStyle": {
-            "title": "Style visuel",
-            "headerImage": "Image d'en-tête",
-            "accentColor": "Couleur d'accentuation"
-        },
-        "cardBack": {
-            "title": "Dos de la carte",
-            "design": "Modèle de dos de carte",
-            "custom": "Personnalisé",
-            "customImage": "Image personnalisée (URL)",
-            "tintColor": "Couleur de teinte",
-            "noTint": "Aucune teinte",
-            "tintDescription": "Applique une teinte de couleur pour modifier l'apparence de la texture."
-        },
-        "image": {
-            "placeholder": "Lien de l'image ou fichier",
-            "clear": "Effacer l'image"
-        },
-        "fields": {
-            "cardName": "Nom de la carte"
-        },
         "tabs": {
             "properties": "Propriétés",
             "importExport": "Import / Export"
         },
-        "importExport": {
+        "propertiesTab": {
+            "deckSettings": {
+                "title": "Paramètres du deck",
+                "format": {
+                    "title": "Format de la carte",
+                    "tarot": "Tarot",
+                    "poker": "Poker"
+                },
+                "borderRadius": {
+                    "title": "Arrondi des bords"
+                },
+                "imageHeight": {
+                    "title": "Taille de l'image"
+                },
+                "density": {
+                    "title": "Préréglages de densité",
+                    "compact": "Compact",
+                    "normal": "Normal",
+                    "spacious": "Espacé"
+                },
+                "titleSize": {
+                    "title": "Taille de police du titre"
+                },
+                "bodySize": {
+                    "title": "Taille de police du texte"
+                },
+                "lineHeight": {
+                    "title": "Hauteur de ligne"
+                },
+                "padding": {
+                    "title": "Espacement intérieur"
+                }
+            },
+            "cardName": "Nom de la carte",
+            "cardType": {
+                "crafting": "Création de",
+                "groups": {
+                    "abilitiesAndSpells": "Capacités & Sorts",
+                    "items": "Objets"
+                },
+                "types": {
+                    "ability": "Capacité",
+                    "spell": "Sort",
+                    "armor": "Armure",
+                    "weapon": "Arme"
+                }
+            },
+            "spellDetails": {
+                "title": "Détails du sort",
+                "school": {
+                    "label": "École",
+                    "placeholder": "Aucune école",
+                    "schools": {
+                        "abjuration": "Abjuration",
+                        "conjuration": "Invocation",
+                        "divination": "Divination",
+                        "enchantment": "Enchantement",
+                        "evocation": "Évocation",
+                        "illusion": "Illusion",
+                        "necromancy": "Nécromancie",
+                        "transmutation": "Transmutation"
+                    }
+                },
+                "level": {
+                    "label": "Niveau",
+                    "placeholder": "Aucun niveau",
+                    "cantrip": "Sort mineur",
+                    "level1": "Niveau 1",
+                    "level2": "Niveau 2",
+                    "level3": "Niveau 3",
+                    "level4": "Niveau 4",
+                    "level5": "Niveau 5",
+                    "level6": "Niveau 6",
+                    "level7": "Niveau 7",
+                    "level8": "Niveau 8",
+                    "level9": "Niveau 9"
+                },
+                "castingTime": {
+                    "label": "Temps d'incantation",
+                    "ritual": "Rituel",
+                    "unitPlaceholder": "Unité",
+                    "units": {
+                        "action": "Action",
+                        "bonusAction": "Action bonus",
+                        "reaction": "Réaction",
+                        "minute": "Minute(s)",
+                        "hour": "Heure(s)"
+                    }
+                },
+                "range": {
+                    "label": "Portée",
+                    "typePlaceholder": "Type de portée",
+                    "unitPlaceholder": "Unité",
+                    "types": {
+                        "self": "Soi-même",
+                        "touch": "Contact",
+                        "ranged": "À distance",
+                        "sight": "Champ de vision",
+                        "unlimited": "Illimitée"
+                    },
+                    "units": {
+                        "feet": "Pieds",
+                        "miles": "Miles"
+                    }
+                },
+                "duration": {
+                    "label": "Durée",
+                    "concentration": "Concentration",
+                    "typePlaceholder": "Type de durée",
+                    "unitPlaceholder": "Unité",
+                    "types": {
+                        "instantaneous": "Instantanée",
+                        "time": "Temps",
+                        "untilDispelled": "Jusqu'à dissipation"
+                    },
+                    "units": {
+                        "round": "Tour(s)",
+                        "minute": "Minute(s)",
+                        "hour": "Heure(s)",
+                        "day": "Jour(s)"
+                    }
+                },
+                "components": {
+                    "label": "Composantes",
+                    "verbal": "Verbale",
+                    "somatic": "Somatique",
+                    "material": "Matérielle"
+                }
+            },
+            "rulesText": "Contenu de la carte",
+            "visualStyle": {
+                "title": "Style visuel",
+                "headerImage": "Image d'en-tête",
+                "accentColor": "Couleur d'accentuation"
+            },
+            "cardBack": {
+                "title": "Dos de la carte",
+                "design": "Modèle de dos de carte",
+                "custom": "Personnalisé",
+                "customImage": "Image personnalisée (URL)",
+                "tintColor": "Couleur de teinte",
+                "noTint": "Aucune teinte",
+                "tintDescription": "Applique une teinte de couleur pour modifier l'apparence de la texture."
+            },
+            "image": {
+                "placeholder": "Lien de l'image ou fichier",
+                "clear": "Effacer l'image"
+            }
+        },
+        "importExportTab": {
             "title": "Données sources",
             "copyTitle": "Copier le JSON",
             "placeholder": "Coller le JSON ici...",
@@ -114,106 +207,25 @@
                 "saved": "Enregistré",
                 "unknownError": "Erreur inconnue"
             }
-        },
-        "richText": {
-            "slashPrompt": "Tapez '/' pour les raccourcis",
-            "filterPlaceholder": "Rechercher...",
-            "sections": {
-                "text": "Texte",
-                "lists": "Listes",
-                "formatting": "Mise en forme"
-            },
-            "commands": {
-                "text": "Texte",
-                "section": "Titre",
-                "subsection": "Sous-titre",
-                "bulletList": "Liste à puces",
-                "numberedList": "Liste numérotée",
-                "flavorText": "Texte d'ambiance",
-                "divider": "Séparateur",
-                "fallback": "Tapez \"/{{search}}\" sur la page"
-            }
         }
     },
-    "spell": {
-        "school": {
-            "label": "École",
-            "placeholder": "Sélectionner...",
-            "schools": {
-                "abjuration": "Abjuration",
-                "conjuration": "Invocation",
-                "divination": "Divination",
-                "enchantment": "Enchantement",
-                "evocation": "Évocation",
-                "illusion": "Illusion",
-                "necromancy": "Nécromancie",
-                "transmutation": "Transmutation"
-            }
+    "richText": {
+        "slashPrompt": "Tapez '/' pour les raccourcis",
+        "filterPlaceholder": "Rechercher...",
+        "sections": {
+            "text": "Texte",
+            "lists": "Listes",
+            "formatting": "Mise en forme"
         },
-        "level": {
-            "label": "Niveau",
-            "placeholder": "Sélectionner...",
-            "cantrip": "Sort mineur",
-            "level1": "Niveau 1",
-            "level2": "Niveau 2",
-            "level3": "Niveau 3",
-            "level4": "Niveau 4",
-            "level5": "Niveau 5",
-            "level6": "Niveau 6",
-            "level7": "Niveau 7",
-            "level8": "Niveau 8",
-            "level9": "Niveau 9"
-        },
-        "castingTime": {
-            "label": "Temps d'incantation",
-            "ritual": "Rituel",
-            "unitPlaceholder": "Unité",
-            "units": {
-                "action": "Action",
-                "bonusAction": "Action bonus",
-                "reaction": "Réaction",
-                "minute": "Minute(s)",
-                "hour": "Heure(s)"
-            }
-        },
-        "range": {
-            "label": "Portée",
-            "typePlaceholder": "Type de portée",
-            "unitPlaceholder": "Unité",
-            "types": {
-                "self": "Soi-même",
-                "touch": "Contact",
-                "ranged": "À distance",
-                "sight": "Champ de vision",
-                "unlimited": "Illimitée"
-            },
-            "units": {
-                "feet": "Pieds",
-                "miles": "Miles"
-            }
-        },
-        "duration": {
-            "label": "Durée",
-            "concentration": "Concentration",
-            "typePlaceholder": "Type de durée",
-            "unitPlaceholder": "Unité",
-            "types": {
-                "instantaneous": "Instantanée",
-                "time": "Temps",
-                "untilDispelled": "Jusqu'à dissipation"
-            },
-            "units": {
-                "round": "Tour(s)",
-                "minute": "Minute(s)",
-                "hour": "Heure(s)",
-                "day": "Jour(s)"
-            }
-        },
-        "components": {
-            "label": "Composantes",
-            "verbal": "Verbale",
-            "somatic": "Somatique",
-            "material": "Matérielle"
+        "commands": {
+            "text": "Texte",
+            "section": "Titre",
+            "subsection": "Sous-titre",
+            "bulletList": "Liste à puces",
+            "numberedList": "Liste numérotée",
+            "flavorText": "Texte d'ambiance",
+            "divider": "Séparateur",
+            "fallback": "Tapez \"/{{search}}\" sur la page"
         }
     }
 }

@@ -39,7 +39,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
   return (
     <div>
       <EditorLabel htmlFor={inputId}>
-        {label || t("editor.visualStyle.headerImage")}
+        {label || t("editor.propertiesTab.visualStyle.headerImage")}
       </EditorLabel>
       <div className="space-y-2">
         <div className="flex gap-2">
@@ -47,7 +47,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
             id={`${inputId}-url`}
             value={value || ""}
             onChange={(e) => onChange(e.target.value || undefined)}
-            placeholder={t("editor.image.placeholder")}
+            placeholder={t("editor.propertiesTab.image.placeholder")}
             className="flex-1 bg-slate-800 border-slate-700 text-slate-100 text-xs placeholder:text-slate-500"
           />
           <input
@@ -75,7 +75,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
             type="button"
             className="bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-slate-100 h-7 text-xs w-full"
           >
-            {t("editor.image.clear")}
+            {t("editor.propertiesTab.image.clear")}
           </Button>
         )}
       </div>

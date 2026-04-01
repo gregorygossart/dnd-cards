@@ -59,16 +59,16 @@ export function RichTextEditor({
   const { t } = useT();
 
   const allCommands: MenuItem[] = useMemo(() => [
-    { type: "section", title: t("editor.richText.sections.text") },
+    { type: "section", title: t("richText.sections.text") },
     {
       type: "command",
-      title: t("editor.richText.commands.text"),
+      title: t("richText.commands.text"),
       icon: Type,
       command: (editor) => editor.chain().focus().setParagraph().run(),
     },
     {
       type: "command",
-      title: t("editor.richText.commands.section"),
+      title: t("richText.commands.section"),
       icon: Heading2,
       shortcut: "##",
       command: (editor) =>
@@ -76,33 +76,33 @@ export function RichTextEditor({
     },
     {
       type: "command",
-      title: t("editor.richText.commands.subsection"),
+      title: t("richText.commands.subsection"),
       icon: Heading3,
       shortcut: "###",
       command: (editor) =>
         editor.chain().focus().toggleHeading({ level: 3 }).run(),
     },
 
-    { type: "section", title: t("editor.richText.sections.lists") },
+    { type: "section", title: t("richText.sections.lists") },
     {
       type: "command",
-      title: t("editor.richText.commands.bulletList"),
+      title: t("richText.commands.bulletList"),
       icon: List,
       shortcut: "-",
       command: (editor) => editor.chain().focus().toggleBulletList().run(),
     },
     {
       type: "command",
-      title: t("editor.richText.commands.numberedList"),
+      title: t("richText.commands.numberedList"),
       icon: ListOrdered,
       shortcut: "1.",
       command: (editor) => editor.chain().focus().toggleOrderedList().run(),
     },
 
-    { type: "section", title: t("editor.richText.sections.formatting") },
+    { type: "section", title: t("richText.sections.formatting") },
     {
       type: "command",
-      title: t("editor.richText.commands.flavorText"),
+      title: t("richText.commands.flavorText"),
       icon: Quote,
       shortcut: ">",
       command: (editor) => editor.chain().focus().toggleBlockquote().run(),
@@ -110,7 +110,7 @@ export function RichTextEditor({
 
     {
       type: "command",
-      title: t("editor.richText.commands.divider"),
+      title: t("richText.commands.divider"),
       icon: Minus,
       shortcut: "---",
       command: (editor) => editor.chain().focus().setHorizontalRule().run(),
@@ -142,7 +142,7 @@ export function RichTextEditor({
         return [
           {
             type: "command" as const,
-            title: t("editor.richText.commands.fallback", { search: commandSearch }),
+            title: t("richText.commands.fallback", { search: commandSearch }),
             icon: Type,
             shortcut: undefined,
             command: () => {
@@ -181,7 +181,7 @@ export function RichTextEditor({
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === "paragraph") {
-            return t("editor.richText.slashPrompt");
+            return t("richText.slashPrompt");
           }
           return "";
         },
@@ -446,7 +446,7 @@ export function RichTextEditor({
               left: placeholderPos.left,
             }}
           >
-            {t("editor.richText.filterPlaceholder")}
+            {t("richText.filterPlaceholder")}
           </div>
         )}
       </div>

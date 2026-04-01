@@ -25,7 +25,7 @@ export const ImageHeightInput: React.FC<ImageHeightInputProps> = ({
         htmlFor="image-height"
         className="flex items-center justify-between"
       >
-        <span>{t("deck.settings.imageHeight")}</span>
+        <span>{t("editor.propertiesTab.deckSettings.imageHeight.title")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {imageHeightPercent}%
         </span>

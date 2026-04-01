@@ -22,7 +22,7 @@ export const CardFormatSelector: React.FC<CardFormatSelectorProps> = ({
 
   return (
     <div className="space-y-2">
-      <EditorLabel>{t("deck.settings.format")}</EditorLabel>
+      <EditorLabel>{t("editor.propertiesTab.deckSettings.format.title")}</EditorLabel>
       <div className="grid grid-cols-2 gap-2">
         <Button
           variant={cardFormat === CardFormat.Tarot ? "default" : "outline"}
@@ -30,7 +30,7 @@ export const CardFormatSelector: React.FC<CardFormatSelectorProps> = ({
           onClick={() => handleCardFormatChange(CardFormat.Tarot)}
           className="text-xs"
         >
-          {t("deck.settings.formats.tarot")}
+          {t("editor.propertiesTab.deckSettings.format.tarot")}
         </Button>
         <Button
           variant={cardFormat === CardFormat.Poker ? "default" : "outline"}
@@ -38,7 +38,7 @@ export const CardFormatSelector: React.FC<CardFormatSelectorProps> = ({
           onClick={() => handleCardFormatChange(CardFormat.Poker)}
           className="text-xs"
         >
-          {t("deck.settings.formats.poker")}
+          {t("editor.propertiesTab.deckSettings.format.poker")}
         </Button>
       </div>
     </div>

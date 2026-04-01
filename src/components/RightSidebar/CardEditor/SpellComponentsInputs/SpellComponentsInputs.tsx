@@ -11,7 +11,7 @@ export const SpellComponentsInputs: React.FC = () => {
 
   return (
     <div>
-      <EditorLabel>{t("spell.components.label")}</EditorLabel>
+      <EditorLabel>{t("editor.propertiesTab.spellDetails.components.label")}</EditorLabel>
 
       <div className="flex gap-4">
         <div className="flex-1 flex items-center gap-2">
@@ -31,7 +31,7 @@ export const SpellComponentsInputs: React.FC = () => {
             htmlFor="verbal"
             className="text-slate-300 font-normal cursor-pointer"
           >
-            {t("spell.components.verbal")}
+            {t("editor.propertiesTab.spellDetails.components.verbal")}
           </Label>
         </div>
 
@@ -52,7 +52,7 @@ export const SpellComponentsInputs: React.FC = () => {
             htmlFor="somatic"
             className="text-slate-300 font-normal cursor-pointer"
           >
-            {t("spell.components.somatic")}
+            {t("editor.propertiesTab.spellDetails.components.somatic")}
           </Label>
         </div>
 
@@ -73,7 +73,7 @@ export const SpellComponentsInputs: React.FC = () => {
             htmlFor="material"
             className="text-slate-300 font-normal cursor-pointer"
           >
-            {t("spell.components.material")}
+            {t("editor.propertiesTab.spellDetails.components.material")}
           </Label>
         </div>
       </div>

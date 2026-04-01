@@ -21,7 +21,7 @@ export const CastingTimeInputs: React.FC = () => {
   return (
     <div className="col-span-2">
       <div className="flex items-start justify-between">
-        <EditorLabel>{t("spell.castingTime.label")}</EditorLabel>
+        <EditorLabel>{t("editor.propertiesTab.spellDetails.castingTime.label")}</EditorLabel>
         <div className="flex items-center gap-2">
           <Controller
             control={control}
@@ -39,7 +39,7 @@ export const CastingTimeInputs: React.FC = () => {
             htmlFor="ritual"
             className="text-xs font-normal text-slate-400 cursor-pointer"
           >
-            {t("spell.castingTime.ritual")}
+            {t("editor.propertiesTab.spellDetails.castingTime.ritual")}
           </Label>
         </div>
       </div>
@@ -67,23 +67,23 @@ export const CastingTimeInputs: React.FC = () => {
             render={({ field }) => (
               <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 w-full h-9">
-                  <SelectValue placeholder={t("spell.castingTime.unitPlaceholder")} />
+                  <SelectValue placeholder={t("editor.propertiesTab.spellDetails.castingTime.unitPlaceholder")} />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                   <SelectItem value={CastingTimeUnit.Action}>
-                    {t("spell.castingTime.units.action")}
+                    {t("editor.propertiesTab.spellDetails.castingTime.units.action")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.BonusAction}>
-                    {t("spell.castingTime.units.bonusAction")}
+                    {t("editor.propertiesTab.spellDetails.castingTime.units.bonusAction")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.Reaction}>
-                    {t("spell.castingTime.units.reaction")}
+                    {t("editor.propertiesTab.spellDetails.castingTime.units.reaction")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.Minute}>
-                    {t("spell.castingTime.units.minute")}
+                    {t("editor.propertiesTab.spellDetails.castingTime.units.minute")}
                   </SelectItem>
                   <SelectItem value={CastingTimeUnit.Hour}>
-                    {t("spell.castingTime.units.hour")}
+                    {t("editor.propertiesTab.spellDetails.castingTime.units.hour")}
                   </SelectItem>
                 </SelectContent>
               </Select>

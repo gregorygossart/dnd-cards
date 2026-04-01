@@ -10,11 +10,11 @@ export const TitleInput: React.FC = () => {
 
   return (
     <div>
-      <EditorLabel htmlFor="title">{t("editor.fields.cardName")}</EditorLabel>
+      <EditorLabel htmlFor="title">{t("editor.propertiesTab.cardName")}</EditorLabel>
       <Input
         id="title"
         {...register("title")}
-        placeholder={t("editor.fields.cardName")}
+        placeholder={t("editor.propertiesTab.cardName")}
         className="bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500 h-9"
       />
     </div>

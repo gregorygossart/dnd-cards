@@ -19,7 +19,7 @@ export const SpellClassificationInputs: React.FC = () => {
     <div className="flex gap-2">
       {/* School */}
       <div className="flex-1 min-w-0">
-        <EditorLabel htmlFor="school">{t("spell.school.label")}</EditorLabel>
+        <EditorLabel htmlFor="school">{t("editor.propertiesTab.spellDetails.school.label")}</EditorLabel>
         <Controller
           control={control}
           name="school"
@@ -29,12 +29,12 @@ export const SpellClassificationInputs: React.FC = () => {
                 id="school"
                 className="bg-slate-800 border-slate-700 text-slate-100 w-full h-9 truncate [&_span]:truncate"
               >
-                <SelectValue placeholder={t("spell.school.placeholder")} />
+                <SelectValue placeholder={t("editor.propertiesTab.spellDetails.school.placeholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(SpellSchool).map((school) => (
                   <SelectItem key={school} value={school}>
-                    {t(`spell.school.schools.${school.toLowerCase()}`)}
+                    {t(`editor.propertiesTab.spellDetails.school.schools.${school.toLowerCase()}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -45,7 +45,7 @@ export const SpellClassificationInputs: React.FC = () => {
 
       {/* Level */}
       <div className="flex-1 min-w-0">
-        <EditorLabel htmlFor="level">{t("spell.level.label")}</EditorLabel>
+        <EditorLabel htmlFor="level">{t("editor.propertiesTab.spellDetails.level.label")}</EditorLabel>
         <Controller
           control={control}
           name="level"
@@ -60,19 +60,19 @@ export const SpellClassificationInputs: React.FC = () => {
                 id="level"
                 className="bg-slate-800 border-slate-700 text-slate-100 w-full h-9 truncate [&_span]:truncate"
               >
-                <SelectValue placeholder={t("spell.level.placeholder")} />
+                <SelectValue placeholder={t("editor.propertiesTab.spellDetails.level.placeholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
-                <SelectItem value="0">{t("spell.level.cantrip")}</SelectItem>
-                <SelectItem value="1">{t("spell.level.level1")}</SelectItem>
-                <SelectItem value="2">{t("spell.level.level2")}</SelectItem>
-                <SelectItem value="3">{t("spell.level.level3")}</SelectItem>
-                <SelectItem value="4">{t("spell.level.level4")}</SelectItem>
-                <SelectItem value="5">{t("spell.level.level5")}</SelectItem>
-                <SelectItem value="6">{t("spell.level.level6")}</SelectItem>
-                <SelectItem value="7">{t("spell.level.level7")}</SelectItem>
-                <SelectItem value="8">{t("spell.level.level8")}</SelectItem>
-                <SelectItem value="9">{t("spell.level.level9")}</SelectItem>
+                <SelectItem value="0">{t("editor.propertiesTab.spellDetails.level.cantrip")}</SelectItem>
+                <SelectItem value="1">{t("editor.propertiesTab.spellDetails.level.level1")}</SelectItem>
+                <SelectItem value="2">{t("editor.propertiesTab.spellDetails.level.level2")}</SelectItem>
+                <SelectItem value="3">{t("editor.propertiesTab.spellDetails.level.level3")}</SelectItem>
+                <SelectItem value="4">{t("editor.propertiesTab.spellDetails.level.level4")}</SelectItem>
+                <SelectItem value="5">{t("editor.propertiesTab.spellDetails.level.level5")}</SelectItem>
+                <SelectItem value="6">{t("editor.propertiesTab.spellDetails.level.level6")}</SelectItem>
+                <SelectItem value="7">{t("editor.propertiesTab.spellDetails.level.level7")}</SelectItem>
+                <SelectItem value="8">{t("editor.propertiesTab.spellDetails.level.level8")}</SelectItem>
+                <SelectItem value="9">{t("editor.propertiesTab.spellDetails.level.level9")}</SelectItem>
               </SelectContent>
             </Select>
           )}

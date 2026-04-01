@@ -34,7 +34,7 @@ export const SpellDurationInputs: React.FC = () => {
   return (
     <div>
       <div className="flex items-start justify-between">
-        <EditorLabel>{t("spell.duration.label")}</EditorLabel>
+        <EditorLabel>{t("editor.propertiesTab.spellDetails.duration.label")}</EditorLabel>
 
         <div className="flex items-center gap-2">
           <Controller
@@ -58,7 +58,7 @@ export const SpellDurationInputs: React.FC = () => {
                 : "text-slate-400"
             }`}
           >
-            {t("spell.duration.concentration")}
+            {t("editor.propertiesTab.spellDetails.duration.concentration")}
           </Label>
         </div>
       </div>
@@ -92,12 +92,12 @@ export const SpellDurationInputs: React.FC = () => {
           }}
         >
           <SelectTrigger className="flex-1 bg-slate-800 border-slate-700 text-slate-100 h-9">
-            <SelectValue placeholder={t("spell.duration.typePlaceholder")} />
+            <SelectValue placeholder={t("editor.propertiesTab.spellDetails.duration.typePlaceholder")} />
           </SelectTrigger>
           <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
             {Object.values(DurationType).map((type) => (
               <SelectItem key={type} value={type}>
-                {t(`spell.duration.types.${getDurationTypeKey(type)}`)}
+                {t(`editor.propertiesTab.spellDetails.duration.types.${getDurationTypeKey(type)}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -120,12 +120,12 @@ export const SpellDurationInputs: React.FC = () => {
               }
             >
               <SelectTrigger className="w-[100px] bg-slate-800 border-slate-700 text-slate-100 h-9">
-                <SelectValue placeholder={t("spell.duration.unitPlaceholder")} />
+                <SelectValue placeholder={t("editor.propertiesTab.spellDetails.duration.unitPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(TimeDurationUnit).map((unit) => (
                   <SelectItem key={unit} value={unit}>
-                    {t(`spell.duration.units.${unit.toLowerCase()}`)}
+                    {t(`editor.propertiesTab.spellDetails.duration.units.${unit.toLowerCase()}`)}
                   </SelectItem>
                 ))}
               </SelectContent>

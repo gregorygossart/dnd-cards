@@ -25,7 +25,7 @@ export const CornerRadiusInput: React.FC<CornerRadiusInputProps> = ({
         htmlFor="corner-radius"
         className="flex items-center justify-between"
       >
-        <span>{t("deck.settings.borderRadius")}</span>
+        <span>{t("editor.propertiesTab.deckSettings.borderRadius.title")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {cornerRadius.toFixed(1)}rem
         </span>

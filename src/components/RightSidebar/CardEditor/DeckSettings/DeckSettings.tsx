@@ -17,7 +17,7 @@ interface DeckSettingsProps {
 export const DeckSettings: React.FC<DeckSettingsProps> = ({ deckId }) => {
   const { t } = useT();
   return (
-    <CollapsibleGroup title={t("deck.settings.title")} defaultOpen={false}>
+    <CollapsibleGroup title={t("editor.propertiesTab.deckSettings.title")} defaultOpen={false}>
       <div className="space-y-6">
         {/* Card Format */}
         <CardFormatSelector deckId={deckId} />

@@ -23,7 +23,7 @@ export const PaddingInput: React.FC<PaddingInputProps> = ({ deckId }) => {
         htmlFor="padding"
         className="flex items-center justify-between"
       >
-        <span>{t("deck.settings.padding")}</span>
+        <span>{t("editor.propertiesTab.deckSettings.padding.title")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {(paddingMultiplier * 100).toFixed(0)}%
         </span>
