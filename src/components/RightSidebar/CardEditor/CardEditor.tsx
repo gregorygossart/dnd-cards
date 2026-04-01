@@ -18,6 +18,7 @@ import {
 } from "@/features/items/weapons/constants";
 import { LightArmorType } from "@/features/items/armors/constants";
 import { RichTextEditor } from "@/components/RichTextEditor/RichTextEditor";
+import { useT } from "next-i18next/client";
 import { TitleInput } from "@/components/RightSidebar/CardEditor/TitleInput/TitleInput";
 import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/ImageInput";
 import { CardBackSelector } from "@/components/RightSidebar/CardEditor/CardBackSelector/CardBackSelector";
@@ -96,6 +97,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
 }) => {
   const { decks, currentDeckIndex } = useDeckStore();
   const currentDeck = decks[currentDeckIndex];
+  const { t } = useT();
 
   const form = useForm<Card>({
     resolver: zodResolver(CardSchema),
@@ -151,7 +153,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
 
         {/* Spell-specific fields */}
         {watch("type") === CardType.Spell && (
-          <CollapsibleGroup title="Spell Details" defaultOpen={true}>
+          <CollapsibleGroup title={t("editor.spellDetails")} defaultOpen={true}>
             <div className="space-y-6">
               <SpellClassificationInputs />
 

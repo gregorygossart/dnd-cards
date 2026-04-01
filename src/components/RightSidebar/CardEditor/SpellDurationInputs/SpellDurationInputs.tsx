@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useT } from "next-i18next/client";
 import { DurationType, TimeDurationUnit } from "@/features/spells/constants";
 import type { Card } from "@/features/cards/types";
 import { assertUnreachable } from "@/lib/utils";
@@ -17,11 +18,23 @@ import { assertUnreachable } from "@/lib/utils";
 export const SpellDurationInputs: React.FC = () => {
   const { control, watch, setValue, getValues, register } =
     useFormContext<Card>();
+  const { t } = useT();
+
+  const getDurationTypeKey = (type: DurationType): string => {
+    switch (type) {
+      case DurationType.Instantaneous:
+        return "instantaneous";
+      case DurationType.Time:
+        return "time";
+      case DurationType.UntilDispelled:
+        return "untilDispelled";
+    }
+  };
 
   return (
     <div>
       <div className="flex items-start justify-between">
-        <EditorLabel>Duration</EditorLabel>
+        <EditorLabel>{t("spell.duration.label")}</EditorLabel>
 
         <div className="flex items-center gap-2">
           <Controller
@@ -45,7 +58,7 @@ export const SpellDurationInputs: React.FC = () => {
                 : "text-slate-400"
             }`}
           >
-            Concentration
+            {t("spell.duration.concentration")}
           </Label>
         </div>
       </div>
@@ -79,12 +92,12 @@ export const SpellDurationInputs: React.FC = () => {
           }}
         >
           <SelectTrigger className="flex-1 bg-slate-800 border-slate-700 text-slate-100 h-9">
-            <SelectValue placeholder="Duration Type" />
+            <SelectValue placeholder={t("spell.duration.typePlaceholder")} />
           </SelectTrigger>
           <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
             {Object.values(DurationType).map((type) => (
               <SelectItem key={type} value={type}>
-                {type}
+                {t(`spell.duration.types.${getDurationTypeKey(type)}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -107,12 +120,12 @@ export const SpellDurationInputs: React.FC = () => {
               }
             >
               <SelectTrigger className="w-[100px] bg-slate-800 border-slate-700 text-slate-100 h-9">
-                <SelectValue placeholder="Unit" />
+                <SelectValue placeholder={t("spell.duration.unitPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(TimeDurationUnit).map((unit) => (
                   <SelectItem key={unit} value={unit}>
-                    {unit}
+                    {t(`spell.duration.units.${unit.toLowerCase()}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -123,3 +136,4 @@ export const SpellDurationInputs: React.FC = () => {
     </div>
   );
 };
+

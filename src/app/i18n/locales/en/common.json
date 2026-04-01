@@ -64,6 +64,7 @@
     },
     "editor": {
         "title": "Card editor",
+        "spellDetails": "Spell details",
         "fields": {
             "cardName": "Card name"
         },
@@ -79,6 +80,87 @@
                 "saved": "Saved",
                 "unknownError": "Unknown error"
             }
+        }
+    },
+    "spell": {
+        "school": {
+            "label": "School",
+            "placeholder": "Select school",
+            "schools": {
+                "abjuration": "Abjuration",
+                "conjuration": "Conjuration",
+                "divination": "Divination",
+                "enchantment": "Enchantment",
+                "evocation": "Evocation",
+                "illusion": "Illusion",
+                "necromancy": "Necromancy",
+                "transmutation": "Transmutation"
+            }
+        },
+        "level": {
+            "label": "Level",
+            "placeholder": "Select level",
+            "cantrip": "Cantrip",
+            "level1": "1st Level",
+            "level2": "2nd Level",
+            "level3": "3rd Level",
+            "level4": "4th Level",
+            "level5": "5th Level",
+            "level6": "6th Level",
+            "level7": "7th Level",
+            "level8": "8th Level",
+            "level9": "9th Level"
+        },
+        "castingTime": {
+            "label": "Casting Time",
+            "ritual": "Ritual",
+            "unitPlaceholder": "Unit",
+            "units": {
+                "action": "Action",
+                "bonusAction": "Bonus Action",
+                "reaction": "Reaction",
+                "minute": "Minute(s)",
+                "hour": "Hour(s)"
+            }
+        },
+        "range": {
+            "label": "Range",
+            "typePlaceholder": "Range type",
+            "unitPlaceholder": "Unit",
+            "types": {
+                "self": "Self",
+                "touch": "Touch",
+                "ranged": "Ranged",
+                "sight": "Sight",
+                "unlimited": "Unlimited"
+            },
+            "units": {
+                "feet": "Feet",
+                "miles": "Miles"
+            }
+        },
+        "duration": {
+            "label": "Duration",
+            "concentration": "Concentration",
+            "typePlaceholder": "Duration type",
+            "unitPlaceholder": "Unit",
+            "types": {
+                "instantaneous": "Instantaneous",
+                "time": "Time",
+                "untilDispelled": "Until dispelled"
+            },
+            "units": {
+                "round": "Round(s)",
+                "minute": "Minute(s)",
+                "hour": "Hour(s)",
+                "day": "Day(s)"
+            }
+        },
+        "components": {
+            "label": "Components",
+            "verbal": "Verbal",
+            "somatic": "Somatic",
+            "material": "Material"
         }
     }
 }

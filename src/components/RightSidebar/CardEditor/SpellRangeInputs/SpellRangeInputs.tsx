@@ -8,16 +8,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useT } from "next-i18next/client";
 import { RangeType } from "@/features/spells/constants";
 import { RangeDistanceUnit } from "@/features/constants";
 import type { Card } from "@/features/cards/types";
 
 export const SpellRangeInputs: React.FC = () => {
   const { watch, setValue, register } = useFormContext<Card>();
+  const { t } = useT();
 
   return (
     <div>
-      <EditorLabel>Range</EditorLabel>
+      <EditorLabel>{t("spell.range.label")}</EditorLabel>
       <div className="flex gap-2">
         <Select
           value={watch("range.type")}
@@ -34,12 +36,12 @@ export const SpellRangeInputs: React.FC = () => {
           }}
         >
           <SelectTrigger className="flex-1 bg-slate-800 border-slate-700 text-slate-100 h-9">
-            <SelectValue placeholder="Range Type" />
+            <SelectValue placeholder={t("spell.range.typePlaceholder")} />
           </SelectTrigger>
           <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
             {Object.values(RangeType).map((type) => (
               <SelectItem key={type} value={type}>
-                {type}
+                {t(`spell.range.types.${type.toLowerCase()}`)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -62,12 +64,12 @@ export const SpellRangeInputs: React.FC = () => {
               }
             >
               <SelectTrigger className="w-[100px] bg-slate-800 border-slate-700 text-slate-100 h-9">
-                <SelectValue placeholder="Unit" />
+                <SelectValue placeholder={t("spell.range.unitPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(RangeDistanceUnit).map((unit) => (
                   <SelectItem key={unit} value={unit}>
-                    {unit}
+                    {t(`spell.range.units.${unit.toLowerCase()}`)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -78,3 +80,4 @@ export const SpellRangeInputs: React.FC = () => {
     </div>
   );
 };
+

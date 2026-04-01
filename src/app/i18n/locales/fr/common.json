@@ -64,6 +64,7 @@
     },
     "editor": {
         "title": "Éditeur de carte",
+        "spellDetails": "Détails du sort",
         "fields": {
             "cardName": "Nom de la carte"
         },
@@ -79,6 +80,87 @@
                 "saved": "Enregistré",
                 "unknownError": "Erreur inconnue"
             }
+        }
+    },
+    "spell": {
+        "school": {
+            "label": "École",
+            "placeholder": "Sélectionner...",
+            "schools": {
+                "abjuration": "Abjuration",
+                "conjuration": "Invocation",
+                "divination": "Divination",
+                "enchantment": "Enchantement",
+                "evocation": "Évocation",
+                "illusion": "Illusion",
+                "necromancy": "Nécromancie",
+                "transmutation": "Transmutation"
+            }
+        },
+        "level": {
+            "label": "Niveau",
+            "placeholder": "Sélectionner...",
+            "cantrip": "Sort mineur",
+            "level1": "Niveau 1",
+            "level2": "Niveau 2",
+            "level3": "Niveau 3",
+            "level4": "Niveau 4",
+            "level5": "Niveau 5",
+            "level6": "Niveau 6",
+            "level7": "Niveau 7",
+            "level8": "Niveau 8",
+            "level9": "Niveau 9"
+        },
+        "castingTime": {
+            "label": "Temps d'incantation",
+            "ritual": "Rituel",
+            "unitPlaceholder": "Unité",
+            "units": {
+                "action": "Action",
+                "bonusAction": "Action bonus",
+                "reaction": "Réaction",
+                "minute": "Minute(s)",
+                "hour": "Heure(s)"
+            }
+        },
+        "range": {
+            "label": "Portée",
+            "typePlaceholder": "Type de portée",
+            "unitPlaceholder": "Unité",
+            "types": {
+                "self": "Soi-même",
+                "touch": "Contact",
+                "ranged": "À distance",
+                "sight": "Champ de vision",
+                "unlimited": "Illimitée"
+            },
+            "units": {
+                "feet": "Pieds",
+                "miles": "Miles"
+            }
+        },
+        "duration": {
+            "label": "Durée",
+            "concentration": "Concentration",
+            "typePlaceholder": "Type de durée",
+            "unitPlaceholder": "Unité",
+            "types": {
+                "instantaneous": "Instantanée",
+                "time": "Temps",
+                "untilDispelled": "Jusqu'à dissipation"
+            },
+            "units": {
+                "round": "Tour(s)",
+                "minute": "Minute(s)",
+                "hour": "Heure(s)",
+                "day": "Jour(s)"
+            }
+        },
+        "components": {
+            "label": "Composantes",
+            "verbal": "Verbale",
+            "somatic": "Somatique",
+            "material": "Matérielle"
         }
     }
 }
