@@ -172,6 +172,16 @@
   line-height: 1.6;
 }
 
+/*
+ * Empty paragraphs from TipTap (Enter for blank lines) often serialize as <p></p>
+ * or <p><br></p>. Without a minimum block size, margins collapse through those
+ * empty blocks and multiple “blank lines” vanish on the rendered card.
+ */
+.rich-text-content p:empty,
+.rich-text-content p:has(> br:only-child) {
+  min-height: 1lh;
+}
+
 .rich-text-content p.is-empty::before {
   content: attr(data-placeholder);
   opacity: 0.5;
