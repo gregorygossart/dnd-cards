@@ -5,6 +5,10 @@ import type { Deck, DeckStyle } from "@/features/decks/types";
 import { CardFormat, CardType } from "@/features/cards/constants";
 import { DensityPreset } from "@/features/decks/constants";
 import { defaultCardValues } from "@/components/RightSidebar/CardEditor/CardEditor";
+import {
+  cloneCardLocalImageRefs,
+  deleteCardLocalImageRefs,
+} from "@/lib/cardImages";
 
 interface DeckStore {
   decks: Deck[];
@@ -13,7 +17,7 @@ interface DeckStore {
   isHydrated: boolean;
   updateCard: (deckIndex: number, cardIndex: number, card: Card) => void;
   addCard: (deckId: string, type: CardType) => void;
-  duplicateCard: (deckIndex: number, cardIndex: number) => void;
+  duplicateCard: (deckIndex: number, cardIndex: number) => Promise<void>;
   deleteCard: (deckIndex: number, cardIndex: number) => void;
   addDeck: (name: string) => void;
   updateDeckName: (deckId: string, name: string) => void;
@@ -77,7 +81,7 @@ function getDefaultDecks(): Deck[] {
 
 export const useDeckStore = create<DeckStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       decks: getDefaultDecks(),
       currentDeckIndex: 0,
       currentCardIndex: 0,
@@ -128,20 +132,21 @@ export const useDeckStore = create<DeckStore>()(
         });
       },
 
-      duplicateCard: (deckIndex, cardIndex) => {
-        set((state) => {
-          const deck = state.decks[deckIndex];
-          if (!deck) return state;
+      duplicateCard: async (deckIndex, cardIndex) => {
+        const state = get();
+        const deck = state.decks[deckIndex];
+        if (!deck) return;
 
-          const cardToDuplicate = deck.cards[cardIndex];
-          if (!cardToDuplicate) return state;
+        const cardToDuplicate = deck.cards[cardIndex];
+        if (!cardToDuplicate) return;
 
-          const newCard = {
-            ...JSON.parse(JSON.stringify(cardToDuplicate)),
-            title: `${cardToDuplicate.title} (Copy)`,
-          };
+        const newCard = await cloneCardLocalImageRefs(
+          structuredClone(cardToDuplicate),
+        );
+        newCard.title = `${cardToDuplicate.title} (Copy)`;
 
-          const newDecks = state.decks.map((d, idx) => {
+        set({
+          decks: state.decks.map((d, idx) => {
             if (idx === deckIndex) {
               return {
                 ...d,
@@ -149,13 +154,9 @@ export const useDeckStore = create<DeckStore>()(
               };
             }
             return d;
-          });
-
-          return {
-            decks: newDecks,
-            currentDeckIndex: deckIndex,
-            currentCardIndex: deck.cards.length, // Select the new card (last index)
-          };
+          }),
+          currentDeckIndex: deckIndex,
+          currentCardIndex: deck.cards.length,
         });
       },
 
@@ -166,6 +167,11 @@ export const useDeckStore = create<DeckStore>()(
 
           // Don't delete the last card in a deck
           if (deck.cards.length <= 1) return state;
+
+          const removed = deck.cards[cardIndex];
+          if (removed) {
+            deleteCardLocalImageRefs(removed);
+          }
 
           const newCards = deck.cards.filter((_, idx) => idx !== cardIndex);
 
@@ -234,6 +240,13 @@ export const useDeckStore = create<DeckStore>()(
 
       deleteDeck: (deckId) => {
         set((state) => {
+          const removedDeck = state.decks.find((deck) => deck.id === deckId);
+          if (removedDeck) {
+            for (const card of removedDeck.cards) {
+              deleteCardLocalImageRefs(card);
+            }
+          }
+
           const newDecks = state.decks.filter((deck) => deck.id !== deckId);
 
           // If we deleted all decks, create a new default one

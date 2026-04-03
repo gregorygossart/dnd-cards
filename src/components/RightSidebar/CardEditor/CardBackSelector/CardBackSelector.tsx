@@ -6,6 +6,7 @@ import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/Imag
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 import { useT } from "next-i18next/client";
 import type { Card } from "@/features/cards/types";
+import { deleteBlobIfLocalRef } from "@/lib/cardImages";
 
 export const CardBackSelector: React.FC = () => {
   const { watch, setValue } = useFormContext<Card>();
@@ -20,11 +21,13 @@ export const CardBackSelector: React.FC = () => {
   const handlePresetSelect = (presetId: string) => {
     if (presetId === "custom") {
       if (selectedPresetId !== "custom") {
+        deleteBlobIfLocalRef(currentBackImage);
         setValue("visuals.backImage", undefined);
       }
     } else {
       const preset = CARD_BACK_PRESETS.find((p) => p.id === presetId);
       if (preset) {
+        deleteBlobIfLocalRef(currentBackImage);
         setValue("visuals.backImage", preset.src);
       }
     }

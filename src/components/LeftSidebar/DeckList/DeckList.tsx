@@ -357,7 +357,7 @@ export const DeckList: React.FC = () => {
                             <DropdownMenuItem
                               onClick={(e) => {
                                 e.stopPropagation();
-                                duplicateCard(deckIndex, cardIndex);
+                                void duplicateCard(deckIndex, cardIndex);
                               }}
                             >
                               <svg

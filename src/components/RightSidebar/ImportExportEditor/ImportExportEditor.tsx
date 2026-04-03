@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Copy, Check, AlertCircle } from "lucide-react";
 import { useT } from "next-i18next/client";
 import { useDebounce } from "@/hooks/useDebounce";
+import { resolveCardForExport } from "@/lib/cardImages";
 
 interface ImportExportEditorProps {
   data: Card;
@@ -17,47 +18,46 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({
   onChange,
 }) => {
   const [jsonText, setJsonText] = useState("");
+  const [dataExportJson, setDataExportJson] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
   const { t } = useT();
 
-  // Debounce the JSON text input
   const debouncedJsonText = useDebounce(jsonText, 500);
 
-  // Initialize with formatted JSON
   useEffect(() => {
-    setJsonText(JSON.stringify(data, null, 2));
+    let cancelled = false;
+    resolveCardForExport(data).then((resolved) => {
+      if (cancelled) return;
+      const s = JSON.stringify(resolved, null, 2);
+      setDataExportJson(s);
+      setJsonText(s);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, [data]);
 
-  // Validate and save when debounced value changes
   useEffect(() => {
-    // Skip validation on initial mount or if text hasn't changed
-    if (
-      !debouncedJsonText ||
-      debouncedJsonText === JSON.stringify(data, null, 2)
-    ) {
-      return;
-    }
+    if (!debouncedJsonText || !dataExportJson) return;
+    if (debouncedJsonText === dataExportJson) return;
 
     try {
       const parsed = JSON.parse(debouncedJsonText);
       const result = CardSchema.safeParse(parsed);
 
       if (result.success) {
-        // Only update if the data actually changed
         if (JSON.stringify(result.data) !== JSON.stringify(data)) {
           onChange(result.data);
           setError(null);
           setSaved(true);
         }
       } else {
-        // Format Zod error with field path
         const firstError = result.error.issues[0];
         const fieldPath =
           firstError.path.length > 0 ? firstError.path.join(".") : "root";
-        const message = firstError.message;
-        setError(`${fieldPath}: ${message}`);
+        setError(`${fieldPath}: ${firstError.message}`);
         setSaved(false);
       }
     } catch (e) {
@@ -69,7 +69,7 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({
       }
       setSaved(false);
     }
-  }, [debouncedJsonText, data, onChange]);
+  }, [debouncedJsonText, dataExportJson, data, onChange, t]);
 
   const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(jsonText);
@@ -81,7 +81,9 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({
     <div className="h-full flex flex-col space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-slate-300 font-semibold text-sm">{t("editor.importExportTab.title")}</h3>
+        <h3 className="text-slate-300 font-semibold text-sm">
+          {t("editor.importExportTab.title")}
+        </h3>
         <Button
           size="icon-sm"
           variant="outline"
@@ -102,7 +104,6 @@ export const ImportExportEditor: React.FC<ImportExportEditorProps> = ({
         value={jsonText}
         onChange={(e) => {
           setJsonText(e.target.value);
-          // Clear error immediately when user starts typing
           if (error) setError(null);
           if (saved) setSaved(false);
         }}
