@@ -23,7 +23,7 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
     <Select value={value} onValueChange={(val) => onChange(val as CardType)}>
       <SelectTrigger
         id="type"
-        className="w-auto min-w-[200px] h-auto p-0 border-0 bg-transparent text-slate-200 hover:text-white focus:ring-0 focus:ring-offset-0 data-[state=open]:text-white [&_svg]:opacity-100 [&_svg]:size-6 [&_svg]:text-slate-500 [&_svg]:ml-2"
+        className="w-auto min-w-[200px] h-auto p-0 border-0 bg-transparent dark:bg-transparent text-slate-200 hover:text-white focus:ring-0 focus:ring-offset-0 data-[state=open]:text-white [&_svg]:opacity-100 [&_svg]:size-6 [&_svg]:text-slate-500 [&_svg]:ml-2"
       >
         <div className="flex items-baseline gap-2">
           <span className="text-2xl font-black text-slate-600 uppercase tracking-tight">

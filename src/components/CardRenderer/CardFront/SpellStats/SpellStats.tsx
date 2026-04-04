@@ -51,27 +51,27 @@ export const SpellStats: React.FC<SpellStatsProps> = ({
         paddingBottom: `${BASE_PADDING.vertical * paddingMultiplier}px`,
       }}
     >
-      <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+      <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
         {formatCastingTime(castingTime, t)}
       </Badge>
       {ritual && (
-        <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+        <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
           {t("card.spell.ritual")}
         </Badge>
       )}
-      <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+      <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
         {formatRange(range, t)}
       </Badge>
       {hasConcentration && (
-        <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+        <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
           {t("card.spell.concentration")}
         </Badge>
       )}
-      <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+      <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
         {formatDuration(duration, t)}
       </Badge>
       {(components.material || components.somatic || components.verbal) && (
-        <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+        <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
           {formatComponents(components)}
         </Badge>
       )}

@@ -36,7 +36,7 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
     const { amount, type } = damage;
 
     return (
-      <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+      <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
         {amount} {type}
       </Badge>
     );
@@ -47,7 +47,7 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
     if (!damage?.versatile) return null;
 
     return (
-      <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+      <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
         {t("card.weapon.versatile", { damage: damage?.versatile })}
       </Badge>
     );
@@ -57,7 +57,7 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
     if (attackType !== WeaponAttackType.Melee) return null;
 
     return (
-      <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+      <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
         {properties?.includes(WeaponProperty.Reach)
           ? t("card.weapon.reach")
           : t("card.weapon.melee")}
@@ -82,7 +82,7 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
     }
 
     return (
-      <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+      <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
         {label}
       </Badge>
     );
@@ -105,7 +105,7 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
     if (filteredProperties.length === 0) return null;
 
     return (
-      <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+      <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
         {filteredProperties.join(", ")}
       </Badge>
     );
@@ -122,7 +122,7 @@ export const WeaponStats: React.FC<WeaponStatsProps> = ({
       }}
     >
       {attunement && (
-        <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+        <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
           {t("card.item.attunement")}
         </Badge>
       )}

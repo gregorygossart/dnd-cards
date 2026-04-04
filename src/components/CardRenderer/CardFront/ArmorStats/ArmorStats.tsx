@@ -34,26 +34,26 @@ export const ArmorStats: React.FC<ArmorStatsProps> = ({
       }}
     >
       {attunement && (
-        <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+        <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
           {t("card.item.attunement")}
         </Badge>
       )}
 
       {/* AC Badge */}
-      <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+      <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
         {ac} {t("card.armor.ac")}
       </Badge>
 
       {/* Strength Req Badge */}
       {strengthRequirement && (
-        <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+        <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
           {t("card.armor.strengthRequired", { value: strengthRequirement })}
         </Badge>
       )}
 
       {/* Stealth Disadvantage Badge */}
       {stealthDisadvantage && (
-        <Badge variant="secondary" style={{ fontSize: `${badgeFontSize}px` }}>
+        <Badge variant="light" style={{ fontSize: `${badgeFontSize}px` }}>
           {t("card.armor.stealthDisadvantage")}
         </Badge>
       )}
