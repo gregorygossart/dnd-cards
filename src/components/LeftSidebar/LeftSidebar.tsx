@@ -1,7 +1,7 @@
 import React from "react";
-import Image from "next/image";
 import { useUIStore } from "@/hooks/useUIStore";
 import { DeckList } from "@/components/LeftSidebar/DeckList/DeckList";
+import { ImportButton } from "@/components/LeftSidebar/ImportButton";
 import {
   Sheet,
   SheetContent,
@@ -11,6 +11,7 @@ import {
 import { useIsMobile } from "@/hooks/useMediaQuery";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LanguageSwitcher, LanguageSwitcherSkeleton } from "@/components/LanguageSwitcher";
+import { useT } from "next-i18next/client";
 
 interface LeftSidebarProps {
   isLoading?: boolean;
@@ -19,6 +20,8 @@ interface LeftSidebarProps {
 const LeftSidebarContent: React.FC<{ isLoading?: boolean }> = ({
   isLoading = false,
 }) => {
+  const { t } = useT();
+
   if (isLoading) {
     return (
       <div className="flex flex-col h-full">
@@ -51,6 +54,9 @@ const LeftSidebarContent: React.FC<{ isLoading?: boolean }> = ({
       </div>
 
       <div className="flex-1 overflow-y-auto">
+        <div className="p-4 pb-0">
+          <ImportButton />
+        </div>
         <DeckList />
       </div>
 

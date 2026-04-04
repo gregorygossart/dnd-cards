@@ -6,7 +6,7 @@ import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/Imag
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 import { useT } from "next-i18next/client";
 import type { Card } from "@/features/cards/types";
-import { deleteBlobIfLocalRef } from "@/lib/cardImages";
+import { deleteBlobIfLocalRef } from "@/lib/share/cardImages";
 
 export const CardBackSelector: React.FC = () => {
   const { watch, setValue } = useFormContext<Card>();
@@ -35,7 +35,7 @@ export const CardBackSelector: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <EditorLabel>{t("editor.propertiesTab.cardBack.design")}</EditorLabel>
+      <EditorLabel>{t("editor.cardBack.design")}</EditorLabel>
 
       <div className="grid grid-cols-4 gap-2">
         {CARD_BACK_PRESETS.map((preset) => (
@@ -88,7 +88,7 @@ export const CardBackSelector: React.FC = () => {
               ? "border-violet-500 ring-2 ring-violet-500/20"
               : "border-slate-700 hover:border-slate-500",
           )}
-          title={t("editor.propertiesTab.cardBack.custom")}
+          title={t("editor.cardBack.custom")}
         >
           <svg
             className="w-6 h-6 text-slate-400"
@@ -104,7 +104,7 @@ export const CardBackSelector: React.FC = () => {
             />
           </svg>
           <span className="text-[10px] font-medium text-slate-400">
-            {t("editor.propertiesTab.cardBack.custom")}
+            {t("editor.cardBack.custom")}
           </span>
         </button>
       </div>
@@ -114,14 +114,14 @@ export const CardBackSelector: React.FC = () => {
         <div className="pt-2 animate-in fade-in slide-in-from-top-2 duration-200">
           <ImageInput
             fieldName="visuals.backImage"
-            label={t("editor.propertiesTab.cardBack.customImage")}
+            label={t("editor.cardBack.customImage")}
           />
         </div>
       )}
 
       {/* Back Tint Picker */}
       <div>
-        <EditorLabel htmlFor="backTint">{t("editor.propertiesTab.cardBack.tintColor")}</EditorLabel>
+        <EditorLabel htmlFor="backTint">{t("editor.cardBack.tintColor")}</EditorLabel>
         <div className="flex items-center gap-2">
           <div className="relative w-8 h-8 shrink-0">
             <input
@@ -142,7 +142,7 @@ export const CardBackSelector: React.FC = () => {
               id="backTint"
               value={watch("visuals.backTint") || ""}
               onChange={(e) => setValue("visuals.backTint", e.target.value)}
-              placeholder={t("editor.propertiesTab.cardBack.noTint")}
+              placeholder={t("editor.cardBack.noTint")}
               className="flex-1 bg-slate-800 border border-slate-700 rounded-md text-slate-100 placeholder:text-slate-500 px-3 h-9 font-mono text-sm min-w-0"
             />
             {watch("visuals.backTint") && (
@@ -157,7 +157,7 @@ export const CardBackSelector: React.FC = () => {
           </div>
         </div>
         <p className="text-[10px] text-slate-500 mt-1 pl-1">
-          {t("editor.propertiesTab.cardBack.tintDescription")}
+          {t("editor.cardBack.tintDescription")}
         </p>
       </div>
     </div>

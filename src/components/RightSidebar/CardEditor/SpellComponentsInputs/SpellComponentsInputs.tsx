@@ -11,7 +11,7 @@ export const SpellComponentsInputs: React.FC = () => {
 
   return (
     <div>
-      <EditorLabel>{t("editor.propertiesTab.spellDetails.components.label")}</EditorLabel>
+      <EditorLabel>{t("editor.spellDetails.components.label")}</EditorLabel>
 
       <div className="flex gap-4">
         <div className="flex-1 flex items-center gap-2">

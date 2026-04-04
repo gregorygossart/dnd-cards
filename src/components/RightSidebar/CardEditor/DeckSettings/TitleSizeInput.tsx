@@ -23,7 +23,7 @@ export const TitleSizeInput: React.FC<TitleSizeInputProps> = ({ deckId }) => {
         htmlFor="title-size"
         className="flex items-center justify-between"
       >
-        <span>{t("editor.propertiesTab.deckSettings.titleSize.title")}</span>
+        <span>{t("editor.deckSettings.titleSize.title")}</span>
         <span className="font-mono normal-case font-normal text-muted-foreground">
           {titleFontSize}px
         </span>

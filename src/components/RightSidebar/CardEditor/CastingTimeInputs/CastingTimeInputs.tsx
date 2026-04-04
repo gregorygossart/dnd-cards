@@ -21,7 +21,7 @@ export const CastingTimeInputs: React.FC = () => {
   return (
     <div className="col-span-2">
       <div className="flex items-start justify-between">
-        <EditorLabel>{t("editor.propertiesTab.spellDetails.castingTime.label")}</EditorLabel>
+        <EditorLabel>{t("editor.spellDetails.castingTime.label")}</EditorLabel>
         <div className="flex items-center gap-2">
           <Controller
             control={control}
@@ -67,7 +67,7 @@ export const CastingTimeInputs: React.FC = () => {
             render={({ field }) => (
               <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-100 w-full h-9">
-                  <SelectValue placeholder={t("editor.propertiesTab.spellDetails.castingTime.unitPlaceholder")} />
+                  <SelectValue placeholder={t("editor.spellDetails.castingTime.unitPlaceholder")} />
                 </SelectTrigger>
                 <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                   <SelectItem value={CastingTimeUnit.Action}>

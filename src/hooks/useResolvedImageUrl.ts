@@ -3,7 +3,7 @@ import {
   getImageBlob,
   getLocalImageId,
   isLocalImageRef,
-} from "@/lib/cardImages";
+} from "@/lib/share/cardImages";
 
 /** Turns `idb:…` values from the card into a temporary `blob:` URL for `<img>` / CSS. See `cardImages.ts`. */
 export function useResolvedImageUrl(src: string | undefined): string | undefined {

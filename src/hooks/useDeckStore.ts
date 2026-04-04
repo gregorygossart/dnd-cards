@@ -8,7 +8,7 @@ import { defaultCardValues } from "@/components/RightSidebar/CardEditor/CardEdit
 import {
   cloneCardLocalImageRefs,
   deleteCardLocalImageRefs,
-} from "@/lib/cardImages";
+} from "@/lib/share/cardImages";
 
 interface DeckStore {
   decks: Deck[];
@@ -19,7 +19,7 @@ interface DeckStore {
   addCard: (deckId: string, type: CardType) => void;
   duplicateCard: (deckIndex: number, cardIndex: number) => Promise<void>;
   deleteCard: (deckIndex: number, cardIndex: number) => void;
-  addDeck: (name: string) => void;
+  addDeck: (name: string, cards?: Card[], style?: Partial<DeckStyle>) => void;
   updateDeckName: (deckId: string, name: string) => void;
   updateDeckStyle: (deckId: string, style: Partial<DeckStyle>) => void;
   deleteDeck: (deckId: string) => void;
@@ -202,12 +202,12 @@ export const useDeckStore = create<DeckStore>()(
         });
       },
 
-      addDeck: (name) => {
+      addDeck: (name: string, cards?: Card[], style?: Partial<DeckStyle>) => {
         const newDeck: Deck = {
           id: crypto.randomUUID(),
           name,
-          cards: [defaultCardValues[CardType.Spell]],
-          style: DEFAULT_STYLE,
+          cards: cards ?? [defaultCardValues[CardType.Spell]],
+          style: style ? { ...DEFAULT_STYLE, ...style } : DEFAULT_STYLE,
         };
 
         set((state) => ({

@@ -44,6 +44,11 @@
             "description": "Êtes-vous sûr de vouloir supprimer \"{{deckName}}\"? Cela supprimera également les {{cardCount}} carte(s) de ce deck. Cette action est irréversible."
         }
     },
+    "share": {
+        "importDeck": "Importer un deck",
+        "export": "Exporter",
+        "importError": "Échec de l'import: {{message}}"
+    },
     "card": {
         "types": {
             "ability": "Capacité",
@@ -136,107 +141,92 @@
     },
     "editor": {
         "title": "Éditeur de carte",
-        "tabs": {
-            "properties": "Propriétés",
-            "importExport": "Import / Export"
-        },
-        "propertiesTab": {
-            "deckSettings": {
-                "title": "Paramètres du deck",
-                "format": {
-                    "title": "Format de la carte",
-                    "tarot": "Tarot",
-                    "poker": "Poker"
-                },
-                "borderRadius": {
-                    "title": "Arrondi des bords"
-                },
-                "imageHeight": {
-                    "title": "Taille de l'image"
-                },
-                "density": {
-                    "title": "Préréglages de densité",
-                    "compact": "Compact",
-                    "normal": "Normal",
-                    "spacious": "Espacé"
-                },
-                "titleSize": {
-                    "title": "Taille de police du titre"
-                },
-                "bodySize": {
-                    "title": "Taille de police du texte"
-                },
-                "lineHeight": {
-                    "title": "Hauteur de ligne"
-                },
-                "padding": {
-                    "title": "Espacement intérieur"
-                }
+        "deckSettings": {
+            "title": "Paramètres du deck",
+            "format": {
+                "title": "Format de la carte",
+                "tarot": "Tarot",
+                "poker": "Poker"
             },
-            "cardName": "Nom de la carte",
-            "cardType": {
-                "crafting": "Création de",
-                "groups": {
-                    "abilitiesAndSpells": "Capacités & Sorts",
-                    "items": "Objets"
-                }
+            "borderRadius": {
+                "title": "Arrondi des bords"
             },
-            "spellDetails": {
-                "title": "Détails du sort",
-                "school": {
-                    "label": "École",
-                    "placeholder": "Aucune école"
-                },
-                "level": {
-                    "label": "Niveau",
-                    "placeholder": "Aucun niveau"
-                },
-                "castingTime": {
-                    "label": "Temps d'incantation",
-                    "unitPlaceholder": "Unité"
-                },
-                "range": {
-                    "label": "Portée",
-                    "typePlaceholder": "Type de portée",
-                    "unitPlaceholder": "Unité"
-                },
-                "duration": {
-                    "label": "Durée",
-                    "typePlaceholder": "Type de durée",
-                    "unitPlaceholder": "Unité"
-                },
-                "components": {
-                    "label": "Composantes"
-                }
+            "imageHeight": {
+                "title": "Taille de l'image"
             },
-            "rulesText": "Contenu de la carte",
-            "visualStyle": {
-                "title": "Style visuel",
-                "headerImage": "Image d'en-tête",
-                "accentColor": "Couleur d'accentuation"
+            "density": {
+                "title": "Préréglages de densité",
+                "compact": "Compact",
+                "normal": "Normal",
+                "spacious": "Espacé"
             },
-            "cardBack": {
-                "title": "Dos de la carte",
-                "design": "Modèle de dos de carte",
-                "custom": "Personnalisé",
-                "customImage": "Image personnalisée (URL)",
-                "tintColor": "Couleur de teinte",
-                "noTint": "Aucune teinte",
-                "tintDescription": "Applique une teinte de couleur pour modifier l'apparence de la texture."
+            "titleSize": {
+                "title": "Taille de police du titre"
             },
-            "image": {
-                "placeholder": "Lien de l'image ou fichier",
-                "clear": "Effacer l'image"
+            "bodySize": {
+                "title": "Taille de police du texte"
+            },
+            "lineHeight": {
+                "title": "Hauteur de ligne"
+            },
+            "padding": {
+                "title": "Espacement intérieur"
             }
         },
-        "importExportTab": {
-            "title": "Données sources",
-            "copyTitle": "Copier le JSON",
-            "placeholder": "Coller le JSON ici...",
-            "status": {
-                "saved": "Enregistré",
-                "unknownError": "Erreur inconnue"
+        "cardName": "Nom de la carte",
+        "cardType": {
+            "crafting": "Création de",
+            "groups": {
+                "abilitiesAndSpells": "Capacités & Sorts",
+                "items": "Objets"
             }
+        },
+        "spellDetails": {
+            "title": "Détails du sort",
+            "school": {
+                "label": "École",
+                "placeholder": "Aucune école"
+            },
+            "level": {
+                "label": "Niveau",
+                "placeholder": "Aucun niveau"
+            },
+            "castingTime": {
+                "label": "Temps d'incantation",
+                "unitPlaceholder": "Unité"
+            },
+            "range": {
+                "label": "Portée",
+                "typePlaceholder": "Type de portée",
+                "unitPlaceholder": "Unité"
+            },
+            "duration": {
+                "label": "Durée",
+                "typePlaceholder": "Type de durée",
+                "unitPlaceholder": "Unité"
+            },
+            "components": {
+                "label": "Composantes"
+            }
+        },
+        "rulesText": "Contenu de la carte",
+        "visualStyle": {
+            "title": "Style visuel",
+            "headerImage": "Image d'en-tête",
+            "accentColor": "Couleur d'accentuation"
+        },
+        "cardBack": {
+            "title": "Dos de la carte",
+            "design": "Modèle de dos de carte",
+            "custom": "Personnalisé",
+            "customImage": "Image personnalisée (URL)",
+            "tintColor": "Couleur de teinte",
+            "noTint": "Aucune teinte",
+            "tintDescription": "Applique une teinte de couleur pour modifier l'apparence de la texture."
+        },
+        "image": {
+            "placeholder": "Lien de l'image ou fichier",
+            "clear": "Effacer l'image"
         }
     },
     "richText": {

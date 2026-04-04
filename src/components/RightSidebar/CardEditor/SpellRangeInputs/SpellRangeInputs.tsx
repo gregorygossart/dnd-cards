@@ -19,7 +19,7 @@ export const SpellRangeInputs: React.FC = () => {
 
   return (
     <div>
-      <EditorLabel>{t("editor.propertiesTab.spellDetails.range.label")}</EditorLabel>
+      <EditorLabel>{t("editor.spellDetails.range.label")}</EditorLabel>
       <div className="flex gap-2">
         <Select
           value={watch("range.type")}
@@ -36,7 +36,7 @@ export const SpellRangeInputs: React.FC = () => {
           }}
         >
           <SelectTrigger className="flex-1 bg-slate-800 border-slate-700 text-slate-100 h-9">
-            <SelectValue placeholder={t("editor.propertiesTab.spellDetails.range.typePlaceholder")} />
+            <SelectValue placeholder={t("editor.spellDetails.range.typePlaceholder")} />
           </SelectTrigger>
           <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
             {Object.values(RangeType).map((type) => (
@@ -64,7 +64,7 @@ export const SpellRangeInputs: React.FC = () => {
               }
             >
               <SelectTrigger className="w-[100px] bg-slate-800 border-slate-700 text-slate-100 h-9">
-                <SelectValue placeholder={t("editor.propertiesTab.spellDetails.range.unitPlaceholder")} />
+                <SelectValue placeholder={t("editor.spellDetails.range.unitPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(RangeDistanceUnit).map((unit) => (

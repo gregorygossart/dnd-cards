@@ -44,6 +44,11 @@
             "description": "Are you sure you want to delete \"{{deckName}}\"? This will also delete all {{cardCount}} card(s) in this deck. This action cannot be undone."
         }
     },
+    "share": {
+        "importDeck": "Import deck",
+        "export": "Export",
+        "importError": "Import failed: {{message}}"
+    },
     "card": {
         "types": {
             "ability": "Ability",
@@ -136,107 +141,92 @@
     },
     "editor": {
         "title": "Card editor",
-        "tabs": {
-            "properties": "Properties",
-            "importExport": "Import / Export"
-        },
-        "propertiesTab": {
-            "deckSettings": {
-                "title": "Deck settings",
-                "format": {
-                    "title": "Card format",
-                    "tarot": "Tarot",
-                    "poker": "Poker"
-                },
-                "borderRadius": {
-                    "title": "Border radius"
-                },
-                "imageHeight": {
-                    "title": "Image height"
-                },
-                "density": {
-                    "title": "Density presets",
-                    "compact": "Compact",
-                    "normal": "Normal",
-                    "spacious": "Spacious"
-                },
-                "titleSize": {
-                    "title": "Title font size"
-                },
-                "bodySize": {
-                    "title": "Body font size"
-                },
-                "lineHeight": {
-                    "title": "Line height"
-                },
-                "padding": {
-                    "title": "Padding"
-                }
+        "deckSettings": {
+            "title": "Deck settings",
+            "format": {
+                "title": "Card format",
+                "tarot": "Tarot",
+                "poker": "Poker"
             },
-            "cardType": {
-                "crafting": "Crafting",
-                "groups": {
-                    "abilitiesAndSpells": "Abilities & Spells",
-                    "items": "Items"
-                }
+            "borderRadius": {
+                "title": "Border radius"
             },
-            "cardName": "Card name",
-            "spellDetails": {
-                "title": "Spell details",
-                "school": {
-                    "label": "School",
-                    "placeholder": "No school"
-                },
-                "level": {
-                    "label": "Level",
-                    "placeholder": "No level"
-                },
-                "castingTime": {
-                    "label": "Casting Time",
-                    "unitPlaceholder": "Unit"
-                },
-                "range": {
-                    "label": "Range",
-                    "typePlaceholder": "Range type",
-                    "unitPlaceholder": "Unit"
-                },
-                "duration": {
-                    "label": "Duration",
-                    "typePlaceholder": "Duration type",
-                    "unitPlaceholder": "Unit"
-                },
-                "components": {
-                    "label": "Components"
-                }
+            "imageHeight": {
+                "title": "Image height"
             },
-            "rulesText": "Rules text",
-            "visualStyle": {
-                "title": "Visual style",
-                "headerImage": "Header image",
-                "accentColor": "Accent color"
+            "density": {
+                "title": "Density presets",
+                "compact": "Compact",
+                "normal": "Normal",
+                "spacious": "Spacious"
             },
-            "cardBack": {
-                "title": "Card back",
-                "design": "Card back design",
-                "custom": "Custom",
-                "customImage": "Custom back image URL",
-                "tintColor": "Tint color",
-                "noTint": "No tint",
-                "tintDescription": "Apply a color tint to modify the texture appearance."
+            "titleSize": {
+                "title": "Title font size"
             },
-            "image": {
-                "placeholder": "Enter image URL or upload file",
-                "clear": "Clear image"
+            "bodySize": {
+                "title": "Body font size"
+            },
+            "lineHeight": {
+                "title": "Line height"
+            },
+            "padding": {
+                "title": "Padding"
             }
         },
-        "importExportTab": {
-            "title": "Card data",
-            "copyTitle": "Copy JSON",
-            "placeholder": "Paste JSON here...",
-            "status": {
-                "saved": "Saved",
-                "unknownError": "Unknown error"
+        "cardType": {
+            "crafting": "Crafting",
+            "groups": {
+                "abilitiesAndSpells": "Abilities & Spells",
+                "items": "Items"
             }
+        },
+        "cardName": "Card name",
+        "spellDetails": {
+            "title": "Spell details",
+            "school": {
+                "label": "School",
+                "placeholder": "No school"
+            },
+            "level": {
+                "label": "Level",
+                "placeholder": "No level"
+            },
+            "castingTime": {
+                "label": "Casting Time",
+                "unitPlaceholder": "Unit"
+            },
+            "range": {
+                "label": "Range",
+                "typePlaceholder": "Range type",
+                "unitPlaceholder": "Unit"
+            },
+            "duration": {
+                "label": "Duration",
+                "typePlaceholder": "Duration type",
+                "unitPlaceholder": "Unit"
+            },
+            "components": {
+                "label": "Components"
+            }
+        },
+        "rulesText": "Rules text",
+        "visualStyle": {
+            "title": "Visual style",
+            "headerImage": "Header image",
+            "accentColor": "Accent color"
+        },
+        "cardBack": {
+            "title": "Card back",
+            "design": "Card back design",
+            "custom": "Custom",
+            "customImage": "Custom back image URL",
+            "tintColor": "Tint color",
+            "noTint": "No tint",
+            "tintDescription": "Apply a color tint to modify the texture appearance."
+        },
+        "image": {
+            "placeholder": "Enter image URL or upload file",
+            "clear": "Clear image"
         }
     },
     "richText": {

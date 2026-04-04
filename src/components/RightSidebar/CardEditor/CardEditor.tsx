@@ -153,7 +153,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
 
         {/* Spell-specific fields */}
         {watch("type") === CardType.Spell && (
-          <CollapsibleGroup title={t("editor.propertiesTab.spellDetails.title")} defaultOpen={true}>
+          <CollapsibleGroup title={t("editor.spellDetails.title")} defaultOpen={true}>
             <div className="space-y-6">
               <SpellClassificationInputs />
 
@@ -178,7 +178,7 @@ export const CardEditor: React.FC<CardEditorProps> = ({
           </CollapsibleGroup>
         )}
 
-        <CollapsibleGroup title={t("editor.propertiesTab.rulesText")} defaultOpen={true}>
+        <CollapsibleGroup title={t("editor.rulesText")} defaultOpen={true}>
           <Controller
             name="description"
             control={control}
@@ -192,17 +192,17 @@ export const CardEditor: React.FC<CardEditorProps> = ({
           />
         </CollapsibleGroup>
 
-        <CollapsibleGroup title={t("editor.propertiesTab.visualStyle.title")} defaultOpen={true}>
+        <CollapsibleGroup title={t("editor.visualStyle.title")} defaultOpen={true}>
           <div className="space-y-6">
             <ImageInput
-              label={t("editor.propertiesTab.visualStyle.headerImage")}
+              label={t("editor.visualStyle.headerImage")}
               fieldName="visuals.headerImage"
             />
             <AccentColorInput />
           </div>
         </CollapsibleGroup>
 
-        <CollapsibleGroup title={t("editor.propertiesTab.cardBack.title")} defaultOpen={true}>
+        <CollapsibleGroup title={t("editor.cardBack.title")} defaultOpen={true}>
           <CardBackSelector />
         </CollapsibleGroup>
       </div>

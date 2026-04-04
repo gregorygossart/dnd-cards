@@ -5,6 +5,7 @@ import { type Card } from "@/features/cards/types";
 import { CardType } from "@/features/cards/constants";
 import { assertUnreachable, cn } from "@/lib/utils";
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { exportDeck } from "@/lib/share/export";
 import { AddCardButton } from "./AddCardButton";
 import { AddDeckButton } from "./AddDeckButton";
 import {
@@ -81,6 +82,11 @@ export const DeckList: React.FC = () => {
       }, 100);
     }
   }, [editingDeckId]);
+
+  // Expand deck when currentDeckIndex changes (e.g., when importing a new deck)
+  React.useEffect(() => {
+    setExpandedDeckIndex(currentDeckIndex);
+  }, [currentDeckIndex]);
 
   const toggleDeck = (deckIndex: number) => {
     setExpandedDeckIndex(expandedDeckIndex === deckIndex ? -1 : deckIndex);
@@ -245,6 +251,27 @@ export const DeckList: React.FC = () => {
                           />
                         </svg>
                         {t("deck.actions.rename")}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          void exportDeck(deck);
+                        }}
+                      >
+                        <svg
+                          className="w-4 h-4 mr-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                          />
+                        </svg>
+                        {t("share.export")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={(e) => {

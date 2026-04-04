@@ -13,7 +13,7 @@ export const AccentColorInput: React.FC = () => {
   return (
     <div>
       <EditorLabel htmlFor="accentColor">
-        {t("editor.propertiesTab.visualStyle.accentColor")}
+        {t("editor.visualStyle.accentColor")}
       </EditorLabel>
       <div className="flex items-center gap-2">
         <div className="relative w-8 h-8 shrink-0">

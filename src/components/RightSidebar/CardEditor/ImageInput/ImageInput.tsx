@@ -11,7 +11,7 @@ import {
   getLocalImageId,
   isLocalImageRef,
   putImageBlob,
-} from "@/lib/cardImages";
+} from "@/lib/share/cardImages";
 import { useResolvedImageUrl } from "@/hooks/useResolvedImageUrl";
 
 interface ImageInputProps {
@@ -65,7 +65,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
   return (
     <div>
       <EditorLabel htmlFor={inputId}>
-        {label || t("editor.propertiesTab.visualStyle.headerImage")}
+        {label || t("editor.visualStyle.headerImage")}
       </EditorLabel>
       <div className="space-y-2">
         <div className="flex gap-2">
@@ -77,7 +77,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
               const raw = e.target.value.trim();
               setFieldValue(raw || undefined, previous);
             }}
-            placeholder={t("editor.propertiesTab.image.placeholder")}
+            placeholder={t("editor.image.placeholder")}
             className="flex-1 bg-slate-800 border-slate-700 text-slate-100 text-xs placeholder:text-slate-500"
           />
           <input
@@ -117,7 +117,7 @@ export const ImageInput: React.FC<ImageInputProps> = ({
             type="button"
             className="bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-slate-100 h-7 text-xs w-full"
           >
-            {t("editor.propertiesTab.image.clear")}
+            {t("editor.image.clear")}
           </Button>
         )}
       </div>

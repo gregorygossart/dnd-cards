@@ -34,7 +34,7 @@ export const SpellDurationInputs: React.FC = () => {
   return (
     <div>
       <div className="flex items-start justify-between">
-        <EditorLabel>{t("editor.propertiesTab.spellDetails.duration.label")}</EditorLabel>
+        <EditorLabel>{t("editor.spellDetails.duration.label")}</EditorLabel>
 
         <div className="flex items-center gap-2">
           <Controller
@@ -91,7 +91,7 @@ export const SpellDurationInputs: React.FC = () => {
           }}
         >
           <SelectTrigger className="flex-1 bg-slate-800 border-slate-700 text-slate-100 h-9">
-            <SelectValue placeholder={t("editor.propertiesTab.spellDetails.duration.typePlaceholder")} />
+            <SelectValue placeholder={t("editor.spellDetails.duration.typePlaceholder")} />
           </SelectTrigger>
           <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
             {Object.values(DurationType).map((type) => (
@@ -119,7 +119,7 @@ export const SpellDurationInputs: React.FC = () => {
               }
             >
               <SelectTrigger className="w-[100px] bg-slate-800 border-slate-700 text-slate-100 h-9">
-                <SelectValue placeholder={t("editor.propertiesTab.spellDetails.duration.unitPlaceholder")} />
+                <SelectValue placeholder={t("editor.spellDetails.duration.unitPlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(TimeDurationUnit).map((unit) => (

@@ -19,7 +19,7 @@ export const SpellClassificationInputs: React.FC = () => {
     <div className="flex gap-2">
       {/* School */}
       <div className="flex-1 min-w-0">
-        <EditorLabel htmlFor="school">{t("editor.propertiesTab.spellDetails.school.label")}</EditorLabel>
+        <EditorLabel htmlFor="school">{t("editor.spellDetails.school.label")}</EditorLabel>
         <Controller
           control={control}
           name="school"
@@ -29,7 +29,7 @@ export const SpellClassificationInputs: React.FC = () => {
                 id="school"
                 className="bg-slate-800 border-slate-700 text-slate-100 w-full h-9 truncate [&_span]:truncate"
               >
-                <SelectValue placeholder={t("editor.propertiesTab.spellDetails.school.placeholder")} />
+                <SelectValue placeholder={t("editor.spellDetails.school.placeholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 {Object.values(SpellSchool).map((school) => (
@@ -45,7 +45,7 @@ export const SpellClassificationInputs: React.FC = () => {
 
       {/* Level */}
       <div className="flex-1 min-w-0">
-        <EditorLabel htmlFor="level">{t("editor.propertiesTab.spellDetails.level.label")}</EditorLabel>
+        <EditorLabel htmlFor="level">{t("editor.spellDetails.level.label")}</EditorLabel>
         <Controller
           control={control}
           name="level"
@@ -60,7 +60,7 @@ export const SpellClassificationInputs: React.FC = () => {
                 id="level"
                 className="bg-slate-800 border-slate-700 text-slate-100 w-full h-9 truncate [&_span]:truncate"
               >
-                <SelectValue placeholder={t("editor.propertiesTab.spellDetails.level.placeholder")} />
+                <SelectValue placeholder={t("editor.spellDetails.level.placeholder")} />
               </SelectTrigger>
               <SelectContent className="bg-slate-800 border-slate-700 text-slate-100">
                 <SelectItem value="0">{t("card.spell.levels.cantrip")}</SelectItem>

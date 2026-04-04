@@ -19,7 +19,7 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
 
   return (
     <div className="space-y-2">
-      <EditorLabel>{t("editor.propertiesTab.deckSettings.density.title")}</EditorLabel>
+      <EditorLabel>{t("editor.deckSettings.density.title")}</EditorLabel>
       <div className="grid grid-cols-3 gap-2">
         <Button
           variant="outline"
@@ -27,7 +27,7 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
           onClick={() => applyPreset(DensityPreset.Compact)}
           className="text-xs"
         >
-          {t("editor.propertiesTab.deckSettings.density.compact")}
+          {t("editor.deckSettings.density.compact")}
         </Button>
         <Button
           variant="outline"
@@ -35,7 +35,7 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
           onClick={() => applyPreset(DensityPreset.Normal)}
           className="text-xs"
         >
-          {t("editor.propertiesTab.deckSettings.density.normal")}
+          {t("editor.deckSettings.density.normal")}
         </Button>
         <Button
           variant="outline"
@@ -43,7 +43,7 @@ export const DensityPresets: React.FC<DensityPresetsProps> = ({ deckId }) => {
           onClick={() => applyPreset(DensityPreset.Spacious)}
           className="text-xs"
         >
-          {t("editor.propertiesTab.deckSettings.density.spacious")}
+          {t("editor.deckSettings.density.spacious")}
         </Button>
       </div>
     </div>

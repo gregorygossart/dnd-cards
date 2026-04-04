@@ -27,7 +27,7 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
       >
         <div className="flex items-baseline gap-2">
           <span className="text-2xl font-black text-slate-600 uppercase tracking-tight">
-            {t("editor.propertiesTab.cardType.crafting")}
+            {t("editor.cardType.crafting")}
           </span>
           <span className="text-2xl font-black uppercase tracking-tight text-violet-500">
             {t(`card.types.${value.toLowerCase()}`)}
@@ -36,7 +36,7 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
       </SelectTrigger>
       <SelectContent className="bg-slate-800 border-slate-700 text-slate-100 min-w-[200px]">
         <SelectGroup>
-          <SelectLabel>{t("editor.propertiesTab.cardType.groups.abilitiesAndSpells")}</SelectLabel>
+          <SelectLabel>{t("editor.cardType.groups.abilitiesAndSpells")}</SelectLabel>
 
           <SelectItem
             disabled
@@ -54,7 +54,7 @@ export const CardTypeSelector: React.FC<CardTypeSelectorProps> = ({
         </SelectGroup>
 
         <SelectGroup>
-          <SelectLabel>{t("editor.propertiesTab.cardType.groups.items")}</SelectLabel>
+          <SelectLabel>{t("editor.cardType.groups.items")}</SelectLabel>
 
           <SelectItem
             disabled
