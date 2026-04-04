@@ -40,7 +40,7 @@ export const AddDeckButton: React.FC = () => {
   return (
     <button
       onClick={() => setIsAdding(true)}
-      className="w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group hover:bg-slate-800/50 text-slate-400 hover:text-slate-300"
+      className="w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group hover:bg-slate-800/50 text-slate-400 hover:text-slate-300 border border-dashed border-slate-700"
     >
       <div className="w-5 h-5 rounded flex items-center justify-center shrink-0 bg-slate-700 group-hover:bg-violet-600">
         <svg

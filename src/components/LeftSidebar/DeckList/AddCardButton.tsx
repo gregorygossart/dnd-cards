@@ -14,9 +14,9 @@ export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId }) => {
   return (
     <button
       onClick={() => addCard(deckId, CardType.Spell)}
-      className="w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group hover:bg-violet-600/10 text-violet-400 hover:text-violet-300 mt-1"
+      className="w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group hover:bg-slate-800/50 text-slate-400 hover:text-slate-300 border border-dashed border-slate-700 mt-1"
     >
-      <div className="w-4 h-4 rounded shrink-0 bg-violet-600/20 flex items-center justify-center">
+      <div className="w-4 h-4 rounded shrink-0 bg-slate-700 group-hover:bg-violet-600 flex items-center justify-center">
         <svg
           className="w-3 h-3"
           fill="none"
