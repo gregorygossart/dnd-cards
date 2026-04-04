@@ -3,6 +3,7 @@ import { useDeckStore } from "@/hooks/useDeckStore";
 import { importDeckFromFile, ImportError } from "@/lib/share/import";
 import { useT } from "next-i18next/client";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export const ImportButton: React.FC = () => {
   const { addDeck } = useDeckStore();
@@ -22,9 +23,9 @@ export const ImportButton: React.FC = () => {
       addDeck(deckData.name, deckData.cards, deckData.style);
     } catch (error) {
       if (error instanceof ImportError) {
-        alert(t("share.importError", { message: error.message }));
+        toast.error(t("share.importError", { message: error.message }));
       } else {
-        alert(t("share.importError", { message: "Unknown error" }));
+        toast.error(t("share.importError", { message: "Unknown error" }));
       }
     }
 

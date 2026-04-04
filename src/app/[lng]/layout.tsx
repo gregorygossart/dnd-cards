@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { I18nProvider } from "next-i18next/client";
 import { initServerI18next, getT, getResources, generateI18nStaticParams } from "next-i18next/server";
 import i18nConfig from "@/i18n.config";
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 // Initialize server-side i18n at module scope
 initServerI18next(i18nConfig);
@@ -52,9 +54,12 @@ export default async function RootLayout({
           "bg-background text-foreground font-sans",
         )}
       >
-        <I18nProvider language={lng} resources={resources}>
-          {children}
-        </I18nProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <I18nProvider language={lng} resources={resources}>
+            {children}
+          </I18nProvider>
+          <Toaster position="bottom-center" />
+        </ThemeProvider>
         <SpeedInsights />
         <Analytics />
       </body>
