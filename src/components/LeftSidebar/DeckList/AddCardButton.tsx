@@ -1,39 +1,68 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { useT } from "next-i18next/client";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { CardType } from "@/features/cards/constants";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Sparkles, Zap, Sword, Shield, Plus } from "lucide-react";
 
 interface AddCardButtonProps {
   deckId: string;
 }
 
+const cardTypes = [
+  { type: CardType.Spell, icon: Sparkles, labelKey: "spell" },
+  { type: CardType.Ability, icon: Zap, labelKey: "ability", disabled: true },
+  { type: CardType.Weapon, icon: Sword, labelKey: "weapon", disabled: true },
+  { type: CardType.Armor, icon: Shield, labelKey: "armor", disabled: true },
+];
+
 export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId }) => {
   const { addCard } = useDeckStore();
   const { t } = useT();
+  const [open, setOpen] = useState(false);
+
+  const handleSelect = (type: CardType, disabled?: boolean) => {
+    if (disabled) return;
+    addCard(deckId, type);
+    setOpen(false);
+  };
 
   return (
-    <button
-      onClick={() => addCard(deckId, CardType.Spell)}
-      className="w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group hover:bg-slate-800/50 text-slate-400 hover:text-slate-300 border border-dashed border-slate-700 mt-1"
-    >
-      <div className="w-4 h-4 rounded shrink-0 bg-slate-700 group-hover:bg-violet-600 flex items-center justify-center">
-        <svg
-          className="w-3 h-3"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger asChild>
+        <button
+          className="w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group hover:bg-slate-800/50 text-slate-400 hover:text-slate-300 border border-dashed border-slate-700 mt-1"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M12 4v16m8-8H4"
-          />
-        </svg>
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="truncate font-medium">{t("card.add.buttonLabel")}</div>
-      </div>
-    </button>
+          <div className="w-4 h-4 rounded shrink-0 bg-slate-700 group-hover:bg-violet-600 flex items-center justify-center">
+            <Plus className="w-3 h-3" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <span className="truncate font-medium">{t("card.add.buttonLabel")}</span>
+          </div>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="bg-slate-800 border-slate-700 min-w-[var(--radix-dropdown-menu-trigger-width)]">
+        {cardTypes.map(({ type, icon: Icon, labelKey, disabled }) => (
+          <DropdownMenuItem
+            key={type}
+            disabled={disabled}
+            onClick={() => handleSelect(type, disabled)}
+            className="text-slate-300 focus:bg-slate-700 focus:text-slate-100 cursor-pointer disabled:text-slate-600 disabled:cursor-not-allowed"
+          >
+            <div className="flex items-center gap-2">
+              <Icon className="w-4 h-4" />
+              <span>{t(`card.types.${labelKey}`)}</span>
+            </div>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

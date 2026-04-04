@@ -22,17 +22,15 @@ import { useT } from "next-i18next/client";
 import { TitleInput } from "@/components/RightSidebar/CardEditor/TitleInput/TitleInput";
 import { ImageInput } from "@/components/RightSidebar/CardEditor/ImageInput/ImageInput";
 import { CardBackSelector } from "@/components/RightSidebar/CardEditor/CardBackSelector/CardBackSelector";
-import { CardTypeSelector } from "@/components/RightSidebar/CardEditor/CardTypeSelector/CardTypeSelector";
-import { SpellComponentsInputs } from "@/components/RightSidebar/CardEditor/SpellComponentsInputs/SpellComponentsInputs";
+import { DeckSettings } from "@/components/RightSidebar/CardEditor/DeckSettings/DeckSettings";
 import { SpellDurationInputs } from "@/components/RightSidebar/CardEditor/SpellDurationInputs/SpellDurationInputs";
+import { SpellComponentsInputs } from "@/components/RightSidebar/CardEditor/SpellComponentsInputs/SpellComponentsInputs";
 import { SpellRangeInputs } from "@/components/RightSidebar/CardEditor/SpellRangeInputs/SpellRangeInputs";
 import { CastingTimeInputs } from "@/components/RightSidebar/CardEditor/CastingTimeInputs/CastingTimeInputs";
 import { SpellClassificationInputs } from "@/components/RightSidebar/CardEditor/SpellClassificationInputs/SpellClassificationInputs";
 import { AccentColorInput } from "@/components/RightSidebar/CardEditor/AccentColorInput/AccentColorInput";
 import { CollapsibleGroup } from "@/components/ui/collapsible-group";
-import { DeckSettings } from "@/components/RightSidebar/CardEditor/DeckSettings/DeckSettings";
 import { useDeckStore } from "@/hooks/useDeckStore";
-import { Separator } from "@/components/ui/separator";
 import { WeaponDetailsInputs } from "@/features/items/weapons/components/WeaponDetailsInputs/WeaponDetailsInputs";
 import { ArmorDetailsInputs } from "@/features/items/armors/components/ArmorDetailsInputs/ArmorDetailsInputs";
 
@@ -132,16 +130,6 @@ export const CardEditor: React.FC<CardEditorProps> = ({
     <FormProvider {...form}>
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         <DeckSettings deckId={currentDeck.id} />
-
-        <Separator className="mt-6 py-0.25 bg-slate-600" />
-
-        <CardTypeSelector
-          value={watch("type")}
-          onChange={(value) => {
-            const defaults = defaultCardValues[value];
-            form.reset(defaults);
-          }}
-        />
 
         <TitleInput />
 
