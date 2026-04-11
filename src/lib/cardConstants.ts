@@ -69,13 +69,18 @@ export const PRINT_CONFIG = {
 
 export const CARD_BACK_PRESETS = [
   {
+    id: "default",
+    name: "Default",
+    src: "/images/card-backs/default.png",
+  },
+  {
     id: "shield-sword",
     name: "Shield & Sword",
-    src: "/card-backs/shield-sword.png",
+    src: "/images/card-backs/shield-sword.png",
   },
   {
     id: "magic-eye",
     name: "Magic Eye",
-    src: "/card-backs/magic-eye.png",
+    src: "/images/card-backs/magic-eye.png",
   },
 ] as const;

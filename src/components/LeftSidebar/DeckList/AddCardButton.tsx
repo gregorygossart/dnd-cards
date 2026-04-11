@@ -8,12 +8,14 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Sparkles, Zap, Sword, Shield, Plus } from "lucide-react";
+import { Sparkles, Zap, Sword, Shield, Plus, BookOpen } from "lucide-react";
 
 interface AddCardButtonProps {
   deckId: string;
+  onOpenLibrary?: () => void;
 }
 
 const cardTypes = [
@@ -23,7 +25,7 @@ const cardTypes = [
   { type: CardType.Armor, icon: Shield, labelKey: "armor", disabled: true },
 ];
 
-export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId }) => {
+export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId, onOpenLibrary }) => {
   const { addCard } = useDeckStore();
   const { t } = useT();
   const [open, setOpen] = useState(false);
@@ -31,6 +33,11 @@ export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId }) => {
   const handleSelect = (type: CardType, disabled?: boolean) => {
     if (disabled) return;
     addCard(deckId, type);
+    setOpen(false);
+  };
+
+  const handleLibrary = () => {
+    onOpenLibrary?.();
     setOpen(false);
   };
 
@@ -49,6 +56,16 @@ export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId }) => {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-slate-800 border-slate-700 min-w-[var(--radix-dropdown-menu-trigger-width)]">
+        <DropdownMenuItem
+          onClick={handleLibrary}
+          className="text-slate-300 focus:bg-slate-700 focus:text-slate-100 cursor-pointer"
+        >
+          <div className="flex items-center gap-2">
+            <BookOpen className="w-4 h-4" />
+            <span>{t("library.fromLibrary")}</span>
+          </div>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator className="bg-slate-700" />
         {cardTypes.map(({ type, icon: Icon, labelKey, disabled }) => (
           <DropdownMenuItem
             key={type}

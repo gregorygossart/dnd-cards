@@ -247,5 +247,11 @@
             "divider": "Divider",
             "fallback": "Type \"/{{search}}\" on the page"
         }
+    },
+    "library": {
+        "spellLibrary": "Spell Library",
+        "fromLibrary": "From library",
+        "searchPlaceholder": "Search spells...",
+        "importToDeck": "Add to deck"
     }
 }
