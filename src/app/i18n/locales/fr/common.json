@@ -247,5 +247,10 @@
             "divider": "Séparateur",
             "fallback": "Tapez \"/{{search}}\" sur la page"
         }
+    },
+    "library": {
+        "spellLibrary": "Bibliothèque de sorts",
+        "searchPlaceholder": "Rechercher des sorts...",
+        "importToDeck": "Ajouter au deck"
     }
 }

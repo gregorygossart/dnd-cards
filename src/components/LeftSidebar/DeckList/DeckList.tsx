@@ -8,6 +8,7 @@ import { useDeckStore } from "@/hooks/useDeckStore";
 import { exportDeck } from "@/lib/share/export";
 import { AddCardButton } from "./AddCardButton";
 import { AddDeckButton } from "./AddDeckButton";
+import { SpellLibraryDialog } from "@/components/SpellLibrary/SpellLibraryDialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -70,6 +71,8 @@ export const DeckList: React.FC = () => {
     cardIndex: number;
     title: string;
   } | null>(null);
+  const [libraryOpen, setLibraryOpen] = useState(false);
+  const [libraryDeckId, setLibraryDeckId] = useState<string | null>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   // Focus and select text when editing starts
@@ -436,7 +439,13 @@ export const DeckList: React.FC = () => {
                   })}
 
                   {/* Add Card Button */}
-                  <AddCardButton deckId={deck.id} />
+                  <AddCardButton 
+                    deckId={deck.id} 
+                    onOpenLibrary={() => {
+                      setLibraryDeckId(deck.id);
+                      setLibraryOpen(true);
+                    }}
+                  />
                 </div>
               )}
             </div>
@@ -493,6 +502,15 @@ export const DeckList: React.FC = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {/* Spell Library Dialog */}
+      {libraryDeckId && (
+        <SpellLibraryDialog
+          open={libraryOpen}
+          onOpenChange={setLibraryOpen}
+          deckId={libraryDeckId}
+        />
+      )}
     </div>
   );
 };

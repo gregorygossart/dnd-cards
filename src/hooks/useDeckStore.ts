@@ -17,6 +17,7 @@ interface DeckStore {
   isHydrated: boolean;
   updateCard: (deckIndex: number, cardIndex: number, card: Card) => void;
   addCard: (deckId: string, type: CardType) => void;
+  addCardWithData: (deckId: string, cardData: Card) => void;
   duplicateCard: (deckIndex: number, cardIndex: number) => Promise<void>;
   deleteCard: (deckIndex: number, cardIndex: number) => void;
   addDeck: (name: string, cards?: Card[], style?: Partial<DeckStyle>) => void;
@@ -113,6 +114,34 @@ export const useDeckStore = create<DeckStore>()(
               return {
                 ...deck,
                 cards: [...deck.cards, newCard],
+              };
+            }
+            return deck;
+          });
+
+          const newCardIndex =
+            targetDeckIndex !== -1
+              ? state.decks[targetDeckIndex].cards.length
+              : state.currentCardIndex;
+
+          return {
+            decks: newDecks,
+            currentDeckIndex:
+              targetDeckIndex !== -1 ? targetDeckIndex : state.currentDeckIndex,
+            currentCardIndex: newCardIndex,
+          };
+        });
+      },
+
+      addCardWithData: (deckId: string, cardData: Card) => {
+        set((state) => {
+          let targetDeckIndex = -1;
+          const newDecks = state.decks.map((deck, idx) => {
+            if (deck.id === deckId) {
+              targetDeckIndex = idx;
+              return {
+                ...deck,
+                cards: [...deck.cards, cardData],
               };
             }
             return deck;
