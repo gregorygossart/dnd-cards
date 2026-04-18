@@ -10,7 +10,7 @@ Based on current codebase audit and feature review.
 
 | Feature | Status | Priority | Notes |
 |---------|--------|----------|-------|
-| Text Overflow Detection | Todo | 1 | Warn user when card text exceeds visible area |
+| Text Overflow Detection | Done | 1 | Real-time detection, deck list warnings, print blocking |
 | Safe Print Margins | Todo | 1 | Center cards, add printer-safe margins |
 | Material Component Field | Todo | 1 | Add text input for "materials needed" on spells |
 
@@ -69,9 +69,9 @@ Based on current codebase audit and feature review.
 
 ## Quick TODO (Next 3 Tasks)
 
-1. [ ] **Text overflow warning** — detect when card content exceeds bounds
-2. [ ] **Safe print margins** — center cards away from printer margins
-3. [ ] **Material component text field** — complete the spell card feature
+1. [ ] **Safe print margins** — center cards away from printer margins
+2. [ ] **Material component text field** — complete the spell card feature
+3. [ ] **Card Reordering** — drag/drop cards within deck
 
 ---
 

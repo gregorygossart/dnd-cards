@@ -1,11 +1,13 @@
-import React, { useMemo } from "react";
+import React, { useRef } from "react";
 import type { Card } from "@/features/cards/types";
+import type { DeckStyle } from "@/features/decks/types";
 import { CardFormat } from "@/features/cards/constants";
 import { CardFront } from "./CardFront/CardFront";
 import { CardBack } from "./CardBack/CardBack";
+import { OverflowWarning } from "./OverflowWarning/OverflowWarning";
 import { cn } from "@/lib/utils";
 import { getCardDimensions } from "@/lib/cardConstants";
-import { useDeckStore } from "@/hooks/useDeckStore";
+import { useVisibleCardOverflow } from "@/hooks/overflow/useVisibleCardOverflow";
 
 export enum CardSide {
   Front = "Front",
@@ -17,6 +19,7 @@ const RESOLUTION = 1.5;
 
 interface CardRendererProps {
   data: Card;
+  deckStyle: DeckStyle;
   className?: string;
   scale?: number;
   showShadow?: boolean;
@@ -25,21 +28,33 @@ interface CardRendererProps {
 
 export const CardRenderer: React.FC<CardRendererProps> = ({
   data,
+  deckStyle,
   className,
   scale = 1,
   showShadow = true,
   side = CardSide.Front,
 }) => {
   const { visuals } = data;
-  const { decks, currentDeckIndex } = useDeckStore();
+  const cardContainerRef = useRef<HTMLDivElement>(null);
 
   // Get card dimensions based on deck's card format
-  const cardDimensions = useMemo(() => {
-    const deck = decks[currentDeckIndex];
-    const format =
-      deck?.style?.cardFormat === "Poker" ? CardFormat.Poker : CardFormat.Tarot;
-    return getCardDimensions(format);
-  }, [decks, currentDeckIndex]);
+  const cardDimensions = getCardDimensions(
+    deckStyle.cardFormat === "Poker" ? CardFormat.Poker : CardFormat.Tarot
+  );
+
+  // Track overflow state
+  const [contentElement, setContentElement] = React.useState<HTMLElement | null>(null);
+
+  const hasOverflow = useVisibleCardOverflow(
+    contentElement,
+    cardContainerRef.current,
+    [data, scale, side, deckStyle]
+  );
+
+  // Capture the content element from CardFront
+  const handleContentRef = React.useCallback((el: HTMLElement | null) => {
+    setContentElement(el);
+  }, []);
 
   return (
     <div
@@ -58,16 +73,19 @@ export const CardRenderer: React.FC<CardRendererProps> = ({
         }}
       >
         <div
+          ref={cardContainerRef}
           className={cn(
             "relative overflow-hidden flex flex-col font-sans text-slate-900 h-full",
             showShadow && "shadow-2xl",
           )}
         >
           {side === CardSide.Back ? (
-            <CardBack visuals={visuals} />
+            <CardBack visuals={visuals} deckStyle={deckStyle} />
           ) : (
-            <CardFront data={data} />
+            <CardFront data={data} deckStyle={deckStyle} onContentRef={handleContentRef} />
           )}
+          {/* Overflow warning - only show for front side */}
+          {side === CardSide.Front && <OverflowWarning hasOverflow={hasOverflow} />}
         </div>
       </div>
     </div>

@@ -1,17 +1,16 @@
 import React from "react";
 import type { CardVisuals } from "@/features/cards/types";
+import type { DeckStyle } from "@/features/decks/types";
 import { getCardRadii } from "@/lib/cardConstants";
-import { useDeckStore } from "@/hooks/useDeckStore";
 import { useResolvedImageUrl } from "@/hooks/useResolvedImageUrl";
 
 interface CardBackProps {
   visuals: CardVisuals;
+  deckStyle: DeckStyle;
 }
 
-export const CardBack: React.FC<CardBackProps> = ({ visuals }) => {
-  // Get corner radius from current deck's typography settings
-  const { decks, currentDeckIndex } = useDeckStore();
-  const cornerRadius = decks[currentDeckIndex]?.style?.cornerRadius ?? 1.5;
+export const CardBack: React.FC<CardBackProps> = ({ visuals, deckStyle }) => {
+  const cornerRadius = deckStyle.cornerRadius ?? 1.5;
   const backSrc = useResolvedImageUrl(visuals.backImage);
 
   const { outerRadius, padding, innerRadius } = getCardRadii(cornerRadius);

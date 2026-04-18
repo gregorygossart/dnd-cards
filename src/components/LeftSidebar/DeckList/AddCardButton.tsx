@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sparkles, Zap, Sword, Shield, Plus } from "lucide-react";
+import { DeckListIcon } from "./DeckListIcon";
 
 interface AddCardButtonProps {
   deckId: string;
@@ -40,9 +41,9 @@ export const AddCardButton: React.FC<AddCardButtonProps> = ({ deckId }) => {
         <button
           className="w-full px-3 py-2 text-left text-sm rounded-lg transition-colors flex items-center gap-2 group hover:bg-slate-800/50 text-slate-400 hover:text-slate-300 border border-dashed border-slate-700 mt-1"
         >
-          <div className="w-4 h-4 rounded shrink-0 bg-slate-700 group-hover:bg-violet-600 flex items-center justify-center">
+          <DeckListIcon className="group-hover:bg-violet-600">
             <Plus className="w-3 h-3" />
-          </div>
+          </DeckListIcon>
           <div className="flex-1 min-w-0">
             <span className="truncate font-medium">{t("card.add.buttonLabel")}</span>
           </div>

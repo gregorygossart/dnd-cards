@@ -107,6 +107,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             >
               <CardRenderer
                 data={currentCard}
+                deckStyle={currentDeck?.style}
                 scale={cardScale}
                 side={CardSide.Back}
               />
@@ -121,6 +122,7 @@ export const MainContent: React.FC<MainContentProps> = ({
             >
               <CardRenderer
                 data={currentCard}
+                deckStyle={currentDeck?.style}
                 scale={cardScale}
                 side={CardSide.Front}
               />

@@ -6,6 +6,7 @@ import { CardRenderer, CardSide } from "@/components/CardRenderer/CardRenderer";
 import { PRINT_CONFIG, getCardDimensions } from "@/lib/cardConstants";
 import { useT } from "next-i18next/client";
 import { useDeckStore } from "@/hooks/useDeckStore";
+import { useDeckListOverflow } from "@/hooks/overflow/useDeckListOverflow";
 
 export default function PrintPage() {
   const { decks, currentDeckIndex } = useDeckStore();
@@ -16,6 +17,9 @@ export default function PrintPage() {
     setMounted(true);
   }, []);
 
+  // Check for overflow in all decks - MUST be called before any conditional returns
+  const overflowState = useDeckListOverflow(decks.map(d => ({ id: d.id, cards: d.cards, style: d.style })));
+
   if (!mounted) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -25,6 +29,11 @@ export default function PrintPage() {
   }
 
   const currentDeck = decks[currentDeckIndex];
+  
+  // Check if current deck has overflow
+  const currentDeckOverflow = currentDeck ? overflowState.decks.get(currentDeck.id) : null;
+  const hasOverflow = currentDeckOverflow?.hasOverflow ?? false;
+  const overflowCount = currentDeckOverflow?.results.filter(r => r.hasOverflow).length ?? 0;
 
   if (!currentDeck) {
     return (
@@ -76,8 +85,22 @@ export default function PrintPage() {
         }
       `}</style>
 
+      {/* Overflow warning banner */}
+      {hasOverflow && (
+        <div className="fixed top-0 left-0 right-0 bg-orange-500 text-white px-8 py-2 print:hidden z-50">
+          <div className="flex items-center justify-center gap-2">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span className="font-medium">
+              Fix required: {overflowCount} card{overflowCount !== 1 ? 's' : ''} exceed the available space. Printing is disabled until resolved.
+            </span>
+          </div>
+        </div>
+      )}
+
       {/* Toolbar (hidden on print) */}
-      <div className="fixed top-0 left-0 right-0 h-16 bg-slate-900 text-white flex items-center justify-between px-8 shadow-lg print:hidden z-50">
+      <div className={`fixed left-0 right-0 bg-slate-900 text-white flex items-center justify-between px-8 shadow-lg print:hidden z-40 ${hasOverflow ? 'top-10 h-14' : 'top-0 h-16'}`}>
         <div className="flex items-center gap-4">
           <h1 className="font-bold text-lg">{t("printPage.printPreview")}</h1>
           <span className="text-slate-400">|</span>
@@ -88,7 +111,8 @@ export default function PrintPage() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => window.print()}
-            className="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded font-medium transition-colors flex items-center gap-2"
+            disabled={hasOverflow}
+            className="bg-violet-600 hover:bg-violet-700 disabled:bg-violet-400 disabled:cursor-not-allowed text-white px-4 py-2 rounded font-medium transition-colors flex items-center gap-2"
           >
             <svg
               className="w-4 h-4"
@@ -142,6 +166,7 @@ export default function PrintPage() {
                   <CardRenderer
                     key={`front - ${index} `}
                     data={card}
+                    deckStyle={currentDeck.style}
                     className="page-break-inside-avoid break-inside-avoid"
                     showShadow={false}
                     side={CardSide.Front}
@@ -174,6 +199,7 @@ export default function PrintPage() {
                     {/* Reset direction for content so text isn't backwards */}
                     <CardRenderer
                       data={card}
+                      deckStyle={currentDeck.style}
                       className="page-break-inside-avoid break-inside-avoid"
                       showShadow={false}
                       side={CardSide.Back}

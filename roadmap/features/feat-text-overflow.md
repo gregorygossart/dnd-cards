@@ -1,6 +1,6 @@
 # Feature: Text Overflow Detection
 
-**Status**: Todo
+**Status**: Done
 **Priority**: 1 (Critical)
 
 ## Problem
@@ -35,10 +35,12 @@ Detect overflow and warn user.
 
 ## Success Criteria
 
-- [ ] User sees warning when card content overflows visible area
-- [ ] Warning appears in real-time during editing
-- [ ] Warning appears before print
-- [ ] Deck style changes check all cards for overflow
+- [x] User sees warning when card content overflows visible area
+- [x] Warning appears in real-time during editing
+- [x] Warning appears in deck list (orange icon on overflowing cards)
+- [x] Deck shows warning when any card overflows (orange folder icon)
+- [x] Warning appears before print (orange banner + disabled print button)
+- [x] All cards checked for overflow automatically (via useDeckListOverflow hook)
 
 ## Technical Approach
 

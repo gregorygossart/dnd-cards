@@ -1,5 +1,7 @@
+import { useRef, useEffect } from "react";
 import { CardType } from "@/features/cards/constants";
 import type { Card } from "@/features/cards/types";
+import type { DeckStyle } from "@/features/decks/types";
 import { WeaponStats } from "@/components/CardRenderer/CardFront/WeaponStats/WeaponStats";
 import { ArmorStats } from "@/components/CardRenderer/CardFront/ArmorStats/ArmorStats";
 import { CardArtArea } from "@/components/CardRenderer/CardFront/CardArtArea/CardArtArea";
@@ -9,20 +11,26 @@ import { CardHeader } from "@/components/CardRenderer/CardFront/CardHeader/CardH
 import { SpellStats } from "@/components/CardRenderer/CardFront/SpellStats/SpellStats";
 import { CardBody } from "@/components/CardRenderer/CardFront/CardBody/CardBody";
 import { getCardRadii } from "@/lib/cardConstants";
-import { useDeckStore } from "@/hooks/useDeckStore";
 
 interface CardFrontProps {
   data: Card;
+  deckStyle: DeckStyle;
+  onContentRef?: (el: HTMLElement | null) => void;
 }
 
-export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
+export const CardFront: React.FC<CardFrontProps> = ({ data, deckStyle, onContentRef }) => {
+  const contentRef = useRef<HTMLDivElement>(null);
   const { title, description, visuals } = data;
 
-  // Get typography settings from current deck
-  const { decks, currentDeckIndex } = useDeckStore();
-  const cornerRadius = decks[currentDeckIndex]?.style?.cornerRadius ?? 1.5;
-  const imageHeightPercent =
-    decks[currentDeckIndex]?.style?.imageHeightPercent ?? 40;
+  // Pass content element ref to parent for overflow detection
+  useEffect(() => {
+    if (onContentRef) {
+      onContentRef(contentRef.current);
+    }
+  }, [onContentRef]);
+
+  const cornerRadius = deckStyle.cornerRadius ?? 1.5;
+  const imageHeightPercent = deckStyle.imageHeightPercent ?? 40;
 
   const { outerRadius, padding, innerRadius } = getCardRadii(cornerRadius);
 
@@ -53,7 +61,8 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
 
         {/* Content Area */}
         <div
-          className="absolute left-0 right-0 bottom-0 flex flex-col bg-white pt-2"
+          ref={contentRef}
+          className="absolute left-0 right-0 bottom-0 flex flex-col bg-white pt-2 overflow-hidden"
           style={{ top: `${imageHeightPercent}%` }}
         >
           <div className="mb-2">
@@ -97,6 +106,7 @@ export const CardFront: React.FC<CardFrontProps> = ({ data }) => {
           <CardBody
             description={description}
             accentColor={visuals.accentColor}
+            deckStyle={deckStyle}
           />
         </div>
       </div>

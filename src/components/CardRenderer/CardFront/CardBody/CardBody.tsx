@@ -1,21 +1,21 @@
 import React from "react";
-import { useDeckStore, BASE_PADDING } from "@/hooks/useDeckStore";
+import type { DeckStyle } from "@/features/decks/types";
+import { BASE_PADDING } from "@/hooks/useDeckStore";
 
 interface CardBodyProps {
   description: string;
   accentColor: string;
+  deckStyle: DeckStyle;
 }
 
 export const CardBody: React.FC<CardBodyProps> = ({
   description,
   accentColor,
+  deckStyle,
 }) => {
-  // Get typography settings from current deck
-  const { decks, currentDeckIndex } = useDeckStore();
-  const bodyFontSize = decks[currentDeckIndex]?.style?.bodyFontSize ?? 14;
-  const lineHeight = decks[currentDeckIndex]?.style?.lineHeight ?? 1.5;
-  const paddingMultiplier =
-    decks[currentDeckIndex]?.style?.paddingMultiplier ?? 1.0;
+  const bodyFontSize = deckStyle.bodyFontSize ?? 14;
+  const lineHeight = deckStyle.lineHeight ?? 1.5;
+  const paddingMultiplier = deckStyle.paddingMultiplier ?? 1.0;
 
   return (
     <div

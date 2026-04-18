@@ -6,8 +6,11 @@ import { CardType } from "@/features/cards/constants";
 import { assertUnreachable, cn } from "@/lib/utils";
 import { useDeckStore } from "@/hooks/useDeckStore";
 import { exportDeck } from "@/lib/share/export";
+import { useDeckListOverflow } from "@/hooks/overflow/useDeckListOverflow";
+import type { CardOverflowResult } from "@/lib/overflow";
 import { AddCardButton } from "./AddCardButton";
 import { AddDeckButton } from "./AddDeckButton";
+import { DeckListIcon } from "./DeckListIcon";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -71,6 +74,10 @@ export const DeckList: React.FC = () => {
     title: string;
   } | null>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
+  // Pass all decks to the overflow hook - it checks all of them automatically
+  const overflowState = useDeckListOverflow(
+    decks.map(d => ({ id: d.id, cards: d.cards, style: d.style }))
+  );
 
   // Focus and select text when editing starts
   React.useEffect(() => {
@@ -138,6 +145,14 @@ export const DeckList: React.FC = () => {
           const isCurrentDeck = deckIndex === currentDeckIndex;
           const isEditing = editingDeckId === deck.id;
 
+          // Get overflow results for this specific deck
+          const deckOverflowState = overflowState.decks.get(deck.id);
+          const overflowingCards = deckOverflowState?.results
+            .filter((r: CardOverflowResult) => r.hasOverflow)
+            .map((r: CardOverflowResult) => r.cardIndex) ?? [];
+
+          const hasOverflowInDeck = overflowingCards.length > 0;
+
           return (
             <div key={deck.id}>
               {/* Deck Header */}
@@ -155,13 +170,8 @@ export const DeckList: React.FC = () => {
                 )}
               >
                 <div className="flex items-center gap-2 flex-1 min-w-0">
-                  {/* Deck Icon */}
-                  <div
-                    className={cn(
-                      "w-5 h-5 rounded flex items-center justify-center shrink-0",
-                      isCurrentDeck ? "bg-violet-600" : "bg-slate-700",
-                    )}
-                  >
+                  {/* Deck Icon - Warning if any card overflows */}
+                  <DeckListIcon isWarning={hasOverflowInDeck} isActive={isCurrentDeck}>
                     <svg
                       className="w-3 h-3"
                       fill="currentColor"
@@ -169,7 +179,7 @@ export const DeckList: React.FC = () => {
                     >
                       <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
                     </svg>
-                  </div>
+                  </DeckListIcon>
 
                   {/* Deck Name */}
                   <div className="flex-1 min-w-0 pr-2">
@@ -307,6 +317,7 @@ export const DeckList: React.FC = () => {
                     const isActive =
                       deckIndex === currentDeckIndex &&
                       cardIndex === currentCardIndex;
+                    const cardOverflows = overflowingCards.includes(cardIndex);
 
                     return (
                       <div
@@ -324,15 +335,14 @@ export const DeckList: React.FC = () => {
                           aria-label={`Select ${card.title || "Untitled Card"}`}
                         />
 
-                        {/* Card type icon */}
-                        <div
-                          className={cn(
-                            "w-4 h-4 rounded shrink-0 relative z-10 pointer-events-none",
-                            isActive ? "bg-violet-600" : "bg-slate-700",
-                          )}
+                        {/* Card type icon - warning if overflows */}
+                        <DeckListIcon
+                          isWarning={cardOverflows}
+                          isActive={isActive}
+                          className="relative z-10 pointer-events-none"
                         >
                           <svg
-                            className="w-full h-full p-0.5"
+                            className="w-3 h-3"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -342,7 +352,7 @@ export const DeckList: React.FC = () => {
                               clipRule="evenodd"
                             />
                           </svg>
-                        </div>
+                        </DeckListIcon>
 
                         <div className="flex-1 min-w-0 relative z-10 pointer-events-none">
                           <div className="truncate">
