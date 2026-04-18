@@ -60,6 +60,12 @@ export default function PrintPage() {
   const rows = cardHeightMm > 0 ? Math.floor(contentHeight / cardHeightMm) : 0;
   const cardsPerPage = cols * rows;
 
+  // Calculate equal gaps for centering (gaps on edges too)
+  const totalCardWidth = cols * cardWidthMm;
+  const totalCardHeight = rows * cardHeightMm;
+  const gapX = cols > 0 ? (contentWidth - totalCardWidth) / (cols + 1) : 0;
+  const gapY = rows > 0 ? (contentHeight - totalCardHeight) / (rows + 1) : 0;
+
   // Chunk cards into pages
   const pages = [];
   for (let i = 0; i < currentDeck.cards.length; i += cardsPerPage) {
@@ -158,8 +164,8 @@ export default function PrintPage() {
                 style={{
                   gridTemplateColumns: `repeat(${cols}, ${cardWidthMm}mm)`,
                   gridTemplateRows: `repeat(${rows}, ${cardHeightMm}mm)`,
-                  justifyContent: "space-between",
-                  alignContent: "space-between",
+                  gap: `${gapY}mm ${gapX}mm`,
+                  placeContent: "center",
                 }}
               >
                 {pageCards.map((card, index) => (
@@ -189,8 +195,8 @@ export default function PrintPage() {
                 style={{
                   gridTemplateColumns: `repeat(${cols}, ${cardWidthMm}mm)`,
                   gridTemplateRows: `repeat(${rows}, ${cardHeightMm}mm)`,
-                  justifyContent: "space-between",
-                  alignContent: "space-between",
+                  gap: `${gapY}mm ${gapX}mm`,
+                  placeContent: "center",
                   direction: "rtl", // This mirrors the grid layout horizontally
                 }}
               >

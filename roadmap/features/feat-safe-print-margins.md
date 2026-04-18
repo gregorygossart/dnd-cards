@@ -1,6 +1,6 @@
 # Feature: Safe Print Margins
 
-**Status**: Todo
+**Status**: Done
 **Priority**: 1 (Critical)
 
 ## Problem
@@ -28,10 +28,10 @@ Cards start at 5mm from edge. Most printers need 10-15mm safe zone.
 
 ## Success Criteria
 
-- [ ] Cards positioned away from paper edges (10mm minimum)
-- [ ] Cards centered in available space
-- [ ] Equal gap between cards
-- [ ] Works for both Poker (9 per page) and Tarot (4 per page)
+- [x] Cards positioned away from paper edges (10mm minimum)
+- [x] Cards centered in available space
+- [x] Equal gap between cards
+- [x] Works for both Poker (9 per page) and Tarot (4 per page)
 
 ## Technical Notes
 

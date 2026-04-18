@@ -63,7 +63,7 @@ export const PRINT_CONFIG = {
   PAPER: {
     WIDTH_MM: 210, // A4
     HEIGHT_MM: 297,
-    MARGIN_MM: 5,
+    MARGIN_MM: 8, // Safe margin away from printer's unprintable zone
   },
 } as const;
 
