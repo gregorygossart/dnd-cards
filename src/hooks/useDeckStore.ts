@@ -19,7 +19,7 @@ interface DeckStore {
   addCard: (deckId: string, type: CardType) => void;
   duplicateCard: (deckIndex: number, cardIndex: number) => Promise<void>;
   deleteCard: (deckIndex: number, cardIndex: number) => void;
-  addDeck: (name: string, cards?: Card[], style?: Partial<DeckStyle>) => void;
+  addDeck: (name: string, cards?: Card[], style?: Partial<DeckStyle>) => string;
   updateDeckName: (deckId: string, name: string) => void;
   updateDeckStyle: (deckId: string, style: Partial<DeckStyle>) => void;
   deleteDeck: (deckId: string) => void;
@@ -215,6 +215,8 @@ export const useDeckStore = create<DeckStore>()(
           currentDeckIndex: state.decks.length,
           currentCardIndex: 0,
         }));
+
+        return newDeck.id;
       },
 
       updateDeckName: (deckId, name) => {

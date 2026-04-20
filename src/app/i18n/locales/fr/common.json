@@ -33,8 +33,11 @@
         "noDeckFound": "Aucun deck trouvé.",
         "add": {
             "buttonLabel": "Ajouter un deck",
-            "placeholder": "Nom du deck..."
+            "placeholder": "Nouveau deck"
         },
+        "cardCount_one": "{{count}} carte",
+        "cardCount_other": "{{count}} cartes",
+        "overflow": "dépassement",
         "actions": {
             "rename": "Renommer",
             "delete": "Supprimer"

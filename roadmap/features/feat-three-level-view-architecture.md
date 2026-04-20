@@ -1,6 +1,6 @@
 # Feature: Three-Level View Architecture
 
-**Status**: Todo
+**Status**: In Progress
 **Priority**: 2
 
 ## Problem
@@ -130,8 +130,16 @@ src/
       CardEditorPanel.tsx
 ```
 
+## Implementation Progress
+
+- [x] **Deck Gallery** (`/[lng]/decks`) - Created with list view, overflow badges, CRUD actions
+- [ ] **Deck Detail** (`/[lng]/decks/[deckId]`) - Card grid + deck settings
+- [ ] **Card Detail** (`/[lng]/decks/[deckId]/cards/[cardId]`) - Single card editor
+- [ ] **Navigation** - Breadcrumbs, back buttons, URL routing
+- [ ] **Mobile responsiveness** - Full-screen views on mobile
+
 ### Migration Path
-1. Build new views alongside existing UI
+1. Build new views alongside existing UI ✓ (Deck Gallery done)
 2. Add feature flag to toggle between flows
 3. Remove old sidebar-based flow once stable
 
