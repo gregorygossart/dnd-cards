@@ -37,5 +37,10 @@ Deck and card settings mixed in same UI space causes confusion.
 
 ## Related
 
+- [feat-three-level-view-architecture](./feat-three-level-view-architecture.md) — **Superior approach**: separates deck and card editing into distinct views
 - [feat-text-overflow](./feat-text-overflow.md) — overflow detection catches this
 - [feat-input-organization](./feat-input-organization.md) — UI reorganization
+
+## Note
+
+This feature (Settings Isolation) can be achieved through [feat-three-level-view-architecture](./feat-three-level-view-architecture.md), which is the recommended path forward. The three-level architecture naturally separates deck settings (in Deck Detail view) from card settings (in Card Detail view), making this explicit separation unnecessary as a standalone feature.

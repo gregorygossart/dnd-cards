@@ -44,6 +44,7 @@ Based on current codebase audit and feature review.
 
 | Feature | Status | Priority | Notes |
 |---------|--------|----------|-------|
+| [Three-Level View Architecture](./features/feat-three-level-view-architecture.md) | Todo | 2 | Deck gallery → deck detail → card editor flow |
 | [Card Reordering](./features/feat-card-reordering.md) | Todo | 2 | Drag/drop cards within deck |
 | [Letter Paper Size](./features/feat-letter-paper.md) | Todo | 2 | US paper format support |
 | [Cut Lines on Print](./features/feat-print-cut-lines.md) | Todo | 3 | Industry-standard crop marks |
