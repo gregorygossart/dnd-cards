@@ -206,7 +206,9 @@
                 "unitPlaceholder": "Unité"
             },
             "components": {
-                "label": "Composantes"
+                "label": "Composantes",
+                "materialLabel": "Matériaux nécessaires",
+                "materialDescriptionPlaceholder": "ex: 'une pincée de soufre'"
             }
         },
         "rulesText": "Contenu de la carte",

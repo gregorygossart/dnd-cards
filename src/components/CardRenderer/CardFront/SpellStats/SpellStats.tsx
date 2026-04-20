@@ -75,6 +75,14 @@ export const SpellStats: React.FC<SpellStatsProps> = ({
           {formatComponents(components)}
         </Badge>
       )}
+      {components.materialDescription && (
+        <span
+          className="text-xs italic text-slate-500 w-full text-center"
+          style={{ fontSize: `${badgeFontSize}px` }}
+        >
+          Materials: {components.materialDescription}
+        </span>
+      )}
     </div>
   );
 };

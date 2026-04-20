@@ -2,12 +2,15 @@ import { useFormContext, Controller } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import { EditorLabel } from "@/components/RightSidebar/CardEditor/EditorLabel/EditorLabel";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { useT } from "next-i18next/client";
 import type { Card } from "@/features/cards/types";
 
 export const SpellComponentsInputs: React.FC = () => {
-  const { control } = useFormContext<Card>();
+  const { control, watch } = useFormContext<Card>();
   const { t } = useT();
+
+  const hasMaterial = watch("components.material");
 
   return (
     <div>
@@ -77,6 +80,26 @@ export const SpellComponentsInputs: React.FC = () => {
           </Label>
         </div>
       </div>
+
+      {hasMaterial && (
+        <div className="mt-3 space-y-1.5">
+          <EditorLabel>
+            {t("editor.spellDetails.components.materialLabel")}
+          </EditorLabel>
+          <Controller
+            control={control}
+            name="components.materialDescription"
+            render={({ field }) => (
+              <Input
+                {...field}
+                value={field.value ?? ""}
+                placeholder={t("editor.spellDetails.components.materialDescriptionPlaceholder")}
+                className="bg-slate-900 border-slate-700 text-slate-200 placeholder:text-slate-500"
+              />
+            )}
+          />
+        </div>
+      )}
     </div>
   );
 };

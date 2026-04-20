@@ -206,7 +206,9 @@
                 "unitPlaceholder": "Unit"
             },
             "components": {
-                "label": "Components"
+                "label": "Components",
+                "materialLabel": "Materials needed",
+                "materialDescriptionPlaceholder": "e.g., 'a pinch of sulfur'"
             }
         },
         "rulesText": "Rules text",

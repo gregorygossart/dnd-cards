@@ -1,6 +1,6 @@
 # Feature: Spell Material Text Field
 
-**Status**: Todo
+**Status**: Done
 **Priority**: 1 (Critical)
 
 ## Problem
@@ -30,10 +30,10 @@ Option C: Both
 
 ## Success Criteria
 
-- [ ] Text field appears when "Material" component is enabled
-- [ ] Field stores and persists material description
-- [ ] Description displays on card (below components or as tooltip)
-- [ ] Optional: limit length to prevent overflow
+- [x] Text field appears when "Material" component is enabled
+- [x] Field stores and persists material description
+- [x] Description displays on card (inside card body after description)
+- [x] Label uses consistent EditorLabel styling
 
 ## Schema Changes
 

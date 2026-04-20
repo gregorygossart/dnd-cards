@@ -40,6 +40,7 @@ export const ComponentsSchema = z.object({
   verbal: z.boolean(),
   somatic: z.boolean(),
   material: z.boolean(),
+  materialDescription: z.string().optional(),
 });
 
 export const RangeSchema = z.discriminatedUnion("type", [
