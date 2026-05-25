@@ -30,7 +30,7 @@
     },
     "deck": {
         "printDeck": "Imprimer le deck",
-        "noDeckFound": "Aucun deck trouvé.",
+                "noDeckFound": "Aucun deck trouvé.",
         "add": {
             "buttonLabel": "Ajouter un deck",
             "placeholder": "Nouveau deck"
@@ -61,6 +61,7 @@
         },
         "editCard": "Modifier la carte",
         "untitledCard": "Carte sans titre",
+        "noCards": "Aucune carte dans ce deck.",
         "add": {
             "buttonLabel": "Ajouter une carte"
         },

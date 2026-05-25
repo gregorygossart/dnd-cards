@@ -61,6 +61,7 @@
         },
         "editCard": "Edit card",
         "untitledCard": "Untitled card",
+        "noCards": "No cards in this deck.",
         "add": {
             "buttonLabel": "Add card"
         },
