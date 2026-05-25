@@ -7,17 +7,15 @@ export function PageHeader() {
   const { t } = useT();
 
   return (
-    <header className="border-b border-slate-800 bg-slate-900">
-      <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Logo />
-          <span className="text-slate-500">/</span>
-          <span className="text-slate-300">{t("navigation.myDecks")}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <ImportButton />
-          <AddDeckButton />
-        </div>
+    <header className="z-20 h-14 shrink-0 border-b border-slate-800 bg-slate-900 flex items-center justify-between px-4 lg:px-6 space-x-4">
+      <div className="flex items-center gap-4 min-w-0 flex-1">
+        <Logo />
+        <span className="text-slate-500">/</span>
+        <span className="text-slate-300 truncate">{t("navigation.myDecks")}</span>
+      </div>
+      <div className="flex items-center gap-4 shrink-0">
+        <ImportButton />
+        <AddDeckButton />
       </div>
     </header>
   );

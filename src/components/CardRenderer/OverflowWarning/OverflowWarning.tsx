@@ -18,12 +18,12 @@ export const OverflowWarning: React.FC<OverflowWarningProps> = ({
 
   return (
     <div
-      className="absolute bottom-3 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1.5 bg-amber-500 text-white px-3 py-1.5 rounded-full shadow-xl text-sm font-semibold animate-in fade-in border-2 border-white"
+      className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 z-50 flex items-center gap-1 bg-amber-500 text-white px-2 py-1 rounded-full shadow-lg text-xs font-semibold animate-in fade-in border-2 border-amber-400"
       style={{
         animationDuration: "200ms",
       }}
     >
-      <AlertTriangle className="w-4 h-4" />
+      <AlertTriangle className="w-3 h-3" />
       <span>Overflow</span>
     </div>
   );

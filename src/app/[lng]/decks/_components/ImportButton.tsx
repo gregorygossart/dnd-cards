@@ -40,11 +40,12 @@ export function ImportButton() {
     <>
       <Button
         onClick={handleClick}
-        variant="outline"
-        className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-slate-100"
+        variant="ghost"
+        size="sm"
+        className="text-slate-400 hover:text-slate-100 hover:bg-slate-800"
       >
-        <Upload className="w-4 h-4 mr-2" />
-        {t("share.importDeck")}
+        <Upload className="w-4 h-4 mr-1 lg:mr-2" />
+        <span className="hidden lg:inline">{t("share.importDeck")}</span>
       </Button>
       <input
         ref={fileInputRef}

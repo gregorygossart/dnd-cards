@@ -58,14 +58,14 @@ export const CardRenderer: React.FC<CardRendererProps> = ({
 
   return (
     <div
-      className={cn("relative overflow-hidden", className)}
+      className={cn("relative", className)}
       style={{
         width: `${cardDimensions.width * scale}px`,
         height: `${cardDimensions.height * scale}px`,
       }}
     >
       <div
-        className="origin-top-left"
+        className="origin-top-left overflow-hidden"
         style={{
           transform: `scale(${scale / RESOLUTION})`,
           width: `${cardDimensions.width * RESOLUTION}px`,
@@ -75,7 +75,7 @@ export const CardRenderer: React.FC<CardRendererProps> = ({
         <div
           ref={cardContainerRef}
           className={cn(
-            "relative overflow-hidden flex flex-col font-sans text-slate-900 h-full",
+            "relative flex flex-col font-sans text-slate-900 h-full",
             showShadow && "shadow-2xl",
           )}
         >
@@ -84,10 +84,10 @@ export const CardRenderer: React.FC<CardRendererProps> = ({
           ) : (
             <CardFront data={data} deckStyle={deckStyle} onContentRef={handleContentRef} />
           )}
-          {/* Overflow warning - only show for front side */}
-          {side === CardSide.Front && <OverflowWarning hasOverflow={hasOverflow} />}
         </div>
       </div>
+      {/* Overflow warning - only show for front side, outside overflow-hidden */}
+      {side === CardSide.Front && <OverflowWarning hasOverflow={hasOverflow} />}
     </div>
   );
 };
