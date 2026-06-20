@@ -1,0 +1,75 @@
+# generated: 2026-06-21
+# last_updated: 2026-06-21
+# project: TomeForge
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-06-21
+last_updated: 2026-06-21
+project: TomeForge
+project_key: NOKEY
+tracking_system: file-system
+story_location: _bmad-output/implementation-artifacts
+
+development_status:
+  epic-1: backlog
+  1-1-install-domain-libraries: backlog
+  1-2-dexie-schema-database-instance: backlog
+  1-3-repository-layer: backlog
+  1-4-card-deck-type-definitions: backlog
+  1-5-zustand-stores-with-persistence-middleware: backlog
+  1-6-shared-utilities-feature-flags: backlog
+  epic-1-retrospective: optional
+  epic-2: backlog
+  2-1-card-type-discrimination-content-model: backlog
+  2-2-spell-card-zod-schema: backlog
+  2-3-card-renderer-component: backlog
+  2-4-card-editor-form-spell-details: backlog
+  2-5-artwork-upload-feature: backlog
+  2-6-visual-theme-engine: backlog
+  2-7-live-preview-integration: backlog
+  epic-2-retrospective: optional
+  epic-3: backlog
+  3-1-deck-crud-actions-in-store: backlog
+  3-2-deck-list-panel: backlog
+  3-3-card-add-remove-in-deck: backlog
+  3-4-card-reordering-drag-and-drop: backlog
+  3-5-auto-save-confirmation: backlog
+  3-6-export-import-tomeforge: backlog
+  epic-3-retrospective: optional
+  epic-4: backlog
+  4-1-print-layout-route-isolation: backlog
+  4-2-print-grid-card-placement: backlog
+  4-3-pdf-builder: backlog
+  4-4-public-sharing-mvp-text-only: backlog
+  epic-4-retrospective: optional
