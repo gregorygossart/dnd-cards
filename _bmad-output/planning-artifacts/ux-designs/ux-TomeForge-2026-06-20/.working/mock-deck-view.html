@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mock - Deck View</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #0f172a; color: #f1f5f9; height: 100vh; display: flex; }
+  
+  /* Left Panel */
+  .left-panel { width: 260px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; flex-shrink: 0; }
+  .left-header { padding: 1rem; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 16px; font-weight: 800; color: #8b5cf6; letter-spacing: -0.02em; }
+  .logo span { color: #f1f5f9; }
+  .left-header h2 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; }
+  .btn-new { background: #8b5cf6; color: white; border: none; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  
+  .deck-item { padding: 10px 16px; cursor: pointer; border-left: 3px solid transparent; display: flex; justify-content: space-between; align-items: center; }
+  .deck-item.active { border-left-color: #8b5cf6; background: rgba(139, 92, 246, 0.1); }
+  .deck-item:hover { background: rgba(255,255,255,0.05); }
+  .deck-item .name { font-size: 14px; font-weight: 500; }
+  .deck-item .count { font-size: 12px; color: #64748b; }
+  .deck-divider { height: 1px; background: #334155; margin: 4px 16px; }
+  .card-item { padding: 8px 16px 8px 28px; cursor: pointer; font-size: 13px; color: #94a3b8; display: flex; align-items: center; gap: 8px; }
+  .card-item:hover { color: #f1f5f9; }
+  .card-item .dot { width: 6px; height: 6px; border-radius: 50%; background: #8b5cf6; flex-shrink: 0; }
+  .left-footer { padding: 1rem; border-top: 1px solid #334155; margin-top: auto; }
+  .btn-new-card { width: 100%; background: transparent; border: 1px dashed #475569; color: #94a3b8; padding: 8px; border-radius: 4px; font-size: 13px; cursor: pointer; }
+  .btn-new-card:hover { border-color: #8b5cf6; color: #8b5cf6; }
+
+  /* Center Panel */
+  .center-panel { flex: 1; display: flex; flex-direction: column; padding: 24px; overflow-y: auto; }
+  .center-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .center-header { margin-bottom: 20px; }
+  .center-header h1 { font-size: 20px; font-weight: 700; }
+  .center-header .sub { font-size: 13px; color: #64748b; margin-top: 2px; }
+  .btn-print { background: #1e293b; border: 1px solid #334155; color: #f1f5f9; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .btn-print:hover { border-color: #8b5cf6; color: #8b5cf6; }
+  
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+  .card-thumb { background: #1e293b; border-radius: 8px; overflow: hidden; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+  .card-thumb:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .card-mini { aspect-ratio: 5/7; background: #000; margin: 8px; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; }
+  .card-mini-art { height: 40%; background: linear-gradient(135deg, #312e81, #1e1b4b); }
+  .card-mini-body { flex: 1; background: white; padding: 6px; }
+  .card-mini-title { height: 8px; width: 70%; background: #1e293b; border-radius: 2px; margin: 4px auto; }
+  .card-mini-line { height: 4px; width: 50%; background: #e2e8f0; border-radius: 2px; margin: 3px auto; }
+  .card-thumb-label { padding: 4px 12px 10px; font-size: 13px; font-weight: 500; text-align: center; color: #f1f5f9; }
+  
+  .empty-grid { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 300px; color: #64748b; gap: 12px; }
+  .empty-grid .icon { font-size: 40px; opacity: 0.5; }
+  .empty-grid p { font-size: 14px; }
+  .empty-grid .btn-cta { background: #8b5cf6; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; }
+
+  /* Right Panel */
+  .right-panel { width: 384px; background: #1e293b; border-left: 1px solid #334155; display: flex; flex-direction: column; flex-shrink: 0; }
+  .right-header { padding: 16px 20px; border-bottom: 1px solid #334155; }
+  .right-header h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; }
+  .right-body { padding: 16px 20px; overflow-y: auto; flex: 1; }
+  
+  .setting-group { margin-bottom: 20px; }
+  .setting-label { font-size: 12px; font-weight: 500; color: #94a3b8; margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .setting-label .val { color: #f1f5f9; }
+  .setting-select { width: 100%; padding: 8px 12px; background: #0f172a; border: 1px solid #334155; color: #f1f5f9; border-radius: 4px; font-size: 13px; }
+  .setting-slider { width: 100%; accent-color: #8b5cf6; }
+  .preset-row { display: flex; gap: 8px; }
+  .preset { flex: 1; padding: 8px; text-align: center; background: #0f172a; border: 1px solid #334155; border-radius: 4px; font-size: 12px; color: #94a3b8; cursor: pointer; }
+  .preset.active { border-color: #8b5cf6; color: #8b5cf6; }
+  .preset:hover { border-color: #8b5cf6; }
+</style>
+</head>
+<body>
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div class="left-header">
+      <div class="logo">Tome<span>Forge</span></div>
+      <button class="btn-new">+ New</button>
+    </div>
+    <div class="deck-group">
+      <div class="deck-item"><span class="name">LMoP Encounters</span><span class="count">8</span></div>
+      <div class="deck-item"><span class="name">NPC Contacts</span><span class="count">4</span></div>
+    </div>
+    <div class="deck-group expanded">
+      <div class="deck-item active"><span class="name">Merric's Spellbook</span><span class="count">10</span><span class="expand">▾</span></div>
+      <div class="card-list">
+        <div class="card-item"><span class="dot"></span> Fireball</div>
+        <div class="card-item"><span class="dot"></span> Magic Missile</div>
+        <div class="card-item"><span class="dot"></span> Shield</div>
+        <div class="card-item"><span class="dot"></span> Misty Step</div>
+        <div class="card-item active"><span class="dot"></span> Counterspell</div>
+        <div class="card-item"><span class="dot"></span> Fire Bolt</div>
+      </div>
+    </div>
+    <div class="left-footer">
+      <button class="btn-new-card">+ New Card</button>
+    </div>
+  </div>
+
+  <!-- CENTER PANEL -->
+  <div class="center-panel">
+    <div class="center-top">
+      <div class="center-header">
+        <h1>Merric's Spellbook</h1>
+        <div class="sub">10 cards · Poker format</div>
+      </div>
+      <button class="btn-print">⎙ Print</button>
+    </div>
+    <div class="card-grid">
+      <div class="card-thumb">
+        <div class="card-mini">
+          <div class="card-mini-art"></div>
+          <div class="card-mini-body">
+            <div class="card-mini-title"></div>
+            <div class="card-mini-line"></div>
+            <div class="card-mini-line" style="width:30%"></div>
+          </div>
+        </div>
+        <div class="card-thumb-label">Fireball</div>
+      </div>
+      <div class="card-thumb">
+        <div class="card-mini">
+          <div class="card-mini-art" style="background:linear-gradient(135deg,#1e3a5f,#0c1929)"></div>
+          <div class="card-mini-body">
+            <div class="card-mini-title"></div>
+            <div class="card-mini-line"></div>
+            <div class="card-mini-line" style="width:30%"></div>
+          </div>
+        </div>
+        <div class="card-thumb-label">Magic Missile</div>
+      </div>
+      <div class="card-thumb">
+        <div class="card-mini">
+          <div class="card-mini-art" style="background:linear-gradient(135deg,#5b2e2e,#2a1414)"></div>
+          <div class="card-mini-body">
+            <div class="card-mini-title"></div>
+            <div class="card-mini-line"></div>
+            <div class="card-mini-line" style="width:30%"></div>
+          </div>
+        </div>
+        <div class="card-thumb-label">Shield</div>
+      </div>
+      <div class="card-thumb">
+        <div class="card-mini">
+          <div class="card-mini-art" style="background:linear-gradient(135deg,#2e5b3a,#14291a)"></div>
+          <div class="card-mini-body">
+            <div class="card-mini-title"></div>
+            <div class="card-mini-line"></div>
+            <div class="card-mini-line" style="width:30%"></div>
+          </div>
+        </div>
+        <div class="card-thumb-label">Misty Step</div>
+      </div>
+      <div class="card-thumb">
+        <div class="card-mini">
+          <div class="card-mini-art" style="background:linear-gradient(135deg,#4a2e5b,#23142a)"></div>
+          <div class="card-mini-body">
+            <div class="card-mini-title"></div>
+            <div class="card-mini-line"></div>
+            <div class="card-mini-line" style="width:30%"></div>
+          </div>
+        </div>
+        <div class="card-thumb-label">Counterspell</div>
+      </div>
+      <div class="card-thumb">
+        <div class="card-mini">
+          <div class="card-mini-art" style="background:linear-gradient(135deg,#5b4a2e,#2a2314)"></div>
+          <div class="card-mini-body">
+            <div class="card-mini-title"></div>
+            <div class="card-mini-line"></div>
+            <div class="card-mini-line" style="width:30%"></div>
+          </div>
+        </div>
+        <div class="card-thumb-label">Fire Bolt</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+    <div class="right-header">
+      <h3>Deck Settings</h3>
+    </div>
+    <div class="right-body">
+      <div class="setting-group">
+        <div class="setting-label">Card Format</div>
+        <select class="setting-select">
+          <option selected>Poker (2.5" × 3.5")</option>
+          <option>Tarot (2.75" × 4.75")</option>
+        </select>
+      </div>
+      <div class="setting-group">
+        <div class="setting-label">Corner Radius <span class="val">1.5rem</span></div>
+        <input type="range" class="setting-slider" min="0" max="3" step="0.1" value="1.5">
+      </div>
+      <div class="setting-group">
+        <div class="setting-label">Image Height <span class="val">40%</span></div>
+        <input type="range" class="setting-slider" min="0" max="100" value="40">
+      </div>
+      <div class="setting-group">
+        <div class="setting-label">Density</div>
+        <div class="preset-row">
+          <div class="preset">Compact</div>
+          <div class="preset active">Normal</div>
+          <div class="preset">Spacious</div>
+        </div>
+      </div>
+      <div class="setting-group">
+        <div class="setting-label">Title Font Size <span class="val">24px</span></div>
+        <input type="range" class="setting-slider" min="14" max="36" value="24">
+      </div>
+      <div class="setting-group">
+        <div class="setting-label">Body Font Size <span class="val">14px</span></div>
+        <input type="range" class="setting-slider" min="10" max="20" value="14">
+      </div>
+      <div class="setting-group">
+        <div class="setting-label">Line Height <span class="val">1.5</span></div>
+        <input type="range" class="setting-slider" min="1.0" max="2.0" step="0.1" value="1.5">
+      </div>
+      <div class="setting-group">
+        <div class="setting-label">Padding <span class="val">1.0×</span></div>
+        <input type="range" class="setting-slider" min="0.5" max="1.5" step="0.1" value="1.0">
+      </div>
+    </div>
+  </div>
+</body>
+</html>

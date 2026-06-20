@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mock - Card View (Front + Back stacked)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #0f172a; color: #f1f5f9; height: 100vh; display: flex; }
+  
+  /* Left Panel */
+  .left-panel { width: 260px; background: #1e293b; border-right: 1px solid #334155; display: flex; flex-direction: column; flex-shrink: 0; }
+  .left-header { padding: 1rem; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 16px; font-weight: 800; color: #8b5cf6; letter-spacing: -0.02em; }
+  .logo span { color: #f1f5f9; }
+  .left-header h2 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; }
+  .btn-new { background: #8b5cf6; color: white; border: none; padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .deck-item { padding: 10px 16px; cursor: pointer; border-left: 3px solid transparent; display: flex; justify-content: space-between; align-items: center; }
+  .deck-item.active { border-left-color: #8b5cf6; background: rgba(139, 92, 246, 0.1); }
+  .deck-item:hover { background: rgba(255,255,255,0.05); }
+  .deck-item .name { font-size: 14px; font-weight: 500; }
+  .deck-item .count { font-size: 12px; color: #64748b; }
+  .deck-item .expand { font-size: 10px; color: #64748b; margin-left: 6px; }
+  .deck-group { border-bottom: 1px solid #334155; }
+  .deck-group.expanded { border-bottom: none; }
+  .deck-divider { height: 1px; background: #334155; margin: 4px 16px; }
+  .card-list { background: rgba(0,0,0,0.15); }
+  .card-item { padding: 8px 16px 8px 28px; cursor: pointer; font-size: 13px; color: #94a3b8; display: flex; align-items: center; gap: 8px; }
+  .card-item:hover { color: #f1f5f9; }
+  .card-item .dot { width: 6px; height: 6px; border-radius: 50%; background: #8b5cf6; flex-shrink: 0; }
+  .card-item.active { color: #f1f5f9; background: rgba(139, 92, 246, 0.1); border-radius: 0 4px 4px 0; }
+  .left-footer { padding: 1rem; border-top: 1px solid #334155; margin-top: auto; }
+  .btn-new-card { width: 100%; background: transparent; border: 1px dashed #475569; color: #94a3b8; padding: 8px; border-radius: 4px; font-size: 13px; cursor: pointer; }
+
+  /* Center Panel */
+  .center-panel { flex: 1; display: flex; flex-direction: column; padding: 24px; align-items: center; overflow-y: auto; }
+  .center-top { width: 100%; display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+  .back-link { color: #94a3b8; font-size: 13px; cursor: pointer; }
+  .back-link:hover { color: #8b5cf6; }
+  .back-link::before { content: "← "; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .format-badge { background: #334155; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+  .btn-print { background: #1e293b; border: 1px solid #334155; color: #f1f5f9; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; }
+  .btn-print:hover { border-color: #8b5cf6; color: #8b5cf6; }
+
+  /* Card Stack: Front on top, Back peeking from behind-right */
+  .card-stack { position: relative; width: 280px; height: 380px; margin: 20px 0; }
+  .card-back { position: absolute; top: 20px; left: 32px; width: 252px; height: 352px; border-radius: 24px; background: linear-gradient(135deg, #1e293b, #0f172a); border: 2px solid #334155; box-shadow: 0 8px 24px rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; }
+  .card-back-inner { width: 80%; height: 80%; border: 2px solid #475569; border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #475569; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; }
+  .card-front { position: relative; z-index: 10; width: 252px; height: 352px; background: #000; border-radius: 24px; box-shadow: 0 12px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column; overflow: hidden; }
+  .card-art { height: 40%; background: linear-gradient(135deg, #312e81, #1e1b4b); position: relative; }
+  .card-separator { position: absolute; bottom: 0; left: 0; right: 0; height: 24px; transform: translateY(50%); z-index: 10; }
+  .card-separator svg { width: 100%; height: 24px; display: block; }
+  .level-badge { position: absolute; left: 24px; bottom: -12px; z-index: 20; width: 28px; height: 28px; background: #8b5cf6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; border: 2px solid #000; }
+  .card-content { flex: 1; background: white; padding: 20px 16px 12px; display: flex; flex-direction: column; color: #0f172a; }
+  .card-subheader { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 2px; }
+  .card-title { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; margin-bottom: 8px; }
+  .card-stats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .stat { background: #f1f5f9; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; color: #475569; }
+  .card-body-text { font-size: 13px; line-height: 1.5; color: #334155; flex: 1; }
+  .zoom-row { display: flex; gap: 8px; margin-top: 12px; }
+  .zoom-btn { padding: 6px 14px; background: #1e293b; border: 1px solid #334155; color: #94a3b8; border-radius: 4px; font-size: 12px; cursor: pointer; }
+  .zoom-btn:hover { border-color: #8b5cf6; color: #8b5cf6; }
+  .zoom-btn.active { background: #8b5cf6; color: white; border-color: #8b5cf6; }
+
+  /* Right Panel - Card Editor */
+  .right-panel { width: 384px; background: #1e293b; border-left: 1px solid #334155; display: flex; flex-direction: column; flex-shrink: 0; }
+  .right-header { padding: 16px 20px; border-bottom: 1px solid #334155; }
+  .right-header h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; }
+  .right-body { padding: 16px 20px; overflow-y: auto; flex: 1; }
+  .field-group { margin-bottom: 16px; }
+  .field-label { font-size: 12px; font-weight: 500; color: #94a3b8; margin-bottom: 4px; }
+  .field-input { width: 100%; padding: 8px 12px; background: #0f172a; border: 1px solid #334155; color: #f1f5f9; border-radius: 4px; font-size: 13px; outline: none; }
+  .field-input:focus { border-color: #8b5cf6; }
+  .field-select { width: 100%; padding: 8px 12px; background: #0f172a; border: 1px solid #334155; color: #f1f5f9; border-radius: 4px; font-size: 13px; }
+  .field-textarea { width: 100%; padding: 8px 12px; background: #0f172a; border: 1px solid #334155; color: #f1f5f9; border-radius: 4px; font-size: 13px; min-height: 80px; resize: vertical; font-family: inherit; }
+  .section-group { margin-bottom: 20px; }
+  .section-header { font-size: 12px; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+  .color-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .color-swatch { width: 32px; height: 32px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; }
+  .color-swatch.active { border-color: #f1f5f9; }
+  .upload-zone { border: 2px dashed #475569; border-radius: 6px; padding: 20px; text-align: center; color: #64748b; font-size: 12px; cursor: pointer; }
+</style>
+</head>
+<body>
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+    <div class="left-header"><h2>Decks</h2><button class="btn-new">+ New</button></div>
+    <div class="deck-group">
+      <div class="deck-item"><span class="name">LMoP Encounters</span><span class="count">8</span></div>
+    </div>
+    <div class="deck-group expanded">
+      <div class="deck-item active"><span class="name">Merric's Spellbook</span><span class="count">10</span><span class="expand">▾</span></div>
+      <div class="card-list">
+        <div class="card-item"><span class="dot"></span> Fireball</div>
+        <div class="card-item"><span class="dot"></span> Magic Missile</div>
+        <div class="card-item"><span class="dot"></span> Shield</div>
+        <div class="card-item"><span class="dot"></span> Misty Step</div>
+        <div class="card-item active"><span class="dot"></span> Counterspell</div>
+        <div class="card-item"><span class="dot"></span> Fire Bolt</div>
+      </div>
+    </div>
+    <div class="left-footer"><button class="btn-new-card">+ New Card</button></div>
+  </div>
+
+  <!-- CENTER PANEL -->
+  <div class="center-panel">
+    <div class="center-top">
+      <span class="back-link">Merric's Spellbook</span>
+      <div class="header-right">
+        <span class="format-badge">Poker</span>
+        <button class="btn-print">⎙ Print</button>
+      </div>
+    </div>
+
+    <!-- Card Stack: Front on top, Back peeking -->
+    <div class="card-stack">
+      <div class="card-back">
+        <div class="card-back-inner">TomeForge</div>
+      </div>
+      <div class="card-front">
+        <div class="card-art">
+          <div class="level-badge">3</div>
+          <div class="card-separator">
+            <svg viewBox="0 0 252 24" preserveAspectRatio="none">
+              <path d="M0,12 Q30,0 60,8 Q90,16 126,8 Q162,0 192,8 Q222,16 252,12 L252,24 L0,24 Z" fill="#8b5cf6"/>
+              <path d="M0,12 Q30,24 60,16 Q90,8 126,16 Q162,24 192,16 Q222,8 252,12" fill="none" stroke="#6d28d9" stroke-width="1"/>
+            </svg>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-subheader">3rd-level Abjuration</div>
+          <div class="card-title">Counterspell</div>
+          <div class="card-stats">
+            <span class="stat">1 reaction</span>
+            <span class="stat">60 ft</span>
+            <span class="stat">V,S</span>
+            <span class="stat">Instant</span>
+          </div>
+          <div class="card-body-text">
+            You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zoom-row">
+      <span class="zoom-btn">Fit</span>
+      <span class="zoom-btn active">1:1</span>
+      <span class="zoom-btn">2×</span>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL - CARD EDITOR -->
+  <div class="right-panel">
+    <div class="right-header"><h3>Card Editor</h3></div>
+    <div class="right-body">
+      <div class="section-group">
+        <div class="section-header">Title & Type <span>−</span></div>
+        <div class="field-group">
+          <div class="field-label">Card Name</div>
+          <input class="field-input" value="Counterspell">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Type</div>
+          <select class="field-select"><option selected>Spell</option><option>Ability</option><option>Weapon</option><option>Armor</option></select>
+        </div>
+      </div>
+
+      <div class="section-group">
+        <div class="section-header">Spell Details <span>−</span></div>
+        <div class="field-group">
+          <div class="field-label">Level</div>
+          <select class="field-select"><option>Cantrip</option><option>1st</option><option>2nd</option><option selected>3rd</option><option>4th</option><option>5th</option><option>6th</option><option>7th</option><option>8th</option><option>9th</option></select>
+        </div>
+        <div class="field-group">
+          <div class="field-label">School</div>
+          <select class="field-select"><option selected>Abjuration</option><option>Conjuration</option><option>Divination</option><option>Enchantment</option><option>Evocation</option><option>Illusion</option><option>Necromancy</option><option>Transmutation</option></select>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Casting Time</div>
+          <input class="field-input" value="1 reaction">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Range</div>
+          <input class="field-input" value="60 feet">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Components</div>
+          <div style="display:flex;gap:12px;margin-bottom:6px">
+            <label style="font-size:12px;color:#94a3b8;display:flex;align-items:center;gap:4px"><input type="checkbox" checked> V</label>
+            <label style="font-size:12px;color:#94a3b8;display:flex;align-items:center;gap:4px"><input type="checkbox" checked> S</label>
+            <label style="font-size:12px;color:#94a3b8;display:flex;align-items:center;gap:4px"><input type="checkbox"> M</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <div class="field-label">Duration</div>
+          <input class="field-input" value="Instantaneous">
+        </div>
+      </div>
+
+      <div class="section-group">
+        <div class="section-header">Description <span>−</span></div>
+        <div class="field-group">
+          <textarea class="field-textarea">You attempt to interrupt a creature in the process of casting a spell. If the creature is casting a spell of 3rd level or lower, its spell fails and has no effect.</textarea>
+        </div>
+        <div class="field-group">
+          <div class="field-label">At Higher Levels</div>
+          <textarea class="field-textarea" style="min-height:50px" placeholder="Effect when cast at higher levels..."></textarea>
+        </div>
+      </div>
+
+      <div class="section-group">
+        <div class="section-header">Artwork <span>−</span></div>
+        <div class="upload-zone">Click to upload image<br><span style="font-size:11px">JPEG, PNG or WebP</span></div>
+      </div>
+
+      <div class="section-group">
+        <div class="section-header">Accent Color <span>−</span></div>
+        <div class="color-row">
+          <div class="color-swatch active" style="background:#8b5cf6"></div>
+          <div class="color-swatch" style="background:#3b82f6"></div>
+          <div class="color-swatch" style="background:#22c55e"></div>
+          <div class="color-swatch" style="background:#f59e0b"></div>
+          <div class="color-swatch" style="background:#ef4444"></div>
+          <div class="color-swatch" style="background:#06b6d4"></div>
+          <div class="color-swatch" style="background:#ec4899"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
