@@ -1,5 +1,5 @@
 # generated: 2026-06-21
-# last_updated: 2026-06-21
+# last_updated: 2026-06-22
 # project: TomeForge
 # project_key: NOKEY
 # tracking_system: file-system
@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-06-21
-last_updated: 2026-06-21
+last_updated: 2026-06-22
 project: TomeForge
 project_key: NOKEY
 tracking_system: file-system
@@ -45,7 +45,7 @@ development_status:
   epic-1: in-progress
   1-1-install-domain-libraries: done
   1-2-dexie-schema-database-instance: done
-  1-3-repository-layer: backlog
+  1-3-repository-layer: done
   1-4-card-deck-type-definitions: backlog
   1-5-zustand-stores-with-persistence-middleware: backlog
   1-6-shared-utilities-feature-flags: backlog
