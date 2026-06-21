@@ -46,7 +46,7 @@ development_status:
   1-1-install-domain-libraries: done
   1-2-dexie-schema-database-instance: done
   1-3-repository-layer: done
-  1-4-card-deck-type-definitions: backlog
+  1-4-card-deck-type-definitions: done
   1-5-zustand-stores-with-persistence-middleware: backlog
   1-6-shared-utilities-feature-flags: backlog
   epic-1-retrospective: optional
