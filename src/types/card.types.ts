@@ -33,6 +33,7 @@ export interface CardBase {
   name: string;
   createdAt: number; // Unix timestamp
   updatedAt: number; // Unix timestamp
+  order: number;
 }
 
 export interface SpellCard extends CardBase {
