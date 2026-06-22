@@ -26,7 +26,7 @@ describe("TomeForgeDB schema", () => {
 
   it("should have schema version set to 1", () => {
     // Dexie exposes the highest version number via the `verno` property
-    expect(db.verno).toBe(1);
+    expect(db.verno).toBe(3);
   });
 
   it("should have an index on 'deckId' (idx_cards_deckId) for the cards table", () => {
